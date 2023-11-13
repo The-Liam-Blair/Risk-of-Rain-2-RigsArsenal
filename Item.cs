@@ -6,7 +6,7 @@ using UnityEngine.AddressableAssets;
 namespace MoreItems
 {
     // Generic item class
-    public abstract class ItemAbstract
+    public abstract class Item
     {
         public abstract string Name { get; }
         public abstract string NameToken { get; }
@@ -18,7 +18,7 @@ namespace MoreItems
 
         public abstract bool CanRemove { get; }
 
-        public ItemDef ItemDef;
+        public ItemDef ItemDef { get; private set; }
 
         /// <summary>
         /// Item assembly process: Setup LanguageAPI, create the item object, added to the item list, and reference the methods/events the item hooks into.

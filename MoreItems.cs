@@ -22,15 +22,28 @@ namespace MoreItems
         public const string p_Name = "MoreItems";
         public const string p_Version = "a0.0.1";
 
+        private Stimpack pack;
 
         public void Awake()
         {
             DebugLog.Init(Logger);
+
+            // Initialise items
+            // todo: Once several items are implemented, create a standard method for detecting item classes instead of hardcoded reference per item.
+            pack = new Stimpack();
+            pack.Init();
         }
 
-        public void CreateNewItem(ItemDef itemDef, ItemDisplayRuleDict displayRules)
+        private void Update()
         {
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
+            // Stimpack
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                // Fetch player's transform.
+                var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
+
+                PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(pack.ItemDef.itemIndex), transform.position, transform.forward * 20f);
+            }
         }
     }
 }
