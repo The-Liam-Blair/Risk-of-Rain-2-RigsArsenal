@@ -18,16 +18,23 @@ namespace MoreItems
 
         public abstract bool CanRemove { get; }
 
-        public ItemDef ItemDef { get; private set; }
+        public ItemDef itemDef { get; private set; }
 
         /// <summary>
-        /// Item assembly process: Setup LanguageAPI, create the item object, added to the item list, and reference the methods/events the item hooks into.
+        /// Item assembly process: Setup LanguageAPI, create the item object, added to the item list, and reference & implement the methods/events the item hooks into.
         /// </summary>
         public virtual void Init()
         {
+            DebugLog.Log($"Item {Name} load started...");
             InitLang();
+
+            DebugLog.Log($"Item {Name} language initialised.");
             CreateItem();
+
+            DebugLog.Log($"Item {Name} created.");
             SetupHooks();
+
+            DebugLog.Log($"Item {Name} hooks initialised.");
         }
 
         /// <summary>
@@ -35,10 +42,10 @@ namespace MoreItems
         /// </summary>
         public virtual void InitLang()
         {
-            LanguageAPI.Add($"Item {NameToken} {Name}");
-            LanguageAPI.Add($"Item {NameToken} {PickupToken}");
-            LanguageAPI.Add($"Item {NameToken} {Description}");
-            LanguageAPI.Add($"Item {NameToken} {Lore}");
+            LanguageAPI.Add($"ITEM_{NameToken}_NAME{Name}");
+            LanguageAPI.Add($"ITEM_{NameToken}_PICKUP{PickupToken}");
+            LanguageAPI.Add($"ITEM_{NameToken}_DESCRIPTION{Description}");
+            LanguageAPI.Add($"ITEM_{NameToken}_LORE{Lore}");
         }
 
         /// <summary>
@@ -46,23 +53,25 @@ namespace MoreItems
         /// </summary>
         public virtual void CreateItem()
         {
-            ItemDef = ScriptableObject.CreateInstance<ItemDef>();
+            itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            ItemDef.name = Name;
-            ItemDef.nameToken = NameToken;
-            ItemDef.pickupToken = PickupToken;
-            ItemDef.descriptionToken = Description;
-            ItemDef.loreToken = Lore;
+            itemDef.name = Name;
+            itemDef.nameToken = NameToken;
+            itemDef.pickupToken = PickupToken;
+            itemDef.descriptionToken = Description;
+            itemDef.loreToken = Lore;
 
-            ItemDef.tier = Tier;
+            // todo: Switch state to load in the specific item tier asset depending on the ItemTier enum.
+            itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/Base/Common/Tier1Def.asset").WaitForCompletion();
 
-            ItemDef.canRemove = CanRemove;
+            itemDef.canRemove = CanRemove;
+            itemDef.hidden = false;
 
             // Temporary sprites & models
-            ItemDef.pickupIconSprite = Addressables.LoadAssetAsync<Sprite>("RoR2/Base/Common/MiscIcons/texMysteryIcon.png").WaitForCompletion();
-            ItemDef.pickupModelPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mystery/PickupMystery.prefab").WaitForCompletion();
+            itemDef.pickupIconSprite = Addressables.LoadAssetAsync<Sprite>("RoR2/Base/Common/MiscIcons/texMysteryIcon.png").WaitForCompletion();
+            itemDef.pickupModelPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mystery/PickupMystery.prefab").WaitForCompletion();
 
-            ItemAPI.Add(new CustomItem(ItemDef, new ItemDisplayRuleDict()));
+            ItemAPI.Add(new CustomItem(itemDef, new ItemDisplayRuleDict(null)));
         }
 
         public virtual void SetupHooks() {}
