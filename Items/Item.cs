@@ -3,7 +3,7 @@ using RoR2;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace MoreItems
+namespace MoreItems.Items
 {
     // Generic item class
     public abstract class Item
@@ -17,6 +17,8 @@ namespace MoreItems
         public abstract ItemTier Tier { get; }
 
         public abstract bool CanRemove { get; }
+
+        public abstract bool AIBlackList { get; }
 
         public ItemDef itemDef { get; private set; }
 
@@ -55,17 +57,43 @@ namespace MoreItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = Name;
+            itemDef.name = Name; // Name has to be XML safe: No spaces or special characters!
             itemDef.nameToken = NameToken;
             itemDef.pickupToken = PickupToken;
             itemDef.descriptionToken = Description;
-            itemDef.loreToken = Lore;
+            itemDef.loreToken = Lore; // todo- figure out why lore isn't showing in-game.
 
-            // todo: Switch state to load in the specific item tier asset depending on the ItemTier enum.
-            itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/Base/Common/Tier1Def.asset").WaitForCompletion();
+            switch (itemDef.tier)
+            {
+                case ItemTier.Tier1:
+                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/Base/Common/Tier1Def.asset").WaitForCompletion();
+                    break;
+
+                case ItemTier.Tier2:
+                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/Base/Common/Tier2Def.asset").WaitForCompletion();
+                    break;
+
+                //todo: the other tiers
+
+                default:
+                    DebugLog.Log($"Item {itemDef.name} has an invalid item tier. Defaulting to Tier1.");
+                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/Base/Common/Tier1Def.asset").WaitForCompletion();
+                    break;
+            }
 
             itemDef.canRemove = CanRemove;
             itemDef.hidden = false;
+
+            //todo: research tags a bit more in-depth and apply to items as per.
+            /*
+            if (AIBlackList)
+            {
+                itemDef.tags = new ItemTag[]
+                {
+                    ItemTag.AIBlacklist
+                };
+            }
+            */
 
             // Temporary sprites & models
             itemDef.pickupIconSprite = Addressables.LoadAssetAsync<Sprite>("RoR2/Base/Common/MiscIcons/texMysteryIcon.png").WaitForCompletion();
@@ -74,6 +102,6 @@ namespace MoreItems
             ItemAPI.Add(new CustomItem(itemDef, new ItemDisplayRuleDict(null)));
         }
 
-        public virtual void SetupHooks() {}
+        public virtual void SetupHooks() { }
     }
 }

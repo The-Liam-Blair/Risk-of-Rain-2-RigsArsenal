@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using MoreItems.Items;
 using R2API;
 using RoR2;
 using UnityEngine;
@@ -20,9 +21,10 @@ namespace MoreItems
         public const string P_GUID = $"{P_Author}.{p_Name}";
         public const string P_Author = "RigsInRags";
         public const string p_Name = "MoreItems";
-        public const string p_Version = "0.0.1";
+        public const string p_Version = "0.0.2";
 
         private Stimpack pack;
+        private BountyHunterBadge badge;
 
         public void Awake()
         {
@@ -32,6 +34,9 @@ namespace MoreItems
             // todo: Once several items are implemented, create a standard method for detecting item classes instead of hardcoded reference per item. (reflection)
             pack = new Stimpack();
             pack.Init();
+
+            badge = new BountyHunterBadge();
+            badge.Init();
         }
 
         
@@ -44,9 +49,15 @@ namespace MoreItems
                 // Fetch player's transform.
                 var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
 
-                DebugLog.Log($"Player transform fetched: {player.position}");
-
                 PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(pack.itemDef.itemIndex), player.position, player.forward * 20f);
+            }
+            else if (Input.GetKeyDown(KeyCode.F2))
+            { 
+                DebugLog.Log("F2 pressed, spawning bounty hunter's badge.");
+                // Fetch player's transform.
+                var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
+
+                PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(badge.itemDef.itemIndex), player.position, player.forward * 20f);
             }
         }
     }

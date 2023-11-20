@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
 
-namespace MoreItems
+namespace MoreItems.Items
 {
     /// <summary>
     /// Stimpack - T1 (Common) Item
@@ -17,18 +17,21 @@ namespace MoreItems
     {
 
         public override string Name => "Stimpack";
-        public override string NameToken => "STIMPACK";
+        public override string NameToken => "Stimpack";
         public override string PickupToken => "Increased movement speed when health is low.";
-        public override string Description => $"Gain <style=cIsUtility>13%</style><style=cStack> (+13% per stack)</style> movement speed while at <style=cIsHealth>50% health</style> or less.";
+        public override string Description => "Gain <style=cIsUtility>30%</style><style=cStack> (+30% per stack)</style> movement speed while at <style=cIsHealth>50% health</style> or less.";
         public override string Lore => "Urge to zerg rush rising...";
 
         public override ItemTier Tier => ItemTier.Tier1;
 
         public override bool CanRemove => true;
 
+        public override bool AIBlackList => false;
+
+
         private float lowHealthThreshold = 0.5f;
 
-        private float speedScalar = 0.13f;
+        private float speedScalar = 0.30f;
         private float finalSpeed = 1f;
 
         public override void SetupHooks()
@@ -42,8 +45,6 @@ namespace MoreItems
                 (body, args) =>
                 {
                     if (body.inventory == null) { return; }
-
-                    DebugLog.Log($"recalculate stats api fired: {body.name}");
 
                     var count = body.inventory.GetItemCount(itemDef);
                     if (count > 0 && body.healthComponent.combinedHealthFraction <= lowHealthThreshold)
