@@ -65,7 +65,7 @@ namespace MoreItems.Items
             itemDef.descriptionToken = $"ITEM_{NameToken}_DESCRIPTION";
             itemDef.loreToken = $"ITEM_{NameToken}_LORE";
 
-            switch (itemDef.tier)
+            switch (Tier)
             {
                 case ItemTier.Tier1:
                     itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/Base/Common/Tier1Def.asset").WaitForCompletion();
