@@ -12,16 +12,16 @@ namespace MoreItems
     [BepInDependency(LanguageAPI.PluginGUID)]
 
     // Plugin Metadata
-    [BepInPlugin(P_GUID, p_Name, p_Version)]
+    [BepInPlugin(P_GUID, P_Name, P_Version)]
 
     // Main Plugin Class
     public class MoreItems : BaseUnityPlugin
     {
         // Plugin metadata and version
-        public const string P_GUID = $"{P_Author}.{p_Name}";
+        public const string P_GUID = $"{P_Author}.{P_Name}";
         public const string P_Author = "RigsInRags";
-        public const string p_Name = "MoreItems";
-        public const string p_Version = "0.0.2";
+        public const string P_Name = "MoreItems";
+        public const string P_Version = "0.0.3";
 
         private Stimpack pack;
         private BountyHunterBadge badge;

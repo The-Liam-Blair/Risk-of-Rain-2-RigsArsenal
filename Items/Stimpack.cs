@@ -17,10 +17,10 @@ namespace MoreItems.Items
     {
 
         public override string Name => "Stimpack";
-        public override string NameToken => "Stimpack";
-        public override string PickupToken => "Increased movement speed when health is low.";
-        public override string Description => "Gain <style=cIsUtility>30%</style><style=cStack> (+30% per stack)</style> movement speed while at <style=cIsHealth>50% health</style> or less.";
-        public override string Lore => "Urge to zerg rush rising...";
+        public override string NameToken => "STIMPACK";
+        public override string PickupToken => "Increased movement speed and health regeneration when health is low.";
+        public override string Description => "Gain <style=cIsUtility>+10%</style><style=cStack> (+10% per stack)</style> <style=cIsUtility>movement speed</style> and <style=cIsHealth>+1</style> <style=cStack>(+0.5 per stack)</style> <style=cIsHealth>health regeneration</style> while at or under <style=cIsHealth>50% health</style>.";
+        public override string Lore => "Man... still stuck in this chicken-shit outfit...";
 
         public override ItemTier Tier => ItemTier.Tier1;
 
@@ -28,10 +28,13 @@ namespace MoreItems.Items
 
         public override bool AIBlackList => false;
 
+        public override string IconPath => null;
+        public override string ModelPath => null;
+
 
         private float lowHealthThreshold = 0.5f;
 
-        private float speedScalar = 0.30f;
+        private float speedScalar = 0.10f;
         private float finalSpeed = 1f;
 
         public override void SetupHooks()
@@ -50,6 +53,7 @@ namespace MoreItems.Items
                     if (count > 0 && body.healthComponent.combinedHealthFraction <= lowHealthThreshold)
                     {
                         args.moveSpeedMultAdd += finalSpeed;
+                        args.baseRegenAdd += 1f + (0.5f * (count - 1)); // +1 health regen for the first item, +0.5 per additional stack.
                     }
                 };
 
