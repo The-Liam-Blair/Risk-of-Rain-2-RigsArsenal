@@ -1,4 +1,5 @@
-﻿using R2API;
+﻿using System.Collections.Generic;
+using R2API;
 using RoR2;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -16,13 +17,15 @@ namespace MoreItems.Items
 
         public abstract ItemTier Tier { get; } // The tier of the item.
 
+        public virtual ItemTag[] Tags { get; set; }
+
         public abstract bool CanRemove { get; } // Can be removed from the player's inventory, such as from a shrine of order.
         public abstract bool AIBlackList { get; } // Determines if the enemy can receive this item, such as from the void fields.
 
         public ItemDef itemDef { get; private set; } // Reference to the item definition.
 
-        public abstract string IconPath { get; } // Filepath to the item's 2D icon sprite.
-        public abstract string ModelPath { get; } // Filepath to the item's 3D model.
+        public abstract Sprite Icon { get; } // Icon sprite.
+        public abstract GameObject Model { get; } // Item model.
 
         /// <summary>
         /// Item assembly process: Setup LanguageAPI, create the item object, added to the item list, and reference & implement the methods/events the item hooks into.
@@ -86,25 +89,22 @@ namespace MoreItems.Items
             itemDef.canRemove = CanRemove;
             itemDef.hidden = false;
 
-            //todo: research tags a bit more in-depth and apply to items as per.
-            /*
+            // Setup tags list, and special definition for if the item is blacklisted from the enemy AI.
             if (AIBlackList)
             {
-                itemDef.tags = new ItemTag[]
-                {
-                    ItemTag.AIBlacklist
-                };
+                Tags = new List<ItemTag>(Tags) { ItemTag.AIBlacklist }.ToArray();
             }
-            */
+
+            if(Tags.Length > 0) { itemDef.tags = Tags; }
 
             // If it exists, load custom sprite and model, otherwise load default question mark sprite and model.
-            itemDef.pickupIconSprite = (IconPath != null) 
-                ? Addressables.LoadAssetAsync<Sprite>(IconPath).WaitForCompletion() 
+            itemDef.pickupIconSprite = (Icon != null) 
+                ? Icon
                 : Addressables.LoadAssetAsync<Sprite>("RoR2/Base/Common/MiscIcons/texMysteryIcon.png").WaitForCompletion();
 
 
-            itemDef.pickupModelPrefab = (ModelPath != null)
-                ? Addressables.LoadAssetAsync<GameObject>(ModelPath).WaitForCompletion()
+            itemDef.pickupModelPrefab = (Model != null)
+                ? Model
                 : Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mystery/PickupMystery.prefab").WaitForCompletion();
 
             ItemAPI.Add(new CustomItem(itemDef, new ItemDisplayRuleDict(null)));

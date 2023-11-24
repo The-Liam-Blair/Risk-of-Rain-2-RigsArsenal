@@ -25,10 +25,12 @@ namespace MoreItems.Items
         public override ItemTier Tier => ItemTier.Tier2;
 
         public override bool CanRemove => true;
+
+        public override ItemTag[] Tags => new ItemTag[] { ItemTag.Utility };
         public override bool AIBlackList => true;
 
-        public override string IconPath => null;
-        public override string ModelPath => null;
+        public override Sprite Icon => null;
+        public override GameObject Model => null;
 
         public override void SetupHooks()
         {
@@ -45,9 +47,7 @@ namespace MoreItems.Items
 
                 if (victim.isElite)
                 {
-                    //var increasedGold = victim.master.money * count / 4; // +25% total enemy value per stack, linear.
-
-                    var fractionalBit = 1 / (1 + count * 0.25f); // Hyperbolic scaling, approaches ~+100% of enemy gold value.
+                    var fractionalBit = 1 / (1 + count * 0.25f); // Hyperbolic scaling, approaches ~100% of enemy gold value.
                     var increasedGold = Mathf.FloorToInt((1 - fractionalBit) * victim.master.money); // Rounded down to the nearest whole number.
 
                     player.master.GiveMoney((uint)increasedGold);

@@ -26,10 +26,11 @@ namespace MoreItems.Items
 
         public override bool CanRemove => true;
 
+        public override ItemTag[] Tags => new ItemTag[] {ItemTag.Healing, ItemTag.Utility};
         public override bool AIBlackList => false;
 
-        public override string IconPath => null;
-        public override string ModelPath => null;
+        public override Sprite Icon => null;
+        public override GameObject Model => null;
 
 
         private float lowHealthThreshold = 0.5f;
