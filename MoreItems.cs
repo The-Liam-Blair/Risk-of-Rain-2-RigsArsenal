@@ -26,9 +26,9 @@ namespace MoreItems
         public const string P_Name = "MoreItems";
         public const string P_Version = "0.0.4";
 
-        public static AssetBundle MainAssets;
+        //public static AssetBundle MainAssets;
 
-        public static List<Item> ItemList;
+        public static List<Item> ItemList = new List<Item>();
 
 
         public void Awake()
@@ -36,20 +36,24 @@ namespace MoreItems
             // Start up the logger.
             DebugLog.Init(Logger);
 
+            /*
             // Load the asset bundle for this mod.
            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("MoreItems.my_assetbundlefile"))
             {
                 MainAssets = AssetBundle.LoadFromStream(stream);
             }
+            */
 
            // Fetch all the items by type, and load each one (Populate each item's class definition then add to the item list).
             var Items = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Item)));
 
             foreach (var item in Items)
             {
+                DebugLog.Log($"Loading item {item.Name}...");
                 Item anItem = (Item) System.Activator.CreateInstance(item);
                 anItem.Init();
                 ItemList.Add(anItem);
+                DebugLog.Log($"Item {item.Name} loaded.");
             }
 
         }
@@ -64,7 +68,7 @@ namespace MoreItems
                 // Fetch player's transform.
                 var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
 
-                var pack = ItemList.Find(x => x.Name == "Stimpack");
+                var pack = ItemList.Find(x => x.NameToken == "STIMPACK");
                 PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(pack.itemDef.itemIndex), player.position, player.forward * 20f);
             }
             else if (Input.GetKeyDown(KeyCode.F2))
@@ -73,7 +77,7 @@ namespace MoreItems
                 // Fetch player's transform.
                 var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
 
-                var badge = ItemList.Find(x => x.Name == "BountyHunterBadge");
+                var badge = ItemList.Find(x => x.NameToken == "BOUNTYHUNTERBADGE");
                 PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(badge.itemDef.itemIndex), player.position, player.forward * 20f);
             }
         }

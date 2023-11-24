@@ -19,7 +19,7 @@ namespace MoreItems.Items
         public override string Name => "Stimpack";
         public override string NameToken => "STIMPACK";
         public override string PickupToken => "Increased movement speed and health regeneration when health is low.";
-        public override string Description => "Gain <style=cIsUtility>+10%</style><style=cStack> (+10% per stack)</style> <style=cIsUtility>movement speed</style> and <style=cIsHealth>+1</style> <style=cStack>(+0.5 per stack)</style> <style=cIsHealth>health regeneration</style> while at or under <style=cIsHealth>50% health</style>.";
+        public override string Description => "While at or under <style=cIsHealth>50% health</style>, gain <style=cIsUtility>+10%</style><style=cStack> (+10% per stack)</style> <style=cIsUtility>movement speed</style> and <style=cIsHealing>+1 base health regeneration</style> <style=cStack>(+0.5 per stack)</style>";
         public override string Lore => "Man... still stuck in this chicken-shit outfit...";
 
         public override ItemTier Tier => ItemTier.Tier1;

@@ -19,7 +19,7 @@ namespace MoreItems.Items
         public override string Name => "Bounty Hunter's Badge";
         public override string NameToken => "BOUNTYHUNTERBADGE";
         public override string PickupToken => "Increased gold from killing elite enemies.";
-        public override string Description => "<style=cDeath>Killing an elite enemy</style> rewards <style=cIsDamage>+25%</style><style=cStack> (+20% per stack)</style> increased <style=cIsDamage>gold.</style>";
+        public override string Description => "Killing an elite enemy rewards <style=cIsDamage>+25%</style><style=cStack> (+20% per stack)</style> increased <style=cIsDamage>gold.</style>";
         public override string Lore => "It's high noon...";
 
         public override ItemTier Tier => ItemTier.Tier2;
