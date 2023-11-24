@@ -1,7 +1,10 @@
-﻿using BepInEx;
+﻿using System.Collections.Generic;
+using BepInEx;
 using MoreItems.Items;
 using R2API;
 using RoR2;
+using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -21,25 +24,41 @@ namespace MoreItems
         public const string P_GUID = $"{P_Author}.{P_Name}";
         public const string P_Author = "RigsInRags";
         public const string P_Name = "MoreItems";
-        public const string P_Version = "0.0.3";
+        public const string P_Version = "0.0.4";
 
-        private Stimpack pack;
-        private BountyHunterBadge badge;
+        //public static AssetBundle MainAssets;
+
+        public static List<Item> ItemList = new List<Item>();
+
 
         public void Awake()
         {
-           DebugLog.Init(Logger);
+            // Start up the logger.
+            DebugLog.Init(Logger);
 
-           // Initialise items
-            // todo: Once several items are implemented, create a standard method for detecting item classes instead of hardcoded reference per item. (reflection)
-            pack = new Stimpack();
-            pack.Init();
+            /*
+            // Load the asset bundle for this mod.
+           using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("MoreItems.my_assetbundlefile"))
+            {
+                MainAssets = AssetBundle.LoadFromStream(stream);
+            }
+            */
 
-            badge = new BountyHunterBadge();
-            badge.Init();
+           // Fetch all the items by type, and load each one (Populate each item's class definition then add to the item list).
+            var Items = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Item)));
+
+            foreach (var item in Items)
+            {
+                DebugLog.Log($"Loading item {item.Name}...");
+                Item anItem = (Item) System.Activator.CreateInstance(item);
+                anItem.Init();
+                ItemList.Add(anItem);
+                DebugLog.Log($"Item {item.Name} loaded.");
+            }
+
         }
 
-        
+
         private void Update()
         {
             // Stimpack
@@ -49,6 +68,7 @@ namespace MoreItems
                 // Fetch player's transform.
                 var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
 
+                var pack = ItemList.Find(x => x.NameToken == "STIMPACK");
                 PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(pack.itemDef.itemIndex), player.position, player.forward * 20f);
             }
             else if (Input.GetKeyDown(KeyCode.F2))
@@ -57,6 +77,7 @@ namespace MoreItems
                 // Fetch player's transform.
                 var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
 
+                var badge = ItemList.Find(x => x.NameToken == "BOUNTYHUNTERBADGE");
                 PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(badge.itemDef.itemIndex), player.position, player.forward * 20f);
             }
         }
