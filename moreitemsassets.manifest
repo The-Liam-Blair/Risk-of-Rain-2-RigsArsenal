@@ -1,0 +1,41 @@
+ManifestFileVersion: 0
+CRC: 1613611919
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 144ec1e65473e044930741060117503c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 51c682616bd7f3dc763b52b2f08205a8
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Prefabs/Item/WornOutStimpack/WornOutStimpack.prefab
+- Assets/Materials/Item/WornOutStimpack/M_Base.mat
+- Assets/Materials/Item/WornOutStimpack/WornOutStimpack.png
+- Assets/Materials/Item/WornOutStimpack/M_HealIcon.mat
+- Assets/Materials/Item/WornOutStimpack/M_White.mat
+- Assets/Materials/Item/WornOutStimpack/M_DepletedIcon.mat
+- Assets/Materials/Item/WornOutStimpack/M_Button.mat
+Dependencies: []

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using R2API;
 using RoR2;
 using UnityEngine;
@@ -98,7 +99,6 @@ namespace MoreItems.Items
             if(Tags.Length > 0) { itemDef.tags = Tags; }
 
             // If it exists, load custom sprite and model, otherwise load default question mark sprite and model.
-            /*
             itemDef.pickupIconSprite = (Icon != null) 
                 ? Icon
                 : Addressables.LoadAssetAsync<Sprite>("RoR2/Base/Common/MiscIcons/texMysteryIcon.png").WaitForCompletion();
@@ -107,9 +107,7 @@ namespace MoreItems.Items
             itemDef.pickupModelPrefab = (Model != null)
                 ? Model
                 : Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mystery/PickupMystery.prefab").WaitForCompletion();
-            */
-            itemDef.pickupIconSprite = Addressables.LoadAssetAsync<Sprite>("RoR2/Base/Common/MiscIcons/texMysteryIcon.png").WaitForCompletion();
-            itemDef.pickupModelPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mystery/PickupMystery.prefab").WaitForCompletion();
+            
 
             ItemAPI.Add(new CustomItem(itemDef, new ItemDisplayRuleDict(null)));
         }
