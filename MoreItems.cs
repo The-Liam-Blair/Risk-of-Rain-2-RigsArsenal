@@ -24,9 +24,9 @@ namespace MoreItems
         public const string P_GUID = $"{P_Author}.{P_Name}";
         public const string P_Author = "RigsInRags";
         public const string P_Name = "MoreItems";
-        public const string P_Version = "0.0.4";
+        public const string P_Version = "0.0.5";
 
-        //public static AssetBundle MainAssets;
+        public static AssetBundle MainAssets;
 
         public static List<Item> ItemList = new List<Item>();
 
@@ -36,13 +36,13 @@ namespace MoreItems
             // Start up the logger.
             DebugLog.Init(Logger);
 
-            /*
+            
             // Load the asset bundle for this mod.
-           using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("MoreItems.my_assetbundlefile"))
+           using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("MoreItems.moreitemsassets"))
             {
                 MainAssets = AssetBundle.LoadFromStream(stream);
             }
-            */
+            
 
            // Fetch all the items by type, and load each one (Populate each item's class definition then add to the item list).
             var Items = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Item)));
@@ -61,14 +61,14 @@ namespace MoreItems
 
         private void Update()
         {
-            // Stimpack
+            // WornOutStimpack
             if (Input.GetKeyDown(KeyCode.F1))
             {
                 DebugLog.Log("F1 pressed, spawning stimpack.");
                 // Fetch player's transform.
                 var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
 
-                var pack = ItemList.Find(x => x.NameToken == "STIMPACK");
+                var pack = ItemList.Find(x => x.NameToken == "WORNOUTSTIMPACK");
                 PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(pack.itemDef.itemIndex), player.position, player.forward * 20f);
             }
             else if (Input.GetKeyDown(KeyCode.F2))
