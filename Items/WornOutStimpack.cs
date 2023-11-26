@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using EntityStates;
 using R2API;
 using R2API.Utils;
 using RoR2;

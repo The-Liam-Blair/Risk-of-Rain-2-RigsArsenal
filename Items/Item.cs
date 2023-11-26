@@ -28,6 +28,8 @@ namespace MoreItems.Items
         public abstract Sprite Icon { get; } // Icon sprite.
         public abstract GameObject Model { get; } // Item model.
 
+        public virtual BuffDef ItemBuffDef { get; } = null; // Reference to the buff definition.
+
         /// <summary>
         /// Item assembly process: Setup LanguageAPI, create the item object, added to the item list, and reference & implement the methods/events the item hooks into.
         /// </summary>

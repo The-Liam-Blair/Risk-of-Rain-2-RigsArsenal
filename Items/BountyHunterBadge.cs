@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Diagnostics;
 using UnityEngine.UIElements;
+using static MoreItems.MoreItems;
 
 namespace MoreItems.Items
 {
