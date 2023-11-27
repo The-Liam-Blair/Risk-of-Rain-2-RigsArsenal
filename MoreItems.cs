@@ -5,6 +5,7 @@ using R2API;
 using RoR2;
 using System.Linq;
 using System.Reflection;
+using MoreItems.Buffs;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -24,11 +25,12 @@ namespace MoreItems
         public const string P_GUID = $"{P_Author}.{P_Name}";
         public const string P_Author = "RigsInRags";
         public const string P_Name = "MoreItems";
-        public const string P_Version = "0.0.5";
+        public const string P_Version = "0.0.6";
 
         public static AssetBundle MainAssets;
 
         public static List<Item> ItemList = new List<Item>();
+        public static List<Buff> BuffList = new List<Buff>();
 
 
         public void Awake()
@@ -39,12 +41,24 @@ namespace MoreItems
             
             // Load the asset bundle for this mod.
            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("MoreItems.moreitemsassets"))
-            {
+           {
                 MainAssets = AssetBundle.LoadFromStream(stream);
-            }
-            
+           }
 
-           // Fetch all the items by type, and load each one (Populate each item's class definition then add to the item list).
+
+           var Buffs = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Buff)));
+
+           foreach (var buff in Buffs)
+           {
+               DebugLog.Log($"Loading buff {buff.Name}...");
+               Buff aBuff = (Buff)System.Activator.CreateInstance(buff);
+               aBuff.Init();
+               BuffList.Add(aBuff);
+               DebugLog.Log($"Buff {buff.Name} loaded.");
+           }
+
+
+            // Fetch all the items by type, and load each one (Populate each item's class definition then add to the item list).
             var Items = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Item)));
 
             foreach (var item in Items)
@@ -55,31 +69,35 @@ namespace MoreItems
                 ItemList.Add(anItem);
                 DebugLog.Log($"Item {item.Name} loaded.");
             }
-
         }
 
 
         private void Update()
         {
-            // WornOutStimpack
             if (Input.GetKeyDown(KeyCode.F1))
             {
                 DebugLog.Log("F1 pressed, spawning stimpack.");
-                // Fetch player's transform.
-                var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
-
-                var pack = ItemList.Find(x => x.NameToken == "WORNOUTSTIMPACK");
-                PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(pack.itemDef.itemIndex), player.position, player.forward * 20f);
+                DEBUG_SpawnItem("WORNOUTSTIMPACK");
             }
             else if (Input.GetKeyDown(KeyCode.F2))
             { 
                 DebugLog.Log("F2 pressed, spawning bounty hunter's badge.");
-                // Fetch player's transform.
-                var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
-
-                var badge = ItemList.Find(x => x.NameToken == "BOUNTYHUNTERBADGE");
-                PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(badge.itemDef.itemIndex), player.position, player.forward * 20f);
+                DEBUG_SpawnItem("BOUNTYHUNTERBADGE");
             }
+
+            else if (Input.GetKeyDown(KeyCode.F3))
+            {
+                DebugLog.Log("F3 pressed, spawning damaged capacitor.");
+                DEBUG_SpawnItem("DAMAGEDCAPACITOR");
+            }
+        }
+
+        private void DEBUG_SpawnItem(string itemName)
+        {
+            var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
+            var item = ItemList.Find(x => x.NameToken == itemName);
+
+            PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(item.itemDef.itemIndex), player.position, player.forward * 20f);
         }
     }
 }
