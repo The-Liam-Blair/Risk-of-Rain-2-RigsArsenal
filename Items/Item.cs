@@ -26,7 +26,7 @@ namespace MoreItems.Items
         public ItemDef itemDef { get; private set; } // Reference to the item definition.
 
         public abstract Sprite Icon { get; } // Icon sprite.
-        public abstract GameObject Model { get; } // Item model.
+        public abstract GameObject Model { get; } // Item model. NOTE: Larger colour RGB values in the editor = brightness!
 
         public virtual BuffDef ItemBuffDef { get; } = null; // Reference to the buff definition.
 

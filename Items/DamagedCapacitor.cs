@@ -15,7 +15,7 @@ namespace MoreItems.Items
         public override string NameToken => "DAMAGEDCAPACITOR";
         public override string PickupToken => "Gain barrier when you use your utility skill.";
         public override string Description => "After using your <style=cIsUtility>utility skill</style>, gain <style=cIsHealing>10</style> plus an additional <style=cIsHealing>5%</style> <style=cStack>(+5% per stack)</style> <style=cIsHealing>barrier</style>. Goes on a <style=cIsUtility>5 second cooldown</style> after use.";
-        public override string Lore => "This little capacitor is capable of powering your shields from dawn 'til dusk! Unfortunately, it looks like it took a bit of damage.\n\nSave it for when your in a pinch and need to hightail it out of there.";
+        public override string Lore => "This little capacitor is capable of powering your shields from dawn 'til dusk! Unfortunately, it looks like it took a bit of damage.\n\nSave it for when your in a pinch and need to hightail it out of there.\n\nJust don't touch the glowing part, or even the bars for that matter.";
 
         public override BuffDef ItemBuffDef => BuffList.Find(x => x.Name == "DamagedCapacitorCooldown").buffDef;
         public override ItemTier Tier => ItemTier.Tier1;
@@ -25,8 +25,8 @@ namespace MoreItems.Items
         public override ItemTag[] Tags => new ItemTag[] { ItemTag.Utility };
         public override bool AIBlackList => true;
 
-        public override Sprite Icon => null;
-        public override GameObject Model => null;
+        public override Sprite Icon => MainAssets.LoadAsset<Sprite>("DamagedCapacitor.png");
+        public override GameObject Model => MainAssets.LoadAsset<GameObject>("DamagedCapacitor.prefab");
 
         public override void SetupHooks()
         {
