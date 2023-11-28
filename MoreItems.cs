@@ -87,8 +87,8 @@ namespace MoreItems
 
             else if (Input.GetKeyDown(KeyCode.F3))
             {
-                DebugLog.Log("F3 pressed, spawning damaged capacitor.");
-                DEBUG_SpawnItem("DAMAGEDCAPACITOR");
+                DebugLog.Log("F3 pressed, spawning kinetic battery.");
+                DEBUG_SpawnItem("KINETICBATTERY");
             }
         }
 

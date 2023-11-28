@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3975526816
+CRC: 1028025402
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: c45b88aa21cefec14efe791360613b74
+    Hash: bbe02e5c9893e5b6dbe7b74f256d6c91
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 9adb05e7d57ef97595567c58869441f7
+    Hash: 1fe3abd029edb3522ae5dbbc711d0a74
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -25,28 +25,24 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
-- Class: 65
-  Script: {instanceID: 0}
-- Class: 136
-  Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Materials/Item/WornOutStimpack/M_White.mat
 - Assets/shaders/deferred/hgstandard.shader
-- Assets/Prefabs/Item/WornOutStimpack/WornOutStimpack.prefab
 - Assets/Materials/Item/WornOutStimpack/M_Base.mat
-- Assets/Materials/Item/DamagedCapacitor/M_Screw.mat
+- Assets/Materials/Item/KineticBattery/M_Screw.mat
 - Assets/Materials/Item/WornOutStimpack/WornOutStimpack.png
 - Assets/Materials/Item/WornOutStimpack/M_HealIcon.mat
 - Assets/Materials/Item/WornOutStimpack/M_WhiteBright.mat
+- Assets/Prefabs/Item/WornOutStimpack/WornOutStimpack.prefab
 - Assets/Materials/Item/its texturin time.png
-- Assets/Prefabs/Item/DamagedCapacitor/DamagedCapacitor.prefab
-- Assets/Materials/Item/DamagedCapacitor/M_Body.mat
-- Assets/Materials/Item/DamagedCapacitor/M_Glow.mat
+- Assets/Prefabs/Item/KineticBattery/KineticBattery.prefab
+- Assets/Materials/Item/KineticBattery/M_Body.mat
+- Assets/Materials/Item/KineticBattery/M_Glow.mat
 - Assets/Materials/Item/WornOutStimpack/M_DepletedIcon.mat
-- Assets/Materials/Item/DamagedCapacitor/M_Bars.mat
-- Assets/Materials/Item/DamagedCapacitor/DamagedCapacitor.PNG
+- Assets/Materials/Item/KineticBattery/M_Bars.mat
+- Assets/Materials/Item/KineticBattery/KineticBattery.PNG
 - Assets/Materials/Item/WornOutStimpack/M_Button.mat
 Dependencies: []

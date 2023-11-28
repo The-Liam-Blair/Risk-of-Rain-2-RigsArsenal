@@ -27,6 +27,8 @@ namespace MoreItems.Items
 
         public abstract Sprite Icon { get; } // Icon sprite.
         public abstract GameObject Model { get; } // Item model. NOTE: Larger colour RGB values in the editor = brightness!
+                                                  // NOTE 2: Scaling does NOT scale the object as a pickup! For reasons only god knows, sticking a mesh renderer on an
+                                                  // empty parent makes it far smaller though. Scaling it with a mesh renderer does nothing additionally. please help.
 
         public virtual BuffDef ItemBuffDef { get; } = null; // Reference to the buff definition.
 

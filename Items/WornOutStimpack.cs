@@ -52,8 +52,9 @@ namespace MoreItems.Items
                     if (body.inventory == null) { return; }
 
                     var count = body.inventory.GetItemCount(itemDef);
-                    if (count > 0 && body.healthComponent.combinedHealthFraction <= lowHealthThreshold)
+                    if (count > 0 && (body.healthComponent.health / body.healthComponent.fullHealth) <= lowHealthThreshold)
                     {
+                        Debug.Log($"hp innit: {body.healthComponent.health / body.healthComponent.fullHealth}.");
                         args.moveSpeedMultAdd += finalSpeed;
                         args.baseRegenAdd += 0.5f * count;
                     }
@@ -70,7 +71,7 @@ namespace MoreItems.Items
                     if (body.inventory == null) { return orig(self, amount, procChainMask, nonRegen); }
 
                     var count = body.inventory.GetItemCount(itemDef);
-                    if (count > 0 && body.healthComponent.combinedHealthFraction <= lowHealthThreshold)
+                    if (count > 0 && (body.healthComponent.health / body.healthComponent.fullHealth) <= lowHealthThreshold)
                     {
                         finalSpeed = speedScalar * count;
                     }
@@ -93,7 +94,7 @@ namespace MoreItems.Items
                     if (body.inventory == null) { return; }
 
                     var count = body.inventory.GetItemCount(itemDef);
-                    if (count > 0 && body.healthComponent.combinedHealthFraction <= lowHealthThreshold)
+                    if (count > 0 && (body.healthComponent.health / body.healthComponent.fullHealth) <= lowHealthThreshold)
                     {
                         finalSpeed = speedScalar * count;
                     }
