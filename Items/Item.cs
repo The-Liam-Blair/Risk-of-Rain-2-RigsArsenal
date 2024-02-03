@@ -38,14 +38,14 @@ namespace MoreItems.Items
         public virtual void Init()
         {
             DebugLog.Log($"Item {Name} load started...");
+
             InitLang();
-
             DebugLog.Log($"Item {Name} language initialised.");
+
             CreateItem();
-
             DebugLog.Log($"Item {Name} created.");
-            SetupHooks();
 
+            SetupHooks();
             DebugLog.Log($"Item {Name} hooks initialised.");
         }
 
@@ -83,7 +83,9 @@ namespace MoreItems.Items
                     itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/Base/Common/Tier2Def.asset").WaitForCompletion();
                     break;
 
-                //todo: the other tiers
+                case ItemTier.Tier3:
+                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/Base/Common/Tier3Def.asset").WaitForCompletion();
+                    break;
 
                 default:
                     DebugLog.Log($"Item {itemDef.name} has an invalid item tier. Defaulting to Tier1.");

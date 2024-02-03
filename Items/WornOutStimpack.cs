@@ -34,6 +34,8 @@ namespace MoreItems.Items
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("WornOutStimpack.png");
         public override GameObject Model => MainAssets.LoadAsset<GameObject>("WornOutStimpack.prefab");
 
+        public override BuffDef ItemBuffDef => BuffList.Find(x => x.Name == "StimpackHealCooldown").buffDef;
+
 
         private float lowHealthThreshold = 0.5f;
 
@@ -42,49 +44,10 @@ namespace MoreItems.Items
 
         public override void SetupHooks()
         {
-            // god this looks a mess
-            // will revisit when im smarter :)
+            // todo: testing on enemies.
 
-            // Called when the entity's stats are recalculated, checks the health, and if under the threshold, applies the speed and health regen buff.
-            RecalculateStatsAPI.GetStatCoefficients +=
-                (body, args) =>
-                {
-                    if (body.inventory == null) { return; }
-
-                    var count = body.inventory.GetItemCount(itemDef);
-                    if (count > 0 && (body.healthComponent.health / body.healthComponent.fullHealth) <= lowHealthThreshold)
-                    {
-                        Debug.Log($"hp innit: {body.healthComponent.health / body.healthComponent.fullHealth}.");
-                        args.moveSpeedMultAdd += finalSpeed;
-                        args.baseRegenAdd += 0.5f * count;
-                    }
-                };
-
-            // Checks healing statistics for those with the item, on the basis that if a heal increases the entity's current health above the threshold
-            // in which case the buffs are removed.
-            On.RoR2.HealthComponent.Heal +=
-                (orig, self, amount, procChainMask, nonRegen) =>
-                {
-                    orig(self, amount, procChainMask, nonRegen);
-
-                    var body = self.body;
-                    if (body.inventory == null) { return orig(self, amount, procChainMask, nonRegen); }
-
-                    var count = body.inventory.GetItemCount(itemDef);
-                    if (count > 0 && (body.healthComponent.health / body.healthComponent.fullHealth) <= lowHealthThreshold)
-                    {
-                        finalSpeed = speedScalar * count;
-                    }
-                    else
-                    {
-                        finalSpeed = 0f;
-                    }
-                    body.RecalculateStats();
-
-                    return orig(self, amount, procChainMask, nonRegen);
-                };
-
-            // Checks damage report for those with the item, and checks if the damage puts the entity under the health threshold.
+            // If entity takes damage that drops their health below the low health threshold, add the buff.
+            // Buff is refreshed if it's currently active.
             On.RoR2.HealthComponent.TakeDamage +=
                 (orig, self, damageInfo) =>
                 {
@@ -94,16 +57,42 @@ namespace MoreItems.Items
                     if (body.inventory == null) { return; }
 
                     var count = body.inventory.GetItemCount(itemDef);
-                    if (count > 0 && (body.healthComponent.health / body.healthComponent.fullHealth) <= lowHealthThreshold)
+                    if(count <= 0) { return; }
+
+                    if(body.healthComponent.combinedHealthFraction > lowHealthThreshold) { return; }
+
+                    // Add buff for 5 second duration. If buff already exists, refresh the duration.
+                    if (body.GetBuffCount(ItemBuffDef) <= 0)
                     {
-                        finalSpeed = speedScalar * count;
+                        body.AddTimedBuff(ItemBuffDef, 5f);
                     }
                     else
                     {
-                        finalSpeed = 0f;
+                        body.ClearTimedBuffs(ItemBuffDef);
+                        body.AddTimedBuff(ItemBuffDef, 5f);
                     }
-                    body.RecalculateStats();
                 };
+
+            // If an entity receives healing, has the buff, and is currently under the low health threshold, the buff
+            // is applied or refreshed.
+            On.RoR2.HealthComponent.Heal += (orig, self, amount, mask, regen) =>
+            {
+                orig(self, amount, mask, regen);
+
+                var body = self.body;
+                if (body.inventory == null) { return orig(self, amount, mask, regen); }
+
+                var count = body.inventory.GetItemCount(itemDef);
+                if (count <= 0) { return orig(self, amount, mask, regen); }
+
+                if (body.HasBuff(ItemBuffDef) && self.combinedHealthFraction < lowHealthThreshold)
+                {
+                    body.ClearTimedBuffs(ItemBuffDef);
+                    body.AddTimedBuff(ItemBuffDef, 5f);
+                }
+
+                return orig(self, amount, mask, regen);
+            };
         }
     }
 }

@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1028025402
+CRC: 3683267549
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: bbe02e5c9893e5b6dbe7b74f256d6c91
+    Hash: a255b402e9649581b6fbcaa047347a01
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 1fe3abd029edb3522ae5dbbc711d0a74
+    Hash: f2653914301cae258266227f7532cb88
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -25,6 +25,10 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
+- Class: 64
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
@@ -36,10 +40,17 @@ Assets:
 - Assets/Materials/Item/WornOutStimpack/WornOutStimpack.png
 - Assets/Materials/Item/WornOutStimpack/M_HealIcon.mat
 - Assets/Materials/Item/WornOutStimpack/M_WhiteBright.mat
+- Assets/Materials/Item/BountyHunterBadge/M_yella.mat
 - Assets/Prefabs/Item/WornOutStimpack/WornOutStimpack.prefab
+- Assets/Materials/Item/BountyHunterBadge/M_Shiny-YELLA.mat
+- Assets/Materials/Item/WornOutStimpack/WornOutStimpackBuff.png
+- Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.prefab
+- Assets/Materials/Item/KineticBattery/KineticBatteryBuff.png
 - Assets/Materials/Item/its texturin time.png
 - Assets/Prefabs/Item/KineticBattery/KineticBattery.prefab
+- Assets/Materials/Item/BountyHunterBadge/M_YELLA-ER.mat
 - Assets/Materials/Item/KineticBattery/M_Body.mat
+- Assets/Materials/Item/BountyHunterBadge/M_SHINY-YELLA-ER.mat
 - Assets/Materials/Item/KineticBattery/M_Glow.mat
 - Assets/Materials/Item/WornOutStimpack/M_DepletedIcon.mat
 - Assets/Materials/Item/KineticBattery/M_Bars.mat

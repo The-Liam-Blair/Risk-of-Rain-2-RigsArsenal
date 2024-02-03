@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using IL.EntityStates;
 using MoreItems.Buffs;
 using UnityEngine;
 using static MoreItems.MoreItems;
@@ -19,7 +20,7 @@ namespace MoreItems.Items
         public override string Name => "Kinetic Battery";
         public override string NameToken => "KINETICBATTERY";
         public override string PickupToken => "Gain barrier when you use your utility skill.";
-        public override string Description => "After using your <style=cIsUtility>utility skill</style>, gain <style=cIsHealing>10</style> plus an additional <style=cIsHealing>5%</style> <style=cStack>(+5% per stack)</style> <style=cIsHealing>barrier</style>. Goes on a <style=cIsUtility>5 second cooldown</style> after use.";
+        public override string Description => "After using a <style=cIsUtility>utility skill</style>, gain <style=cIsHealing>25</style> <style=cStack>(+25 per stack)</style> <style=cIsHealing>barrier</style>. Goes on a <style=cIsUtility>5 second cooldown</style> after use.";
         public override string Lore => "This little battery can hook directly into your shield system to provide a quick, temporary burst of shielding!\n\nIt's real strength however is that it can recharge itself through quick motion! A burst of speed is enough for the battery to power your shields for a brief moment, perfect for when you need to quickly remove yourself from any situation safely.\n\nJust don't touch the glowing parts, or even the bars for that matter.";
 
         public override BuffDef ItemBuffDef => BuffList.Find(x => x.Name == "KineticBatteryCooldown").buffDef;
@@ -35,24 +36,24 @@ namespace MoreItems.Items
 
         public override void SetupHooks()
         {
+            // When the player uses their utility skill, give a barrier and apply the cooldown buff.
             On.RoR2.CharacterBody.OnSkillActivated += (orig, self, skill) =>
             {
                 orig(self, skill);
 
                 if (!self.isPlayerControlled) { return; } // Prevents NRE from enemies calling this method (On self.skillLocator.utility.hasExecutedSuccessfully).
 
-                DebugLog.Log($"Buff name: {ItemBuffDef.name}, {ItemBuffDef.buffColor}, {ItemBuffDef}");
-                DebugLog.Log($"Buff count: {self.GetBuffCount(ItemBuffDef)}");
                 if (self.GetBuffCount(ItemBuffDef) <= 0 && self.skillLocator.utility.hasExecutedSuccessfully)
                 {
                     var count = self.inventory.GetItemCount(itemDef);
                     if (count > 0)
                     {
-                        var finalBarrierValue = 10 + (self.maxHealth * 0.05f * count); // 10 + 5% max health per stack.
+                        var finalBarrierValue = 25 * count;
                         self.healthComponent.AddBarrier(finalBarrierValue);
                         self.AddTimedBuff(ItemBuffDef, 5f);
                     }
                 }
+                
             };
         }
     }

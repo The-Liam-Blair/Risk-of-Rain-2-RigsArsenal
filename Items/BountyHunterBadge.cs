@@ -31,10 +31,11 @@ namespace MoreItems.Items
         public override bool AIBlackList => true;
 
         public override Sprite Icon => null;
-        public override GameObject Model => null;
+        public override GameObject Model => MainAssets.LoadAsset<GameObject>("BountyHunterBadge.prefab");
 
         public override void SetupHooks()
         {
+            // Give the player more gold when they kill an elite enemy.
             GlobalEventManager.onCharacterDeathGlobal += (DamageInfo) =>
             {
                 var victim = DamageInfo.victimBody;
@@ -52,11 +53,6 @@ namespace MoreItems.Items
                     var increasedGold = Mathf.FloorToInt((1 - fractionalBit) * victim.master.money); // Rounded down to the nearest whole number.
 
                     player.master.GiveMoney((uint)increasedGold);
-
-                    DebugLog.Log($"Killed an elite; gained {increasedGold} gold.");
-                    DebugLog.Log($"Enemy Gold Value: {victim.master.money}");
-                    DebugLog.Log($"It's fractioning time: {1 - fractionalBit}");
-                    DebugLog.Log($"Total gold value: {victim.master.money + increasedGold}");
                 }
             };
         }
