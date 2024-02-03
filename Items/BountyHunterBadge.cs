@@ -21,7 +21,7 @@ namespace MoreItems.Items
         public override string NameToken => "BOUNTYHUNTERBADGE";
         public override string PickupToken => "Increased gold from killing elite enemies.";
         public override string Description => "Killing an elite enemy rewards <style=cIsDamage>+25%</style><style=cStack> (+20% per stack)</style> increased <style=cIsDamage>gold.</style>.";
-        public override string Lore => "<style=cMono>// ARTIFACT ANALYSIS NOTES //</style>\n\nNAME: Sheriff Badge.\n\nSIZE: Approximately 12cm x 12cm x 2cm.\n\nWEIGHT: 145g.\n\nMATERIAL: Gold.\n\nINVESTIGATOR'S NOTES: Artifact's front shows clear signs of wear and tear. The letters 'J R' has been scribed on the back, perhaps the initials of the former wearer. Under the initials are 5 circular icons scribed in a line, 3 of which crossed out, possibly targets to the former wearer. Further examination of the icons are required. Artifact has been cleared for further forensic and DNA testing.\n\n<style=cMono>// END OF NOTES //";
+        public override string Lore => "<style=cMono>// ARTIFACT ANALYSIS NOTES //</style>\n\nNAME: Sheriff Badge.\n\nSIZE: Approximately 12cm x 12cm x 2cm.\n\nWEIGHT: 275g.\n\nMATERIAL: Gold, Rubber.\n\nINVESTIGATOR'S NOTES: Artifact's front shows clear signs of wear and tear. The letters 'J R' has been scribed on the back, perhaps the initials of the former wearer. Under the initials are 5 circular icons scribed in a line, 3 of which crossed out, possibly targets to the former wearer. Further examination of the icons are required. Artifact has been cleared for further forensic and DNA testing.\n\n<style=cMono>// END OF NOTES //";
 
         public override ItemTier Tier => ItemTier.Tier2;
 
@@ -30,7 +30,7 @@ namespace MoreItems.Items
         public override ItemTag[] Tags => new ItemTag[] { ItemTag.Utility };
         public override bool AIBlackList => true;
 
-        public override Sprite Icon => null;
+        public override Sprite Icon => MainAssets.LoadAsset<Sprite>("BountyHunterBadge.png");
         public override GameObject Model => MainAssets.LoadAsset<GameObject>("BountyHunterBadge.prefab");
 
         public override void SetupHooks()

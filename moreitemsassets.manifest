@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3683267549
+CRC: 1757594345
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a255b402e9649581b6fbcaa047347a01
+    Hash: 127bc0b9efc21deda91b04549fd5cf1e
   TypeTreeHash:
     serializedVersion: 2
-    Hash: f2653914301cae258266227f7532cb88
+    Hash: 209b83e87f2068bd9f291febfe005640
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -25,24 +25,26 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
-- Class: 64
-  Script: {instanceID: 0}
-- Class: 65
+- Class: 135
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
+- Assets/Materials/Item/BountyHunterBadge/M_Gray.mat
 - Assets/Materials/Item/WornOutStimpack/M_White.mat
+- Assets/Materials/Item/BountyHunterBadge/BountyHunterBadge.png
 - Assets/shaders/deferred/hgstandard.shader
+- Assets/Materials/Item/BountyHunterBadge/YellowTex2.png
 - Assets/Materials/Item/WornOutStimpack/M_Base.mat
 - Assets/Materials/Item/KineticBattery/M_Screw.mat
 - Assets/Materials/Item/WornOutStimpack/WornOutStimpack.png
+- Assets/Materials/Item/BountyHunterBadge/M_Black.mat
 - Assets/Materials/Item/WornOutStimpack/M_HealIcon.mat
+- Assets/Materials/Item/BountyHunterBadge/BackingTex.png
 - Assets/Materials/Item/WornOutStimpack/M_WhiteBright.mat
 - Assets/Materials/Item/BountyHunterBadge/M_yella.mat
 - Assets/Prefabs/Item/WornOutStimpack/WornOutStimpack.prefab
-- Assets/Materials/Item/BountyHunterBadge/M_Shiny-YELLA.mat
 - Assets/Materials/Item/WornOutStimpack/WornOutStimpackBuff.png
 - Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.prefab
 - Assets/Materials/Item/KineticBattery/KineticBatteryBuff.png
@@ -50,7 +52,8 @@ Assets:
 - Assets/Prefabs/Item/KineticBattery/KineticBattery.prefab
 - Assets/Materials/Item/BountyHunterBadge/M_YELLA-ER.mat
 - Assets/Materials/Item/KineticBattery/M_Body.mat
-- Assets/Materials/Item/BountyHunterBadge/M_SHINY-YELLA-ER.mat
+- Assets/Materials/Item/BountyHunterBadge/YellowTex1.png
+- Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.blend
 - Assets/Materials/Item/KineticBattery/M_Glow.mat
 - Assets/Materials/Item/WornOutStimpack/M_DepletedIcon.mat
 - Assets/Materials/Item/KineticBattery/M_Bars.mat
