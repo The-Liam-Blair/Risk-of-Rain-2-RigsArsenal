@@ -12,10 +12,9 @@ namespace MoreItems.Buffs
     {
         public override string Name => "StimpackHealCooldown";
         public override bool canStack => false;
-        public override bool isDebuff => true;
+        public override bool isDebuff => false;
         public override Color BuffColor => Color.white;
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("WornOutStimpackBuff.png");
-        public override bool isCooldown => true;
 
 
         private float lowHealthThreshold = 0.5f;

@@ -90,6 +90,12 @@ namespace MoreItems
                 DebugLog.Log("F3 pressed, spawning kinetic battery.");
                 DEBUG_SpawnItem("KINETICBATTERY");
             }
+
+            else if (Input.GetKeyDown(KeyCode.F4))
+            {
+                DebugLog.Log("F4 pressed, spawning reactive armour plating.");
+                DEBUG_SpawnItem("REACTIVEARMOURPLATING");
+            }
         }
 
         private void DEBUG_SpawnItem(string itemName)
