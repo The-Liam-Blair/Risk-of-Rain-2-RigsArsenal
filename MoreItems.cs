@@ -96,6 +96,12 @@ namespace MoreItems
                 DebugLog.Log("F4 pressed, spawning reactive armour plating.");
                 DEBUG_SpawnItem("REACTIVEARMOURPLATING");
             }
+
+            else if (Input.GetKeyDown(KeyCode.F5))
+            {
+                DebugLog.Log("F5 pressed, spawning Under-Barrel Shotgun");
+                DEBUG_SpawnItem("UNDERBARRELSHOTGUN");
+            }
         }
 
         private void DEBUG_SpawnItem(string itemName)
