@@ -50,13 +50,14 @@ namespace MoreItems.Items
             // temp until custom models are made.
             pellet = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/Thermite"), "UnderBarrelShotgunPellet", true);
 
-            pellet.AddComponent<ProjectileGhostController>();
+            var pGhost = pellet.AddComponent<ProjectileGhostController>();
 
             var projectileController = pellet.GetComponent<ProjectileController>();
             projectileController.ghostPrefab = Model;
             pellet.GetComponent<TeamFilter>().teamIndex = TeamIndex.Player;
             pellet.GetComponent<RoR2.Projectile.ProjectileDamage>().damageType = DamageType.Generic;
             pellet.GetComponent<RoR2.Projectile.ProjectileDamage>().damage = 1f;
+            pellet.GetComponent<RoR2.Projectile.ProjectileController>().ghost = pGhost;
            
             PrefabAPI.RegisterNetworkPrefab(pellet);
 

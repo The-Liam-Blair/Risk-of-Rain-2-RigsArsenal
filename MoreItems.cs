@@ -72,6 +72,7 @@ namespace MoreItems
         }
 
 
+        // Debugging method to spawn items in-game.
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.F1))
@@ -101,6 +102,11 @@ namespace MoreItems
             {
                 DebugLog.Log("F5 pressed, spawning Under-Barrel Shotgun");
                 DEBUG_SpawnItem("UNDERBARRELSHOTGUN");
+            }
+            else if (Input.GetKeyDown(KeyCode.F6))
+            {
+                DebugLog.Log("F6 pressed, spawning Chaos Rune");
+                DEBUG_SpawnItem("CHAOSRUNE");
             }
         }
 
