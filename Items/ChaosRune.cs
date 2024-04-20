@@ -35,11 +35,9 @@ namespace MoreItems.Items
         public override Sprite Icon => null;
         public override GameObject Model => null;
 
-        // todo: Get rid of addBuff hook as the OnDotsStackAddedServer hook modifies the buffs/debuffs.
-        //       A way to identify the attacker and inspect their item count is required too:
-        //          - The DotStack class has an attacker object property which may expose the attacker's characterbody component, and so their inventory.
-        
-        // Note: The OnDotsStackAddedServer hook can also be used to modify (de)buff durations, damage, damage type, etc, which can be handy for some other item ideas.
+
+        // todo: investigate the "infinite callback loop" of this function. It appears that the .dll is not updating from looking at dnspy, so may be an issue
+        // with visual studio. if not, then it may be a proc chain infinite loop.
         public override void SetupHooks()
         {
             On.RoR2.DotController.InflictDot_refInflictDotInfo += (On.RoR2.DotController.orig_InflictDot_refInflictDotInfo orig, ref InflictDotInfo inflictDotInfo) =>
@@ -53,18 +51,14 @@ namespace MoreItems.Items
                 var count = attacker.inventory.GetItemCount(itemDef);
                 if(count <= 0) { return; }
 
-                var roll = 100;
-                var maxSuccessfulRolls = Mathf.Max(2, Mathf.Floor(count * 0.34f)); // 2 successful rolls minimum, or 1 additional successful roll per 3 stacks
-                DebugLog.Log($"Up to {maxSuccessfulRolls} successful roles allowed. Total roll count: {count}.");                                                                   // (With many stacks of this item it starts to lag and be more unstable).
-                var currentSuccessfulRolls = 0;
+                var roll = 50;
+                DebugLog.Log($"Total roll count: {count}.");
                 int[] allowedDots = new int[] { 0, 1, 5, 8 }; // Bleed, Burn, Blight (Acrid), Fracture (Collapse).
                                                               // Numbers are just the dot values on the DotController enum, only the order matters for the switch statement.
                 
                 //todo: test for infinite loop/proc chain crash is gone, test burn + stronger burn interaction, blight and collapse. reset roll value to 20 when done.
-                for(int i = 0; i < count; i++)
+                for(int i = 0; i < 1; i++)
                 {
-                    if(currentSuccessfulRolls >= maxSuccessfulRolls) { break; }
-
                     if (Util.CheckRoll(roll, attacker.master))
                     {
                         DebugLog.Log("Chaos Rune: Successful roll for additional debuff.");
@@ -119,13 +113,13 @@ namespace MoreItems.Items
                                     victimObject = inflictDotInfo.victimObject,
                                     totalDamage = attacker.damage * 0.125f, // Normally it is damage * 0.5f, but it has been scaled down by 1/4 to balance the item.
                                     damageMultiplier = 1f,                  // Reducing the damage by 1/4 seems to reduce its duration by 1/4 and retain the same dps (requires more testing).
-                                    dotIndex = DotController.DotIndex.Burn
+                                    dotIndex = DotController.DotIndex.Burn,
+                                    maxStacksFromAttacker = uint.MaxValue
                                 };
                                 StrengthenBurnUtils.CheckDotForUpgrade(attacker.inventory, ref burnDot); // Upgrades burn to stronger burn if the entity has any ignition tanks.
                                 DotController.InflictDot(ref burnDot);
                                 break;
                         }
-                        currentSuccessfulRolls++;
                     }
                 }
             };
