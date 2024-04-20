@@ -42,36 +42,92 @@ namespace MoreItems.Items
         // Note: The OnDotsStackAddedServer hook can also be used to modify (de)buff durations, damage, damage type, etc, which can be handy for some other item ideas.
         public override void SetupHooks()
         {
-            // Called when a buff/debuff is given to an entity.
-            On.RoR2.CharacterBody.AddBuff_BuffDef += (orig, self, buffDef) =>
+            On.RoR2.DotController.InflictDot_refInflictDotInfo += (On.RoR2.DotController.orig_InflictDot_refInflictDotInfo orig, ref InflictDotInfo inflictDotInfo) =>
             {
-                orig(self, buffDef);
+                orig(ref inflictDotInfo);
 
-                //   var count = self.inventory.GetItemCount(itemDef);
-                //   if (count <= 0) { return; }
+                var attacker = inflictDotInfo.attackerObject.GetComponent<CharacterBody>();
+                var victim = inflictDotInfo.victimObject.GetComponent<CharacterBody>();
+                if (!attacker || !victim) { return; }
 
-                if (buffDef != null)
+                var count = attacker.inventory.GetItemCount(itemDef);
+                if(count <= 0) { return; }
+
+                var roll = 100;
+                var maxSuccessfulRolls = Mathf.Max(2, Mathf.Floor(count * 0.34f)); // 2 successful rolls minimum, or 1 additional successful roll per 3 stacks
+                DebugLog.Log($"Up to {maxSuccessfulRolls} successful roles allowed. Total roll count: {count}.");                                                                   // (With many stacks of this item it starts to lag and be more unstable).
+                var currentSuccessfulRolls = 0;
+                int[] allowedDots = new int[] { 0, 1, 5, 8 }; // Bleed, Burn, Blight (Acrid), Fracture (Collapse).
+                                                              // Numbers are just the dot values on the DotController enum, only the order matters for the switch statement.
+                
+                //todo: test for infinite loop/proc chain crash is gone, test burn + stronger burn interaction, blight and collapse. reset roll value to 20 when done.
+                for(int i = 0; i < count; i++)
                 {
-                    DebugLog.Log($"Chaos Rune: Debuff {buffDef.name} applied to {self.name}");
-                }
-                else
-                {
-                    DebugLog.Log($"Huh, no debuff applied to {self.name}");
-                }
-            };
+                    if(currentSuccessfulRolls >= maxSuccessfulRolls) { break; }
 
-            // Called when a buff/debuff has been assembled and about to be added onto the target.
-            On.RoR2.DotController.OnDotStackAddedServer += (orig, self, dotStack) =>
-            {
-                // For some reason dotstack is interpreted as an object, not as a DotStack class, so its casted into that type so it can be modified.
-                DotController.DotStack castedDotStack = dotStack as DotController.DotStack;
+                    if (Util.CheckRoll(roll, attacker.master))
+                    {
+                        DebugLog.Log("Chaos Rune: Successful roll for additional debuff.");
+                        var DotIndex = Random.Range(0, allowedDots.Length);
 
-                if (castedDotStack != null)
-                {
-                    castedDotStack.damage *= 5f;
+                        // Debuff info is assembled before the debuff is applied, called during the "OnHitEnemy" method. As each debuff has it's own damage and 
+                        // duration among other stats, this basically replicates this process of building debuffs.
+                        //
+                        // Duration of bleed and blight scales off of the attack's proc coefficient. As this isn't exposed here, a flat multiplier is used that
+                        // tries to be in-line with the average duration.
+                        //
+                        // Because this item can inflict lots of debuffss incredibly quickly, the duration of bleed, blight and burn are reduced slightly from an average
+                        // value to balance the item, and their damage is reduced by 1/4. The damage of collapse is only reduced by 1/4, duration is unaffected.
+                        switch(DotIndex)
+                        {
+                            /*
+                            case 0: // Bleed
+                                DebugLog.Log($"Inflicting bleed.");
+                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Bleed, 1.5f, 0.25f);
+                                break;
+                                
+                            case 1: // Burn - As it's damage scales off of the entity's damage value, its damage can be calculated accurately.
+                                DebugLog.Log($"Inflicting burn.");
+                                InflictDotInfo burnDot = new InflictDotInfo()
+                                {
+                                    attackerObject = inflictDotInfo.attackerObject,
+                                    victimObject = inflictDotInfo.victimObject,
+                                    totalDamage = attacker.damage * 0.125f, // Normally it is damage * 0.5f, but it has been scaled down by 1/4 to balance the item.
+                                    damageMultiplier = 1f,                  // Reducing the damage by 1/4 seems to reduce its duration by 1/4 and retain the same dps (requires more testing).
+                                    dotIndex = DotController.DotIndex.Burn
+                                };
+                                StrengthenBurnUtils.CheckDotForUpgrade(attacker.inventory, ref burnDot); // Upgrades burn to stronger burn if the entity has any ignition tanks.
+                                DotController.InflictDot(ref burnDot);
+                                break;
+
+                            case 2: // Blight
+                                DebugLog.Log("$Inflicting blight.");
+                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Blight, 2.5f, 0.25f);
+                                break;
+
+                            case 4: // Collapse
+                                DebugLog.Log("$Inflicting collapse.");
+                                DotController.DotDef collapseDef = DotController.GetDotDef(DotController.DotIndex.Fracture);
+                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Fracture, collapseDef.interval, 0.25f);
+                                break;
+                            */
+                            default:
+                                DebugLog.Log($"Inflicting burn.");
+                                InflictDotInfo burnDot = new InflictDotInfo()
+                                {
+                                    attackerObject = inflictDotInfo.attackerObject,
+                                    victimObject = inflictDotInfo.victimObject,
+                                    totalDamage = attacker.damage * 0.125f, // Normally it is damage * 0.5f, but it has been scaled down by 1/4 to balance the item.
+                                    damageMultiplier = 1f,                  // Reducing the damage by 1/4 seems to reduce its duration by 1/4 and retain the same dps (requires more testing).
+                                    dotIndex = DotController.DotIndex.Burn
+                                };
+                                StrengthenBurnUtils.CheckDotForUpgrade(attacker.inventory, ref burnDot); // Upgrades burn to stronger burn if the entity has any ignition tanks.
+                                DotController.InflictDot(ref burnDot);
+                                break;
+                        }
+                        currentSuccessfulRolls++;
+                    }
                 }
-
-                orig(self, dotStack);
             };
         }
     }

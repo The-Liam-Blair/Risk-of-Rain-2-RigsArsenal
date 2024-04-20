@@ -108,6 +108,19 @@ namespace MoreItems
                 DebugLog.Log("F6 pressed, spawning Chaos Rune");
                 DEBUG_SpawnItem("CHAOSRUNE");
             }
+            else if (Input.GetKeyDown(KeyCode.F12))
+            {
+                var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
+                for (int i = 0; i < ItemList.Count; i++)
+                {
+                    var item = ItemList[i];
+                    var count = player.GetComponent<CharacterBody>().inventory.GetItemCount(item.itemDef);
+                    if (count > 0)
+                    {
+                        player.GetComponent<CharacterBody>().inventory.RemoveItem(item.itemDef, count);
+                    }
+                }
+            }
         }
 
         private void DEBUG_SpawnItem(string itemName)
