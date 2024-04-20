@@ -35,17 +35,20 @@ namespace MoreItems.Items
         public override Sprite Icon => null;
         public override GameObject Model => null;
 
+        // todo: Get rid of addBuff hook as the OnDotsStackAddedServer hook modifies the buffs/debuffs.
+        //       A way to identify the attacker and inspect their item count is required too:
+        //          - The DotStack class has an attacker object property which may expose the attacker's characterbody component, and so their inventory.
+        
+        // Note: The OnDotsStackAddedServer hook can also be used to modify (de)buff durations, damage, damage type, etc, which can be handy for some other item ideas.
         public override void SetupHooks()
         {
-            // Called when a buff is given to an entity.
-            // TODO: figure out the attacker who applied the debuff and then call this modified method.
-            //       (Checking count is only checking the count for the entity receiving the debuff, not the attacker!)
+            // Called when a buff/debuff is given to an entity.
             On.RoR2.CharacterBody.AddBuff_BuffDef += (orig, self, buffDef) =>
             {
                 orig(self, buffDef);
 
-             //   var count = self.inventory.GetItemCount(itemDef);
-             //   if (count <= 0) { return; }
+                //   var count = self.inventory.GetItemCount(itemDef);
+                //   if (count <= 0) { return; }
 
                 if (buffDef != null)
                 {
@@ -55,6 +58,20 @@ namespace MoreItems.Items
                 {
                     DebugLog.Log($"Huh, no debuff applied to {self.name}");
                 }
+            };
+
+            // Called when a buff/debuff has been assembled and about to be added onto the target.
+            On.RoR2.DotController.OnDotStackAddedServer += (orig, self, dotStack) =>
+            {
+                // For some reason dotstack is interpreted as an object, not as a DotStack class, so its casted into that type so it can be modified.
+                DotController.DotStack castedDotStack = dotStack as DotController.DotStack;
+
+                if (castedDotStack != null)
+                {
+                    castedDotStack.damage *= 5f;
+                }
+
+                orig(self, dotStack);
             };
         }
     }
