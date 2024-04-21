@@ -123,6 +123,11 @@ namespace MoreItems
             }
         }
 
+        private void LateUpdate()
+        {
+
+        }
+
         private void DEBUG_SpawnItem(string itemName)
         {
             var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
