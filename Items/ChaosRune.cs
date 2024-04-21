@@ -21,8 +21,8 @@ namespace MoreItems.Items
     {
         public override string Name => "Chaos Rune";
         public override string NameToken => "CHAOSRUNE";
-        public override string PickupToken => "Chance to inflict additional damaging debuffs when applying any debuff.";
-        public override string Description => "";
+        public override string PickupToken => "Chance to inflict additional damaging debuffs when applying any damaging debuff.";
+        public override string Description => "When applying a damaging debuff to an enemy, there is a <style=cIsDamage>25% chance</style><style=cStack>(+1 roll per stack)</style> to apply <style=cIsHealth>additional damaging debuffs</style>, up to 1 <style=cStack>(+1 per 2 stacks).</style> Additional damaging debuffs inflict <style=cIsHealth>50% reduced damage.</style>";
         public override string Lore => "";
 
         public override ItemTier Tier => ItemTier.Tier3;
@@ -87,7 +87,7 @@ namespace MoreItems.Items
                         switch (DotIndex)
                         {
                             case 0: // Bleed
-                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Bleed, 1.5f, 0.25f);
+                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Bleed, 2f, 0.25f);
                                 break;
 
                             case 1: // Burn - As it's damage scales off of the entity's damage value, its damage can be calculated accurately.
@@ -95,7 +95,7 @@ namespace MoreItems.Items
                                 {
                                     attackerObject = inflictDotInfo.attackerObject,
                                     victimObject = inflictDotInfo.victimObject,
-                                    totalDamage = attacker.damage * 0.125f, // Normally it is damage * 0.5f, but it has been scaled down by 1/4 to balance the item.
+                                    totalDamage = attacker.damage * 0.25f, // Normally it is damage * 0.5f, but it has been scaled down by 1/4 to balance the item.
                                     damageMultiplier = 1f,                  // Reducing the damage by 1/4 seems to reduce its duration by 1/4 and retain the same dps (requires more testing).
                                     dotIndex = DotController.DotIndex.Burn
                                 };
@@ -104,12 +104,12 @@ namespace MoreItems.Items
                                 break;
 
                             case 2: // Blight
-                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Blight, 2.5f, 0.25f);
+                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Blight, 3f, 0.50f);
                                 break;
 
                             case 3: // Collapse
                                 DotController.DotDef collapseDef = DotController.GetDotDef(DotController.DotIndex.Fracture);
-                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Fracture, collapseDef.interval, 0.25f);
+                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Fracture, collapseDef.interval, 0.5f);
                                 break;
                         }
                     }
