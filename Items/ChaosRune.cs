@@ -43,8 +43,6 @@ namespace MoreItems.Items
             {
                 orig(ref inflictDotInfo);
 
-                DebugLog.Log($"HasRun: {_hasRun}");
-
                 if(_hasRun) { return; }
 
                 var attacker = inflictDotInfo.attackerObject.GetComponent<CharacterBody>();
@@ -58,7 +56,6 @@ namespace MoreItems.Items
                 var currentSucessfulRolls = 0;
                 
                 var roll = 25;
-                DebugLog.Log($"Total roll count: {count}.");
                 int[] allowedDots = new int[] { 0, 1, 5, 8 }; // Bleed, Burn, Blight (Acrid), Fracture (Collapse).
                                                               // Numbers are just the dot values on the DotController enum, only the order matters for the switch statement.
                 
@@ -72,9 +69,7 @@ namespace MoreItems.Items
 
                         currentSucessfulRolls++;
 
-                        DebugLog.Log("Chaos Rune: Successful roll for additional debuff.");
                         int DotIndex = Random.Range(0, allowedDots.Length);
-                        DebugLog.Log($"Dot Index rolled was {DotIndex}.");
 
                         // Debuff info is assembled before the debuff is applied, called during the "OnHitEnemy" method. As each debuff has it's own damage and 
                         // duration among other stats, this basically replicates this process of building debuffs.
