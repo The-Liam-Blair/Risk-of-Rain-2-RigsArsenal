@@ -68,7 +68,7 @@ namespace MoreItems.Items
                         _hasRun = true;
                         currentSucessfulRolls++;
 
-                        int DotIndex = Random.Range(0, 4); // 4 DOTs: Bleed, Burn (Including ignition tank upgraded burn), Blight and Collapse.
+                        int DotIndex = Random.Range(0, 3); // 4 DOTs: Bleed, Burn (Including ignition tank upgraded burn), Blight and Collapse.
 
                         switch (DotIndex)
                         {
