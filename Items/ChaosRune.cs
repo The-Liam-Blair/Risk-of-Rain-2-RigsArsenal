@@ -22,20 +22,22 @@ namespace MoreItems.Items
         public override string Name => "Chaos Rune";
         public override string NameToken => "CHAOSRUNE";
         public override string PickupToken => "Chance to inflict additional damaging debuffs when applying any damaging debuff.";
-        public override string Description => "When applying a damaging debuff to an enemy, there is a <style=cIsDamage>25% chance</style><style=cStack>(+1 roll per stack)</style> to apply <style=cIsHealth>additional damaging debuffs</style>, up to 1 <style=cStack>(+1 per 2 stacks).</style> Additional damaging debuffs inflict <style=cIsHealth>50% reduced damage.</style>";
+        public override string Description => "When applying a damaging debuff to an enemy, there is a <style=cIsDamage>33% chance</style><style=cStack>(+1 roll per stack)</style> to apply <style=cIsHealth>additional damaging debuffs</style>, up to 1 <style=cStack>(+1 per 2 stacks).";
         public override string Lore => "";
 
         public override ItemTier Tier => ItemTier.Tier3;
 
         public override bool CanRemove => true;
 
-        public override ItemTag[] Tags => new ItemTag[] { ItemTag.Utility };
-        public override bool AIBlackList => false;
-
+        public override ItemTag[] Tags => new ItemTag[] { ItemTag.Damage };
+        public override bool AIBlackList => false; // Even though the AI could get this item, its only going to be useful if the enemy can inflict damaging DOTs
+                                                   // naturally or is able to with another item.
+        
         public override Sprite Icon => null;
         public override GameObject Model => null;
 
-        public bool _hasRun = false;
+        private bool _hasRun = false;
+        private DamageInfo _damageInfo { get; set; }
 
         public override void SetupHooks()
         {
@@ -55,9 +57,7 @@ namespace MoreItems.Items
                 var maxSuccessfulRolls = 1 + Mathf.Floor(count * 0.5f); // Up to 1 successful roll, and another per 2 stacks.
                 var currentSucessfulRolls = 0;
                 
-                var roll = 25;
-                int[] allowedDots = new int[] { 0, 1, 5, 8 }; // Bleed, Burn, Blight (Acrid), Fracture (Collapse).
-                                                              // Numbers are just the dot values on the DotController enum, only the order matters for the switch statement.
+                var roll = 33; // 1/3 chance of a successful roll per stack.
                 
                 for(int i = 0; i < count; i++)
                 {
@@ -66,32 +66,23 @@ namespace MoreItems.Items
                     if (Util.CheckRoll(roll, attacker.master))
                     {
                         _hasRun = true;
-
                         currentSucessfulRolls++;
 
-                        int DotIndex = Random.Range(0, allowedDots.Length);
+                        int DotIndex = Random.Range(0, 4); // 4 DOTs: Bleed, Burn (Including ignition tank upgraded burn), Blight and Collapse.
 
-                        // Debuff info is assembled before the debuff is applied, called during the "OnHitEnemy" method. As each debuff has it's own damage and 
-                        // duration among other stats, this basically replicates this process of building debuffs.
-                        //
-                        // Duration of bleed and blight scales off of the attack's proc coefficient. As this isn't exposed here, a flat multiplier is used that
-                        // tries to be in-line with the average duration.
-                        //
-                        // Because this item can inflict lots of debuffss incredibly quickly, the duration of bleed, blight and burn are reduced slightly from an average
-                        // value to balance the item, and their damage is reduced by 1/4. The damage of collapse is only reduced by 1/4, duration is unaffected.
                         switch (DotIndex)
                         {
                             case 0: // Bleed
-                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Bleed, 2f, 0.25f);
+                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Bleed, 3f * _damageInfo.procCoefficient, 1f);
                                 break;
 
-                            case 1: // Burn - As it's damage scales off of the entity's damage value, its damage can be calculated accurately.
+                            case 1: // Burn
                                 InflictDotInfo burnDot = new InflictDotInfo()
                                 {
                                     attackerObject = inflictDotInfo.attackerObject,
                                     victimObject = inflictDotInfo.victimObject,
-                                    totalDamage = attacker.damage * 0.25f, // Normally it is damage * 0.5f, but it has been scaled down by 1/4 to balance the item.
-                                    damageMultiplier = 1f,                  // Reducing the damage by 1/4 seems to reduce its duration by 1/4 and retain the same dps (requires more testing).
+                                    totalDamage = attacker.damage * 0.5f,
+                                    damageMultiplier = 1f,
                                     dotIndex = DotController.DotIndex.Burn
                                 };
                                 StrengthenBurnUtils.CheckDotForUpgrade(attacker.inventory, ref burnDot); // Upgrades burn to stronger burn if the entity has any ignition tanks.
@@ -99,22 +90,21 @@ namespace MoreItems.Items
                                 break;
 
                             case 2: // Blight
-                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Blight, 3f, 0.50f);
+                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Blight, 5f * _damageInfo.procCoefficient, 1f);
                                 break;
 
                             case 3: // Collapse
                                 DotController.DotDef collapseDef = DotController.GetDotDef(DotController.DotIndex.Fracture);
-                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Fracture, collapseDef.interval, 0.5f);
+                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Fracture, collapseDef.interval, 1f);
                                 break;
                         }
                     }
                 }
-
-                currentSucessfulRolls = 0;
             };
 
             On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
             {
+                _damageInfo = damageInfo; // Store damage info for possible later use to get the attack's proc coefficient.
                 _hasRun = false; // Reset flag for triggering this item.
                 orig(self, damageInfo, victim);
             };

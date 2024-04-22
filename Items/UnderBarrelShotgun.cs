@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿/*
+using RoR2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,8 +38,7 @@ namespace MoreItems.Items
         public override bool AIBlackList => false;
 
         public override Sprite Icon => null;
-        public override GameObject Model => MainAssets.LoadAsset<GameObject>("WornOutStimpack.prefab");
-
+        public override GameObject Model => null;
         private GameObject pellet;
 
         public override void Init()
@@ -104,3 +104,4 @@ namespace MoreItems.Items
         }
     }
 }
+*/
