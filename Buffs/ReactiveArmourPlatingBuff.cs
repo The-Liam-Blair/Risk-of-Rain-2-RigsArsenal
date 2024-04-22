@@ -16,15 +16,19 @@ namespace MoreItems.Buffs
         public override Color BuffColor => Color.white;
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("ReactiveArmourPlatingBuff.png");
 
+        private ItemDef itemDef;
+
         public override void SetupHooks()
         {
             // While the buff is active, gain +15% total armour per stack.
             R2API.RecalculateStatsAPI.GetStatCoefficients += (self, args) =>
             {
-                var itemDef = ItemList.Find(x => x.NameToken == "REACTIVEARMOURPLATING").itemDef;
+                itemDef = ItemList.Find(x => x.NameToken.Equals("REACTIVEARMOURPLATING")).itemDef;
+                if(!itemDef || self.inventory) { return; }
+
                 var count = self.inventory.GetItemCount(itemDef);
 
-                if (self.HasBuff(buffDef))
+                if (count > 0 && self.HasBuff(buffDef))
                 {
                     args.armorAdd += 20 * count;
                 }
