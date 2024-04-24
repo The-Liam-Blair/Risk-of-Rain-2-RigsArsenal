@@ -22,7 +22,7 @@ namespace MoreItems.Items
         public override string Name => "Chaos Rune";
         public override string NameToken => "CHAOSRUNE";
         public override string PickupToken => "Chance to inflict additional damaging debuffs when applying any damaging debuff.";
-        public override string Description => "When applying a damaging debuff to an enemy, there is a <style=cIsDamage>33% chance</style><style=cStack>(+1 roll per stack)</style> to apply <style=cIsHealth>additional damaging debuffs</style>, up to 1 <style=cStack>(+1 per 2 stacks).";
+        public override string Description => "When applying a damaging debuff to an enemy, there is a <style=cIsDamage>33% chance</style><style=cStack> (+1 roll per stack)</style> to apply <style=cIsHealth>additional damaging debuffs</style> up to 1 <style=cStack>(+1 per 2 stacks)</style> more.";
         public override string Lore => "";
 
         public override ItemTier Tier => ItemTier.Tier3;

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 406619043
+CRC: 2041520574
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 4674e373ba2b204d3cfcf0342c111115
+    Hash: dd4984655b3e57d45b74e97886160be3
   TypeTreeHash:
     serializedVersion: 2
     Hash: 209b83e87f2068bd9f291febfe005640
@@ -31,43 +31,44 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/Materials/Item/BountyHunterBadge/M_Gray.mat
-- Assets/Materials/Item/WornOutStimpack/M_White.mat
-- Assets/Materials/Item/BountyHunterBadge/BountyHunterBadge.png
+- Assets/MoreItems/Materials/Item/BountyHunterBadge/M_Gray.mat
+- Assets/MoreItems/Materials/Item/WornOutStimpack/M_White.mat
+- Assets/MoreItems/Materials/Item/BountyHunterBadge/BountyHunterBadge.png
 - Assets/shaders/deferred/hgstandard.shader
-- Assets/Materials/Item/ReactiveArmourPlate/ArmourTex.png
-- Assets/Materials/Item/BountyHunterBadge/YellowTex2.png
-- Assets/Materials/Item/WornOutStimpack/M_Base.mat
-- Assets/Materials/Item/ReactiveArmourPlate/M_ArmourEdge.mat
-- Assets/Materials/Item/KineticBattery/M_Screw.mat
-- Assets/Materials/Item/WornOutStimpack/WornOutStimpack.png
-- Assets/Materials/Item/BountyHunterBadge/M_Black.mat
-- Assets/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.blend
-- Assets/Materials/Item/WornOutStimpack/M_HealIcon.mat
-- Assets/Materials/Item/BountyHunterBadge/BackingTex.png
-- Assets/Materials/Item/WornOutStimpack/M_WhiteBright.mat
-- Assets/Materials/Item/BountyHunterBadge/M_yella.mat
-- Assets/Materials/Item/ReactiveArmourPlate/M_Armour.mat
-- Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlating.png
-- Assets/Prefabs/Item/WornOutStimpack/WornOutStimpack.prefab
-- Assets/Materials/Item/WornOutStimpack/WornOutStimpackBuff.png
-- Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.prefab
-- Assets/Materials/Item/KineticBattery/KineticBatteryBuff.png
-- Assets/Materials/Item/KineticBattery/its texturin time.png
-- Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlatingBuff.png
-- Assets/Prefabs/Item/KineticBattery/KineticBattery.prefab
-- Assets/Materials/Item/BountyHunterBadge/M_YELLA-ER.mat
-- Assets/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.prefab
-- Assets/Materials/Item/ReactiveArmourPlate/M_Underlay.mat
-- Assets/Materials/Item/KineticBattery/M_Body.mat
-- Assets/Materials/Item/ReactiveArmourPlate/UnderlayTex.png
-- Assets/Materials/Item/BountyHunterBadge/YellowTex1.png
-- Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.blend
-- Assets/Materials/Item/KineticBattery/M_Glow.mat
-- Assets/Materials/Item/WornOutStimpack/M_DepletedIcon.mat
-- Assets/Materials/Item/KineticBattery/M_Bars.mat
-- Assets/Materials/Item/KineticBattery/KineticBattery.PNG
-- Assets/Materials/Item/WornOutStimpack/M_Button.mat
-- Assets/Materials/Item/BountyHunterBadge/M_yellaNoTex.mat
-- Assets/Materials/Item/ReactiveArmourPlate/M_Grip.mat
+- Assets/MoreItems/Materials/Item/ReactiveArmourPlate/ArmourTex.png
+- Assets/MoreItems/Materials/Item/BountyHunterBadge/YellowTex2.png
+- Assets/MoreItems/Materials/Item/WornOutStimpack/M_Base.mat
+- Assets/MoreItems/Materials/Item/ReactiveArmourPlate/M_ArmourEdge.mat
+- Assets/MoreItems/Materials/Item/KineticBattery/M_Screw.mat
+- Assets/MoreItems/Materials/Item/WornOutStimpack/WornOutStimpack.png
+- Assets/MoreItems/Materials/Item/BountyHunterBadge/M_Black.mat
+- Assets/MoreItems/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.blend
+- Assets/MoreItems/Materials/Item/WornOutStimpack/M_HealIcon.mat
+- Assets/MoreItems/Materials/Item/BountyHunterBadge/BackingTex.png
+- Assets/MoreItems/Materials/Item/WornOutStimpack/M_WhiteBright.mat
+- Assets/MoreItems/Materials/Item/BountyHunterBadge/M_yella.mat
+- Assets/MoreItems/Materials/Item/ReactiveArmourPlate/M_Armour.mat
+- Assets/MoreItems/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlating.png
+- Assets/MoreItems/Prefabs/Item/WornOutStimpack/WornOutStimpack.prefab
+- Assets/MoreItems/Materials/Item/WornOutStimpack/WornOutStimpackBuff.png
+- Assets/MoreItems/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.prefab
+- Assets/MoreItems/Materials/Item/KineticBattery/KineticBatteryBuff.png
+- Assets/MoreItems/Materials/Item/KineticBattery/its texturin time.png
+- Assets/MoreItems/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlatingBuff.png
+- Assets/MoreItems/Prefabs/Item/KineticBattery/KineticBattery.prefab
+- Assets/MoreItems/Materials/Item/BountyHunterBadge/M_YELLA-ER.mat
+- Assets/MoreItems/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.prefab
+- Assets/MoreItems/Materials/Item/ReactiveArmourPlate/M_Underlay.mat
+- Assets/MoreItems/Materials/Item/KineticBattery/M_Body.mat
+- Assets/MoreItems/Materials/Item/ReactiveArmourPlate/UnderlayTex.png
+- Assets/MoreItems/Materials/Item/BountyHunterBadge/YellowTex1.png
+- Assets/MoreItems/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.blend
+- Assets/MoreItems/Materials/Item/KineticBattery/M_Glow.mat
+- Assets/MoreItems/Materials/Item/WornOutStimpack/M_DepletedIcon.mat
+- Assets/MoreItems/Materials/Item/KineticBattery/M_Bars.mat
+- Assets/MoreItems/Materials/Item/KineticBattery/KineticBattery.PNG
+- Assets/MoreItems/Materials/Item/ReactiveArmourPlate/MetallicTex.png
+- Assets/MoreItems/Materials/Item/WornOutStimpack/M_Button.mat
+- Assets/MoreItems/Materials/Item/BountyHunterBadge/M_yellaNoTex.mat
+- Assets/MoreItems/Materials/Item/ReactiveArmourPlate/M_Grip.mat
 Dependencies: []
