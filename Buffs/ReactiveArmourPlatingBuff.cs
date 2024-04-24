@@ -20,15 +20,17 @@ namespace MoreItems.Buffs
 
         public override void SetupHooks()
         {
-            // While the buff is active, gain +15% total armour per stack.
+            // While the buff is active, gain +20 armour per stack.
             R2API.RecalculateStatsAPI.GetStatCoefficients += (self, args) =>
             {
                 itemDef = ItemList.Find(x => x.NameToken.Equals("REACTIVEARMOURPLATING")).itemDef;
-                if(!itemDef || self.inventory) { return; }
+
+                if(!itemDef || !self || !self.inventory) { return; }
+                if(!self.HasBuff(buffDef)) {  return; }
 
                 var count = self.inventory.GetItemCount(itemDef);
 
-                if (count > 0 && self.HasBuff(buffDef))
+                if (count > 0)
                 {
                     args.armorAdd += 20 * count;
                 }

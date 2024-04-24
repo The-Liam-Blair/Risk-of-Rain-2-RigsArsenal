@@ -52,9 +52,10 @@ namespace MoreItems.Items
                 (orig, self, damageInfo) =>
                 {
                     orig(self, damageInfo);
+                    if(!self) { return; }
 
                     var body = self.body;
-                    if (body.inventory == null) { return; }
+                    if (!body || !body.inventory) { return; }
 
                     var count = body.inventory.GetItemCount(itemDef);
                     if(count <= 0) { return; }
@@ -78,9 +79,10 @@ namespace MoreItems.Items
             On.RoR2.HealthComponent.Heal += (orig, self, amount, mask, regen) =>
             {
                 orig(self, amount, mask, regen);
+                if(!self) { return orig(self, amount, mask, regen); }
 
                 var body = self.body;
-                if (body.inventory == null) { return orig(self, amount, mask, regen); }
+                if (!body || !body.inventory) { return orig(self, amount, mask, regen); }
 
                 var count = body.inventory.GetItemCount(itemDef);
                 if (count <= 0) { return orig(self, amount, mask, regen); }
