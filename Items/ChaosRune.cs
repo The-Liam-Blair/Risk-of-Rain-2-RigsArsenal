@@ -47,9 +47,12 @@ namespace MoreItems.Items
 
                 if(_hasRun) { return; }
 
+                if(!inflictDotInfo.attackerObject || !inflictDotInfo.victimObject) { return; }
+
                 var attacker = inflictDotInfo.attackerObject.GetComponent<CharacterBody>();
                 var victim = inflictDotInfo.victimObject.GetComponent<CharacterBody>();
-                if (!attacker || !victim) { return; }
+
+                if(!attacker.inventory) { return; }
 
                 var count = attacker.inventory.GetItemCount(itemDef);
                 if(count <= 0) { return; }
