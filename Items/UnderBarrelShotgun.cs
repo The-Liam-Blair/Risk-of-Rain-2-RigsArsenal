@@ -1,5 +1,4 @@
-﻿/*
-using RoR2;
+﻿using RoR2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,13 +44,14 @@ namespace MoreItems.Items
         {
             base.Init();
 
-
             DebugLog.Log("Initializing Under-Barrel Shotgun pellet...");
+
             // temp until custom models are made.
-            pellet = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/Thermite"), "UnderBarrelShotgunPellet", true);
+            GameObject proj = Resources.Load<GameObject>("prefabs/projectiles/PaladinRocket");
+            //pellet = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/Thermite"), "UnderBarrelShotgunPellet", true);
+            pellet = proj.InstantiateClone("UnderBarrelShotgunPellet", true);
 
-            var pGhost = pellet.AddComponent<ProjectileGhostController>();
-
+            /*
             var projectileController = pellet.GetComponent<ProjectileController>();
             projectileController.ghostPrefab = Model;
             pellet.GetComponent<TeamFilter>().teamIndex = TeamIndex.Player;
@@ -60,6 +60,7 @@ namespace MoreItems.Items
             pellet.GetComponent<RoR2.Projectile.ProjectileController>().ghost = pGhost;
            
             PrefabAPI.RegisterNetworkPrefab(pellet);
+            */
 
             ContentAddition.AddProjectile(pellet);
 
@@ -74,7 +75,6 @@ namespace MoreItems.Items
             {
                 orig(self, info);
 
-
                 var victim = self.body;
                 if (!victim || !victim.inventory|| !info.attacker) { return; }
 
@@ -86,16 +86,23 @@ namespace MoreItems.Items
 
                 DebugLog.Log("Firing projectile...");
 
+                ProcChainMask mask = info.procChainMask;
 
-                var projectileInfo = new FireProjectileInfo();
-
-                projectileInfo.owner = attacker.gameObject;
-                projectileInfo.projectilePrefab = pellet;
-                projectileInfo.speedOverride = 100f;
-                projectileInfo.damage = 1f;
-                projectileInfo.damageTypeOverride = null;
-                projectileInfo.damageColorIndex = DamageColorIndex.Default;
-                projectileInfo.procChainMask = default;
+                var projectileInfo = new FireProjectileInfo()
+                {
+                    projectilePrefab = pellet,
+                    position = attacker.transform.position,
+                    procChainMask = mask,
+                    target = victim.gameObject,
+                    owner = attacker.gameObject,
+                    damage = 1f,
+                    crit = info.crit,
+                    force = 1000f,
+                    damageColorIndex = DamageColorIndex.Item,
+                    speedOverride = -1f,
+                    damageTypeOverride = DamageType.AOE,
+                    rotation = Quaternion.identity
+                };
 
                 RoR2.Projectile.ProjectileManager.instance.FireProjectile(projectileInfo);
 
@@ -104,4 +111,3 @@ namespace MoreItems.Items
         }
     }
 }
-*/
