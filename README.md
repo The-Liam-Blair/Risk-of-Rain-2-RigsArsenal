@@ -7,3 +7,5 @@
 | Kinetic Battery | ![Kinetic Battery](_pageImages/KineticBattery.PNG) | Common | After using your **utility skill**, gain **25** *(+25 per stack)* **barrier**. Enters a **5 second cooldown** after use. | Linear |
 | Bounty Hunter's Badge | ![Bounty Hunter's Badge](/_pageImages/BountyHunterBadge.png) | Uncommon | Gain **+25% increased gold** *(+20% per stack)* when you defeat an **elite enemy**. | Hyperbolic |
 | Reactive Armour Plating | ![Reactive Armour Plating](/_pageImages/ReactiveArmourPlating.png) | Uncommon | Gain **20 permanent armour.** Briefly gain **20** *(+20 per stack)* **armour** after receiving damage. | Linear |
+| Chaos Rune | wip :) | Legendary | 33% chance to inflict **additional damaging debuffs** *(+1 roll per stack)* when you apply a damaging debuff. Up to 1 *(+1 per 2 stacks)* additional debuffs can be **applied at once.** | Linear |
+
