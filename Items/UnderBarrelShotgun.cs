@@ -86,25 +86,31 @@ namespace MoreItems.Items
 
                 DebugLog.Log("Firing projectile...");
 
-                ProcChainMask mask = info.procChainMask;
-
-                var projectileInfo = new FireProjectileInfo()
+                for (int i = 0; i < 12; i++)
                 {
-                    projectilePrefab = pellet,
-                    position = attacker.transform.position,
-                    procChainMask = mask,
-                    target = victim.gameObject,
-                    owner = attacker.gameObject,
-                    damage = 1f,
-                    crit = info.crit,
-                    force = 1000f,
-                    damageColorIndex = DamageColorIndex.Item,
-                    speedOverride = -1f,
-                    damageTypeOverride = DamageType.AOE,
-                    rotation = Quaternion.identity
-                };
+                    ProcChainMask mask = info.procChainMask;
+                    mask.AddProc(ProcType.Missile);
 
-                RoR2.Projectile.ProjectileManager.instance.FireProjectile(projectileInfo);
+                    var projectileInfo = new FireProjectileInfo()
+                    {
+                        projectilePrefab = pellet,
+                        position = attacker.transform.position,
+                        procChainMask = mask,
+                        target = victim.gameObject,
+                        owner = attacker.gameObject,
+                        damage = 1f,
+                        crit = info.crit,
+                        force = 10000f,
+                        damageColorIndex = DamageColorIndex.Item,
+                        speedOverride = -1f,
+                        damageTypeOverride = DamageType.AOE,
+                    };
+
+                    projectileInfo.rotation = Util.QuaternionSafeLookRotation(projectileInfo.target.transform.position - projectileInfo.position);
+                    projectileInfo.rotation.eulerAngles = Util.ApplySpread(projectileInfo.rotation.eulerAngles, 0f, 90f, 1f, 1f);
+
+                    RoR2.Projectile.ProjectileManager.instance.FireProjectile(projectileInfo);
+                }
 
                 DebugLog.Log("Finished firing projectile.");
             };
