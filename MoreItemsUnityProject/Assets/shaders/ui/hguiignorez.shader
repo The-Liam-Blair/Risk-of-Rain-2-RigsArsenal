@@ -1,7 +1,6 @@
-Shader "Hopoo Games/UI/Debug Ignore Z" {
+Shader "StubbedShader/ui/hguiignorez" {
 	Properties {
 		_MainTex ("Texture", 2D) = "white" {}
 	}
-	
-	Fallback "Diffuse"
+		Fallback "Diffuse"
 }

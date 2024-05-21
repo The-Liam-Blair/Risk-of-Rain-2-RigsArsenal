@@ -1,6 +1,6 @@
-Shader "Stubbed Hopoo Games/FX/Solid Parallax" {
+Shader "StubbedShader/fx/hgsolidparallax" {
 	Properties {
-		[HDR] _Color ("Color", Vector) = (1,1,1,1)
+		[HDR] _Color ("Color", Color) = (1,1,1,1)
 		_MainTex ("Albedo (RGB)", 2D) = "white" {}
 		_EmissionTex ("Emission (RGB)", 2D) = "black" {}
 		_EmissionPower ("Emission Power", Range(0.1, 20)) = 1
@@ -18,6 +18,5 @@ Shader "Stubbed Hopoo Games/FX/Solid Parallax" {
 		[MaterialEnum(Off,0,Front,1,Back,2)] _Cull ("Cull", Float) = 2
 		[Toggle(ALPHACLIP)] _ClipOn ("Alpha Clip", Float) = 0
 	}
-
 	Fallback "Diffuse"
 }

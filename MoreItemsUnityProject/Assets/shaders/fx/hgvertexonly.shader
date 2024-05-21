@@ -1,7 +1,6 @@
-Shader "Stubbed Hopoo Games/FX/Vertex Colors Only" {
+Shader "StubbedShader/fx/hgvertexonly" {
 	Properties {
-		[HDR] _TintColor ("AAH", Vector) = (1,1,1,1)
+		[HDR] _TintColor ("AAH", Color) = (1,1,1,1)
 	}
-	
-	Fallback "Diffuse"
+		Fallback "Diffuse"
 }

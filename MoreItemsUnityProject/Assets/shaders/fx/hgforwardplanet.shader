@@ -1,9 +1,9 @@
-Shader "Stubbed Hopoo Games/FX/Forward Planet" {
+Shader "StubbedShader/fx/hgforwardplanet" {
 	Properties {
 		[Header(Blending)] [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlendFloat ("Source Blend", Float) = 1
 		[Enum(UnityEngine.Rendering.BlendMode)] _DstBlendFloat ("Destination Blend", Float) = 1
 		[MaterialEnum(Off,0,Front,1,Back,2)] _Cull ("Cull", Float) = 0
-		[Header(Lighting and Base Colors)] [HDR] _TintColor ("Tint", Vector) = (1,1,1,1)
+		[Header(Lighting and Base Colors)] [HDR] _TintColor ("Tint", Color) = (1,1,1,1)
 		[NoScaleOffset] _LightWarpRamp ("Lightwarp Ramp", 2D) = "grey" {}
 		_DetailStrength ("Detail Strength", Range(0, 1)) = 0.5
 		_DiffuseTex ("Diffuse Texture", 2D) = "white" {}
@@ -21,6 +21,5 @@ Shader "Stubbed Hopoo Games/FX/Forward Planet" {
 		_EmissionStrength ("Emission Strength", Range(0, 100)) = 1
 		[Header(Animation)] _RotationSpeed ("Rotation Speed", Range(0, 10)) = 0
 	}
-	
-	Fallback "Diffuse"
+		Fallback "Diffuse"
 }
