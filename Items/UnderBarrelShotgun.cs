@@ -67,16 +67,7 @@ namespace MoreItems.Items
         {
             // todo:
             // - Custom projectile prefab instead of juryrigging an existing one, import through the asset bundle.
-            // - A focus crystal-like ring to visualize the maximium range of the item. (Look at NearbyDamageBonus item).
 
-            // To spawn: lookat "nearbydamagebonus" setter.
-
-            // - Focus crystal properties to modify:
-            // -- "NearbyDamageBonusIndicator(Clone) object, child of player object.
-            // -- "Radius, Spherical", 2nd child of the ring object.
-            // -- Set the transform's scale to 60, 60, 60 (30 metres radius).
-            // -- MeshRenderer component -> SharedMaterial material.
-            // -- Set the tint of the shared material to white.                         
             On.RoR2.HealthComponent.TakeDamage += (orig, self, info) =>
             {
                 orig(self, info);
@@ -93,18 +84,14 @@ namespace MoreItems.Items
 
                 DebugLog.Log(Vector3.Distance(victim.transform.position, attacker.transform.position));
 
-                // Only triggers against entities 30 or fewer units away
+                // Only triggers against entities 25 or fewer units away
                 if (Vector3.Distance(victim.transform.position, attacker.transform.position) > 25f) { return; }
 
                 // Because they're projectiles, also performs a line of sight check so that the shot is actually able to hit.
-                if (Physics.Linecast(attacker.transform.position, victim.transform.position, 0))
-                {
-                    DebugLog.Log($"Line of sight check failed for {attacker.name} to {victim.name}.");
-                    return;
-                }
+                // (Not entirely consistent, might investigate a better solution down the line).
+                if (Physics.Linecast(attacker.transform.position, victim.transform.position, 0)) { return; }
 
-                int pelletCount = 13; // Fixed pellet count.
-
+                int pelletCount = 13;
                 float stackingDamageMultiplier = 0.25f + (0.25f * count); // 25% the attack's damage per pellet per stack.
 
                 for (int i = 0; i < pelletCount; i++)
@@ -177,13 +164,19 @@ namespace MoreItems.Items
             };
         }
 
+        /// <summary>
+        /// Randomize the angle of a given direction, to simulate spread.
+        /// </summary>
+        /// <param name="direction">The current, fixed aiming direction of a projectile.</param>
+        /// <param name="spread">Spread intensity factor: Larger values produce larger angle values</param>
+        /// <returns>The original angle offsetted randomly according to the spread intensity.</returns>
         private Quaternion ApplySpread(Quaternion direction, float spread)
         {
-            // Randomize the spread angles in radians for yaw and pitch
+            // Randomize the spread angles in radians for yaw and pitch (In radians).
             float yawAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
             float pitchAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
 
-            // Calculate the spread offsets in the x and z directions (yaw and pitch)
+            // Calculate the spread offsets in the x and z directions (yaw and pitch) w.r.t the spread intensity.
             float xOffset = spread * Mathf.Cos(yawAngle);
             float zOffset = spread * Mathf.Sin(pitchAngle);
 
