@@ -72,20 +72,21 @@ namespace MoreItems.Items
             {
                 orig(self, info);
 
+                if (!self|| !info.attacker || info.procCoefficient <= 0f || info.procChainMask.HasProc(ProcType.Missile)) { return; }
+
                 var victim = self.body;
-
-                if (!victim || !victim.inventory|| !info.attacker
-                || info.procCoefficient <= 0f || info.procChainMask.HasProc(ProcType.Missile)) { return; }
-
                 var attacker = info.attacker.GetComponent<CharacterBody>();
+
+                if (!victim || !attacker || !attacker.healthComponent || !victim.healthComponent) { return; }
 
                 var count = attacker.inventory.GetItemCount(itemDef);
                 if (count <= 0) { return; }
 
-                DebugLog.Log(Vector3.Distance(victim.transform.position, attacker.transform.position));
-
                 // Only triggers against entities 25 or fewer units away
                 if (Vector3.Distance(victim.transform.position, attacker.transform.position) > 25f) { return; }
+
+                // 10% (scaled by the attack's proc coefficient) chance to trigger the effect.
+                if (!Util.CheckRoll(0.1f * info.procCoefficient, attacker.master)) { return; }
 
                 // Because they're projectiles, also performs a line of sight check so that the shot is actually able to hit.
                 // (Not entirely consistent, might investigate a better solution down the line).
