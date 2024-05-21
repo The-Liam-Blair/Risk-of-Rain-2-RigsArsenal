@@ -1,6 +1,12 @@
 ## Unity try not to bloat repos with 10,000 library files challenge (IMPOSSIBLE)
 Library/
 
+#RoR2 Packages Folder
+Packages/Risk of Rain 2
+#ThunderKit root folder & Logs
+ThunderKit/
+Assets/ThunderKitSettings/Logs/
+
 # Created by https://www.toptal.com/developers/gitignore/api/unity,visualstudio,csharp
 # Edit at https://www.toptal.com/developers/gitignore?templates=unity,visualstudio,csharp
 

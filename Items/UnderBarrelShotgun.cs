@@ -47,20 +47,14 @@ namespace MoreItems.Items
             DebugLog.Log("Initializing Under-Barrel Shotgun pellet...");
 
             // temp until custom models are made.
-            GameObject proj = Resources.Load<GameObject>("prefabs/projectiles/PaladinRocket");
-            //pellet = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/Thermite"), "UnderBarrelShotgunPellet", true);
+            GameObject proj = Resources.Load<GameObject>("prefabs/projectiles/RailgunnerPistolProjectile");
             pellet = proj.InstantiateClone("UnderBarrelShotgunPellet", true);
 
-            /*
-            var projectileController = pellet.GetComponent<ProjectileController>();
-            projectileController.ghostPrefab = Model;
-            pellet.GetComponent<TeamFilter>().teamIndex = TeamIndex.Player;
-            pellet.GetComponent<RoR2.Projectile.ProjectileDamage>().damageType = DamageType.Generic;
-            pellet.GetComponent<RoR2.Projectile.ProjectileDamage>().damage = 1f;
-            pellet.GetComponent<RoR2.Projectile.ProjectileController>().ghost = pGhost;
-           
+            pellet.GetComponent<RoR2.Projectile.ProjectileDamage>().damageType = DamageType.AOE;
+            pellet.GetComponent<RoR2.Projectile.ProjectileSteerTowardTarget>().enabled = false;
+            pellet.GetComponent<RoR2.Projectile.ProjectileDirectionalTargetFinder>().enabled = false;
+
             PrefabAPI.RegisterNetworkPrefab(pellet);
-            */
 
             ContentAddition.AddProjectile(pellet);
 
@@ -69,8 +63,6 @@ namespace MoreItems.Items
 
         public override void SetupHooks()
         {
-            // todo: null reference on projectile manager.Start(). Unable to determine the cause through debugging.
-            // todo: Revise projectile spawning and preconditions for spawning. Research proper method of spawning projectiles (This is probably wildly incorrect).
             On.RoR2.HealthComponent.TakeDamage += (orig, self, info) =>
             {
                 orig(self, info);
@@ -84,9 +76,9 @@ namespace MoreItems.Items
                 var count = attacker.inventory.GetItemCount(itemDef);
                 if (count <= 0) { return; }
 
-                DebugLog.Log("Firing projectile...");
+                if(info.procChainMask.HasProc(ProcType.Missile)) { return; }
 
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < 10; i++)
                 {
                     ProcChainMask mask = info.procChainMask;
                     mask.AddProc(ProcType.Missile);
@@ -98,22 +90,47 @@ namespace MoreItems.Items
                         procChainMask = mask,
                         target = victim.gameObject,
                         owner = attacker.gameObject,
-                        damage = 1f,
+                        damage = 0f,
                         crit = info.crit,
-                        force = 10000f,
+                        force = 0f,
                         damageColorIndex = DamageColorIndex.Item,
                         speedOverride = -1f,
                         damageTypeOverride = DamageType.AOE,
                     };
 
+                   // Temp workaround: Idea is to eventually bring in a custom projectile through the asset bundle or find a better way to
+                   // manipulate an existing projectile into one for this item, ideally during initialisation. Right now, this just removes
+                   // some unwanted inherited visuals.
+                   // var ghost = pellet.GetComponent<RoR2.Projectile.ProjectileController>().ghost.gameObject;
+                   // ghost.transform.GetChild(4).GetComponent<ParticleSystemRenderer>().enabled = false; 
+
                     projectileInfo.rotation = Util.QuaternionSafeLookRotation(projectileInfo.target.transform.position - projectileInfo.position);
-                    projectileInfo.rotation.eulerAngles = Util.ApplySpread(projectileInfo.rotation.eulerAngles, 0f, 90f, 1f, 1f);
+
+                    // I know there is a utility function that can apply spread, it's either not suited for this purpose or I'm using it incorrectly.
+                    // Regardless, a custom spread function has been made to make the projectiles shoot outwards like a shotgun.
+                    projectileInfo.rotation = ApplySpread(projectileInfo.rotation, 2f);
 
                     RoR2.Projectile.ProjectileManager.instance.FireProjectile(projectileInfo);
                 }
-
-                DebugLog.Log("Finished firing projectile.");
             };
+        }
+
+        private Quaternion ApplySpread(Quaternion direction, float spread)
+        {
+            // Randomize the spread angles in radians for yaw and pitch
+            float yawAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
+            float pitchAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
+
+            // Calculate the spread offsets in the x and z directions (yaw and pitch)
+            float xOffset = spread * Mathf.Cos(yawAngle);
+            float zOffset = spread * Mathf.Sin(pitchAngle);
+
+            // Apply the spread offsets to the aim direction
+            Quaternion spreadYaw = Quaternion.Euler(0f, xOffset, 0f);
+            Quaternion spreadPitch = Quaternion.Euler(zOffset, 0f, 0f);
+            Quaternion spreadDirection = spreadYaw * spreadPitch * direction;
+
+            return spreadDirection.normalized;
         }
     }
 }
