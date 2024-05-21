@@ -63,25 +63,47 @@ namespace MoreItems.Items
 
         public override void SetupHooks()
         {
+            // todo:
+            // - Custom projectile prefab instead of juryrigging an existing one, import through the asset bundle.
+            // - A focus crystal-like ring to visualize the maximium range of the item. (Look at NearbyDamageBonus item).
             On.RoR2.HealthComponent.TakeDamage += (orig, self, info) =>
             {
                 orig(self, info);
 
                 var victim = self.body;
-                if (!victim || !victim.inventory|| !info.attacker) { return; }
+
+                if (!victim || !victim.inventory|| !info.attacker
+                || info.procCoefficient <= 0f || info.procChainMask.HasProc(ProcType.Missile)) { return; }
 
                 var attacker = info.attacker.GetComponent<CharacterBody>();
+
+                DebugLog.Log(Vector3.Distance(victim.transform.position, attacker.transform.position));
+
+                // Only triggers against entities 20 or fewer units away
+                if (Vector3.Distance(victim.transform.position, attacker.transform.position) > 26f) { return; }
+
+                // Because they're projectiles, also performs a line of sight check so that the shot is actually able to hit.
+                if (Physics.Linecast(attacker.transform.position, victim.transform.position, 0))
+                {
+                    DebugLog.Log($"Line of sight check failed for {attacker.name} to {victim.name}.");
+                    return;
+                }
 
 
                 var count = attacker.inventory.GetItemCount(itemDef);
                 if (count <= 0) { return; }
 
-                if(info.procChainMask.HasProc(ProcType.Missile)) { return; }
+                int pelletCount = 5 + (count * 2);
 
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < pelletCount; i++)
                 {
                     ProcChainMask mask = info.procChainMask;
                     mask.AddProc(ProcType.Missile);
+                    float damage = Util.OnHitProcDamage(info.damage, attacker.damage * 0.15f, info.procCoefficient);
+
+                    DebugLog.Log($"Attack did {info.damage} damage, dealt by an entity that has {attacker.damage} with a proc coefficient " +
+                        $"of {info.procCoefficient}, resulted in pellets each inflicting {damage} damage, and a proc coefficent value of {info.procCoefficient * 0.2f}." +
+                        $"The total damage of the {pelletCount} burst is {pelletCount * damage}.");
 
                     var projectileInfo = new FireProjectileInfo()
                     {
@@ -90,13 +112,15 @@ namespace MoreItems.Items
                         procChainMask = mask,
                         target = victim.gameObject,
                         owner = attacker.gameObject,
-                        damage = 0f,
+                        damage = damage,
                         crit = info.crit,
-                        force = 0f,
+                        force = 50f,
                         damageColorIndex = DamageColorIndex.Item,
                         speedOverride = -1f,
                         damageTypeOverride = DamageType.AOE,
                     };
+
+                    // error? bleed procs (and probably other procs) triggering item. research proc masking further.
 
                    // Temp workaround: Idea is to eventually bring in a custom projectile through the asset bundle or find a better way to
                    // manipulate an existing projectile into one for this item, ideally during initialisation. Right now, this just removes
