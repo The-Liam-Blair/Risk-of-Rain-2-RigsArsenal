@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3130355111
+CRC: 3355145292
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: cfab7b21c5bcc2af37b9a829f9f1dab5
+    Hash: e5cd65a4c2b9d2dfd9d79aa20fd08ec3
   TypeTreeHash:
     serializedVersion: 2
     Hash: 209b83e87f2068bd9f291febfe005640
@@ -34,12 +34,17 @@ Assets:
 - Assets/Materials/Item/BountyHunterBadge/M_Gray.mat
 - Assets/Materials/Item/WornOutStimpack/M_White.mat
 - Assets/Materials/Item/BountyHunterBadge/BountyHunterBadge.png
+- Assets/Materials/Item/WornOutStimpack/M_DepletedIcon.mat
+- Assets/Materials/Item/WornOutStimpack/M_Button.mat
+- Assets/shaders/deferred/hgstandard.shader
 - Assets/Materials/Item/ReactiveArmourPlate/ArmourTex.png
 - Assets/Materials/Item/BountyHunterBadge/YellowTex2.png
 - Assets/Materials/Item/ReactiveArmourPlate/M_ArmourEdge.mat
 - Assets/Materials/Item/KineticBattery/M_Screw.mat
+- Assets/Materials/Item/WornOutStimpack/M_Base.mat
 - Assets/Materials/Item/WornOutStimpack/WornOutStimpack.png
 - Assets/Materials/Item/BountyHunterBadge/M_Black.mat
+- Assets/Materials/Item/WornOutStimpack/M_HealIcon.mat
 - Assets/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.blend
 - Assets/Materials/Item/BountyHunterBadge/BackingTex.png
 - Assets/Materials/Item/WornOutStimpack/M_WhiteBright.mat

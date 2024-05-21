@@ -47,14 +47,8 @@ namespace MoreItems.Items
             DebugLog.Log("Initializing Under-Barrel Shotgun pellet...");
 
             // temp until custom models are made.
-            // GameObject proj = Resources.Load<GameObject>("prefabs/projectiles/PaladinRocket");
             GameObject proj = Resources.Load<GameObject>("prefabs/projectiles/RailgunnerPistolProjectile");
-            //pellet = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/Thermite"), "UnderBarrelShotgunPellet", true);
             pellet = proj.InstantiateClone("UnderBarrelShotgunPellet", true);
-
-            // Projectile:
-            // - ProjectileSteerTowardTarget component : remove/disable --
-            // - ProjectileDirectionalTargetFinder component : disable?
 
             pellet.GetComponent<RoR2.Projectile.ProjectileDamage>().damageType = DamageType.AOE;
             pellet.GetComponent<RoR2.Projectile.ProjectileSteerTowardTarget>().enabled = false;
@@ -84,7 +78,7 @@ namespace MoreItems.Items
 
                 if(info.procChainMask.HasProc(ProcType.Missile)) { return; }
 
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < 10; i++)
                 {
                     ProcChainMask mask = info.procChainMask;
                     mask.AddProc(ProcType.Missile);
@@ -107,7 +101,7 @@ namespace MoreItems.Items
                    // Temp workaround: Idea is to eventually bring in a custom projectile through the asset bundle or find a better way to
                    // manipulate an existing projectile into one for this item, ideally during initialisation. Right now, this just removes
                    // some unwanted inherited visuals.
-                   // var ghost = pellet.GetComponent<RoR2.Projectile.ProjectileController>().ghost; // Produces nullref: should be ghost.gameObject instead?
+                   // var ghost = pellet.GetComponent<RoR2.Projectile.ProjectileController>().ghost.gameObject;
                    // ghost.transform.GetChild(4).GetComponent<ParticleSystemRenderer>().enabled = false; 
 
                     projectileInfo.rotation = Util.QuaternionSafeLookRotation(projectileInfo.target.transform.position - projectileInfo.position);
