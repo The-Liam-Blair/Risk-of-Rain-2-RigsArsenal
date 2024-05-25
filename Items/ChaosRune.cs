@@ -36,8 +36,8 @@ namespace MoreItems.Items
         public override Sprite Icon => null;
         public override GameObject Model => null;
 
-        private bool _hasRun = false;
-        private DamageInfo _damageInfo { get; set; }
+        private bool hasRun = false;
+        private DamageInfo damageInfo { get; set; }
 
         public override void SetupHooks()
         {
@@ -45,7 +45,7 @@ namespace MoreItems.Items
             {
                 orig(ref inflictDotInfo);
 
-                if(_hasRun) { return; }
+                if(hasRun) { return; }
 
                 if(!inflictDotInfo.attackerObject || !inflictDotInfo.victimObject) { return; }
 
@@ -68,7 +68,7 @@ namespace MoreItems.Items
 
                     if (Util.CheckRoll(roll, attacker.master))
                     {
-                        _hasRun = true;
+                        hasRun = true;
                         currentSucessfulRolls++;
 
                         int DotIndex = Random.Range(0, 3); // 4 DOTs: Bleed, Burn (Including ignition tank upgraded burn), Blight and Collapse.
@@ -76,7 +76,7 @@ namespace MoreItems.Items
                         switch (DotIndex)
                         {
                             case 0: // Bleed
-                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Bleed, 3f * _damageInfo.procCoefficient, 1f);
+                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Bleed, 3f * damageInfo.procCoefficient, 1f);
                                 break;
 
                             case 1: // Burn
@@ -93,7 +93,7 @@ namespace MoreItems.Items
                                 break;
 
                             case 2: // Blight
-                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Blight, 5f * _damageInfo.procCoefficient, 1f);
+                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Blight, 5f * damageInfo.procCoefficient, 1f);
                                 break;
 
                             case 3: // Collapse
@@ -105,10 +105,10 @@ namespace MoreItems.Items
                 }
             };
 
-            On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
+            On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, DamageInfo, victim) =>
             {
-                _damageInfo = damageInfo; // Store damage info for possible later use to get the attack's proc coefficient.
-                _hasRun = false; // Reset flag for triggering this item.
+                damageInfo = DamageInfo; // Store damage info for possible later use to get the attack's proc coefficient.
+                hasRun = false; // Reset flag for triggering this item.
                 orig(self, damageInfo, victim);
             };
         }
