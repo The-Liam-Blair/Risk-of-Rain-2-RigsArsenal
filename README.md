@@ -7,5 +7,6 @@
 | Kinetic Battery | ![Kinetic Battery](/UnityProject/Assets/Materials/Item/KineticBattery/KineticBattery.PNG) | Common | After using your **utility skill**, gain **25** *(+25 per stack)* **barrier**. Enters a **5 second cooldown** after use. | Linear |
 | Bounty Hunter's Badge | ![Bounty Hunter's Badge](/UnityProject/Assets/Materials/Item/BountyHunterBadge/BountyHunterBadge.png) | Uncommon | Gain **+25% increased gold** *(+20% per stack)* when you defeat an **elite enemy**. | Hyperbolic |
 | Reactive Armour Plating | ![Reactive Armour Plating](/UnityProject/Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlating.png) | Uncommon | Gain **20 permanent armour.** Briefly gain **20** *(+20 per stack)* **armour** after receiving damage. | Linear |
+| Under-Barrel Shotgun | wip :) | Uncommon | 10% chance to fire **13 projectiles** with high spread. Each projectile inflicts **25%** *(+25% per stack)* **TOTAL damage** and inherits **25%** of the attack's **proc coefficient**. | Linear |
 | Chaos Rune | ![ChaosRune](/UnityProject/Assets/Materials/Item/ChaosRune/ChaosRune.png) | Legendary | 33% chance to inflict **additional damaging debuffs** *(+1 roll per stack)* when you apply a damaging debuff. Up to 1 *(+1 per 2 stacks)* additional debuffs can be **applied at once.** | Linear |
 
