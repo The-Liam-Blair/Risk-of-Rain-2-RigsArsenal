@@ -40,6 +40,7 @@ namespace MoreItems.Items
         public override GameObject Model => null;
         private GameObject pellet;
 
+        // Donut ring object that attaches to the player when the item is active to indicate range, much like the focus crystal.
         private GameObject rangeIndicator = null;
 
         public override void Init()
@@ -48,7 +49,6 @@ namespace MoreItems.Items
 
             DebugLog.Log("Initializing Under-Barrel Shotgun pellet...");
 
-            // temp until custom models are made.
             GameObject proj = Resources.Load<GameObject>("prefabs/projectiles/RailgunnerPistolProjectile");
             pellet = proj.InstantiateClone("UnderBarrelShotgunPellet", true);
 
@@ -56,7 +56,21 @@ namespace MoreItems.Items
             pellet.GetComponent<RoR2.Projectile.ProjectileSteerTowardTarget>().enabled = false;
             pellet.GetComponent<RoR2.Projectile.ProjectileDirectionalTargetFinder>().enabled = false;
 
+            GameObject aGhost = Resources.Load<GameObject>("prefabs/projectileghosts/RailgunnerPistolProjectileGhost");
+            var ghost = aGhost.InstantiateClone("UnderBarrelShotgunPelletGhost", true);
+
+            ghost.transform.GetChild(4).GetComponent<ParticleSystemRenderer>().enabled = false;
+
+            var trail = ghost.transform.GetChild(0).GetComponent<TrailRenderer>();
+            trail.widthMultiplier = 0.1f;
+
+            var mat = trail.sharedMaterial;
+            mat.SetColor("_TintColor", new Color(0.33f, 0.33f, 0.33f)); // todo: decide on a vibrant colour, will revisit when making the item model.
+
+            pellet.GetComponent<ProjectileController>().ghostPrefab = ghost;
+
             PrefabAPI.RegisterNetworkPrefab(pellet);
+            PrefabAPI.RegisterNetworkPrefab(ghost);
 
             ContentAddition.AddProjectile(pellet);
 
@@ -72,20 +86,21 @@ namespace MoreItems.Items
             {
                 orig(self, info);
 
+                if (!self|| !info.attacker || info.procCoefficient <= 0f || info.procChainMask.HasProc(ProcType.Missile)) { return; }
+
                 var victim = self.body;
-
-                if (!victim || !victim.inventory|| !info.attacker
-                || info.procCoefficient <= 0f || info.procChainMask.HasProc(ProcType.Missile)) { return; }
-
                 var attacker = info.attacker.GetComponent<CharacterBody>();
+
+                if (!victim || !attacker || !attacker.healthComponent || !victim.healthComponent) { return; }
 
                 var count = attacker.inventory.GetItemCount(itemDef);
                 if (count <= 0) { return; }
 
-                DebugLog.Log(Vector3.Distance(victim.transform.position, attacker.transform.position));
-
                 // Only triggers against entities 25 or fewer units away
                 if (Vector3.Distance(victim.transform.position, attacker.transform.position) > 25f) { return; }
+
+                // 10% (scaled by the attack's proc coefficient) chance to trigger the effect.
+               // if (!Util.CheckRoll(0.1f * info.procCoefficient, attacker.master)) { return; }
 
                 // Because they're projectiles, also performs a line of sight check so that the shot is actually able to hit.
                 // (Not entirely consistent, might investigate a better solution down the line).
@@ -123,13 +138,7 @@ namespace MoreItems.Items
                         damageColorIndex = DamageColorIndex.Item,
                         speedOverride = -1f,
                         damageTypeOverride = DamageType.AOE,
-                    };
-
-                   // Temp workaround: Idea is to eventually bring in a custom projectile through the asset bundle or find a better way to
-                   // manipulate an existing projectile into one for this item, ideally during initialisation. Right now, this just removes
-                   // some unwanted inherited visuals.
-                   // var ghost = pellet.GetComponent<RoR2.Projectile.ProjectileController>().ghost.gameObject;
-                   // ghost.transform.GetChild(4).GetComponent<ParticleSystemRenderer>().enabled = false; 
+                    };            
 
                     projectileInfo.rotation = Util.QuaternionSafeLookRotation(projectileInfo.target.transform.position - projectileInfo.position);
 
@@ -139,6 +148,13 @@ namespace MoreItems.Items
 
                     RoR2.Projectile.ProjectileManager.instance.FireProjectile(projectileInfo);
                 }
+            };
+
+            On.RoR2.Run.Start += (orig, self) =>
+            {
+                orig(self);
+
+                rangeIndicator = null;
             };
 
             // Adds a visual range indicator when a player has the item.

@@ -1,0 +1,19 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": -1268917118898595075
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 6964139367984786566
+  },
+  "m_Name": "",
+  "damage": 0.0,
+  "crit": 0,
+  "force": 0.0,
+  "damageColorIndex": 0,
+  "damageType": 0,
+  "useDotMaxStacksFromAttacker": 0,
+  "dotMaxStacksFromAttacker": 4294967295
+}
