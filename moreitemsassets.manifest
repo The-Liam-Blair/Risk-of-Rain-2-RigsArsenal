@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3355145292
+CRC: 1516333600
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e5cd65a4c2b9d2dfd9d79aa20fd08ec3
+    Hash: 4bac3b2cc7a5985692e1b85a3f3e389e
   TypeTreeHash:
     serializedVersion: 2
     Hash: 209b83e87f2068bd9f291febfe005640
@@ -35,12 +35,15 @@ Assets:
 - Assets/Materials/Item/WornOutStimpack/M_White.mat
 - Assets/Materials/Item/BountyHunterBadge/BountyHunterBadge.png
 - Assets/Materials/Item/WornOutStimpack/M_DepletedIcon.mat
+- Assets/Prefabs/Item/ChaosRune/ChaosRune.prefab
 - Assets/Materials/Item/WornOutStimpack/M_Button.mat
 - Assets/shaders/deferred/hgstandard.shader
 - Assets/Materials/Item/ReactiveArmourPlate/ArmourTex.png
+- Assets/Materials/Item/ChaosRune/M_RockDark.mat
 - Assets/Materials/Item/BountyHunterBadge/YellowTex2.png
 - Assets/Materials/Item/ReactiveArmourPlate/M_ArmourEdge.mat
 - Assets/Materials/Item/KineticBattery/M_Screw.mat
+- Assets/Materials/Item/ChaosRune/Rock.png
 - Assets/Materials/Item/WornOutStimpack/M_Base.mat
 - Assets/Materials/Item/WornOutStimpack/WornOutStimpack.png
 - Assets/Materials/Item/BountyHunterBadge/M_Black.mat
@@ -52,6 +55,8 @@ Assets:
 - Assets/Materials/Item/ReactiveArmourPlate/M_Armour.mat
 - Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlating.png
 - Assets/Prefabs/Item/WornOutStimpack/WornOutStimpack.prefab
+- Assets/Materials/Item/ChaosRune/M_Rock.mat
+- Assets/Materials/Item/ChaosRune/ChaosRune.png
 - Assets/Materials/Item/WornOutStimpack/WornOutStimpackBuff.png
 - Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.prefab
 - Assets/Materials/Item/KineticBattery/KineticBatteryBuff.png
@@ -62,7 +67,10 @@ Assets:
 - Assets/Materials/Item/BountyHunterBadge/M_YELLA-ER.mat
 - Assets/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.prefab
 - Assets/Materials/Item/ReactiveArmourPlate/M_Underlay.mat
+- Assets/Prefabs/Item/ChaosRune/ChaosRune.blend
 - Assets/Materials/Item/KineticBattery/M_Body.mat
+- Assets/Materials/Item/ChaosRune/M_RedGlow.mat
+- Assets/Materials/Item/ChaosRune/M_LesserGlow.mat
 - Assets/Materials/Item/ReactiveArmourPlate/UnderlayTex.png
 - Assets/Materials/Item/BountyHunterBadge/YellowTex1.png
 - Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.blend
