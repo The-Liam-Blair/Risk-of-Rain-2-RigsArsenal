@@ -93,10 +93,10 @@ namespace MoreItems.Items
                 if (count <= 0) { return; }
 
                 // Only triggers against entities 25 or fewer units away
-                if (Vector3.Distance(victim.transform.position, attacker.transform.position) > 25f) { return; }
+                if (Vector3.Distance(victim.transform.position, attacker.transform.position) > 35f) { return; }
 
                 // 10% (scaled by the attack's proc coefficient) chance to trigger the effect.
-                //if (!Util.CheckRoll(0.1f * info.procCoefficient, attacker.master)) { return; }
+                if (!Util.CheckRoll(10f * info.procCoefficient, attacker.master)) { return; }
 
                 // Because they're projectiles, also performs a line of sight check so that the shot is actually able to hit.
                 // (Not entirely consistent, might investigate a better solution down the line).
@@ -134,7 +134,7 @@ namespace MoreItems.Items
 
                     // I know there is a utility function that can apply spread, it's either not suited for this purpose or I'm using it incorrectly.
                     // Regardless, a custom spread function has been made to make the projectiles shoot outwards like a shotgun.
-                    projectileInfo.rotation = ApplySpread(projectileInfo.rotation, 2f);
+                    projectileInfo.rotation = ApplySpread(projectileInfo.rotation, 4f);
 
                     RoR2.Projectile.ProjectileManager.instance.FireProjectile(projectileInfo);
                 }
@@ -164,7 +164,7 @@ namespace MoreItems.Items
                     rangeIndicator.GetComponent<NetworkedBodyAttachment>().AttachToGameObjectAndSpawn(self.gameObject, null);
 
                     var donut = rangeIndicator.transform.GetChild(1); // 2nd child of the range indicator object controls the donut's visual properties.
-                    donut.localScale = new Vector3(50f, 50f, 50f); // 25m radius to match the item's range.
+                    donut.localScale = new Vector3(70f, 70f, 70f); // 35m radius to match the item's range.
                     donut.GetComponent<MeshRenderer>().material.SetColor("_TintColor", new Color(0f, 0.29f, 0.06f)); // Green tint instead of red.
                 }
             };
