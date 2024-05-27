@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3592609921
+CRC: 2005944511
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d5d20648f83681104d0f226de402843a
+    Hash: 23ba1d2301ea0183e0d74ed730f1d687
   TypeTreeHash:
     serializedVersion: 2
     Hash: 209b83e87f2068bd9f291febfe005640
@@ -43,19 +43,24 @@ Assets:
 - Assets/Materials/Item/BountyHunterBadge/YellowTex2.png
 - Assets/Materials/Item/WristMountedShotgun/M_DeepBlack.mat
 - Assets/Materials/Item/WristMountedShotgun/M_Shotgun.mat
+- Assets/Materials/Item/CoolantPack/M_Cap.mat
 - Assets/Materials/Item/ReactiveArmourPlate/M_ArmourEdge.mat
 - Assets/Materials/Item/KineticBattery/M_Screw.mat
+- Assets/Materials/Item/CoolantPack/M_Button.mat
 - Assets/Materials/Item/ChaosRune/Rock.png
 - Assets/Materials/Item/WornOutStimpack/M_Base.mat
 - Assets/Materials/Item/WornOutStimpack/WornOutStimpack.png
 - Assets/Materials/Item/BountyHunterBadge/M_Black.mat
 - Assets/Materials/Item/WornOutStimpack/M_HealIcon.mat
 - Assets/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.blend
+- Assets/Prefabs/Item/CoolantPack/CoolantPack.prefab
 - Assets/Materials/Item/BountyHunterBadge/BackingTex.png
 - Assets/Materials/Item/WristMountedShotgun/M_Shadow.mat
 - Assets/Materials/Item/WornOutStimpack/M_WhiteBright.mat
 - Assets/Materials/Item/BountyHunterBadge/M_yella.mat
+- Assets/Materials/Item/CoolantPack/M_TankMetre.mat
 - Assets/Materials/Item/ReactiveArmourPlate/M_Armour.mat
+- Assets/Prefabs/Item/CoolantPack/CoolantPack.blend
 - Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlating.png
 - Assets/Prefabs/Item/WornOutStimpack/WornOutStimpack.prefab
 - Assets/Materials/Item/ChaosRune/M_Rock.mat
@@ -65,6 +70,7 @@ Assets:
 - Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.prefab
 - Assets/Prefabs/Item/WristMountedShotgun/WristMountedShotgun.prefab
 - Assets/Materials/Item/KineticBattery/KineticBatteryBuff.png
+- Assets/Materials/Item/CoolantPack/M_Tank.mat
 - Assets/Materials/Item/WristMountedShotgun/WristMountedShotgun.png
 - Assets/Materials/Item/KineticBattery/its texturin time.png
 - Assets/Materials/Item/WristMountedShotgun/M_ShotgunComponent.mat
@@ -79,6 +85,8 @@ Assets:
 - Assets/Prefabs/Item/ChaosRune/ChaosRune.blend
 - Assets/Materials/Item/KineticBattery/M_Body.mat
 - Assets/Materials/Item/ChaosRune/M_RedGlow.mat
+- Assets/Materials/Item/CoolantPack/M_Backing.mat
+- Assets/Materials/Item/CoolantPack/CoolantPack.png
 - Assets/Materials/Item/ChaosRune/M_LesserGlow.mat
 - Assets/Materials/Item/ReactiveArmourPlate/UnderlayTex.png
 - Assets/Materials/Item/BountyHunterBadge/YellowTex1.png
@@ -89,5 +97,6 @@ Assets:
 - Assets/Materials/Item/KineticBattery/KineticBattery.PNG
 - Assets/Materials/Item/ReactiveArmourPlate/MetallicTex.png
 - Assets/Materials/Item/BountyHunterBadge/M_yellaNoTex.mat
+- Assets/Materials/Item/CoolantPack/Coolant.png
 - Assets/Materials/Item/ReactiveArmourPlate/M_Grip.mat
 Dependencies: []

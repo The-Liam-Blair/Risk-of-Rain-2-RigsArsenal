@@ -112,6 +112,17 @@ namespace MoreItems
                 DebugLog.Log("F6 pressed, spawning Chaos Rune");
                 DEBUG_SpawnItem("CHAOSRUNE");
             }
+            else if(Input.GetKeyDown(KeyCode.F7))
+            {
+                DebugLog.Log("F7 pressed, spawning CoolantPack");
+                DEBUG_SpawnItem("COOLANTPACK");
+            }
+            else if (Input.GetKeyDown(KeyCode.F11))
+            {
+                var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
+                // apply dot to player
+                DotController.InflictDot(player.gameObject, player.gameObject, DotController.DotIndex.Bleed, 5f, 5f);
+            }
             else if (Input.GetKeyDown(KeyCode.F12))
             {
                 var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
