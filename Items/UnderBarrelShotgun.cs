@@ -65,7 +65,7 @@ namespace MoreItems.Items
             trail.widthMultiplier = 0.1f;
 
             var mat = trail.sharedMaterial;
-            mat.SetColor("_TintColor", new Color(0.25f, 1f, 0.125f)); // Green
+            mat.SetColor("_TintColor", new Color(0f, 0.29f, 0.06f)); // Green
 
             pellet.GetComponent<ProjectileController>().ghostPrefab = ghost;
 
