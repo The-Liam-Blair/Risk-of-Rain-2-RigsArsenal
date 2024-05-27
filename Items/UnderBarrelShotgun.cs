@@ -58,6 +58,7 @@ namespace MoreItems.Items
 
             GameObject aGhost = Resources.Load<GameObject>("prefabs/projectileghosts/RailgunnerPistolProjectileGhost");
             var ghost = aGhost.InstantiateClone("UnderBarrelShotgunPelletGhost", true);
+            ghost.AddComponent<NetworkIdentity>();
 
             ghost.transform.GetChild(4).GetComponent<ParticleSystemRenderer>().enabled = false;
 
