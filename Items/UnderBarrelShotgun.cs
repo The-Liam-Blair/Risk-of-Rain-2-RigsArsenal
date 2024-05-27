@@ -17,9 +17,10 @@ using ProjectileGhostController = RoR2.Projectile.ProjectileGhostController;
 namespace MoreItems.Items
 {
     /// <summary>
-    /// Reactive Armour Plating - T2 (Uncommon) Item.
-    /// <para>Gain a temporary buff that increases armour when taking damage.</para>
-    /// <para>Buff duration is low, does not prevent the damage prior to activation, but can be refreshed repeatedly if hit repeatedly.</para>
+    /// Wrist-Mounted Shotgun - T2 (Uncommon) Item.
+    /// <para>10% chace on hit to launch a spread of projectiles at close range, inflicting high damage.</para>
+    /// <para>Equivalent to the ATG with slightly higher damage and much higher proc rate, it shares the same proc mask so are mutually exclusive.</para>
+    /// <para>Close range attacks -> fire the shotgun. Long range attacks -> fire the ATG.</para>
     /// </summary>
     public class UnderBarrelShotgun : Item
     {
@@ -47,8 +48,6 @@ namespace MoreItems.Items
         {
             base.Init();
 
-            DebugLog.Log("Initializing Under-Barrel Shotgun pellet...");
-
             GameObject proj = Resources.Load<GameObject>("prefabs/projectiles/RailgunnerPistolProjectile");
             pellet = proj.InstantiateClone("UnderBarrelShotgunPellet", true);
 
@@ -74,8 +73,6 @@ namespace MoreItems.Items
             PrefabAPI.RegisterNetworkPrefab(ghost);
 
             ContentAddition.AddProjectile(pellet);
-
-            DebugLog.Log("Finished initializing Under-Barrel Shotgun Pellet.");
         }
 
         public override void SetupHooks()
@@ -99,7 +96,7 @@ namespace MoreItems.Items
                 if (Vector3.Distance(victim.transform.position, attacker.transform.position) > 25f) { return; }
 
                 // 10% (scaled by the attack's proc coefficient) chance to trigger the effect.
-               // if (!Util.CheckRoll(0.1f * info.procCoefficient, attacker.master)) { return; }
+                //if (!Util.CheckRoll(0.1f * info.procCoefficient, attacker.master)) { return; }
 
                 // Because they're projectiles, also performs a line of sight check so that the shot is actually able to hit.
                 // (Not entirely consistent, might investigate a better solution down the line).
@@ -112,17 +109,11 @@ namespace MoreItems.Items
                 {
                     ProcChainMask mask = info.procChainMask;
                     mask.AddProc(ProcType.Missile);
+
                     float damage = Util.OnHitProcDamage(info.damage * stackingDamageMultiplier, attacker.damage, info.procCoefficient);
-
-                    DebugLog.Log($"Attack did {info.damage} damage, dealt by an entity that has {attacker.damage} damage," +
-                        $"resulting in pellets each inflicting {damage} damage. The total damage of the {pelletCount} burst is {pelletCount * damage}.");
-
-                    DebugLog.Log($"The total pellet damage ratio, compared to the the attack's damage was {(pelletCount * damage) / attacker.damage}.");
 
                     // Each pellet has 25% of the attack's proc coefficient. This totals to a 3.25 proc coefficient factor more or less.
                     pellet.GetComponent<ProjectileController>().procCoefficient = info.procCoefficient * 0.25f;
-
-                    DebugLog.Log($"Pellet proc coefficient: {pellet.GetComponent<ProjectileController>().procCoefficient}");
 
                     var projectileInfo = new FireProjectileInfo()
                     {
@@ -162,7 +153,7 @@ namespace MoreItems.Items
             {
                 orig(self);
 
-                if (self.isPlayerControlled && self.inventory.GetItemCount(itemDef) > 0 && !rangeIndicator)
+                if (MoreItems.EnableShotgunMarker.Value && self.isPlayerControlled && self.inventory.GetItemCount(itemDef) > 0 && !rangeIndicator)
                 {
                     // Uses the range indicator from the "NearbyDamageBonus" (focus crystal) item.
                     GameObject original = Resources.Load<GameObject>("Prefabs/NetworkedObjects/NearbyDamageBonusIndicator");
@@ -174,7 +165,7 @@ namespace MoreItems.Items
 
                     var donut = rangeIndicator.transform.GetChild(1); // 2nd child of the range indicator object controls the donut's visual properties.
                     donut.localScale = new Vector3(50f, 50f, 50f); // 25m radius to match the item's range.
-                    donut.GetComponent<MeshRenderer>().material.SetColor("_TintColor", new Color(0.75f, 0.75f, 0.75f)); // White tint instead of red.
+                    donut.GetComponent<MeshRenderer>().material.SetColor("_TintColor", new Color(0f, 0.29f, 0.06f)); // Green tint instead of red.
                 }
             };
         }
