@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BepInEx;
+using BepInEx.Configuration;
 using MoreItems.Items;
 using R2API;
 using RoR2;
@@ -8,15 +9,16 @@ using System.Reflection;
 using MoreItems.Buffs;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using R2API.Utils;
 
 namespace MoreItems
 {
-    // Dependencies: R2API, LanaugageAPI, ItemAPI
     [BepInDependency(ItemAPI.PluginGUID)]
     [BepInDependency(LanguageAPI.PluginGUID)]
 
-    // Plugin Metadata
     [BepInPlugin(P_GUID, P_Name, P_Version)]
+
+    [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
 
     // Main Plugin Class
     public class MoreItems : BaseUnityPlugin
@@ -31,16 +33,16 @@ namespace MoreItems
 
         public static List<Item> ItemList = new List<Item>();
         public static List<Buff> BuffList = new List<Buff>();
+        
+        public static ConfigEntry<bool> EnableShotgunMarker { get; set; }
 
 
         public void Awake()
         {
-            // Start up the logger.
             DebugLog.Init(Logger);
 
-            
             // Load the asset bundle for this mod.
-           using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("MoreItems.moreitemsassets"))
+            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("MoreItems.moreitemsassets"))
            {
                 MainAssets = AssetBundle.LoadFromStream(stream);
            }
@@ -69,6 +71,8 @@ namespace MoreItems
                 ItemList.Add(anItem);
                 DebugLog.Log($"Item {item.Name} loaded.");
             }
+
+            EnableShotgunMarker = Config.Bind("Wrist-Mounted Shotgun", "EnableShotgunMarker", true, "Shows or hides the range indicator for the wrist-mounted shotgun item.");
         }
 
 

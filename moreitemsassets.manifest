@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1806935737
+CRC: 3592609921
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: da73ec3289353a676294809bc0a58aea
+    Hash: d5d20648f83681104d0f226de402843a
   TypeTreeHash:
     serializedVersion: 2
     Hash: 209b83e87f2068bd9f291febfe005640
@@ -60,6 +60,7 @@ Assets:
 - Assets/Prefabs/Item/WornOutStimpack/WornOutStimpack.prefab
 - Assets/Materials/Item/ChaosRune/M_Rock.mat
 - Assets/Materials/Item/ChaosRune/ChaosRune.png
+- Assets/Materials/Item/WristMountedShotgun/camoblack.png
 - Assets/Materials/Item/WornOutStimpack/WornOutStimpackBuff.png
 - Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.prefab
 - Assets/Prefabs/Item/WristMountedShotgun/WristMountedShotgun.prefab
