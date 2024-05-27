@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3909476800
+CRC: 1806935737
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f9f53154b943d96ed0778388b9d6be12
+    Hash: da73ec3289353a676294809bc0a58aea
   TypeTreeHash:
     serializedVersion: 2
     Hash: 209b83e87f2068bd9f291febfe005640
@@ -41,6 +41,8 @@ Assets:
 - Assets/Materials/Item/ReactiveArmourPlate/ArmourTex.png
 - Assets/Materials/Item/ChaosRune/M_RockDark.mat
 - Assets/Materials/Item/BountyHunterBadge/YellowTex2.png
+- Assets/Materials/Item/WristMountedShotgun/M_DeepBlack.mat
+- Assets/Materials/Item/WristMountedShotgun/M_Shotgun.mat
 - Assets/Materials/Item/ReactiveArmourPlate/M_ArmourEdge.mat
 - Assets/Materials/Item/KineticBattery/M_Screw.mat
 - Assets/Materials/Item/ChaosRune/Rock.png
@@ -50,6 +52,7 @@ Assets:
 - Assets/Materials/Item/WornOutStimpack/M_HealIcon.mat
 - Assets/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.blend
 - Assets/Materials/Item/BountyHunterBadge/BackingTex.png
+- Assets/Materials/Item/WristMountedShotgun/M_Shadow.mat
 - Assets/Materials/Item/WornOutStimpack/M_WhiteBright.mat
 - Assets/Materials/Item/BountyHunterBadge/M_yella.mat
 - Assets/Materials/Item/ReactiveArmourPlate/M_Armour.mat
@@ -59,11 +62,16 @@ Assets:
 - Assets/Materials/Item/ChaosRune/ChaosRune.png
 - Assets/Materials/Item/WornOutStimpack/WornOutStimpackBuff.png
 - Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.prefab
+- Assets/Prefabs/Item/WristMountedShotgun/WristMountedShotgun.prefab
 - Assets/Materials/Item/KineticBattery/KineticBatteryBuff.png
+- Assets/Materials/Item/WristMountedShotgun/WristMountedShotgun.png
 - Assets/Materials/Item/KineticBattery/its texturin time.png
+- Assets/Materials/Item/WristMountedShotgun/M_ShotgunComponent.mat
+- Assets/Materials/Item/WristMountedShotgun/Camo.png
 - Assets/Materials/Item/ReactiveArmourPlate/GripTex.png
 - Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlatingBuff.png
 - Assets/Prefabs/Item/KineticBattery/KineticBattery.prefab
+- Assets/Materials/Item/WristMountedShotgun/M_RedDotSight.mat
 - Assets/Materials/Item/BountyHunterBadge/M_YELLA-ER.mat
 - Assets/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.prefab
 - Assets/Materials/Item/ReactiveArmourPlate/M_Underlay.mat
@@ -74,6 +82,7 @@ Assets:
 - Assets/Materials/Item/ReactiveArmourPlate/UnderlayTex.png
 - Assets/Materials/Item/BountyHunterBadge/YellowTex1.png
 - Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.blend
+- Assets/Prefabs/Item/WristMountedShotgun/WristMountedShotgun.blend
 - Assets/Materials/Item/KineticBattery/M_Glow.mat
 - Assets/Materials/Item/KineticBattery/M_Bars.mat
 - Assets/Materials/Item/KineticBattery/KineticBattery.PNG
