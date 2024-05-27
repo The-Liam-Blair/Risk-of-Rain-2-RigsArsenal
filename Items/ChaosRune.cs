@@ -29,7 +29,7 @@ namespace MoreItems.Items
         public override bool CanRemove => true;
 
         public override ItemTag[] Tags => new ItemTag[] { ItemTag.Damage };
-        public override bool AIBlackList => false; // Even though the AI could get this item, its only going to be useful if the enemy can inflict damaging DOTs
+        public override bool AIBlackList => true; // Even though the AI could get this item, its only going to be useful if the enemy can inflict damaging DOTs
                                                    // naturally or is able to with another item, so its too niche.
         
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("ChaosRune.png");

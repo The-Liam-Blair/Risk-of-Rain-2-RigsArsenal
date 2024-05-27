@@ -20,18 +20,18 @@ namespace MoreItems.Items
         public override string Name => "Coolant Pack";
         public override string NameToken => "COOLANTPACK";
         public override string PickupToken => "Incoming damaging debuffs inflict less damage";
-        public override string Description => "All incoming <style=cIsDamage>damaging debuffs</style> inflict 15% <style=cStack>(+15% per stack)</style> <style=cIsDamage>reduced damage</style>.";
-        public override string Lore => "Introducing MediFreeze(tm)! Your omni-purpose solution to all burns, aches and ailments.\n\nCut your finger? Seal that wound up with MediFreeze!\nBurned Yourself? MediFreeze it away!\nBruised your head? MediFreeze it into oblivion!\n\nMediFreeze, buy now today at your nearest wholesaler.\n\nLEGAL DISCLAIMER: Medical trials pending. May contain toxic materials hazardous to biological life. May contain corrosive materials. Wear protective equipment before handling. Seek medical attention immediately if it comes into direct contact with skin, eyes or other sensitive areas.";
+        public override string Description => "All incoming <style=cIsHealth>damaging debuffs</style> inflict 15% <style=cStack>(+15% per stack)</style> <style=cIsDamage>reduced damage</style>.";
+        public override string Lore => "Introducing MediFreeze(tm)! Your omni-purpose solution to all burns, aches and ailments.\n\nCut your finger? Seal that wound up with MediFreeze!\nBurned Yourself? MediFreeze it away!\nBruised your head? MediFreeze it into oblivion!\n\nMediFreeze, resolving your ailments one chill at a time. Buy now today at your nearest wholesaler.\n\nLEGAL DISCLAIMER: Medical trials pending. May contain toxic materials hazardous to biological life. May contain corrosive materials. Wear protective equipment before handling. Seek medical attention immediately if it comes into direct contact with skin, eyes or other sensitive areas.";
 
         public override ItemTier Tier => ItemTier.Tier2;
 
         public override bool CanRemove => true;
 
         public override ItemTag[] Tags => new ItemTag[] { ItemTag.Utility };
-        public override bool AIBlackList => true;
+        public override bool AIBlackList => false;
 
-        public override Sprite Icon => null;
-        public override GameObject Model => null;
+        public override Sprite Icon => MainAssets.LoadAsset<Sprite>("CoolantPack.png");
+        public override GameObject Model => MainAssets.LoadAsset<GameObject>("CoolantPack.prefab");
 
         public override void SetupHooks()
         {
