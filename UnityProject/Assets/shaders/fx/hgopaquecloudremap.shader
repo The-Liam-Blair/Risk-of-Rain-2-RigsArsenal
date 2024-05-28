@@ -1,7 +1,7 @@
-Shader "Stubbed Hopoo Games/FX/Opaque Cloud Remap" {
+Shader "StubbedShader/fx/hgopaquecloudremap" {
 	Properties {
-		[HDR] _TintColor ("Tint", Vector) = (1,1,1,1)
-		[HDR] _EmissionColor ("Emission", Vector) = (1,1,1,1)
+		[HDR] _TintColor ("Tint", Color) = (1,1,1,1)
+		[HDR] _EmissionColor ("Emission", Color) = (1,1,1,1)
 		_MainTex ("Base (RGB) Trans (A)", 2D) = "grey" {}
 		_NormalStrength ("Normal Strength", Range(0, 5)) = 1
 		[NoScaleOffset] _NormalTex ("Normal Map", 2D) = "bump" {}
@@ -22,6 +22,5 @@ Shader "Stubbed Hopoo Games/FX/Opaque Cloud Remap" {
 		[MaterialEnum(Off,0,Front,1,Back,2)] _Cull ("Cull", Float) = 2
 		[PerRendererData] _ExternalAlpha ("External Alpha", Range(0, 1)) = 1
 	}
-	
 	Fallback "Transparent/Cutout/Diffuse"
 }

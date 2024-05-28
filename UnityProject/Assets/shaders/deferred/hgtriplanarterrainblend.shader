@@ -1,11 +1,11 @@
-Shader "Stubbed Hopoo Games/Deferred/Triplanar Terrain Blend" {
+Shader "StubbedShader/deferred/hgtriplanarterrainblend" {
 	Properties {
 		[Toggle(USE_VERTEX_COLORS)] _ColorsOn ("Use Vertex Colors Instead", Float) = 0
 		[Toggle(MIX_VERTEX_COLORS)] _MixColorsOn ("Mix Vertex Colors with Texture", Float) = 0
 		[Toggle(USE_ALPHA_AS_MASK)] _MaskOn ("Use Alpha Channels as Weight Mask", Float) = 0
 		[Toggle(USE_VERTICAL_BIAS)] _VerticalBiasOn ("Bias Green Channel to Vertical", Float) = 0
 		[Toggle(DOUBLESAMPLE)] _DoublesampleOn ("Double Sample UVs", Float) = 1
-		_Color ("Main Color", Vector) = (0.5,0.5,0.5,1)
+		_Color ("Main Color", Color) = (0.5,0.5,0.5,1)
 		_NormalTex ("Normal Tex (RGB)", 2D) = "bump" {}
 		_NormalStrength ("Normal Strength", Range(0, 1)) = 1
 		[MaterialEnum(Two Tone,0,Smoothed Two Tone,1,Unlitish,3,Subsurface,4,Grass,5)] _RampInfo ("Ramp Choice", Float) = 0
@@ -32,6 +32,5 @@ Shader "Stubbed Hopoo Games/Deferred/Triplanar Terrain Blend" {
 		_BlueChannelBias ("Blue Channel Bias", Range(-2, 5)) = 0
 		[Toggle(MICROFACET_SNOW)] _SnowOn ("Treat G.Channel as Snow", Float) = 0
 	}
-
 	Fallback "Diffuse"
 }

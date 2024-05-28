@@ -44,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 5d0ed39f7c3a29f43aecdf0c82e3ba80, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -126,7 +126,7 @@ Material:
     - _EliteBrightnessMax: 1
     - _EliteBrightnessMin: 0
     - _EliteIndex: 0
-    - _EmPower: 1
+    - _EmPower: 5
     - _EnableCutout: 0
     - _FEON: 0
     - _Fade: 1
@@ -174,7 +174,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 3, g: 24, b: 24, a: 1}
-    - _EmColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 0.09411765, g: 0.7490196, b: 0.7490196, a: 1}
+    - _EmColor: {r: 0, g: 0.52, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FlashColor: {r: 0, g: 0, b: 0, a: 1}

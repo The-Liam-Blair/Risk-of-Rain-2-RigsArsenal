@@ -1,6 +1,6 @@
-Shader "Stubbed Hopoo Games/Deferred/Snow Topped" {
+Shader "StubbedShader/deferred/hgsnowtopped" {
 	Properties {
-		_Color ("Main Color", Vector) = (0.5,0.5,0.5,1)
+		_Color ("Main Color", Color) = (0.5,0.5,0.5,1)
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 		_NormalStrength ("Normal Strength", Range(0, 1)) = 1
 		_NormalTex ("Normal Map", 2D) = "bump" {}
@@ -33,6 +33,5 @@ Shader "Stubbed Hopoo Games/Deferred/Snow Topped" {
 		_DirtSpecularExponent ("Dirt Specular Exponent", Range(0, 20)) = 1
 		_DirtSmoothness ("Dirt Smoothness", Range(0, 1)) = 0
 	}
-
 	Fallback "Diffuse"
 }

@@ -1,6 +1,6 @@
-Shader "Stubbed Hopoo Games/Environment/Waterfall" {
+Shader "StubbedShader/environment/hgwaterfall" {
 	Properties {
-		_Color ("Main Color", Vector) = (0.5,0.5,0.5,1)
+		_Color ("Main Color", Color) = (0.5,0.5,0.5,1)
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 		_NormalTex ("Normal Map", 2D) = "bump" {}
 		_NormalStrength ("Normal Strength", Range(0, 1)) = 1
@@ -15,6 +15,5 @@ Shader "Stubbed Hopoo Games/Environment/Waterfall" {
 		_SpecularStrength ("Specular Strength", Range(0, 1)) = 0
 		_SpecularExponent ("Specular Exponent", Range(0, 20)) = 1
 	}
-
 	Fallback "Diffuse"
 }

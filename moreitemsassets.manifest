@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2005944511
+CRC: 80815789
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 23ba1d2301ea0183e0d74ed730f1d687
+    Hash: c1b39693418db85b709e40562e19376d
   TypeTreeHash:
     serializedVersion: 2
     Hash: 209b83e87f2068bd9f291febfe005640
@@ -52,6 +52,7 @@ Assets:
 - Assets/Materials/Item/WornOutStimpack/WornOutStimpack.png
 - Assets/Materials/Item/BountyHunterBadge/M_Black.mat
 - Assets/Materials/Item/WornOutStimpack/M_HealIcon.mat
+- Assets/Materials/Item/WristMountedShotgun/M_Gray.mat
 - Assets/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.blend
 - Assets/Prefabs/Item/CoolantPack/CoolantPack.prefab
 - Assets/Materials/Item/BountyHunterBadge/BackingTex.png
@@ -86,6 +87,7 @@ Assets:
 - Assets/Materials/Item/KineticBattery/M_Body.mat
 - Assets/Materials/Item/ChaosRune/M_RedGlow.mat
 - Assets/Materials/Item/CoolantPack/M_Backing.mat
+- Assets/Materials/Item/ChaosRune/M_RockFace.mat
 - Assets/Materials/Item/CoolantPack/CoolantPack.png
 - Assets/Materials/Item/ChaosRune/M_LesserGlow.mat
 - Assets/Materials/Item/ReactiveArmourPlate/UnderlayTex.png
