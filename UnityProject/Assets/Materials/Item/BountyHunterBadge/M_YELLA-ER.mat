@@ -81,16 +81,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 0c74af729ca4d8448a1abd2f4bbef389, type: 3}
-        m_Scale: {x: -6.29, y: 14.08}
-        m_Offset: {x: 0.62, y: 0}
+        m_Scale: {x: 15, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Texture: {fileID: 2800000, guid: 0c74af729ca4d8448a1abd2f4bbef389, type: 3}
+        m_Scale: {x: 5, y: 5}
+        m_Offset: {x: 0.8, y: 0.6}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -151,7 +151,7 @@ Material:
     - _LimbRemovalOn: 0
     - _Metallic: 0
     - _Mode: 0
-    - _NormalStrength: 1
+    - _NormalStrength: 0.6
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _PrintBias: 0
