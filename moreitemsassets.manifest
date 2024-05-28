@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 80815789
+CRC: 2152437919
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: c1b39693418db85b709e40562e19376d
+    Hash: 0a16644c533fd8f4baf17f66cf80e2a1
   TypeTreeHash:
     serializedVersion: 2
     Hash: 209b83e87f2068bd9f291febfe005640
@@ -92,6 +92,7 @@ Assets:
 - Assets/Materials/Item/ChaosRune/M_LesserGlow.mat
 - Assets/Materials/Item/ReactiveArmourPlate/UnderlayTex.png
 - Assets/Materials/Item/BountyHunterBadge/YellowTex1.png
+- Assets/Materials/Item/BountyHunterBadge/scratchTex.png
 - Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.blend
 - Assets/Prefabs/Item/WristMountedShotgun/WristMountedShotgun.blend
 - Assets/Materials/Item/KineticBattery/M_Glow.mat
