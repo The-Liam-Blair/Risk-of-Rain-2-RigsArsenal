@@ -1,7 +1,7 @@
-Shader "Stubbed Hopoo Games/UI/Default Overbrighten" {
+Shader "StubbedShader/ui/hguioverbrighten" {
 	Properties {
 		[PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
-		_Color ("Tint", Vector) = (1,1,1,1)
+		_Color ("Tint", Color) = (1,1,1,1)
 		_OverbrightenScale ("Overbrighten Scale", Range(0, 5)) = 1
 		_StencilComp ("Stencil Comparison", Float) = 8
 		_Stencil ("Stencil ID", Float) = 0
@@ -11,6 +11,5 @@ Shader "Stubbed Hopoo Games/UI/Default Overbrighten" {
 		_ColorMask ("Color Mask", Float) = 15
 		[Toggle(UNITY_UI_ALPHACLIP)] _UseUIAlphaClip ("Use Alpha Clip", Float) = 0
 	}
-	
-	Fallback "Diffuse"
+		Fallback "Diffuse"
 }

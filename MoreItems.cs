@@ -73,6 +73,7 @@ namespace MoreItems
             }
 
             EnableShotgunMarker = Config.Bind("Wrist-Mounted Shotgun", "EnableShotgunMarker", true, "Shows or hides the range indicator for the wrist-mounted shotgun item.");
+            ApplyShaders();
         }
 
 
@@ -144,6 +145,22 @@ namespace MoreItems
             var item = ItemList.Find(x => x.NameToken == itemName);
 
             PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(item.itemDef.itemIndex), player.position, player.forward * 20f);
+        }
+
+        /// <summary>
+        /// Swap from stubbed shaders to the actual in-game shaders per material (This enables emissions, specular reflections, normal maps, etc).
+        /// </summary>
+        private static void ApplyShaders()
+        {
+            var materials = MainAssets.LoadAllAssets<Material>();
+
+            foreach (var mat in materials)
+            {
+                if (mat.shader.name.StartsWith("StubbedShader"))
+                {
+                    mat.shader = Resources.Load<Shader>("shaders" + mat.shader.name.Substring(13));
+                }
+            }   
         }
     }
 }

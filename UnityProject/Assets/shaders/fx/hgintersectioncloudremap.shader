@@ -1,8 +1,8 @@
-Shader "Stubbed Hopoo Games/FX/Cloud Intersection Remap" {
+Shader "StubbedShader/fx/hgintersectioncloudremap" {
 	Properties {
 		[Enum(UnityEngine.Rendering.BlendMode)] _SrcBlendFloat ("Source Blend", Float) = 1
 		[Enum(UnityEngine.Rendering.BlendMode)] _DstBlendFloat ("Destination Blend", Float) = 1
-		[HDR] _TintColor ("Tint", Vector) = (1,1,1,1)
+		[HDR] _TintColor ("Tint", Color) = (1,1,1,1)
 		_MainTex ("Base (RGB) Trans (A)", 2D) = "grey" {}
 		_Cloud1Tex ("Cloud 1 (RGB) Trans (A)", 2D) = "grey" {}
 		_Cloud2Tex ("Cloud 2 (RGB) Trans (A)", 2D) = "grey" {}
@@ -20,6 +20,5 @@ Shader "Stubbed Hopoo Games/FX/Cloud Intersection Remap" {
 		[Toggle(FADE_FROM_VERTEX_COLORS)] _FadeFromVertexColorsOn ("Fade Alpha from Vertex Color Luminance", Float) = 0
 		[Toggle(TRIPLANAR)] _TriplanarOn ("Enable Triplanar Projections for Clouds", Float) = 0
 	}
-	
-	Fallback "Diffuse"
+		Fallback "Diffuse"
 }

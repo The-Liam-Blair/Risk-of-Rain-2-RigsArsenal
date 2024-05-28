@@ -1,4 +1,4 @@
-Shader "Stubbed Hopoo Games/FX/Distortion" {
+Shader "StubbedShader/fx/hgdistortion" {
 	Properties {
 		_BumpMap ("Bump Texture", 2D) = "bump" {}
 		_MaskTex ("Mask Texture", 2D) = "white" {}
@@ -11,6 +11,5 @@ Shader "Stubbed Hopoo Games/FX/Distortion" {
 		_DistanceModulationMagnitude ("Distance Modulation Magnitude", Range(0, 1)) = 0.5
 		_InvFade ("Soft Factor", Range(0, 2)) = 0.1
 	}
-	
-	Fallback "Diffuse"
+		Fallback "Diffuse"
 }

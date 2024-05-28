@@ -1,6 +1,6 @@
-Shader "Stubbed Hopoo Games/Deferred/Wavy Cloth" {
+Shader "StubbedShader/deferred/hgwavycloth" {
 	Properties {
-		_Color ("Main Color", Vector) = (0.5,0.5,0.5,1)
+		_Color ("Main Color", Color) = (0.5,0.5,0.5,1)
 		_Cutoff ("Alpha Cutoff Value", Range(0, 1)) = 0.5
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 		_ScrollingNormalMap ("Scrolling Normal Map", 2D) = "bump" {}
@@ -14,6 +14,5 @@ Shader "Stubbed Hopoo Games/Deferred/Wavy Cloth" {
 		_SpecularExponent ("Specular Exponent", Range(0, 20)) = 1
 		[Toggle(VERTEX_RED_FOR_DISTORTION)] _EnableVertexColorDistortion ("Use Vertex R channel for distortion strength", Float) = 0
 	}
-
 	Fallback "Diffuse"
 }
