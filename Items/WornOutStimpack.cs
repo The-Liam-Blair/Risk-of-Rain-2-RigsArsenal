@@ -44,8 +44,6 @@ namespace MoreItems.Items
 
         public override void SetupHooks()
         {
-            // todo: testing on enemies.
-
             // If entity takes damage that drops their health below the low health threshold, add the buff.
             // Buff is refreshed if it's currently active.
             On.RoR2.HealthComponent.TakeDamage +=
