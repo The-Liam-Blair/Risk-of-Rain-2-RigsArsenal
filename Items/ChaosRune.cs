@@ -38,9 +38,6 @@ namespace MoreItems.Items
         private bool hasRun = false;
         private DamageInfo damageInfo { get; set; }
 
-
-        // todo: test proc chain interactions and damage balancing.
-
         public override void SetupHooks()
         {
             On.RoR2.DotController.InflictDot_refInflictDotInfo += (On.RoR2.DotController.orig_InflictDot_refInflictDotInfo orig, ref InflictDotInfo inflictDotInfo) =>

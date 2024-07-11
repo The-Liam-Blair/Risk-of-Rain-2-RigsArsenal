@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2152437919
+CRC: 833732028
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 0a16644c533fd8f4baf17f66cf80e2a1
+    Hash: 25c826893a9d08a0f87b5d1a9e270814
   TypeTreeHash:
     serializedVersion: 2
     Hash: 209b83e87f2068bd9f291febfe005640
@@ -66,7 +66,6 @@ Assets:
 - Assets/Prefabs/Item/WornOutStimpack/WornOutStimpack.prefab
 - Assets/Materials/Item/ChaosRune/M_Rock.mat
 - Assets/Materials/Item/ChaosRune/ChaosRune.png
-- Assets/Materials/Item/WristMountedShotgun/camoblack.png
 - Assets/Materials/Item/WornOutStimpack/WornOutStimpackBuff.png
 - Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.prefab
 - Assets/Prefabs/Item/WristMountedShotgun/WristMountedShotgun.prefab
@@ -75,7 +74,6 @@ Assets:
 - Assets/Materials/Item/WristMountedShotgun/WristMountedShotgun.png
 - Assets/Materials/Item/KineticBattery/its texturin time.png
 - Assets/Materials/Item/WristMountedShotgun/M_ShotgunComponent.mat
-- Assets/Materials/Item/WristMountedShotgun/Camo.png
 - Assets/Materials/Item/ReactiveArmourPlate/GripTex.png
 - Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlatingBuff.png
 - Assets/Prefabs/Item/KineticBattery/KineticBattery.prefab
