@@ -15,6 +15,7 @@ namespace MoreItems
 {
     [BepInDependency(ItemAPI.PluginGUID)]
     [BepInDependency(LanguageAPI.PluginGUID)]
+    [BepInDependency(RecalculateStatsAPI.PluginGUID)]
 
     [BepInPlugin(P_GUID, P_Name, P_Version)]
 
@@ -27,7 +28,7 @@ namespace MoreItems
         public const string P_GUID = $"{P_Author}.{P_Name}";
         public const string P_Author = "RigsInRags";
         public const string P_Name = "MoreItems";
-        public const string P_Version = "0.0.6";
+        public const string P_Version = "0.1.0";
 
         public static AssetBundle MainAssets;
 
@@ -52,11 +53,13 @@ namespace MoreItems
 
            foreach (var buff in Buffs)
            {
-               DebugLog.Log($"Loading buff {buff.Name}...");
+               // DebugLog.Log($"Loading buff {buff.Name}...");
+
                Buff aBuff = (Buff)System.Activator.CreateInstance(buff);
                aBuff.Init();
                BuffList.Add(aBuff);
-               DebugLog.Log($"Buff {buff.Name} loaded.");
+
+               //DebugLog.Log($"Buff {buff.Name} loaded.");
            }
 
 
@@ -65,11 +68,13 @@ namespace MoreItems
 
             foreach (var item in Items)
             {
-                DebugLog.Log($"Loading item {item.Name}...");
+                // DebugLog.Log($"Loading item {item.Name}...");
+
                 Item anItem = (Item) System.Activator.CreateInstance(item);
                 anItem.Init();
                 ItemList.Add(anItem);
-                DebugLog.Log($"Item {item.Name} loaded.");
+
+                // DebugLog.Log($"Item {item.Name} loaded.");
             }
 
             EnableShotgunMarker = Config.Bind("Wrist-Mounted Shotgun", "EnableShotgunMarker", true, "Shows or hides the range indicator for the wrist-mounted shotgun item.");
@@ -77,9 +82,12 @@ namespace MoreItems
         }
 
 
-        // Debugging method to spawn items in-game.
         private void Update()
         {
+
+            // Debugging method to spawn items in-game.
+            // Disabled for release version.
+            /*
             if (Input.GetKeyDown(KeyCode.F1))
             {
                 DebugLog.Log("F1 pressed, spawning stimpack.");
@@ -118,12 +126,8 @@ namespace MoreItems
                 DebugLog.Log("F7 pressed, spawning CoolantPack");
                 DEBUG_SpawnItem("COOLANTPACK");
             }
-            else if (Input.GetKeyDown(KeyCode.F11))
-            {
-                var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
-                // apply dot to player
-                DotController.InflictDot(player.gameObject, player.gameObject, DotController.DotIndex.Bleed, 5f, 5f);
-            }
+
+            // Clear all items from the player's inventory.
             else if (Input.GetKeyDown(KeyCode.F12))
             {
                 var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
@@ -137,6 +141,7 @@ namespace MoreItems
                     }
                 }
             }
+            */
         }
 
         private void DEBUG_SpawnItem(string itemName)

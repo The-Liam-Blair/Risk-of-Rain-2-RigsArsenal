@@ -28,7 +28,7 @@ namespace MoreItems.Items
 
         public override bool CanRemove => true;
 
-        public override ItemTag[] Tags => new ItemTag[] {ItemTag.Healing, ItemTag.Utility};
+        public override ItemTag[] Tags => new ItemTag[] {ItemTag.Healing};
         public override bool AIBlackList => false;
 
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("WornOutStimpack.png");
