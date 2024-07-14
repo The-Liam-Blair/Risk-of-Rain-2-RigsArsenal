@@ -36,7 +36,7 @@ namespace MoreItems.Items
 
         public override void SetupHooks()
         {
-            // On damage taken, give the player the relevant reactive armour plating buff that increases armour.
+            // On damage taken, give the entity the relevant reactive armour plating buff that increases armour.
             On.RoR2.HealthComponent.TakeDamage +=
                 (orig, self, damageInfo) =>
                 {

@@ -37,16 +37,9 @@ namespace MoreItems.Items
         /// </summary>
         public virtual void Init()
         {
-            DebugLog.Log($"Item {Name} load started...");
-
             InitLang();
-            DebugLog.Log($"Item {Name} language initialised.");
-
             CreateItem();
-            DebugLog.Log($"Item {Name} created.");
-
             SetupHooks();
-            DebugLog.Log($"Item {Name} hooks initialised.");
         }
 
         /// <summary>
@@ -99,10 +92,17 @@ namespace MoreItems.Items
             // Setup tags list, and special definition for if the item is blacklisted from the enemy AI.
             if (AIBlackList)
             {
-                Tags = new List<ItemTag>(Tags) { ItemTag.AIBlacklist }.ToArray();
+                var tagsList = new List<ItemTag>(Tags) { ItemTag.AIBlacklist };
+                Tags = tagsList.ToArray();
             }
 
-            if(Tags.Length > 0) { itemDef.tags = Tags; }
+            DebugLog.Log($"Item Name: {Name}");
+            foreach (var tag in Tags)
+            {
+                DebugLog.Log($"Item Tag: {tag}");
+            }
+
+            if (Tags.Length > 0) { itemDef.tags = Tags; }
 
             // If it exists, load custom sprite and model, otherwise load default question mark sprite and model.
             itemDef.pickupIconSprite = (Icon != null) 

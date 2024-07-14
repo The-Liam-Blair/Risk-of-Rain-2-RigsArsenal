@@ -24,11 +24,8 @@ namespace MoreItems.Buffs
 
         public virtual void Init()
         {
-            DebugLog.Log($"Buff {Name} load started.");
             CreateBuff();
-            DebugLog.Log($"Buff {Name} created.");
             SetupHooks();
-            DebugLog.Log($"Buff {Name} hooks initialised.");
         }
 
         public virtual void CreateBuff()

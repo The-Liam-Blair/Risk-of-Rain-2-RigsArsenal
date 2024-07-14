@@ -92,29 +92,29 @@ namespace MoreItems.Items
                 var count = attacker.inventory.GetItemCount(itemDef);
                 if (count <= 0) { return; }
 
-                // Only triggers against entities 25 or fewer units away
+                // Only triggers against entities 35 or fewer units away
                 if (Vector3.Distance(victim.transform.position, attacker.transform.position) > 35f) { return; }
 
                 // 10% (scaled by the attack's proc coefficient) chance to trigger the effect.
                 if (!Util.CheckRoll(10f * info.procCoefficient, attacker.master)) { return; }
 
-                // Because they're projectiles, also performs a line of sight check so that the shot is actually able to hit.
-                // (Not entirely consistent, might investigate a better solution down the line).
+                // Because they're projectiles, also performs a line of sight check so that the shot is actually able to hit it's target and not hit a wall instead.
+                // (Not entirely consistent).
                 if (Physics.Linecast(attacker.transform.position, victim.transform.position, 0)) { return; }
 
                 int pelletCount = 13;
                 float stackingDamageMultiplier = 0.25f * count; // 25% the attack's damage per pellet per stack.
 
+                ProcChainMask mask = info.procChainMask;
+                mask.AddProc(ProcType.Missile);
+
+                float damage = Util.OnHitProcDamage(info.damage * stackingDamageMultiplier, attacker.damage, info.procCoefficient);
+
+                // Each pellet has 25% of the attack's proc coefficient. This totals to a 3.25 proc coefficient factor combined on average if every shot hits.
+                pellet.GetComponent<ProjectileController>().procCoefficient = info.procCoefficient * 0.25f;
+
                 for (int i = 0; i < pelletCount; i++)
                 {
-                    ProcChainMask mask = info.procChainMask;
-                    mask.AddProc(ProcType.Missile);
-
-                    float damage = Util.OnHitProcDamage(info.damage * stackingDamageMultiplier, attacker.damage, info.procCoefficient);
-
-                    // Each pellet has 25% of the attack's proc coefficient. This totals to a 3.25 proc coefficient factor more or less.
-                    pellet.GetComponent<ProjectileController>().procCoefficient = info.procCoefficient * 0.25f;
-
                     var projectileInfo = new FireProjectileInfo()
                     {
                         projectilePrefab = pellet,
@@ -154,7 +154,7 @@ namespace MoreItems.Items
 
                 if (MoreItems.EnableShotgunMarker.Value && self.isPlayerControlled && self.inventory.GetItemCount(itemDef) > 0 && !rangeIndicator)
                 {
-                    // Uses the range indicator from the "NearbyDamageBonus" (focus crystal) item.
+                    // Uses a modified range indicator from the "NearbyDamageBonus" (focus crystal) item.
                     GameObject original = Resources.Load<GameObject>("Prefabs/NetworkedObjects/NearbyDamageBonusIndicator");
                     rangeIndicator = original.InstantiateClone("UnderBarrelShotgunRangeIndicator", true);
 
@@ -163,8 +163,8 @@ namespace MoreItems.Items
                     rangeIndicator.GetComponent<NetworkedBodyAttachment>().AttachToGameObjectAndSpawn(self.gameObject, null);
 
                     var donut = rangeIndicator.transform.GetChild(1); // 2nd child of the range indicator object controls the donut's visual properties.
-                    donut.localScale = new Vector3(70f, 70f, 70f); // 35m radius to match the item's range.
-                    donut.GetComponent<MeshRenderer>().material.SetColor("_TintColor", new Color(0f, 0.29f, 0.06f)); // Green tint instead of red.
+                    donut.localScale = new Vector3(70f, 70f, 70f); // 35 unit radius to match the item's range.
+                    donut.GetComponent<MeshRenderer>().material.SetColor("_TintColor", new Color(0f, 0.03f, 0.3f)); // Blue tint instead of red.
                 }
             };
         }
