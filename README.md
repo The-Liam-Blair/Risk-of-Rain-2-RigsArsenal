@@ -1,19 +1,19 @@
 # Risk of Rain 2 Mod - Rigs Arsenal
 Adds 7 vanilla-friendly items into the game. The mod is in active progress and more items and content will be added soon.
 
-| Item Name | Image | Description | Additional Notes |
-| ----------- | ----------- | ----------- |----------- |
-| Worn-Out Stimpack | ![Worn Out Stimpack](/UnityProject/Assets/Materials/Item/WornOutStimpack/WornOutStimpack.png) | Gain **+10% movement speed** *(+10% per stack)* and **+0.5 health regeneration** *(+0.5 per stack)* while at or under **50% health**. | - |
-| Kinetic Battery | ![Kinetic Battery](/UnityProject/Assets/Materials/Item/KineticBattery/KineticBattery.PNG) | After using your **utility skill**, gain **5% hp** + **25** *(+25 per stack)* **barrier**. Enters a **5 second cooldown** after use. | - |
-|||||
-|||||
-| Bounty Hunter's Badge | ![Bounty Hunter's Badge](/UnityProject/Assets/Materials/Item/BountyHunterBadge/BountyHunterBadge.png) | Gain **+25% increased gold** *(+20% per stack)* when you defeat an **elite enemy**. | Hyperbolic stacking, approaching +100% increased gold. |
-| Reactive Armour Plating | ![Reactive Armour Plating](/UnityProject/Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlating.png) | Gain **20 permanent armour.** Briefly gain **20** *(+20 per stack)* **armour** after receiving damage. | - |
-| Wrist-Mounted Shotgun | ![Wrist-Mounted Shotgun](/UnityProject/Assets/Materials/Item/WristMountedShotgun/WristMountedShotgun.png) | 10% on hit chance to fire **13 projectiles** with high spread. Each projectile inflicts **25%** *(+25% per stack)* **TOTAL damage** and inherits **25%** of the attack's **proc coefficient**. | Can only fire if the damaged entity is 35 units away or closer. Configurable range indicator is included with the item.<br><br>Operates on the same proc mask as the AtG Missile Mk. 1, so this item will trigger if the damaged entity is within range, and the AtG Missile Mk. 1 will trigger if the damaged entity is outside the range. |
-| Coolant Pack| ![Coolant Pack](/UnityProject/Assets/Materials/Item/CoolantPack/CoolantPack.png) | All **incoming damaging debuffs** inflict 15% *(+15% per stack)* **reduced damage**. | Hyperbolic stacking, approaching +100% reduced debuff damage. |
-|||||
-|||||
-| Chaos Rune | ![ChaosRune](/UnityProject/Assets/Materials/Item/ChaosRune/ChaosRune.png) | When applying a damaging debuff, 33% chance to inflict **additional damaging debuffs** *(+1 roll per stack)*. Up to 1 *(+1 per 2 stacks)* additional debuffs can be **applied at once.** | This item can apply bleed, burn (Stronger burn if the entity has an ignition tank), Acrid's blight and collapse. |
+| Name | Image | Description |
+| ---------- | ---------- | ---------- |
+| Worn-Out Stimpack | ![Worn Out Stimpack](/UnityProject/Assets/Materials/Item/WornOutStimpack/WornOutStimpack.png) | Gain increased movement speed and health regeneration while at or under 50% health. |
+| Kinetic Battery | ![Kinetic Battery](/UnityProject/Assets/Materials/Item/KineticBattery/KineticBattery.PNG) | Gain barrier after using your utility skill. Incurs a short cooldown after use. |
+||||
+||||
+| Bounty Hunter's Badge | ![Bounty Hunter's Badge](/UnityProject/Assets/Materials/Item/BountyHunterBadge/BountyHunterBadge.png) | Gain increased gold when killing an elite enemy.<br><br><details> <summary> Additional Details:</summary> <br> - Hyperbolic scaling. </details> |
+| Reactive Armour Plating | ![Reactive Armour Plating](/UnityProject/Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlating.png) | Briefly gain increased armour after taking damage. |
+| Wrist-Mounted Shotgun | ![Wrist-Mounted Shotgun](/UnityProject/Assets/Materials/Item/WristMountedShotgun/WristMountedShotgun.png) | Chance on hit to fire a large cluster of projectiles with high spread. Only works at close range. <br><br><details> <summary> Additional Details:</summary> <br>- Includes configurable range indicator.<br>- Shares a proc mask with AtG Missile Mk. 1 and will override it if the foe was within range.</details>|
+| Coolant Pack| ![Coolant Pack](/UnityProject/Assets/Materials/Item/CoolantPack/CoolantPack.png) | All incoming damaging debuffs inflict reduced damage. <br><br><details> <summary> Additional Details:</summary> <br> - Hyperbolic scaling. </details> |
+||||
+||||
+| Chaos Rune | ![ChaosRune](/UnityProject/Assets/Materials/Item/ChaosRune/ChaosRune.png) | When inflicting a damaging debuff, chance to inflict additional damaging debuffs. <br><br><details> <summary> Additional Details:</summary> <br>- Can inflict bleed, burn, Acrid's blight and collapse.</details> |
 
 
 ### Questions or problems? Message me on Discord (rigsinrags) or submit an issue or pull request on GitHub.
