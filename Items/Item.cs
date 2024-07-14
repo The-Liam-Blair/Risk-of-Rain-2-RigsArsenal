@@ -96,12 +96,6 @@ namespace MoreItems.Items
                 Tags = tagsList.ToArray();
             }
 
-            DebugLog.Log($"Item Name: {Name}");
-            foreach (var tag in Tags)
-            {
-                DebugLog.Log($"Item Tag: {tag}");
-            }
-
             if (Tags.Length > 0) { itemDef.tags = Tags; }
 
             // If it exists, load custom sprite and model, otherwise load default question mark sprite and model.
