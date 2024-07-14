@@ -3,7 +3,7 @@ Adds 7 vanilla-friendly items into the game. The mod is in active progress and m
 
 | Name | Image | Description |
 | ---------- | ---------- | ---------- |
-| Worn-Out Stimpack | <img src="/UnityProject/Assets/Materials/Item/WornOutStimpack/WornOutStimpack.png" alt="Worn Out Stimpack" width=256 height=256/> | Gain increased movement speed and health regeneration while at or under 50% health. |
+| Worn-Out Stimpack | ![Worn Out Stimpack](/UnityProject/Assets/Materials/Item/WornOutStimpack/WornOutStimpack.png) | Gain increased movement speed and health regeneration while at or under 50% health. |
 | Kinetic Battery | ![Kinetic Battery](/UnityProject/Assets/Materials/Item/KineticBattery/KineticBattery.PNG) | Gain barrier after using your utility skill. Incurs a short cooldown after use. |
 ||||
 ||||
