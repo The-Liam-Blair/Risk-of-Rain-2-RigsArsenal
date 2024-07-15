@@ -115,12 +115,18 @@ namespace MoreItems.Items
         public override ItemDisplayRuleDict CreateItemDisplayRules()
         {
             ItemDisplayRuleDict rules = new ItemDisplayRuleDict();
+
+            GameObject display = MainAssets.LoadAsset<GameObject>("ChaosRune.prefab");
+
+            var itemDisplay = display.AddComponent<ItemDisplay>();
+            itemDisplay.rendererInfos = ItemDisplaySetup(display);
+
             rules.Add("mdlCommandoDualies", new RoR2.ItemDisplayRule[]
             {
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = Model,
+                    followerPrefab = display,
                     childName = "ThighL",
                     localPos = new Vector3(0.06313F, 0.22037F, 0.09908F),
                     localAngles = new Vector3(45.34884F, 106.977F, 165.8645F),
@@ -133,7 +139,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = Model,
+                    followerPrefab = display,
                     childName = "ThighL",
                     localPos = new Vector3(0f, 0f, 0f),
                     localAngles = new Vector3(0f, 0f, 0f),
@@ -146,7 +152,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = Model,
+                    followerPrefab = display,
                     childName = "ThighL",
                     localPos = new Vector3(0f, 0f, 0f),
                     localAngles = new Vector3(0f, 0f, 0f),
@@ -159,7 +165,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = Model,
+                    followerPrefab = display,
                     childName = "ThighL",
                     localPos = new Vector3(0f, 0f, 0f),
                     localAngles = new Vector3(0f, 0f, 0f),
@@ -172,7 +178,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = Model,
+                    followerPrefab = display,
                     childName = "ThighL",
                     localPos = new Vector3(0f, 0f, 0f),
                     localAngles = new Vector3(0f, 0f, 0f),
@@ -185,7 +191,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = Model,
+                    followerPrefab = display,
                     childName = "ThighL",
                     localPos = new Vector3(0f, 0f, 0f),
                     localAngles = new Vector3(0f, 0f, 0f),
@@ -198,7 +204,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = Model,
+                    followerPrefab = display,
                     childName = "ThighL",
                     localPos = new Vector3(0f, 0f, 0f),
                     localAngles = new Vector3(0f, 0f, 0f),
@@ -211,7 +217,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = Model,
+                    followerPrefab = display,
                     childName = "Base",
                     localPos = new Vector3(0f, 0f, 0f),
                     localAngles = new Vector3(0f, 0f, 0f),
@@ -224,7 +230,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = Model,
+                    followerPrefab = display,
                     childName = "ThighR",
                     localPos = new Vector3(-0.12428F, 0.20452F, 0.04312F),
                     localAngles = new Vector3(22.53534F, 0.66831F, 188.5954F),
@@ -237,7 +243,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = Model,
+                    followerPrefab = display,
                     childName = "ThighR",
                     localPos = new Vector3(-0.90804F, -0.68912F, -0.52958F),
                     localAngles = new Vector3(35.03824F, 0.44614F, 214.5975F),
@@ -250,7 +256,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = Model,
+                    followerPrefab = display,
                     childName = "Stomach",
                     localPos = new Vector3(-0.35971F, 0.04198F, -0.042F),
                     localAngles = new Vector3(328.5733F, 176.5325F, 13.82045F),
@@ -263,7 +269,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = Model,
+                    followerPrefab = display,
                     childName = "ThighL",
                     localPos = new Vector3(0f, 0f, 0f),
                     localAngles = new Vector3(0f, 0f, 0f),
@@ -276,7 +282,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = Model,
+                    followerPrefab = display,
                     childName = "ThighL",
                     localPos = new Vector3(0f, 0f, 0f),
                     localAngles = new Vector3(0f, 0f, 0f),

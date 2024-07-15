@@ -7,6 +7,7 @@ using RoR2;
 using System.Linq;
 using System.Reflection;
 using MoreItems.Buffs;
+//using MoreItems.Equipments;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using R2API.Utils;
@@ -48,8 +49,9 @@ namespace MoreItems
                 MainAssets = AssetBundle.LoadFromStream(stream);
            }
 
+            ApplyShaders();
 
-           var Buffs = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Buff)));
+            var Buffs = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Buff)));
 
            foreach (var buff in Buffs)
            {
@@ -67,75 +69,15 @@ namespace MoreItems
                 Item anItem = (Item) System.Activator.CreateInstance(item);
                 anItem.Init();
                 ItemList.Add(anItem);
-
             }
 
             EnableShotgunMarker = Config.Bind("Wrist-Mounted Shotgun", "EnableShotgunMarker", true, "Shows or hides the range indicator for the wrist-mounted shotgun item.");
-
-            ApplyShaders();
         }
 
 
         private void Update()
         {
 
-            // Debugging method to spawn items in-game.
-            // Disabled for release version.
-            /*
-            if (Input.GetKeyDown(KeyCode.F1))
-            {
-                DebugLog.Log("F1 pressed, spawning stimpack.");
-                DEBUG_SpawnItem("WORNOUTSTIMPACK");
-            }
-            else if (Input.GetKeyDown(KeyCode.F2))
-            { 
-                DebugLog.Log("F2 pressed, spawning bounty hunter's badge.");
-                DEBUG_SpawnItem("BOUNTYHUNTERBADGE");
-            }
-
-            else if (Input.GetKeyDown(KeyCode.F3))
-            {
-                DebugLog.Log("F3 pressed, spawning kinetic battery.");
-                DEBUG_SpawnItem("KINETICBATTERY");
-            }
-
-            else if (Input.GetKeyDown(KeyCode.F4))
-            {
-                DebugLog.Log("F4 pressed, spawning reactive armour plating.");
-                DEBUG_SpawnItem("REACTIVEARMOURPLATING");
-            }
-
-            else if (Input.GetKeyDown(KeyCode.F5))
-            {
-                DebugLog.Log("F5 pressed, spawning Under-Barrel Shotgun");
-                DEBUG_SpawnItem("UNDERBARRELSHOTGUN");
-            }
-            else if (Input.GetKeyDown(KeyCode.F6))
-            {
-                DebugLog.Log("F6 pressed, spawning Chaos Rune");
-                DEBUG_SpawnItem("CHAOSRUNE");
-            }
-            else if(Input.GetKeyDown(KeyCode.F7))
-            {
-                DebugLog.Log("F7 pressed, spawning CoolantPack");
-                DEBUG_SpawnItem("COOLANTPACK");
-            }
-
-            // Clear all items from the player's inventory.
-            else if (Input.GetKeyDown(KeyCode.F12))
-            {
-                var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
-                for (int i = 0; i < ItemList.Count; i++)
-                {
-                    var item = ItemList[i];
-                    var count = player.GetComponent<CharacterBody>().inventory.GetItemCount(item.itemDef);
-                    if (count > 0)
-                    {
-                        player.GetComponent<CharacterBody>().inventory.RemoveItem(item.itemDef, count);
-                    }
-                }
-            }
-            */
         }
 
         private void DEBUG_SpawnItem(string itemName)
