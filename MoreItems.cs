@@ -87,12 +87,12 @@ namespace MoreItems
 
             // Debugging method to spawn items in-game.
             // Disabled for release version.
-            /*
             if (Input.GetKeyDown(KeyCode.F1))
             {
                 DebugLog.Log("F1 pressed, spawning stimpack.");
                 DEBUG_SpawnItem("WORNOUTSTIMPACK");
             }
+            /*
             else if (Input.GetKeyDown(KeyCode.F2))
             { 
                 DebugLog.Log("F2 pressed, spawning bounty hunter's badge.");
@@ -126,9 +126,7 @@ namespace MoreItems
                 DebugLog.Log("F7 pressed, spawning CoolantPack");
                 DEBUG_SpawnItem("COOLANTPACK");
             }
-            */
 
-            /*
             // Clear all items from the player's inventory.
             else if (Input.GetKeyDown(KeyCode.F12))
             {
