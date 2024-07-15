@@ -94,5 +94,18 @@ namespace MoreItems.Items
                 return orig(self, amount, mask, regen);
             };
         }
+
+        /*
+        public override ItemDisplayRuleDict CreateItemDisplayRules()
+        {
+            var display = Model;
+            var itemDisplay = display.AddComponent<ItemDisplay>();
+            itemDisplay.rendererInfos;
+
+            ItemDisplayRuleDict rules = new ItemDisplayRuleDict();
+
+            return rules;
+        }
+        */
     }
 }

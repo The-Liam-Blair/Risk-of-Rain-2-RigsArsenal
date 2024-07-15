@@ -82,12 +82,13 @@ namespace MoreItems.Items
             {
                 orig(self, info);
 
-                if (!self|| !info.attacker || info.procCoefficient <= 0f || info.procChainMask.HasProc(ProcType.Missile)) { return; }
+                if (!self || !info.attacker || info.procCoefficient <= 0f || info.procChainMask.HasProc(ProcType.Missile)) { return; }
+
 
                 var victim = self.body;
                 var attacker = info.attacker.GetComponent<CharacterBody>();
 
-                if (!victim || !attacker || !attacker.healthComponent || !victim.healthComponent) { return; }
+                if (!victim || !attacker || !attacker.healthComponent || !victim.healthComponent || !attacker.inventory) { return; }
 
                 var count = attacker.inventory.GetItemCount(itemDef);
                 if (count <= 0) { return; }

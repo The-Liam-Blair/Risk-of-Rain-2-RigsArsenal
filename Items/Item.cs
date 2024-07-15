@@ -109,8 +109,10 @@ namespace MoreItems.Items
                 : Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mystery/PickupMystery.prefab").WaitForCompletion();
             
 
-            ItemAPI.Add(new CustomItem(itemDef, new ItemDisplayRuleDict(null)));
+            ItemAPI.Add(new CustomItem(itemDef, CreateItemDisplayRules()));
         }
+
+        public virtual ItemDisplayRuleDict CreateItemDisplayRules() => null;
 
         public virtual void SetupHooks() {}
     }
