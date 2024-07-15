@@ -97,17 +97,13 @@ namespace MoreItems.Items
 
         public override ItemDisplayRuleDict CreateItemDisplayRules()
         {
-            var display = Model;
-            var itemDisplay = display.AddComponent<ItemDisplay>();
-            itemDisplay.rendererInfos = ItemDisplaySetup(display);
-
             ItemDisplayRuleDict rules = new ItemDisplayRuleDict();
             rules.Add("mdlCommandoDualies", new RoR2.ItemDisplayRule[]
             {
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = display,
+                    followerPrefab = Model,
                     childName = "ThighL",
                     localPos = new Vector3(0.06313F, 0.22037F, 0.09908F),
                     localAngles = new Vector3(45.34884F, 106.977F, 165.8645F),
@@ -120,7 +116,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = display,
+                    followerPrefab = Model,
                     childName = "ThighL",
                     localPos = new Vector3(0.1173F, 0.15272F, -0.00641F),
                     localAngles = new Vector3(41.80785F, 191.3737F, 184.3928F),
@@ -133,7 +129,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = display,
+                    followerPrefab = Model,
                     childName = "ThighR",
                     localPos = new Vector3(-0.0298F, 0.2107F, 0.07734F),
                     localAngles = new Vector3(20.04926F, 47.88525F, 178.8776F),
@@ -146,7 +142,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = display,
+                    followerPrefab = Model,
                     childName = "ExtraCalfL",
                     localPos = new Vector3(-0.88015F, 0.89902F, 0.05056F),
                     localAngles = new Vector3(325.1124F, 179.5492F, 5.23199F),
@@ -159,7 +155,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = display,
+                    followerPrefab = Model,
                     childName = "UpperArmL",
                     localPos = new Vector3(0.09373F, 0.03316F, 0.01377F),
                     localAngles = new Vector3(28.99673F, 162.3914F, 172.891F),
@@ -172,7 +168,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = display,
+                    followerPrefab = Model,
                     childName = "ThighR",
                     localPos = new Vector3(-0.08462F, 0.36293F, 0.1016F),
                     localAngles = new Vector3(37.80873F, 12.43991F, 179.8899F),
@@ -185,7 +181,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = display,
+                    followerPrefab = Model,
                     childName = "ThighR",
                     localPos = new Vector3(-0.13209F, 0.20849F, -0.02851F),
                     localAngles = new Vector3(43.4352F, 350.5829F, 195.3876F),
@@ -198,7 +194,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = display,
+                    followerPrefab = Model,
                     childName = "FlowerBase",
                     localPos = new Vector3(-0.49788F, 0.79773F, -0.57944F),
                     localAngles = new Vector3(351.3225F, 156.2976F, 35.23988F),
@@ -211,7 +207,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = display,
+                    followerPrefab = Model,
                     childName = "ThighR",
                     localPos = new Vector3(-0.12428F, 0.20452F, 0.04312F),
                     localAngles = new Vector3(22.53534F, 0.66831F, 188.5954F),
@@ -224,7 +220,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = display,
+                    followerPrefab = Model,
                     childName = "ThighR",
                     localPos = new Vector3(-1.18375F, 0.75609F, -0.29474F),
                     localAngles = new Vector3(26.76363F, 329.0323F, 182.0514F),
@@ -237,7 +233,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = display,
+                    followerPrefab = Model,
                     childName = "Stomach",
                     localPos = new Vector3(-0.35971F, 0.04198F, -0.042F),
                     localAngles = new Vector3(328.5733F, 176.5325F, 13.82045F),
@@ -250,7 +246,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = display,
+                    followerPrefab = Model,
                     childName = "Pelvis",
                     localPos = new Vector3(0.21541F, 0.20836F, -0.00426F),
                     localAngles = new Vector3(43.55844F, 204.8219F, 212.8925F),
@@ -263,7 +259,7 @@ namespace MoreItems.Items
                 new RoR2.ItemDisplayRule
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
-                    followerPrefab = display,
+                    followerPrefab = Model,
                     childName = "UpperArmR",
                     localPos = new Vector3(0.2064F, 0.06196F, 0.11423F),
                     localAngles = new Vector3(48.37803F, 145.3048F, 172.1066F),

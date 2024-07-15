@@ -53,13 +53,9 @@ namespace MoreItems
 
            foreach (var buff in Buffs)
            {
-               // DebugLog.Log($"Loading buff {buff.Name}...");
-
                Buff aBuff = (Buff)System.Activator.CreateInstance(buff);
                aBuff.Init();
                BuffList.Add(aBuff);
-
-               //DebugLog.Log($"Buff {buff.Name} loaded.");
            }
 
 
@@ -68,16 +64,14 @@ namespace MoreItems
 
             foreach (var item in Items)
             {
-                // DebugLog.Log($"Loading item {item.Name}...");
-
                 Item anItem = (Item) System.Activator.CreateInstance(item);
                 anItem.Init();
                 ItemList.Add(anItem);
 
-                // DebugLog.Log($"Item {item.Name} loaded.");
             }
 
             EnableShotgunMarker = Config.Bind("Wrist-Mounted Shotgun", "EnableShotgunMarker", true, "Shows or hides the range indicator for the wrist-mounted shotgun item.");
+
             ApplyShaders();
         }
 
@@ -87,12 +81,12 @@ namespace MoreItems
 
             // Debugging method to spawn items in-game.
             // Disabled for release version.
+            /*
             if (Input.GetKeyDown(KeyCode.F1))
             {
                 DebugLog.Log("F1 pressed, spawning stimpack.");
                 DEBUG_SpawnItem("WORNOUTSTIMPACK");
             }
-            /*
             else if (Input.GetKeyDown(KeyCode.F2))
             { 
                 DebugLog.Log("F2 pressed, spawning bounty hunter's badge.");
