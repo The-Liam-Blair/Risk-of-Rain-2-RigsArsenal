@@ -126,7 +126,9 @@ namespace MoreItems
                 DebugLog.Log("F7 pressed, spawning CoolantPack");
                 DEBUG_SpawnItem("COOLANTPACK");
             }
+            */
 
+            /*
             // Clear all items from the player's inventory.
             else if (Input.GetKeyDown(KeyCode.F12))
             {

@@ -37,6 +37,11 @@ namespace MoreItems.Items
         {
             On.RoR2.HealthComponent.TakeDamage += (orig, self, info) =>
             {
+                if (!self) { orig(self, info); return; }
+
+                var body = self.body;
+                if (!body || !body.inventory) { orig(self, info); return; }
+
                 var count = self.body.inventory.GetItemCount(itemDef);
                 var damageType = info.damageType;
                 if(damageType == DamageType.DoT && count > 0)
