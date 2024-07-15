@@ -28,7 +28,7 @@ namespace MoreItems
         public const string P_GUID = $"{P_Author}.{P_Name}";
         public const string P_Author = "RigsInRags";
         public const string P_Name = "RigsArsenal";
-        public const string P_Version = "1.0.0";
+        public const string P_Version = "1.0.1";
 
         public static AssetBundle MainAssets;
 
