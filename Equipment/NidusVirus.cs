@@ -36,7 +36,23 @@ namespace MoreItems.Equipments
 
         public override bool UseEquipment(EquipmentSlot slot)
         {
-            
+            // Special debuffs this can CAN spread:
+            // - Ruin stacks (Repeated use does not increment the stack count).
+            // - Death mark.
+            // - Tar.
+            // - Pulverise buildup stacks AND pulverised from shattering justice. (Spread will overwrite the current stack count, not add to it).
+            // - Rex's weak debuff from most of his primary attack.
+            // - Rex's fruiting debuff and on-death followup from his alternative special attack.
+            // - Acrid's blight and poison.
+            // - Bandit hemorrhage.
+
+
+            // Special debuffs this can CAN NOT spread:
+            // - Hellfire tincture
+            // - Rex's entangle from entangling growth.
+            // - Mercenary's expose.
+            // - Void fog.
+
 
             // todo: May need more testing, sometimes it feels like the effect fails, but it may be due to it acquiring the wrong target.
             //       Aka MAKE THAT VISUAL INDICATOR!!

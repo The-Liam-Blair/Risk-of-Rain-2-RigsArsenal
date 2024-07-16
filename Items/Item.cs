@@ -112,6 +112,7 @@ namespace MoreItems.Items
 
         public virtual ItemDisplayRuleDict CreateItemDisplayRules() => null;
 
+
         public static CharacterModel.RendererInfo[] ItemDisplaySetup(GameObject obj)
         {
             List<Renderer> AllRenderers = new List<Renderer>();

@@ -226,7 +226,7 @@ namespace MoreItems
                     DotController.InflictDot(victim.gameObject, attacker.gameObject, DotIndex.Poison, 5f, 1f);
                     break;
 
-                case DotIndex.SuperBleed: // Bandit's hemmorage
+                case DotIndex.SuperBleed: // Bandit's hemorrhage
                     DotController.InflictDot(victim.gameObject, attacker.gameObject, DotIndex.SuperBleed, 15f, 1f);
                     break;
 
