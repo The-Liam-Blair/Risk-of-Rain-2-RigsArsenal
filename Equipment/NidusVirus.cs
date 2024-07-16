@@ -1,4 +1,5 @@
 ﻿using Rewired.ComponentControls.Data;
+using Rewired.Utils;
 using RoR2;
 using System;
 using System.Collections.Generic;
@@ -33,12 +34,14 @@ namespace MoreItems.Equipments
 
         private int spreadRadius = 200;
         private float debuffDefaultDuration = 5f;
+        private Indicator targetIndicator = null;
 
         public override bool UseEquipment(EquipmentSlot slot)
         {
             // Special debuffs this CAN spread:
             // - Ruin stacks from essence of heresy. (Repeated use does not increment the stack count).
             // - Lunar root from hooks of heresy's explosion.
+            // - Effigy of grief's cripple.
             // - Death mark.
             // - Tar.
             // - Pulverise buildup stacks AND pulverised from shattering justice. (Spread will overwrite the current stack count, not add to it).
@@ -57,8 +60,6 @@ namespace MoreItems.Equipments
 
             // todo: May need more testing, sometimes it feels like the effect fails, but it may be due to it acquiring the wrong target.
             //       Aka MAKE THAT VISUAL INDICATOR!!
-
-            slot.UpdateTargets(RoR2Content.Equipment.Lightning.equipmentIndex, true);
             HurtBox victim = slot.currentTarget.hurtBox;
 
             if(victim)
@@ -150,12 +151,21 @@ namespace MoreItems.Equipments
         public override void SetupHooks()
         {
             // Hook onto the update event.
-            On.RoR2.RoR2Application.Update += (orig, self) =>
+            On.RoR2.RoR2Application.FixedUpdate += (orig, self) =>
             {
                 orig(self);
 
-                // todo: add visual target indicator.
-            };  
+                if (Run.instance && EquipmentSlot && equipmentDef.equipmentIndex == EquipmentSlot.equipmentIndex)
+                {
+                    EquipmentSlot.targetIndicator = new Indicator(EquipmentSlot.gameObject, null);
+                    EquipmentSlot.UpdateTargets(RoR2Content.Equipment.Lightning.equipmentIndex, true);
+
+                    if (!EquipmentSlot.currentTarget.transformToIndicateAt)
+                    {
+                        // please go away indicator
+                    }
+                }
+            };
         }
     }
 

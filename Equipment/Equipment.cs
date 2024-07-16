@@ -29,7 +29,7 @@ namespace MoreItems.Equipments
 
         public virtual BuffDef EquipmentBuffDef { get; } = null; // Reference to the buff definition.
 
-        public virtual EquipmentSlot EquipmentSlot { get; }
+        public virtual EquipmentSlot EquipmentSlot { get; private set; }
 
         /// <summary>
         /// Item assembly process: Setup LanguageAPI, create the item object, added to the item list, and reference & implement the methods/events the item hooks into.
@@ -103,11 +103,25 @@ namespace MoreItems.Equipments
             ItemAPI.Add(new CustomEquipment(equipmentDef, CreateItemDisplayRules()));
 
             On.RoR2.EquipmentSlot.PerformEquipmentAction += ActivateEquipment;
+
+            On.RoR2.EquipmentSlot.UpdateInventory += (orig, self) =>
+            {
+                orig(self);
+
+                if(self.equipmentIndex == equipmentDef.equipmentIndex)
+                {
+                    EquipmentSlot = self;
+                }
+            };
         }
 
         private bool ActivateEquipment(On.RoR2.EquipmentSlot.orig_PerformEquipmentAction orig, EquipmentSlot self, EquipmentDef _equipDef)
         {
-            return (_equipDef == equipmentDef) ? UseEquipment(self) : orig(self, _equipDef);
+            if(_equipDef == equipmentDef)
+            {
+                return UseEquipment(self);
+            }
+            return orig(self, _equipDef);
         }
 
         public virtual ItemDisplayRuleDict CreateItemDisplayRules() => null;
