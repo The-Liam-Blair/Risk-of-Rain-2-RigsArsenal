@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿using Rewired.ComponentControls.Data;
+using RoR2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,7 @@ namespace MoreItems.Equipments
 
         public override bool UseEquipment(EquipmentSlot slot)
         {
+            
 
             // todo: May need more testing, sometimes it feels like the effect fails, but it may be due to it acquiring the wrong target.
             //       Aka MAKE THAT VISUAL INDICATOR!!
@@ -49,7 +51,6 @@ namespace MoreItems.Equipments
 
                 // Damage over time (Dot) debuffs. First item: Type. Second item: Stack count.
                List<Tuple<DotController.DotStack, int>> UniqueDots = new List<Tuple<DotController.DotStack, int>>();
-
 
                 // Find all buffs on the victim.
                 var buffs = victim.healthComponent.body.timedBuffs;
@@ -79,6 +80,7 @@ namespace MoreItems.Equipments
                         BuffDef buffDef = dot.dotDef.associatedBuff;
 
                         UniqueDots.Add(new Tuple<DotController.DotStack, int>(dot, victim.healthComponent.body.GetBuffCount(buffDef)));
+                        DebugLog.Log($"damage of {dot} is {dot.damage} and buffDef is {buffDef}");
 
                     }
                 }

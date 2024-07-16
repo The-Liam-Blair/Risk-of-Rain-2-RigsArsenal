@@ -188,15 +188,16 @@ namespace MoreItems
             }   
         }
 
-        public static void InflictDot(CharacterBody attacker, CharacterBody victim, DotController.DotIndex dotType, float damage, float procCoefficent = 1f, bool upgradeBurn = false)
+        public static void InflictDot(CharacterBody attacker, CharacterBody victim, DotController.DotIndex dotType, float damage, float procCoefficent = 1f)
         {
             switch (dotType)
             {
-                case DotIndex.Bleed: // Bleed
+                case DotIndex.Bleed:
                     DotController.InflictDot(victim.gameObject, attacker.gameObject, DotIndex.Bleed, 3f * procCoefficent, 1f);
                     break;
 
-                case DotIndex.Burn: // Burn
+                case DotIndex.Burn:
+                case DotIndex.StrongerBurn:
                     InflictDotInfo burnDot = new InflictDotInfo()
                     {
                         attackerObject = attacker.gameObject,
@@ -206,20 +207,31 @@ namespace MoreItems
                         dotIndex = DotIndex.Burn
                     };
 
-                    if (upgradeBurn)
-                    {
-                        StrengthenBurnUtils.CheckDotForUpgrade(attacker.inventory, ref burnDot); // Upgrades burn to stronger burn if the entity has any ignition tanks.
-                    }
+                    // If user has an igntion tank, upgrade the dot into a stronger burn.
+                    StrengthenBurnUtils.CheckDotForUpgrade(attacker.inventory, ref burnDot);
+
                     DotController.InflictDot(ref burnDot);
                     break;
 
-                case DotIndex.Blight: // Blight
+                case DotIndex.Blight: // Acrid's blight
                     DotController.InflictDot(victim.gameObject, attacker.gameObject, DotIndex.Blight, 5f * procCoefficent, 1f);
                     break;
 
                 case DotIndex.Fracture: // Collapse
                     DotDef collapseDef = GetDotDef(DotIndex.Fracture);
-                    DotController.InflictDot(victim.gameObject, attacker.gameObject, DotIndex.Fracture, collapseDef.interval, 1f);
+                    DotController.InflictDot(victim.gameObject, attacker.gameObject, DotIndex.Fracture, collapseDef.interval);
+                    break;
+
+                case DotIndex.Poison: // Acrid's poison
+                    DotController.InflictDot(victim.gameObject, attacker.gameObject, DotIndex.Poison, 5f, 1f);
+                    break;
+
+                case DotIndex.SuperBleed: // Bandit's hemmorage
+                    DotController.InflictDot(victim.gameObject, attacker.gameObject, DotIndex.SuperBleed, 15f, 1f);
+                    break;
+
+                default: // All the other dots: default implementation
+                    DotController.InflictDot(victim.gameObject, attacker.gameObject, dotType, damage, procCoefficent);
                     break;
             }
         }

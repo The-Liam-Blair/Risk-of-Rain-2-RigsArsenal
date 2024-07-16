@@ -83,7 +83,7 @@ namespace MoreItems.Items
                                 break;
 
                             case 1: // Burn
-                                InflictDot(attacker, victim, DotController.DotIndex.Burn, attacker.damage, damageInfo.procCoefficient, true);
+                                InflictDot(attacker, victim, DotController.DotIndex.Burn, attacker.damage, damageInfo.procCoefficient);
                                 break;
 
                             case 2: // Blight
@@ -91,7 +91,7 @@ namespace MoreItems.Items
                                 break;
 
                             case 3: // Collapse
-                                InflictDot(attacker, victim, DotController.DotIndex.Fracture, attacker.damage, damageInfo.procCoefficient, true);
+                                InflictDot(attacker, victim, DotController.DotIndex.Fracture, attacker.damage, damageInfo.procCoefficient);
                                 break;
                         }
                     }

@@ -105,9 +105,9 @@ namespace MoreItems.Equipments
             On.RoR2.EquipmentSlot.PerformEquipmentAction += ActivateEquipment;
         }
 
-        private bool ActivateEquipment(On.RoR2.EquipmentSlot.orig_PerformEquipmentAction orig, EquipmentSlot self, EquipmentDef equipmentDef)
+        private bool ActivateEquipment(On.RoR2.EquipmentSlot.orig_PerformEquipmentAction orig, EquipmentSlot self, EquipmentDef _equipDef)
         {
-            return UseEquipment(self);
+            return (_equipDef == equipmentDef) ? UseEquipment(self) : orig(self, _equipDef);
         }
 
         public virtual ItemDisplayRuleDict CreateItemDisplayRules() => null;
