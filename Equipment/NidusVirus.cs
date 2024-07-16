@@ -36,20 +36,21 @@ namespace MoreItems.Equipments
 
         public override bool UseEquipment(EquipmentSlot slot)
         {
-            // Special debuffs this can CAN spread:
-            // - Ruin stacks (Repeated use does not increment the stack count).
+            // Special debuffs this CAN spread:
+            // - Ruin stacks from essence of heresy. (Repeated use does not increment the stack count).
+            // - Lunar root from hooks of heresy's explosion.
             // - Death mark.
             // - Tar.
             // - Pulverise buildup stacks AND pulverised from shattering justice. (Spread will overwrite the current stack count, not add to it).
-            // - Rex's weak debuff from most of his primary attack.
-            // - Rex's fruiting debuff and on-death followup from his alternative special attack.
+            // - Rex's weak debuff.
+            // - Rex's fruiting debuff and on-death followup.
             // - Acrid's blight and poison.
             // - Bandit hemorrhage.
 
 
-            // Special debuffs this can CAN NOT spread:
-            // - Hellfire tincture
-            // - Rex's entangle from entangling growth.
+            // Special debuffs this CAN NOT spread:
+            // - Hellfire tincture.
+            // - Rex's entangle.
             // - Mercenary's expose.
             // - Void fog.
 
