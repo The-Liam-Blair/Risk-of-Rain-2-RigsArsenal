@@ -7,10 +7,11 @@ using RoR2;
 using System.Linq;
 using System.Reflection;
 using MoreItems.Buffs;
-//using MoreItems.Equipments;
+using MoreItems.Equipments;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using R2API.Utils;
+using static RoR2.DotController;
 
 namespace MoreItems
 {
@@ -34,6 +35,7 @@ namespace MoreItems
         public static AssetBundle MainAssets;
 
         public static List<Item> ItemList = new List<Item>();
+        public static List<Equipment> EquipmentList = new List<Equipment>();
         public static List<Buff> BuffList = new List<Buff>();
         
         public static ConfigEntry<bool> EnableShotgunMarker { get; set; }
@@ -71,13 +73,87 @@ namespace MoreItems
                 ItemList.Add(anItem);
             }
 
+            var theEquipment = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Equipment)));
+
+            foreach (var equipment in theEquipment)
+            {
+                Equipment equip = (Equipment)System.Activator.CreateInstance(equipment);
+                equip.Init();
+                EquipmentList.Add(equip);
+            }
+
             EnableShotgunMarker = Config.Bind("Wrist-Mounted Shotgun", "EnableShotgunMarker", true, "Shows or hides the range indicator for the wrist-mounted shotgun item.");
         }
 
 
         private void Update()
         {
+            // Debugging method to spawn items in-game.
+            // Disabled for release version.
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                DebugLog.Log("F1 pressed, spawning stimpack.");
+                DEBUG_SpawnItem("WORNOUTSTIMPACK");
+            }
+            else if (Input.GetKeyDown(KeyCode.F2))
+            { 
+                DebugLog.Log("F2 pressed, spawning bounty hunter's badge.");
+                DEBUG_SpawnItem("BOUNTYHUNTERBADGE");
+            }
 
+            else if (Input.GetKeyDown(KeyCode.F3))
+            {
+                DebugLog.Log("F3 pressed, spawning kinetic battery.");
+                DEBUG_SpawnItem("KINETICBATTERY");
+            }
+
+            else if (Input.GetKeyDown(KeyCode.F4))
+            {
+                DebugLog.Log("F4 pressed, spawning reactive armour plating.");
+                DEBUG_SpawnItem("REACTIVEARMOURPLATING");
+            }
+
+            else if (Input.GetKeyDown(KeyCode.F5))
+            {
+                DebugLog.Log("F5 pressed, spawning Under-Barrel Shotgun");
+                DEBUG_SpawnItem("UNDERBARRELSHOTGUN");
+            }
+            else if (Input.GetKeyDown(KeyCode.F6))
+            {
+                DebugLog.Log("F6 pressed, spawning Chaos Rune");
+                DEBUG_SpawnItem("CHAOSRUNE");
+            }
+            else if(Input.GetKeyDown(KeyCode.F7))
+            {
+                DebugLog.Log("F7 pressed, spawning Coolant Pack");
+                DEBUG_SpawnItem("COOLANTPACK");
+            }
+            else if (Input.GetKeyDown(KeyCode.F8))
+            {
+                DebugLog.Log("F8 pressed, spawning Nidus Virus");
+                DEBUG_SpawnEquipment("NIDUSVIRUS");
+            }
+
+            // Clear all items from the player's inventory.
+            else if (Input.GetKeyDown(KeyCode.F11))
+            {
+                var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
+                for (int i = 0; i < ItemList.Count; i++)
+                {
+                    var item = ItemList[i];
+                    var count = player.GetComponent<CharacterBody>().inventory.GetItemCount(item.itemDef);
+                    if (count > 0)
+                    {
+                        player.GetComponent<CharacterBody>().inventory.RemoveItem(item.itemDef, count);
+                    }
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.F10))
+            {
+                // Give player money
+                var player = PlayerCharacterMasterController.instances[0].master;
+                player.GiveMoney(100000);
+            }
         }
 
         private void DEBUG_SpawnItem(string itemName)
@@ -86,6 +162,14 @@ namespace MoreItems
             var item = ItemList.Find(x => x.NameToken == itemName);
 
             PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(item.itemDef.itemIndex), player.position, player.forward * 20f);
+        }
+
+        private void DEBUG_SpawnEquipment(string equipmentName)
+        {
+            var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
+            var equip = EquipmentList.Find(x => x.NameToken == equipmentName);
+
+            PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(equip.equipmentDef.equipmentIndex), player.position, player.forward * 20f);
         }
 
         /// <summary>
@@ -102,6 +186,42 @@ namespace MoreItems
                     mat.shader = Resources.Load<Shader>("shaders" + mat.shader.name.Substring(13));
                 }
             }   
+        }
+
+        public static void InflictDot(CharacterBody attacker, CharacterBody victim, DotController.DotIndex dotType, float damage, float procCoefficent = 1f, bool upgradeBurn = false)
+        {
+            switch (dotType)
+            {
+                case DotIndex.Bleed: // Bleed
+                    DotController.InflictDot(victim.gameObject, attacker.gameObject, DotIndex.Bleed, 3f * procCoefficent, 1f);
+                    break;
+
+                case DotIndex.Burn: // Burn
+                    InflictDotInfo burnDot = new InflictDotInfo()
+                    {
+                        attackerObject = attacker.gameObject,
+                        victimObject = victim.gameObject,
+                        totalDamage = damage * 0.5f,
+                        damageMultiplier = 1f,
+                        dotIndex = DotIndex.Burn
+                    };
+
+                    if (upgradeBurn)
+                    {
+                        StrengthenBurnUtils.CheckDotForUpgrade(attacker.inventory, ref burnDot); // Upgrades burn to stronger burn if the entity has any ignition tanks.
+                    }
+                    DotController.InflictDot(ref burnDot);
+                    break;
+
+                case DotIndex.Blight: // Blight
+                    DotController.InflictDot(victim.gameObject, attacker.gameObject, DotIndex.Blight, 5f * procCoefficent, 1f);
+                    break;
+
+                case DotIndex.Fracture: // Collapse
+                    DotDef collapseDef = GetDotDef(DotIndex.Fracture);
+                    DotController.InflictDot(victim.gameObject, attacker.gameObject, DotIndex.Fracture, collapseDef.interval, 1f);
+                    break;
+            }
         }
     }
 }

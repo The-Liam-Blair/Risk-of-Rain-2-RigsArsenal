@@ -29,6 +29,8 @@ namespace MoreItems.Equipments
 
         public virtual BuffDef EquipmentBuffDef { get; } = null; // Reference to the buff definition.
 
+        public virtual EquipmentSlot EquipmentSlot { get; }
+
         /// <summary>
         /// Item assembly process: Setup LanguageAPI, create the item object, added to the item list, and reference & implement the methods/events the item hooks into.
         /// </summary>
@@ -66,12 +68,12 @@ namespace MoreItems.Equipments
             if(isLunar)
             {
                 equipmentDef.isLunar = true;
-                equipmentDef._equipmentIndex = Addressables.LoadAssetAsync<EquipmentIndex>("RoR2/Base/Common/LunarEquipmentIndex").WaitForCompletion();
+                equipmentDef.colorIndex = ColorCatalog.ColorIndex.LunarItem;
             }
             else
             {
                 equipmentDef.isLunar = false;
-                equipmentDef._equipmentIndex = Addressables.LoadAssetAsync<EquipmentIndex>("RoR2/Base/Common/EquipmentIndex").WaitForCompletion();
+                equipmentDef.colorIndex = ColorCatalog.ColorIndex.Equipment;
             }
 
 
@@ -85,6 +87,18 @@ namespace MoreItems.Equipments
                 ? Model
                 : Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mystery/PickupMystery.prefab").WaitForCompletion();
 
+            equipmentDef.cooldown = cooldown;
+
+            equipmentDef.appearsInMultiPlayer = true;
+            equipmentDef.appearsInSinglePlayer = true;
+
+            equipmentDef.enigmaCompatible = true;
+            equipmentDef.canBeRandomlyTriggered = true;
+
+            if(EquipmentBuffDef != null)
+            {
+                equipmentDef.passiveBuffDef = EquipmentBuffDef;
+            }
 
             ItemAPI.Add(new CustomEquipment(equipmentDef, CreateItemDisplayRules()));
 

@@ -452,7 +452,6 @@ GameObject:
   - component: {fileID: 6129116960916837334}
   - component: {fileID: 6129116960916837339}
   - component: {fileID: 6129116960916837332}
-  - component: {fileID: 6129116960916837333}
   m_Layer: 0
   m_Name: EdgeBall4
   m_TagString: Untagged
@@ -521,19 +520,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &6129116960916837333
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6129116960916837335}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6129116961016070866
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,7 +531,6 @@ GameObject:
   - component: {fileID: 6129116961016070865}
   - component: {fileID: 6129116961016070870}
   - component: {fileID: 6129116961016070871}
-  - component: {fileID: 6129116961016070864}
   m_Layer: 0
   m_Name: EdgeBall3
   m_TagString: Untagged
@@ -614,19 +599,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &6129116961016070864
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6129116961016070866}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6129116961317375904
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,7 +610,6 @@ GameObject:
   - component: {fileID: 6129116961317375911}
   - component: {fileID: 6129116961317375908}
   - component: {fileID: 6129116961317375909}
-  - component: {fileID: 6129116961317375910}
   m_Layer: 0
   m_Name: CentreBall
   m_TagString: Untagged
@@ -707,19 +678,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &6129116961317375910
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6129116961317375904}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6129116961483790609
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,7 +689,6 @@ GameObject:
   - component: {fileID: 6129116961483790608}
   - component: {fileID: 6129116961483790613}
   - component: {fileID: 6129116961483790614}
-  - component: {fileID: 6129116961483790615}
   m_Layer: 0
   m_Name: EdgeBall5
   m_TagString: Untagged
@@ -800,19 +757,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &6129116961483790615
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6129116961483790609}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6129116961816621074
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,7 +768,6 @@ GameObject:
   - component: {fileID: 6129116961816621073}
   - component: {fileID: 6129116961816621078}
   - component: {fileID: 6129116961816621079}
-  - component: {fileID: 6129116961816621072}
   m_Layer: 0
   m_Name: EdgeBall1
   m_TagString: Untagged
@@ -893,19 +836,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &6129116961816621072
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6129116961816621074}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6129116961908092906
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,7 +847,6 @@ GameObject:
   - component: {fileID: 6129116961908092905}
   - component: {fileID: 6129116961908092910}
   - component: {fileID: 6129116961908092911}
-  - component: {fileID: 6129116961908092904}
   m_Layer: 0
   m_Name: EdgeBall2
   m_TagString: Untagged
@@ -986,19 +915,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &6129116961908092904
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6129116961908092906}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6471556902065148649
 GameObject:
   m_ObjectHideFlags: 0
