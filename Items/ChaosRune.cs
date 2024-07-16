@@ -7,6 +7,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.Diagnostics;
 using UnityEngine.UIElements;
 using static MoreItems.MoreItems;
+using static RoR2.MasterSpawnSlotController;
 
 namespace MoreItems.Items
 {
@@ -70,34 +71,27 @@ namespace MoreItems.Items
                         hasRun = true;
                         currentSucessfulRolls++;
 
-                        int DotIndex = Random.Range(0, 3); // 4 DOTs: Bleed, Burn (Including ignition tank upgraded burn), Blight and Collapse.
+                        // todo: some visual or audio effect maybe to indicate the item has triggered.
+
+                        int DotIndex = UnityEngine.Random.Range(0, 4); // 4 DOTs: Bleed, Burn (Including ignition tank upgraded burn), Blight and Collapse.
+                        DebugLog.Log(DotIndex);
 
                         switch (DotIndex)
                         {
                             case 0: // Bleed
-                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Bleed, 3f * damageInfo.procCoefficient, 1f);
+                                InflictDot(attacker, victim, DotController.DotIndex.Bleed, attacker.damage, damageInfo.procCoefficient);
                                 break;
 
                             case 1: // Burn
-                                InflictDotInfo burnDot = new InflictDotInfo()
-                                {
-                                    attackerObject = inflictDotInfo.attackerObject,
-                                    victimObject = inflictDotInfo.victimObject,
-                                    totalDamage = attacker.damage * 0.5f,
-                                    damageMultiplier = 1f,
-                                    dotIndex = DotController.DotIndex.Burn
-                                };
-                                StrengthenBurnUtils.CheckDotForUpgrade(attacker.inventory, ref burnDot); // Upgrades burn to stronger burn if the entity has any ignition tanks.
-                                DotController.InflictDot(ref burnDot);
+                                InflictDot(attacker, victim, DotController.DotIndex.Burn, attacker.damage, damageInfo.procCoefficient, true);
                                 break;
 
                             case 2: // Blight
-                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Blight, 5f * damageInfo.procCoefficient, 1f);
+                                InflictDot(attacker, victim, DotController.DotIndex.Blight, attacker.damage, damageInfo.procCoefficient);
                                 break;
 
                             case 3: // Collapse
-                                DotController.DotDef collapseDef = DotController.GetDotDef(DotController.DotIndex.Fracture);
-                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Fracture, collapseDef.interval, 1f);
+                                InflictDot(attacker, victim, DotController.DotIndex.Fracture, attacker.damage, damageInfo.procCoefficient, true);
                                 break;
                         }
                     }

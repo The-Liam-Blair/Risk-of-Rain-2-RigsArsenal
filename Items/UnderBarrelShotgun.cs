@@ -114,6 +114,8 @@ namespace MoreItems.Items
                 // Each pellet has 25% of the attack's proc coefficient. This totals to a 3.25 proc coefficient factor combined on average if every shot hits.
                 pellet.GetComponent<ProjectileController>().procCoefficient = info.procCoefficient * 0.25f;
 
+                // todo: shotgun sound effect (that one used by lesser wisps will do).
+
                 for (int i = 0; i < pelletCount; i++)
                 {
                     var projectileInfo = new FireProjectileInfo()
@@ -138,6 +140,7 @@ namespace MoreItems.Items
                     projectileInfo.rotation = ApplySpread(projectileInfo.rotation, 4f);
 
                     RoR2.Projectile.ProjectileManager.instance.FireProjectile(projectileInfo);
+
                 }
             };
 

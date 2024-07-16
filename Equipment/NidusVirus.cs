@@ -1,6 +1,7 @@
 ﻿using RoR2;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -29,97 +30,96 @@ namespace MoreItems.Equipments
 
         public override GameObject Model => null;
 
+        private int spreadRadius = 200;
+        private float debuffDefaultDuration = 5f;
+
         public override bool UseEquipment(EquipmentSlot slot)
         {
+
+            // todo: May need more testing, sometimes it feels like the effect fails, but it may be due to it acquiring the wrong target.
+            //       Aka MAKE THAT VISUAL INDICATOR!!
+
             slot.UpdateTargets(RoR2Content.Equipment.Lightning.equipmentIndex, true);
             HurtBox victim = slot.currentTarget.hurtBox;
 
             if(victim)
             {
-                DebugLog.Log($"Nidus Virus: Targeted {victim.healthComponent.body.name}");
-
                 // Non-damaging debuffs. First item: Type. Second item: Stack count.
                 List<Tuple<BuffDef, int>> UniqueDebuffs = new List<Tuple<BuffDef, int>>();
 
-                // Damage over time (Dot) debuffs. First item: Type. Second item: Stack count. Third item: Damage value.
-               List<Tuple<DotController.DotStack, int, float>> UniqueDots = new List<Tuple<DotController.DotStack, int, float>>();
+                // Damage over time (Dot) debuffs. First item: Type. Second item: Stack count.
+               List<Tuple<DotController.DotStack, int>> UniqueDots = new List<Tuple<DotController.DotStack, int>>();
 
 
+                // Find all buffs on the victim.
                 var buffs = victim.healthComponent.body.timedBuffs;
 
-                foreach (var buff in buffs)
+                if (buffs != null)
                 {
-                    BuffDef buffDef = BuffCatalog.GetBuffDef(buff.buffIndex);
-                    DebugLog.Log($"Nidus Virus: Found {buffDef.name} on {victim.healthComponent.body.name}");
-
-                    if (buffDef.isDebuff)
+                    // Loop through each buff, and record all debuffs.
+                    foreach (var buff in buffs)
                     {
-                        DebugLog.Log($"Nidus Virus: Found debuff {buffDef.name} on {victim.healthComponent.body.name}");
-                        UniqueDebuffs.Add(new Tuple<BuffDef, int>(buffDef, victim.healthComponent.body.GetBuffCount(buffDef)));
+                        BuffDef buffDef = BuffCatalog.GetBuffDef(buff.buffIndex);
+
+                        if (buffDef.isDebuff)
+                        {
+                            UniqueDebuffs.Add(new Tuple<BuffDef, int>(buffDef, victim.healthComponent.body.GetBuffCount(buffDef)));
+                        }
                     }
                 }
 
-                DebugLog.Log("Nidus Virus: Checking for dots.");
+                // Find all dots on the victim.
                 var dots = DotController.FindDotController(victim.healthComponent.body.gameObject);
 
                 if (dots != null)
                 {
+                    // Loop through each dot, and record all dots.
                     foreach (var dot in dots.dotStackList)
                     {
-                        DebugLog.Log($"Nidus Virus: Found {dot.dotDef} on {victim.healthComponent.body.name}");
                         BuffDef buffDef = dot.dotDef.associatedBuff;
 
-                        DebugLog.Log($"Nidus Virus: Found debuff {buffDef.name} on {victim.healthComponent.body.name}");
-                        UniqueDots.Add(new Tuple<DotController.DotStack, int, float>(dot, victim.healthComponent.body.GetBuffCount(buffDef), dot.damage));
+                        UniqueDots.Add(new Tuple<DotController.DotStack, int>(dot, victim.healthComponent.body.GetBuffCount(buffDef)));
 
                     }
                 }
 
-                var victimTeam = victim.healthComponent.body.teamComponent.teamIndex;
-                DebugLog.Log($"Nidus Virus: Victim team is {victimTeam}");
+                // Stop execution if no debuffs or dots were found.
+                if(!UniqueDebuffs.Any() && !UniqueDots.Any())
+                {
+                    DebugLog.Log($"Nidus Virus: {victim.healthComponent.body.name} has no debuffs to spread.");
+                    return false;
+                }
 
+                // Find the team the victim belongs to.
+                var victimTeam = victim.healthComponent.body.teamComponent.teamIndex;
+                
+                // Get all entities in the victim's team.
                 foreach(var entity in TeamComponent.GetTeamMembers(victimTeam))
                 {
-                    DebugLog.Log($"Nidus Virus: Found {entity.name} on the same team as {victim.healthComponent.body.name}");
                     if(entity.teamIndex == victimTeam)
                     {
-                        if(Vector3.Distance(victim.healthComponent.body.corePosition, entity.body.corePosition) <= 200)
+                        // If the entity is within the spread radius, apply the recorded debuffs and dots to that entity.
+                        if(Vector3.Distance(victim.healthComponent.body.corePosition, entity.body.corePosition) <= spreadRadius)
                         {
-                            if(entity.body == victim.healthComponent.body)
-                            {
-                                continue;
-                            }
-                            DebugLog.Log($"Nidus Virus: {entity.name} is within range of {victim.healthComponent.body.name}");
+                            // Skip if the entity was the victim itself to prevent them from receiving their own debuffs.
+                            if(entity.body == victim.healthComponent.body) { continue; }
+
+                            // Spread non-damaging debuffs.
                             foreach(var debuff in UniqueDebuffs)
                             {
-                                entity.body.AddTimedBuff(debuff.Item1, 5f, debuff.Item2);
-                                DebugLog.Log($"Nidus Virus: Spread {debuff.Item1.name} to {entity.name}");
-                                DebugLog.Log($"Buff stats: {debuff.Item2} stacks.");
+                                entity.body.AddTimedBuff(debuff.Item1, debuffDefaultDuration, debuff.Item2);
                             }
 
+                            // Spread dots
                             foreach(var dot in UniqueDots)
                             {
-                                DebugLog.Log($"Nidus Virus: Inflicting {dot.Item1.dotDef.associatedBuff.name} on {entity.name}");
-                                DebugLog.Log($"DOT type is {dot.Item1.dotIndex} or {dot.Item1}");
-                                DebugLog.Log($"DOT damage is {dot.Item1.damage}");
-                                DebugLog.Log($"DOT stack count is {dot.Item2}");
-
-                                /*
-                                InflictDotInfo clonedDot = new InflictDotInfo()
-                                {
-                                    attackerObject = slot.characterBody.gameObject,
-                                    victimObject = entity.body.gameObject,
-                                    totalDamage = slot.characterBody.damage * 2f,
-                                    dotIndex = dot.Item1.dotIndex
-                                };
-                                DotController.InflictDot(ref clonedDot);
-                                */
-
                                 MoreItems.InflictDot(slot.characterBody, entity.body, dot.Item1.dotIndex, slot.characterBody.damage);
                             }
                         }
                     }
                 } 
+
+                // todo: add visual spread effect (some way of showing the equipment activating successfully, and its radius of effect).
 
                 slot.InvalidateCurrentTarget();
                 return true;
