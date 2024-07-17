@@ -20,14 +20,13 @@ namespace MoreItems.Equipments
         
         public abstract float cooldown { get; }
 
-        public abstract bool AIBlackList { get; } // Determines if the enemy can receive this item, such as from the void fields.
-
         public EquipmentDef equipmentDef { get; private set; } // Reference to the item definition.
 
         public abstract Sprite Icon { get; } // Icon sprite.
         public abstract GameObject Model { get; } // Equipment model.
 
         public virtual BuffDef EquipmentBuffDef { get; } = null; // Reference to the buff definition.
+        public virtual bool IsBuffPassive { get; } = false; // Determines if the buff from the equipment is a constant passive buff or not.
 
         public virtual EquipmentSlot EquipmentSlot { get; private set; }
 
@@ -68,11 +67,13 @@ namespace MoreItems.Equipments
             if(isLunar)
             {
                 equipmentDef.isLunar = true;
+                equipmentDef.isBoss = false;
                 equipmentDef.colorIndex = ColorCatalog.ColorIndex.LunarItem;
             }
             else
             {
                 equipmentDef.isLunar = false;
+                equipmentDef.isBoss = true;
                 equipmentDef.colorIndex = ColorCatalog.ColorIndex.Equipment;
             }
 
@@ -95,7 +96,9 @@ namespace MoreItems.Equipments
             equipmentDef.enigmaCompatible = true;
             equipmentDef.canBeRandomlyTriggered = true;
 
-            if(EquipmentBuffDef != null)
+            equipmentDef.canDrop = true;
+
+            if(IsBuffPassive)
             {
                 equipmentDef.passiveBuffDef = EquipmentBuffDef;
             }

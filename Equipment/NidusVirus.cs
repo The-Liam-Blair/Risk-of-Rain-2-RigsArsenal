@@ -26,8 +26,6 @@ namespace MoreItems.Equipments
 
         public override float cooldown => 1f;
 
-        public override bool AIBlackList => false;
-
         public override Sprite Icon => null;
 
         public override GameObject Model => null;
@@ -42,9 +40,11 @@ namespace MoreItems.Equipments
             // - Ruin stacks from essence of heresy. (Repeated use does not increment the stack count).
             // - Lunar root from hooks of heresy's explosion.
             // - Effigy of grief's cripple.
+            //
             // - Death mark.
             // - Tar.
             // - Pulverise buildup stacks AND pulverised from shattering justice. (Spread will overwrite the current stack count, not add to it).
+            //
             // - Rex's weak debuff.
             // - Rex's fruiting debuff and on-death followup.
             // - Acrid's blight and poison.
@@ -52,17 +52,18 @@ namespace MoreItems.Equipments
 
 
             // Special debuffs this CAN NOT spread:
-            // - Hellfire tincture.
+            // - Hellfire tincture.            
+            // - Symbiotic Scorpion's armour shred.
+            // - Void fog.
             // - Rex's entangle.
             // - Mercenary's expose.
-            // - Void fog.
 
 
             // todo: May need more testing, sometimes it feels like the effect fails, but it may be due to it acquiring the wrong target.
             //       Aka MAKE THAT VISUAL INDICATOR!!
             HurtBox victim = slot.currentTarget.hurtBox;
 
-            if(victim)
+            if (victim)
             {
                 // Non-damaging debuffs. First item: Type. Second item: Stack count.
                 List<Tuple<BuffDef, int>> UniqueDebuffs = new List<Tuple<BuffDef, int>>();
@@ -157,13 +158,12 @@ namespace MoreItems.Equipments
 
                 if (Run.instance && EquipmentSlot && equipmentDef.equipmentIndex == EquipmentSlot.equipmentIndex)
                 {
-                    EquipmentSlot.targetIndicator = new Indicator(EquipmentSlot.gameObject, null);
                     EquipmentSlot.UpdateTargets(RoR2Content.Equipment.Lightning.equipmentIndex, true);
+                    EquipmentSlot.targetIndicator = new Indicator(EquipmentSlot.gameObject, null);
 
-                    if (!EquipmentSlot.currentTarget.transformToIndicateAt)
-                    {
-                        // please go away indicator
-                    }
+                    // todo: figure out how to make the indicator disappear when the focus on the current target is lost.
+
+
                 }
             };
         }

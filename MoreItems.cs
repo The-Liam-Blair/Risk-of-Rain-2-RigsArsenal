@@ -133,6 +133,11 @@ namespace MoreItems
                 DebugLog.Log("F8 pressed, spawning Nidus Virus");
                 DEBUG_SpawnEquipment("NIDUSVIRUS");
             }
+            else if (Input.GetKeyDown(KeyCode.F9))
+            {
+                DebugLog.Log("F8 pressed, spawning Nidus Virus");
+                DEBUG_SpawnEquipment("SANGUINESHIELDBATTERY");
+            }
 
             // Clear all items from the player's inventory.
             else if (Input.GetKeyDown(KeyCode.F11))

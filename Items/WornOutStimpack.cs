@@ -77,6 +77,7 @@ namespace MoreItems.Items
             On.RoR2.HealthComponent.Heal += (orig, self, amount, mask, regen) =>
             {
                 orig(self, amount, mask, regen);
+
                 if(!self) { return orig(self, amount, mask, regen); }
 
                 var body = self.body;
@@ -85,7 +86,13 @@ namespace MoreItems.Items
                 var count = body.inventory.GetItemCount(itemDef);
                 if (count <= 0) { return orig(self, amount, mask, regen); }
 
-                if (body.HasBuff(ItemBuffDef) && self.combinedHealthFraction < lowHealthThreshold)
+                if (body.healthComponent.combinedHealthFraction > lowHealthThreshold) { return orig(self, amount, mask, regen); }
+
+                if (body.GetBuffCount(ItemBuffDef) <= 0)
+                {
+                    body.AddTimedBuff(ItemBuffDef, 5f);
+                }
+                else
                 {
                     body.ClearTimedBuffs(ItemBuffDef);
                     body.AddTimedBuff(ItemBuffDef, 5f);
