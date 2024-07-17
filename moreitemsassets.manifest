@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3449253074
+CRC: 3676934201
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f26f6f10c59edffd2a032b1c2c5b3dbc
+    Hash: 22e05501b9fc966197c421248d9b64b2
   TypeTreeHash:
     serializedVersion: 2
     Hash: 1fe3abd029edb3522ae5dbbc711d0a74
@@ -34,6 +34,7 @@ Assets:
 - Assets/Materials/Item/BountyHunterBadge/BountyHunterBadge.png
 - Assets/Materials/Item/WornOutStimpack/M_DepletedIcon.mat
 - Assets/Prefabs/Item/ChaosRune/ChaosRune.prefab
+- Assets/Materials/Item/SanguineShieldBattery/metreLevel.png
 - Assets/Materials/Item/WornOutStimpack/M_Button.mat
 - Assets/shaders/deferred/hgstandard.shader
 - Assets/Materials/Item/ReactiveArmourPlate/ArmourTex.png
@@ -45,27 +46,33 @@ Assets:
 - Assets/Materials/Item/ReactiveArmourPlate/M_ArmourEdge.mat
 - Assets/Materials/Item/KineticBattery/M_Screw.mat
 - Assets/Materials/Item/CoolantPack/M_Button.mat
+- Assets/Materials/Item/SanguineShieldBattery/M_MetalFixtures.mat
 - Assets/Materials/Item/ChaosRune/Rock.png
 - Assets/Materials/Item/WornOutStimpack/M_Base.mat
 - Assets/Materials/Item/WornOutStimpack/WornOutStimpack.png
 - Assets/Materials/Item/BountyHunterBadge/M_Black.mat
 - Assets/Materials/Item/WornOutStimpack/M_HealIcon.mat
 - Assets/Materials/Item/WristMountedShotgun/M_Gray.mat
+- Assets/Materials/Item/SanguineShieldBattery/FlowMap.png
 - Assets/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.blend
 - Assets/Prefabs/Item/CoolantPack/CoolantPack.prefab
 - Assets/Materials/Item/BountyHunterBadge/BackingTex.png
+- Assets/Prefabs/Item/SanguineShieldBattery/SanguineShieldBattery.prefab
 - Assets/Materials/Item/WristMountedShotgun/M_Shadow.mat
+- Assets/Materials/Item/SanguineShieldBattery/M_Gauge.mat
 - Assets/Materials/Item/WornOutStimpack/M_WhiteBright.mat
 - Assets/Materials/Item/BountyHunterBadge/M_yella.mat
 - Assets/Materials/Item/CoolantPack/M_TankMetre.mat
 - Assets/Materials/Item/ReactiveArmourPlate/M_Armour.mat
 - Assets/Prefabs/Item/CoolantPack/CoolantPack.blend
 - Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlating.png
+- Assets/Prefabs/Item/SanguineShieldBattery/SanguineShieldBattery.blend
 - Assets/Prefabs/Item/WornOutStimpack/WornOutStimpack.prefab
 - Assets/Materials/Item/ChaosRune/M_Rock.mat
 - Assets/Materials/Item/ChaosRune/ChaosRune.png
 - Assets/Materials/Item/WornOutStimpack/WornOutStimpackBuff.png
 - Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.prefab
+- Assets/Materials/Item/SanguineShieldBattery/M_Body.mat
 - Assets/Prefabs/Item/WristMountedShotgun/WristMountedShotgun.prefab
 - Assets/Materials/Item/KineticBattery/KineticBatteryBuff.png
 - Assets/Materials/Item/CoolantPack/M_Tank.mat
@@ -74,11 +81,14 @@ Assets:
 - Assets/Materials/Item/WristMountedShotgun/M_ShotgunComponent.mat
 - Assets/Materials/Item/ReactiveArmourPlate/GripTex.png
 - Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlatingBuff.png
+- Assets/Materials/Item/SanguineShieldBattery/flowmapnormals.png
 - Assets/Prefabs/Item/KineticBattery/KineticBattery.prefab
 - Assets/Materials/Item/WristMountedShotgun/M_RedDotSight.mat
+- Assets/Materials/Item/WristMountedShotgun/Strap.png
 - Assets/Materials/Item/BountyHunterBadge/M_YELLA-ER.mat
 - Assets/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.prefab
 - Assets/Materials/Item/ReactiveArmourPlate/M_Underlay.mat
+- Assets/Materials/Item/SanguineShieldBattery/M_BatteryShine.mat
 - Assets/Prefabs/Item/ChaosRune/ChaosRune.blend
 - Assets/Materials/Item/KineticBattery/M_Body.mat
 - Assets/Materials/Item/ChaosRune/M_RedGlow.mat
@@ -89,6 +99,7 @@ Assets:
 - Assets/Materials/Item/ReactiveArmourPlate/UnderlayTex.png
 - Assets/Materials/Item/BountyHunterBadge/YellowTex1.png
 - Assets/Materials/Item/BountyHunterBadge/scratchTex.png
+- Assets/Materials/Item/SanguineShieldBattery/M_Crystal.mat
 - Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.blend
 - Assets/Prefabs/Item/WristMountedShotgun/WristMountedShotgun.blend
 - Assets/Materials/Item/KineticBattery/M_Glow.mat

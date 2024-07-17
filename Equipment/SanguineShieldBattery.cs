@@ -31,7 +31,7 @@ namespace MoreItems.Equipments
 
         public override Sprite Icon => null;
 
-        public override GameObject Model => null;
+        public override GameObject Model => MainAssets.LoadAsset<GameObject>("SanguineShieldBattery.prefab");
 
         public override BuffDef EquipmentBuffDef => BuffList.Find(x => x.Name == "SanguineShieldBatteryDuration").buffDef;
 
