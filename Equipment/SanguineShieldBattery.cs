@@ -105,13 +105,6 @@ namespace MoreItems.Equipments
 
                 // Allow the timer to run if the buff is active.
                 if (intervalCount > 0) { intervalTimer -= Time.deltaTime; }
-
-                if (EquipmentBuffDef)
-                {
-                    DebugLog.Log($"Barrier Decay Rate: {EquipmentSlot.characterBody.barrierDecayRate}");
-                    DebugLog.Log($"intervalCount: {intervalCount}");
-                    DebugLog.Log("-----------------");
-                }
             };
 
             // Halve the barrier decay rate while the buff is active.
