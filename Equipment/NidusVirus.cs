@@ -8,6 +8,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 using static RoR2.MasterSpawnSlotController;
+using static MoreItems.MoreItems;
 
 namespace MoreItems.Equipments
 {
@@ -28,7 +29,7 @@ namespace MoreItems.Equipments
 
         public override Sprite Icon => null;
 
-        public override GameObject Model => null;
+        public override GameObject Model => MainAssets.LoadAsset<GameObject>("NidusVirus.prefab");
 
         private int spreadRadius = 200;
         private float debuffDefaultDuration = 5f;

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3676934201
+CRC: 3709931830
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 22e05501b9fc966197c421248d9b64b2
+    Hash: 9a07e5e8eb27e4265a9d84ab7c75d745
   TypeTreeHash:
     serializedVersion: 2
     Hash: 1fe3abd029edb3522ae5dbbc711d0a74
@@ -36,13 +36,18 @@ Assets:
 - Assets/Prefabs/Item/ChaosRune/ChaosRune.prefab
 - Assets/Materials/Item/SanguineShieldBattery/metreLevel.png
 - Assets/Materials/Item/WornOutStimpack/M_Button.mat
+- Assets/Materials/Item/NidusVirus/M_Glass.mat
 - Assets/shaders/deferred/hgstandard.shader
 - Assets/Materials/Item/ReactiveArmourPlate/ArmourTex.png
+- Assets/Prefabs/Item/NidusVirus/NidusVirus.blend
 - Assets/Materials/Item/ChaosRune/M_RockDark.mat
 - Assets/Materials/Item/BountyHunterBadge/YellowTex2.png
 - Assets/Materials/Item/WristMountedShotgun/M_DeepBlack.mat
 - Assets/Materials/Item/WristMountedShotgun/M_Shotgun.mat
 - Assets/Materials/Item/CoolantPack/M_Cap.mat
+- Assets/Materials/Item/NidusVirus/glassRemapRamp.png
+- Assets/Materials/Item/NidusVirus/M_VirusBall.mat
+- Assets/shaders/fx/hgcloudremap.shader
 - Assets/Materials/Item/ReactiveArmourPlate/M_ArmourEdge.mat
 - Assets/Materials/Item/KineticBattery/M_Screw.mat
 - Assets/Materials/Item/CoolantPack/M_Button.mat
@@ -56,6 +61,7 @@ Assets:
 - Assets/Materials/Item/SanguineShieldBattery/FlowMap.png
 - Assets/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.blend
 - Assets/Prefabs/Item/CoolantPack/CoolantPack.prefab
+- Assets/shaders/fx/hgintersectioncloudremap.shader
 - Assets/Materials/Item/BountyHunterBadge/BackingTex.png
 - Assets/Prefabs/Item/SanguineShieldBattery/SanguineShieldBattery.prefab
 - Assets/Materials/Item/WristMountedShotgun/M_Shadow.mat
@@ -99,6 +105,7 @@ Assets:
 - Assets/Materials/Item/ReactiveArmourPlate/UnderlayTex.png
 - Assets/Materials/Item/BountyHunterBadge/YellowTex1.png
 - Assets/Materials/Item/BountyHunterBadge/scratchTex.png
+- Assets/Prefabs/Item/NidusVirus/NidusVirus.prefab
 - Assets/Materials/Item/SanguineShieldBattery/M_Crystal.mat
 - Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.blend
 - Assets/Prefabs/Item/WristMountedShotgun/WristMountedShotgun.blend
@@ -106,6 +113,7 @@ Assets:
 - Assets/Materials/Item/KineticBattery/M_Bars.mat
 - Assets/Materials/Item/KineticBattery/KineticBattery.PNG
 - Assets/Materials/Item/ReactiveArmourPlate/MetallicTex.png
+- Assets/Materials/Item/NidusVirus/M_VirusStem.mat
 - Assets/Materials/Item/BountyHunterBadge/M_yellaNoTex.mat
 - Assets/Materials/Item/CoolantPack/Coolant.png
 - Assets/Materials/Item/ReactiveArmourPlate/M_Grip.mat
