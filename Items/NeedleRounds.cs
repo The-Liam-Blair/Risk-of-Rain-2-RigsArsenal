@@ -12,15 +12,14 @@ namespace MoreItems.Items
 {
     /// <summary>
     /// NeedleRounds - T2 (Uncommon) Item
-    /// <para>Increases critical strike damage slightly.</para>
-    /// <para>If critical strike chance is less than 10%, it will also be increased to 10%.</para>
+    /// <para>Increases critical strike chance and damage slightly.</para>
     /// </summary>
     public class NeedleRounds : Item
     {
         public override string Name => "Needle Rounds";
         public override string NameToken => "NEEDLEROUNDS";
-        public override string PickupToken => "Increases critical strike chance and damage slightly.";
-        public override string Description => "Gain <style=cIsDamage>+10%</style><style=cStack> (+10% per stack)</style> increased <style=cIsDamage>critical strike chance and damage</style>.";
+        public override string PickupToken => "Increases critical strike chance and critical strike damage slightly.";
+        public override string Description => "Gain <style=cIsDamage>+15%</style><style=cStack> (+15% per stack)</style> increased <style=cIsDamage>critical strike chance</style> and <style=cIsDamage>critical strike damage</style>.";
         public override string Lore => "<style=cMono>// INTERCEPTED RADIO TRANSMISSIONS. //\n// PRINTING TRANSCRIPT... //</style>\n\nExperimental munitions MUST be banned today!\n\nSmall arms research has gone too far, and these so called 'Plated Rounds' harbour a sinister truth. They are designed to kill with brutal efficiency.\n\nShaped charges built into the tail end of the bullet detonate when the bullet has pierced it's target, sending forth huge bursts of shrapnel that decimate the target from the inside!\n\nWar is inevitable, but it does not always need to be a bloodbath. Incapacitation or disarming is always preferred, the less soldiers killed in battle, the better. And we already have methods to ensure that. Private military research into barbaric technologies like these prove that they are only interested in death without resolution.\n\nWe the people demand a system-wide ban on these munitions, and an immediate stop to any further research into similar technologies. For the sake of humanity. <style=cMono>\n\n// TRANSCRIPT FINISHED. //</style>";
 
         public override ItemTier Tier => ItemTier.Tier2;
@@ -30,7 +29,7 @@ namespace MoreItems.Items
         public override ItemTag[] Tags => new ItemTag[] { ItemTag.Damage };
         public override bool AIBlackList => false;
 
-        public override Sprite Icon => null;
+        public override Sprite Icon => MainAssets.LoadAsset<Sprite>("NeedleRounds.png");
         public override GameObject Model => MainAssets.LoadAsset<GameObject>("NeedleRounds.prefab");
 
         public override void SetupHooks()
@@ -39,8 +38,8 @@ namespace MoreItems.Items
             {
                 if(!self || !self.inventory || self.inventory.GetItemCount(itemDef) <= 0) { return; }
 
-                args.critAdd += 10f * self.inventory.GetItemCount(itemDef);
-                args.critDamageMultAdd += 0.10f * self.inventory.GetItemCount(itemDef);
+                args.critAdd += 15f * self.inventory.GetItemCount(itemDef);
+                args.critDamageMultAdd += 0.15f * self.inventory.GetItemCount(itemDef);
             };
         }
 
@@ -48,7 +47,7 @@ namespace MoreItems.Items
         {
             ItemDisplayRuleDict rules = new ItemDisplayRuleDict();
 
-            GameObject display = MainAssets.LoadAsset<GameObject>("BountyHunterBadge.prefab");
+            GameObject display = MainAssets.LoadAsset<GameObject>("NeedleRounds.prefab");
 
             var itemDisplay = display.AddComponent<ItemDisplay>();
             itemDisplay.rendererInfos = ItemDisplaySetup(display);

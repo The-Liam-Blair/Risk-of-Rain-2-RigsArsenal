@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2944872502
+CRC: 1001579100
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a19e449763c539686498e29145127cb2
+    Hash: ff73ac42f3b8882ed983abd7d569aadc
   TypeTreeHash:
     serializedVersion: 2
     Hash: 1fe3abd029edb3522ae5dbbc711d0a74
@@ -31,6 +31,7 @@ SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Materials/Item/BountyHunterBadge/M_Gray.mat
 - Assets/Materials/Item/WornOutStimpack/M_White.mat
+- Assets/Materials/Item/NeedleRounds/NeedleRounds.png
 - Assets/Materials/Item/BountyHunterBadge/BountyHunterBadge.png
 - Assets/Materials/Item/WornOutStimpack/M_DepletedIcon.mat
 - Assets/Prefabs/Item/ChaosRune/ChaosRune.prefab
