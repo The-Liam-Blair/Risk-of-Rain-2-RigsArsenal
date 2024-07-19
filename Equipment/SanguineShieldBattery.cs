@@ -29,7 +29,7 @@ namespace MoreItems.Equipments
 
         public override float cooldown => 20f;
 
-        public override Sprite Icon => null;
+        public override Sprite Icon => MainAssets.LoadAsset<Sprite>("SanguineShieldBattery.png");
 
         public override GameObject Model => MainAssets.LoadAsset<GameObject>("SanguineShieldBattery.prefab");
 

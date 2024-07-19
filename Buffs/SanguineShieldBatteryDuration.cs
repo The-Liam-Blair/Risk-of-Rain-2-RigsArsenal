@@ -14,9 +14,9 @@ namespace MoreItems.Buffs
         public override bool canStack => false;
         public override bool isDebuff => false;
         public override Color BuffColor => Color.white;
-        public override Sprite Icon => null;
+        public override Sprite Icon => MainAssets.LoadAsset<Sprite>("SanguineShieldBatteryBuff.png");
         public override bool isCooldown => true;
 
-        // Does not hook into anything, as the buff itself only acts as a timer/cooldown indicator.
+        // Does not hook into anything, as the buff itself only acts as a duration indicator.
     }
 }
