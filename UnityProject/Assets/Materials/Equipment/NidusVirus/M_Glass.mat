@@ -73,7 +73,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaBias: 0
-    - _AlphaBoost: 10
+    - _AlphaBoost: 20
     - _Boost: 0.25
     - _BumpScale: 1
     - _CalcTextureAlphaOn: 0
@@ -101,7 +101,7 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _InternalSimpleBlendMode: 0
-    - _IntersectionStrength: 20
+    - _IntersectionStrength: 6
     - _InvFade: 0
     - _Metallic: 0
     - _Mode: 0
@@ -110,8 +110,8 @@ Material:
     - _OffsetAmount: 0
     - _Parallax: 0.02
     - _RampInfo: 0
-    - _RimPower: 5
-    - _RimStrength: 2
+    - _RimPower: 9
+    - _RimStrength: 3
     - _SkyboxOnly: 0
     - _SmoothnessTextureChannel: 0
     - _SoftPower: 0.1

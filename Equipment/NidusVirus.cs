@@ -20,18 +20,18 @@ namespace MoreItems.Equipments
 
         public override string PickupToken => "Target enemy's debuffs are spread to nearby enemies.";
 
-        public override string Description => "Target an enemy and spread their <style=cIsUtility>debuffs</style> to enemies up to <style=cIsUtility>50 units</style> away for <style=cIsUtility>5 seconds</style>. <style=cIsHealth>Damaging debuffs</style> inflict <style=cIsHealth>double damage</style>.";
-        public override string Lore => "";
+        public override string Description => "Target an enemy and spread their <style=cIsUtility>debuffs</style> to enemies up to <style=cIsUtility>50 units</style> away for <style=cIsUtility>5 seconds</style>. <style=cIsHealth>Damaging debuffs</style> are duplicated to enemies for their normal duration.";
+        public override string Lore => "''Toxicology team, report!''\n\n''Virus 'ND-1421' outbreak has been successfully contained.''\n\n''Casualties?''\n\n''Over the two month outbreak, approximately 500 million humans, about 95% of the planet's population, has died. Animal reports are still underway, but we estimate up to 80 thousand species are extinct or critically endangered.''\n\n''My god...''\n\n''Most of the local fauna were destroyed. Entire groves of flowers and forests, eradicated. This cannot happen again, ever. If a hostile agent managed to retrieve this virus-''\n\n''It will be sealed in the strongest container money can buy. This virus is one of the deadlest in the known universe and must be studied, to learn how it spreads, and for a cure to make sure an outbreak like this never happens again. Have it sent to the lab on Earth, as soon as possible''\n\n''Yes sir, on it.''";
 
         public override bool isLunar => false;
 
-        public override float cooldown => 1f;
+        public override float cooldown => 35f;
 
-        public override Sprite Icon => null;
+        public override Sprite Icon => MainAssets.LoadAsset<Sprite>("NidusVirus.png");
 
         public override GameObject Model => MainAssets.LoadAsset<GameObject>("NidusVirus.prefab");
 
-        private int spreadRadius = 200;
+        private int spreadRadius = 50;
         private float debuffDefaultDuration = 5f;
         private Indicator targetIndicator = null;
 
@@ -152,7 +152,6 @@ namespace MoreItems.Equipments
 
         public override void SetupHooks()
         {
-            // Hook onto the update event.
             On.RoR2.RoR2Application.FixedUpdate += (orig, self) =>
             {
                 orig(self);

@@ -41,7 +41,7 @@ namespace MoreItems.Equipments
         public override bool UseEquipment(EquipmentSlot slot)
         {
             // On equipment activation, add 20 intervals where the equipment's effects will apply, each with a timer of 0.25s
-            // for a total of just over 5 seconds.
+            // for a total of around 5.3 seconds. (The extra 0.3 is probably from floating point errors or inconsistencies in dt).
             intervalCount = 20;
             intervalTimer = 0.25f;
 
@@ -94,7 +94,7 @@ namespace MoreItems.Equipments
                     });
 
                     // If the player's health drops below 5% of their max health, end the effect.
-                    // Forcefully call recalculate stats afterwards to reset the barrier decay rate its normal value.
+                    // Forcefully call recalculate stats afterwards to reset the barrier decay rate to its normal value.
                     if (body.healthComponent.health <= maxHealth * 0.05f)
                     {
                         intervalCount = 0;

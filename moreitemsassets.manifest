@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1710306465
+CRC: 3687397273
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3dafa1f5a89c993f3d2593ec2911a348
+    Hash: 037c98b2c52e6699d5f18cc3dae27e4b
   TypeTreeHash:
     serializedVersion: 2
     Hash: 1fe3abd029edb3522ae5dbbc711d0a74
@@ -38,6 +38,7 @@ Assets:
 - Assets/Materials/Item/WornOutStimpack/M_Button.mat
 - Assets/Materials/Equipment/NidusVirus/M_Glass.mat
 - Assets/shaders/deferred/hgstandard.shader
+- Assets/Materials/Equipment/NidusVirus/M_TextBacking.mat
 - Assets/Materials/Item/ReactiveArmourPlate/ArmourTex.png
 - Assets/Prefabs/Equipment/NidusVirus/NidusVirus.blend
 - Assets/Materials/Item/ChaosRune/M_RockDark.mat
@@ -55,22 +56,26 @@ Assets:
 - Assets/Materials/Item/CoolantPack/M_Button.mat
 - Assets/Materials/Equipment/SanguineShieldBattery/M_MetalFixtures.mat
 - Assets/Materials/Item/ChaosRune/Rock.png
+- Assets/Materials/Equipment/NidusVirus/M_Screw.mat
 - Assets/Materials/Item/WornOutStimpack/M_Base.mat
 - Assets/Materials/Item/WornOutStimpack/WornOutStimpack.png
 - Assets/Materials/Item/BountyHunterBadge/M_Black.mat
 - Assets/Materials/Item/WornOutStimpack/M_HealIcon.mat
 - Assets/Materials/Item/WristMountedShotgun/M_Gray.mat
 - Assets/Materials/Equipment/SanguineShieldBattery/FlowMap.png
+- Assets/Materials/Equipment/NidusVirus/M_PlateOutline.mat
 - Assets/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.blend
 - Assets/Prefabs/Item/CoolantPack/CoolantPack.prefab
 - Assets/shaders/fx/hgintersectioncloudremap.shader
 - Assets/Materials/Item/NeedleRounds/M_BulletAttachment.mat
 - Assets/Materials/Item/BountyHunterBadge/BackingTex.png
+- Assets/Materials/Equipment/NidusVirus/M_BoxSign.mat
 - Assets/Prefabs/Equipment/SanguineShieldBattery/SanguineShieldBattery.prefab
 - Assets/Materials/Item/WristMountedShotgun/M_Shadow.mat
 - Assets/Materials/Equipment/SanguineShieldBattery/M_Gauge.mat
 - Assets/Materials/Item/WornOutStimpack/M_WhiteBright.mat
 - Assets/Materials/Item/BountyHunterBadge/M_yella.mat
+- Assets/Materials/Equipment/NidusVirus/M_BoxLight.mat
 - Assets/Materials/Item/CoolantPack/M_TankMetre.mat
 - Assets/Materials/Item/NeedleRounds/M_Tape.mat
 - Assets/Materials/Item/ReactiveArmourPlate/M_Armour.mat
@@ -88,6 +93,7 @@ Assets:
 - Assets/Materials/Item/CoolantPack/M_Tank.mat
 - Assets/Materials/Item/WristMountedShotgun/WristMountedShotgun.png
 - Assets/Materials/Item/KineticBattery/its texturin time.png
+- Assets/Prefabs/Equipment/NidusVirus/NidusVirusObject.blend
 - Assets/Materials/Item/WristMountedShotgun/M_ShotgunComponent.mat
 - Assets/Materials/Item/ReactiveArmourPlate/GripTex.png
 - Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlatingBuff.png
@@ -95,6 +101,7 @@ Assets:
 - Assets/Materials/Equipment/SanguineShieldBattery/SanguineShieldBatteryBuff.png
 - Assets/Prefabs/Item/KineticBattery/KineticBattery.prefab
 - Assets/Materials/Item/WristMountedShotgun/M_RedDotSight.mat
+- Assets/Materials/Equipment/NidusVirus/NidusVirus.png
 - Assets/Materials/Item/WristMountedShotgun/Strap.png
 - Assets/Materials/Item/BountyHunterBadge/M_YELLA-ER.mat
 - Assets/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.prefab
@@ -105,6 +112,7 @@ Assets:
 - Assets/Materials/Item/ChaosRune/M_RedGlow.mat
 - Assets/Materials/Item/CoolantPack/M_Backing.mat
 - Assets/Materials/Item/ChaosRune/M_RockFace.mat
+- Assets/Materials/Equipment/NidusVirus/M_VirusBulb.mat
 - Assets/Materials/Item/CoolantPack/CoolantPack.png
 - Assets/Materials/Item/ChaosRune/M_LesserGlow.mat
 - Assets/Materials/Item/ReactiveArmourPlate/UnderlayTex.png
@@ -116,9 +124,11 @@ Assets:
 - Assets/Materials/Equipment/SanguineShieldBattery/M_Crystal.mat
 - Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.blend
 - Assets/Prefabs/Item/WristMountedShotgun/WristMountedShotgun.blend
+- Assets/Prefabs/Equipment/NidusVirus/Virus.prefab
 - Assets/Materials/Item/KineticBattery/M_Glow.mat
 - Assets/Materials/Item/KineticBattery/M_Bars.mat
 - Assets/Materials/Item/KineticBattery/KineticBattery.PNG
+- Assets/Materials/Equipment/NidusVirus/M_Casing.mat
 - Assets/Materials/Item/ReactiveArmourPlate/MetallicTex.png
 - Assets/Materials/Item/NeedleRounds/M_BulletStripe.mat
 - Assets/Materials/Equipment/NidusVirus/M_VirusStem.mat
