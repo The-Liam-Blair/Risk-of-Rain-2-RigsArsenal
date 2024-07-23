@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2264779969
+CRC: 2733984025
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 0eeebdaa1f127690e6382253b86cafa8
+    Hash: d8fa72369f37d12647df0e335362a792
   TypeTreeHash:
     serializedVersion: 2
     Hash: 1fe3abd029edb3522ae5dbbc711d0a74
@@ -80,6 +80,7 @@ Assets:
 - Assets/Materials/Item/NeedleRounds/M_Tape.mat
 - Assets/Materials/Item/ReactiveArmourPlate/M_Armour.mat
 - Assets/Prefabs/Item/CoolantPack/CoolantPack.blend
+- Assets/Materials/Equipment/TimeWarp/TimeWarpConsume.png
 - Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlating.png
 - Assets/Prefabs/Equipment/SanguineShieldBattery/SanguineShieldBattery.blend
 - Assets/Prefabs/Item/WornOutStimpack/WornOutStimpack.prefab

@@ -78,6 +78,11 @@ namespace MoreItems.Items
                     itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/Base/Common/Tier3Def.asset").WaitForCompletion();
                     break;
 
+                case ItemTier.NoTier:
+                    itemDef.tier = ItemTier.NoTier;
+                    itemDef._itemTierDef = null;
+                    break;
+
                 default:
                     DebugLog.Log($"Item {itemDef.name} has an invalid item tier. Defaulting to Tier1.");
                     itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/Base/Common/Tier1Def.asset").WaitForCompletion();
@@ -97,7 +102,7 @@ namespace MoreItems.Items
             if (Tags.Length > 0) { itemDef.tags = Tags; }
 
             // If it exists, load custom sprite and model, otherwise load default question mark sprite and model.
-            itemDef.pickupIconSprite = (Icon != null) 
+            itemDef.pickupIconSprite = (Icon != null)
                 ? Icon
                 : Addressables.LoadAssetAsync<Sprite>("RoR2/Base/Common/MiscIcons/texMysteryIcon.png").WaitForCompletion();
 
@@ -105,7 +110,7 @@ namespace MoreItems.Items
             itemDef.pickupModelPrefab = (Model != null)
                 ? Model
                 : Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mystery/PickupMystery.prefab").WaitForCompletion();
-            
+
 
             ItemAPI.Add(new CustomItem(itemDef, CreateItemDisplayRules()));
         }
@@ -139,6 +144,6 @@ namespace MoreItems.Items
             return renderInfos;
         }
 
-        public virtual void SetupHooks() {}
+        public virtual void SetupHooks() { }
     }
 }

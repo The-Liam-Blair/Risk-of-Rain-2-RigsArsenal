@@ -90,7 +90,7 @@ namespace MoreItems
         {
             // Debugging method to spawn items in-game.
             // Disabled for release version.
-            /*
+
             if (Input.GetKeyDown(KeyCode.F1))
             {
                 DebugLog.Log("F1 pressed, spawning stimpack.");
@@ -136,8 +136,13 @@ namespace MoreItems
             }
             else if (Input.GetKeyDown(KeyCode.F9))
             {
-                DebugLog.Log("F8 pressed, spawning Nidus Virus");
+                DebugLog.Log("F8 pressed, spawning Sanguine Shield Battery");
                 DEBUG_SpawnEquipment("SANGUINESHIELDBATTERY");
+            }
+            else if (Input.GetKeyDown(KeyCode.F10))
+            {
+                DebugLog.Log("F8 pressed, spawning Time Warp");
+                DEBUG_SpawnEquipment("TIMEWARP");
             }
 
             // Clear all items from the player's inventory.
@@ -160,7 +165,6 @@ namespace MoreItems
                 var player = PlayerCharacterMasterController.instances[0].master;
                 player.GiveMoney(100000);
             }
-            */
         }
 
         private void DEBUG_SpawnItem(string itemName)
@@ -195,6 +199,9 @@ namespace MoreItems
             }   
         }
 
+        /// <summary>
+        /// Inflict a standard dot on a target, as how the game applies them.
+        /// </summary>
         public static void InflictDot(CharacterBody attacker, CharacterBody victim, DotController.DotIndex dotType, float damage, float procCoefficent = 1f)
         {
             switch (dotType)

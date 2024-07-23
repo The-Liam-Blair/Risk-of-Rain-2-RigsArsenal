@@ -65,10 +65,6 @@ namespace MoreItems.Equipments
             // - Rex's entangle.
             // - Mercenary's expose.
 
-
-            // todo: May need more testing, sometimes it feels like the effect fails, but it may be due to it acquiring the wrong target.
-            //       Aka MAKE THAT VISUAL INDICATOR!!
-
             HurtBox victim = slot.currentTarget.hurtBox;
 
             if (!victim || !victim.healthComponent) { return false; }
