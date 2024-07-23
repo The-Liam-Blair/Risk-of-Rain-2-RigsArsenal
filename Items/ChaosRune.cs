@@ -7,6 +7,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.Diagnostics;
 using UnityEngine.UIElements;
 using static MoreItems.MoreItems;
+using static RoR2.MasterSpawnSlotController;
 
 namespace MoreItems.Items
 {
@@ -70,34 +71,27 @@ namespace MoreItems.Items
                         hasRun = true;
                         currentSucessfulRolls++;
 
-                        int DotIndex = Random.Range(0, 3); // 4 DOTs: Bleed, Burn (Including ignition tank upgraded burn), Blight and Collapse.
+                        // todo: some visual or audio effect maybe to indicate the item has triggered.
+
+                        int DotIndex = UnityEngine.Random.Range(0, 4); // 4 DOTs: Bleed, Burn (Including ignition tank upgraded burn), Blight and Collapse.
+                        DebugLog.Log(DotIndex);
 
                         switch (DotIndex)
                         {
                             case 0: // Bleed
-                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Bleed, 3f * damageInfo.procCoefficient, 1f);
+                                InflictDot(attacker, victim, DotController.DotIndex.Bleed, attacker.damage, damageInfo.procCoefficient);
                                 break;
 
                             case 1: // Burn
-                                InflictDotInfo burnDot = new InflictDotInfo()
-                                {
-                                    attackerObject = inflictDotInfo.attackerObject,
-                                    victimObject = inflictDotInfo.victimObject,
-                                    totalDamage = attacker.damage * 0.5f,
-                                    damageMultiplier = 1f,
-                                    dotIndex = DotController.DotIndex.Burn
-                                };
-                                StrengthenBurnUtils.CheckDotForUpgrade(attacker.inventory, ref burnDot); // Upgrades burn to stronger burn if the entity has any ignition tanks.
-                                DotController.InflictDot(ref burnDot);
+                                InflictDot(attacker, victim, DotController.DotIndex.Burn, attacker.damage, damageInfo.procCoefficient);
                                 break;
 
                             case 2: // Blight
-                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Blight, 5f * damageInfo.procCoefficient, 1f);
+                                InflictDot(attacker, victim, DotController.DotIndex.Blight, attacker.damage, damageInfo.procCoefficient);
                                 break;
 
                             case 3: // Collapse
-                                DotController.DotDef collapseDef = DotController.GetDotDef(DotController.DotIndex.Fracture);
-                                DotController.InflictDot(inflictDotInfo.victimObject, inflictDotInfo.attackerObject, DotController.DotIndex.Fracture, collapseDef.interval, 1f);
+                                InflictDot(attacker, victim, DotController.DotIndex.Fracture, attacker.damage, damageInfo.procCoefficient);
                                 break;
                         }
                     }
@@ -110,6 +104,187 @@ namespace MoreItems.Items
                 hasRun = false; // Reset flag for triggering this item.
                 orig(self, damageInfo, victim);
             };
+        }
+
+        public override ItemDisplayRuleDict CreateItemDisplayRules()
+        {
+            ItemDisplayRuleDict rules = new ItemDisplayRuleDict();
+
+            GameObject display = MainAssets.LoadAsset<GameObject>("ChaosRune.prefab");
+
+            var itemDisplay = display.AddComponent<ItemDisplay>();
+            itemDisplay.rendererInfos = ItemDisplaySetup(display);
+
+            rules.Add("mdlCommandoDualies", new RoR2.ItemDisplayRule[]
+            {
+                new RoR2.ItemDisplayRule
+                {
+                    ruleType = ItemDisplayRuleType.ParentedPrefab,
+                    followerPrefab = display,
+                    childName = "ThighL",
+                    localPos = new Vector3(0.06313F, 0.22037F, 0.09908F),
+                    localAngles = new Vector3(45.34884F, 106.977F, 165.8645F),
+                    localScale = new Vector3(0F, 0F, 0F)
+                }
+            });
+
+            rules.Add("mdlHuntress", new RoR2.ItemDisplayRule[]
+            {
+                new RoR2.ItemDisplayRule
+                {
+                    ruleType = ItemDisplayRuleType.ParentedPrefab,
+                    followerPrefab = display,
+                    childName = "ThighL",
+                    localPos = new Vector3(0f, 0f, 0f),
+                    localAngles = new Vector3(0f, 0f, 0f),
+                    localScale = new Vector3(0f, 0f, 0f)
+                }
+            });
+
+            rules.Add("mdlBandit2", new RoR2.ItemDisplayRule[]
+            {
+                new RoR2.ItemDisplayRule
+                {
+                    ruleType = ItemDisplayRuleType.ParentedPrefab,
+                    followerPrefab = display,
+                    childName = "ThighL",
+                    localPos = new Vector3(0f, 0f, 0f),
+                    localAngles = new Vector3(0f, 0f, 0f),
+                    localScale = new Vector3(0f, 0f, 0f)
+                }
+            });
+
+            rules.Add("mdlToolbot", new RoR2.ItemDisplayRule[]
+            {
+                new RoR2.ItemDisplayRule
+                {
+                    ruleType = ItemDisplayRuleType.ParentedPrefab,
+                    followerPrefab = display,
+                    childName = "ThighL",
+                    localPos = new Vector3(0f, 0f, 0f),
+                    localAngles = new Vector3(0f, 0f, 0f),
+                    localScale = new Vector3(0f, 0f, 0f)
+                }
+            });
+
+            rules.Add("mdlEngi", new RoR2.ItemDisplayRule[]
+            {
+                new RoR2.ItemDisplayRule
+                {
+                    ruleType = ItemDisplayRuleType.ParentedPrefab,
+                    followerPrefab = display,
+                    childName = "ThighL",
+                    localPos = new Vector3(0f, 0f, 0f),
+                    localAngles = new Vector3(0f, 0f, 0f),
+                    localScale = new Vector3(0f, 0f, 0f)
+                }
+            });
+
+            rules.Add("mdlMage", new RoR2.ItemDisplayRule[]
+            {
+                new RoR2.ItemDisplayRule
+                {
+                    ruleType = ItemDisplayRuleType.ParentedPrefab,
+                    followerPrefab = display,
+                    childName = "ThighL",
+                    localPos = new Vector3(0f, 0f, 0f),
+                    localAngles = new Vector3(0f, 0f, 0f),
+                    localScale = new Vector3(0f, 0f, 0f)
+                }
+            });
+
+            rules.Add("mdlMerc", new RoR2.ItemDisplayRule[]
+            {
+                new RoR2.ItemDisplayRule
+                {
+                    ruleType = ItemDisplayRuleType.ParentedPrefab,
+                    followerPrefab = display,
+                    childName = "ThighL",
+                    localPos = new Vector3(0f, 0f, 0f),
+                    localAngles = new Vector3(0f, 0f, 0f),
+                    localScale = new Vector3(0f, 0f, 0f)
+                }
+            });
+
+            rules.Add("mdlTreebot", new RoR2.ItemDisplayRule[]
+            {
+                new RoR2.ItemDisplayRule
+                {
+                    ruleType = ItemDisplayRuleType.ParentedPrefab,
+                    followerPrefab = display,
+                    childName = "Base",
+                    localPos = new Vector3(0f, 0f, 0f),
+                    localAngles = new Vector3(0f, 0f, 0f),
+                    localScale = new Vector3(0f, 0f, 0f)
+                }
+            });
+
+            rules.Add("mdlLoader", new RoR2.ItemDisplayRule[]
+            {
+                new RoR2.ItemDisplayRule
+                {
+                    ruleType = ItemDisplayRuleType.ParentedPrefab,
+                    followerPrefab = display,
+                    childName = "ThighR",
+                    localPos = new Vector3(-0.12428F, 0.20452F, 0.04312F),
+                    localAngles = new Vector3(22.53534F, 0.66831F, 188.5954F),
+                    localScale = new Vector3(0F, 0F, 0F)
+                }
+            });
+
+            rules.Add("mdlCroco", new RoR2.ItemDisplayRule[]
+            {
+                new RoR2.ItemDisplayRule
+                {
+                    ruleType = ItemDisplayRuleType.ParentedPrefab,
+                    followerPrefab = display,
+                    childName = "ThighR",
+                    localPos = new Vector3(-0.90804F, -0.68912F, -0.52958F),
+                    localAngles = new Vector3(35.03824F, 0.44614F, 214.5975F),
+                    localScale = new Vector3(0F, 0F, 0F)
+                }
+            });
+
+            rules.Add("mdlCaptain", new RoR2.ItemDisplayRule[]
+            {
+                new RoR2.ItemDisplayRule
+                {
+                    ruleType = ItemDisplayRuleType.ParentedPrefab,
+                    followerPrefab = display,
+                    childName = "Stomach",
+                    localPos = new Vector3(-0.35971F, 0.04198F, -0.042F),
+                    localAngles = new Vector3(328.5733F, 176.5325F, 13.82045F),
+                    localScale = new Vector3(0F, 0F, 0F)
+                }
+            });
+
+            rules.Add("mdlRailGunner", new RoR2.ItemDisplayRule[]
+            {
+                new RoR2.ItemDisplayRule
+                {
+                    ruleType = ItemDisplayRuleType.ParentedPrefab,
+                    followerPrefab = display,
+                    childName = "ThighL",
+                    localPos = new Vector3(0f, 0f, 0f),
+                    localAngles = new Vector3(0f, 0f, 0f),
+                    localScale = new Vector3(0f, 0f, 0f)
+                }
+            });
+
+            rules.Add("mdlVoidSurvivor", new RoR2.ItemDisplayRule[]
+            {
+                new RoR2.ItemDisplayRule
+                {
+                    ruleType = ItemDisplayRuleType.ParentedPrefab,
+                    followerPrefab = display,
+                    childName = "ThighL",
+                    localPos = new Vector3(0f, 0f, 0f),
+                    localAngles = new Vector3(0f, 0f, 0f),
+                    localScale = new Vector3(0f, 0f, 0f)
+                }
+            });
+
+            return rules;
         }
     }
 }

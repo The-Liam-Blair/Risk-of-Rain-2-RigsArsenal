@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2954813653
+CRC: 2264779969
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 98cdffb6d1395d494fcb9cfc35f23322
+    Hash: 0eeebdaa1f127690e6382253b86cafa8
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 209b83e87f2068bd9f291febfe005640
+    Hash: 1fe3abd029edb3522ae5dbbc711d0a74
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -25,79 +25,115 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
-- Class: 135
-  Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Materials/Item/BountyHunterBadge/M_Gray.mat
 - Assets/Materials/Item/WornOutStimpack/M_White.mat
+- Assets/Materials/Item/NeedleRounds/NeedleRounds.png
 - Assets/Materials/Item/BountyHunterBadge/BountyHunterBadge.png
 - Assets/Materials/Item/WornOutStimpack/M_DepletedIcon.mat
 - Assets/Prefabs/Item/ChaosRune/ChaosRune.prefab
 - Assets/Materials/Item/WornOutStimpack/M_Button.mat
+- Assets/Materials/Equipment/NidusVirus/M_Glass.mat
 - Assets/shaders/deferred/hgstandard.shader
+- Assets/Materials/Equipment/NidusVirus/M_TextBacking.mat
 - Assets/Materials/Item/ReactiveArmourPlate/ArmourTex.png
+- Assets/Prefabs/Equipment/NidusVirus/NidusVirus.blend
 - Assets/Materials/Item/ChaosRune/M_RockDark.mat
 - Assets/Materials/Item/BountyHunterBadge/YellowTex2.png
 - Assets/Materials/Item/WristMountedShotgun/M_DeepBlack.mat
 - Assets/Materials/Item/WristMountedShotgun/M_Shotgun.mat
 - Assets/Materials/Item/CoolantPack/M_Cap.mat
+- Assets/Materials/Equipment/NidusVirus/glassRemapRamp.png
+- Assets/Materials/Equipment/SanguineShieldBattery/SanguineShieldBattery.png
+- Assets/Materials/Equipment/NidusVirus/M_VirusBall.mat
+- Assets/shaders/fx/hgcloudremap.shader
+- Assets/Prefabs/Item/NeedleRounds/NeedleRounds.prefab
 - Assets/Materials/Item/ReactiveArmourPlate/M_ArmourEdge.mat
 - Assets/Materials/Item/KineticBattery/M_Screw.mat
 - Assets/Materials/Item/CoolantPack/M_Button.mat
+- Assets/Materials/Equipment/SanguineShieldBattery/M_MetalFixtures.mat
 - Assets/Materials/Item/ChaosRune/Rock.png
+- Assets/Materials/Equipment/NidusVirus/M_Screw.mat
 - Assets/Materials/Item/WornOutStimpack/M_Base.mat
 - Assets/Materials/Item/WornOutStimpack/WornOutStimpack.png
 - Assets/Materials/Item/BountyHunterBadge/M_Black.mat
 - Assets/Materials/Item/WornOutStimpack/M_HealIcon.mat
 - Assets/Materials/Item/WristMountedShotgun/M_Gray.mat
+- Assets/Materials/Equipment/SanguineShieldBattery/FlowMap.png
+- Assets/Materials/Equipment/NidusVirus/M_PlateOutline.mat
 - Assets/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.blend
 - Assets/Prefabs/Item/CoolantPack/CoolantPack.prefab
+- Assets/shaders/fx/hgintersectioncloudremap.shader
+- Assets/Materials/Item/NeedleRounds/M_BulletAttachment.mat
 - Assets/Materials/Item/BountyHunterBadge/BackingTex.png
+- Assets/Materials/Equipment/NidusVirus/M_BoxSign.mat
+- Assets/Prefabs/Equipment/SanguineShieldBattery/SanguineShieldBattery.prefab
 - Assets/Materials/Item/WristMountedShotgun/M_Shadow.mat
+- Assets/Materials/Equipment/SanguineShieldBattery/M_Gauge.mat
 - Assets/Materials/Item/WornOutStimpack/M_WhiteBright.mat
 - Assets/Materials/Item/BountyHunterBadge/M_yella.mat
+- Assets/Materials/Equipment/NidusVirus/M_BoxLight.mat
 - Assets/Materials/Item/CoolantPack/M_TankMetre.mat
+- Assets/Materials/Item/NeedleRounds/M_Tape.mat
 - Assets/Materials/Item/ReactiveArmourPlate/M_Armour.mat
 - Assets/Prefabs/Item/CoolantPack/CoolantPack.blend
 - Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlating.png
+- Assets/Prefabs/Equipment/SanguineShieldBattery/SanguineShieldBattery.blend
 - Assets/Prefabs/Item/WornOutStimpack/WornOutStimpack.prefab
 - Assets/Materials/Item/ChaosRune/M_Rock.mat
 - Assets/Materials/Item/ChaosRune/ChaosRune.png
 - Assets/Materials/Item/WornOutStimpack/WornOutStimpackBuff.png
 - Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.prefab
+- Assets/Materials/Equipment/SanguineShieldBattery/M_Body.mat
 - Assets/Prefabs/Item/WristMountedShotgun/WristMountedShotgun.prefab
 - Assets/Materials/Item/KineticBattery/KineticBatteryBuff.png
 - Assets/Materials/Item/CoolantPack/M_Tank.mat
 - Assets/Materials/Item/WristMountedShotgun/WristMountedShotgun.png
 - Assets/Materials/Item/KineticBattery/its texturin time.png
+- Assets/Prefabs/Equipment/NidusVirus/NidusVirusObject.blend
 - Assets/Materials/Item/WristMountedShotgun/M_ShotgunComponent.mat
 - Assets/Materials/Item/ReactiveArmourPlate/GripTex.png
 - Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlatingBuff.png
+- Assets/Materials/Equipment/SanguineShieldBattery/flowmapnormals.png
+- Assets/Materials/Equipment/SanguineShieldBattery/SanguineShieldBatteryBuff.png
 - Assets/Prefabs/Item/KineticBattery/KineticBattery.prefab
 - Assets/Materials/Item/WristMountedShotgun/M_RedDotSight.mat
+- Assets/Materials/Equipment/NidusVirus/NidusVirus.png
+- Assets/Materials/Item/WristMountedShotgun/Strap.png
 - Assets/Materials/Item/BountyHunterBadge/M_YELLA-ER.mat
 - Assets/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.prefab
 - Assets/Materials/Item/ReactiveArmourPlate/M_Underlay.mat
+- Assets/Materials/Equipment/SanguineShieldBattery/M_BatteryShine.mat
 - Assets/Prefabs/Item/ChaosRune/ChaosRune.blend
 - Assets/Materials/Item/KineticBattery/M_Body.mat
 - Assets/Materials/Item/ChaosRune/M_RedGlow.mat
 - Assets/Materials/Item/CoolantPack/M_Backing.mat
 - Assets/Materials/Item/ChaosRune/M_RockFace.mat
+- Assets/Materials/Equipment/NidusVirus/M_VirusBulb.mat
 - Assets/Materials/Item/CoolantPack/CoolantPack.png
 - Assets/Materials/Item/ChaosRune/M_LesserGlow.mat
 - Assets/Materials/Item/ReactiveArmourPlate/UnderlayTex.png
+- Assets/Materials/Item/NeedleRounds/M_BulletBase.mat
 - Assets/Materials/Item/BountyHunterBadge/YellowTex1.png
 - Assets/Materials/Item/BountyHunterBadge/scratchTex.png
+- Assets/Materials/Item/NeedleRounds/M_BulletTop.mat
+- Assets/Prefabs/Equipment/NidusVirus/NidusVirus.prefab
+- Assets/Materials/Equipment/SanguineShieldBattery/M_Crystal.mat
 - Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.blend
 - Assets/Prefabs/Item/WristMountedShotgun/WristMountedShotgun.blend
+- Assets/Prefabs/Equipment/NidusVirus/Virus.prefab
 - Assets/Materials/Item/KineticBattery/M_Glow.mat
 - Assets/Materials/Item/KineticBattery/M_Bars.mat
 - Assets/Materials/Item/KineticBattery/KineticBattery.PNG
+- Assets/Materials/Equipment/NidusVirus/M_Casing.mat
 - Assets/Materials/Item/ReactiveArmourPlate/MetallicTex.png
+- Assets/Materials/Item/NeedleRounds/M_BulletStripe.mat
+- Assets/Materials/Equipment/NidusVirus/M_VirusStem.mat
 - Assets/Materials/Item/BountyHunterBadge/M_yellaNoTex.mat
 - Assets/Materials/Item/CoolantPack/Coolant.png
 - Assets/Materials/Item/ReactiveArmourPlate/M_Grip.mat
+- Assets/Prefabs/Item/NeedleRounds/NeedleRounds.blend
 Dependencies: []
