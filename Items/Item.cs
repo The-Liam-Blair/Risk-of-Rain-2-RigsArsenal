@@ -64,6 +64,9 @@ namespace MoreItems.Items
             itemDef.descriptionToken = $"ITEM_{NameToken}_DESCRIPTION";
             itemDef.loreToken = $"ITEM_{NameToken}_LORE";
 
+            itemDef.hidden = false;
+            itemDef.canRemove = CanRemove;
+
             switch (Tier)
             {
                 case ItemTier.Tier1:
@@ -80,7 +83,8 @@ namespace MoreItems.Items
 
                 case ItemTier.NoTier:
                     itemDef.tier = ItemTier.NoTier;
-                    itemDef._itemTierDef = null;
+                    itemDef.hidden = true;
+                    itemDef.deprecatedTier = ItemTier.NoTier;
                     break;
 
                 default:
@@ -88,9 +92,6 @@ namespace MoreItems.Items
                     itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/Base/Common/Tier1Def.asset").WaitForCompletion();
                     break;
             }
-
-            itemDef.canRemove = CanRemove;
-            itemDef.hidden = false;
 
             // Setup tags list, and special definition for if the item is blacklisted from the enemy AI.
             if (AIBlackList)

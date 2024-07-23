@@ -24,12 +24,12 @@ namespace MoreItems.Equipments
 
         public override string PickupToken => "Restore a random broken or depleted item.<style=cIsHealth> Sacrifices a random item per restoration.</style>";
 
-        public override string Description => "";
+        public override string Description => "Restore a <style=cIsUtility>single random</style> consumed item or <style=cLunarObjective>cure a single tonic affliction.</style> <style=cIsHealth>A common item is sacrificed per restoration.</style> <style=cDeath>A legendary item is sacrificed for legendary-tier items.</style>";
         public override string Lore => "";
 
         public override bool isLunar => true;
 
-        public override float cooldown => 1f;
+        public override float cooldown => 45f;
 
         public override Sprite Icon => null;
 
@@ -85,6 +85,9 @@ namespace MoreItems.Equipments
 
         private bool DestroyRandomItem(ItemTier sacrificeTier, CharacterBody self)
         {
+            // Dump all variable data to DebugLog.Log on Ror2.Content.Items.TonicAffliction.
+            // Name every dump value beforehand.
+
             // Record the relevant void tier. that can also be sacrificed.
             var voidSacrificeTier = (sacrificeTier == ItemTier.Tier1) ? ItemTier.VoidTier1 : ItemTier.VoidTier3;
 
