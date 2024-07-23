@@ -23,7 +23,7 @@ namespace MoreItems.Equipments
         public override string PickupToken => "Temporarily convert health into barrier.";
 
         public override string Description => "Convert 8% <style=cIsHealth>health</style> into 12% <style=cIsDamage>barrier</style> per second for 5 seconds. Barrier drain rate is <style=cIsDamage>halved</style> during usage. Effect ends prematurely if <style=cIsHealth>health drops below 5%</style> of your maximum health.";
-        public override string Lore => "";
+        public override string Lore => "Shipment: Modified Shield Battery.\nDestination: Ruthsworld Lab, Mars.\nInitial Observation Notes:\n\nStandard-issue exosuit shield battery injected with multiple bloodstone shards. No longer operable with electricity; the bloodstone's energy is the new power source. Like all bloodstone, it grows in power when in the presence of the dead or dying, said to sap their souls. Rare opportunity to examine the inner workings of these rare crystals. Keep in an enclosed environment at all times.";
 
         public override bool isLunar => false;
 

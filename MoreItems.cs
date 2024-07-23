@@ -30,7 +30,7 @@ namespace MoreItems
         public const string P_GUID = $"{P_Author}.{P_Name}";
         public const string P_Author = "RigsInRags";
         public const string P_Name = "RigsArsenal";
-        public const string P_Version = "1.0.1";
+        public const string P_Version = "1.1.0";
 
         public static AssetBundle MainAssets;
 
@@ -90,6 +90,7 @@ namespace MoreItems
         {
             // Debugging method to spawn items in-game.
             // Disabled for release version.
+            /*
             if (Input.GetKeyDown(KeyCode.F1))
             {
                 DebugLog.Log("F1 pressed, spawning stimpack.");
@@ -159,6 +160,7 @@ namespace MoreItems
                 var player = PlayerCharacterMasterController.instances[0].master;
                 player.GiveMoney(100000);
             }
+            */
         }
 
         private void DEBUG_SpawnItem(string itemName)

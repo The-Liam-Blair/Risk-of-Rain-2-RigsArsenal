@@ -29,7 +29,7 @@ namespace MoreItems.Equipments
 
         public override bool isLunar => false;
 
-        public override float cooldown => 0.1f;
+        public override float cooldown => 35f;
 
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("NidusVirus.png");
 
