@@ -10,6 +10,9 @@ using UnityEngine.Networking;
 using static RoR2.MasterSpawnSlotController;
 using static MoreItems.MoreItems;
 using R2API;
+using System.Collections;
+using BepInEx.Configuration;
+using EntityStates.VoidRaidCrab;
 
 namespace MoreItems.Equipments
 {
@@ -26,7 +29,7 @@ namespace MoreItems.Equipments
 
         public override bool isLunar => false;
 
-        public override float cooldown => 35f;
+        public override float cooldown => 0.1f;
 
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("NidusVirus.png");
 
@@ -34,9 +37,9 @@ namespace MoreItems.Equipments
 
         private int spreadRadius = 50;
         private float debuffDefaultDuration = 5f;
-        private Indicator targetIndicator = null;
 
         private GameObject targetIcon;
+        private GameObject SpreadIndicator;
 
         public override bool UseEquipment(EquipmentSlot slot)
         {
@@ -140,10 +143,31 @@ namespace MoreItems.Equipments
                         }
                     }
                 }
-            } 
+            }
 
-            // todo: add visual spread effect (some way of showing the equipment activating successfully, and its radius of effect).
+            // To prevent a NRE from spamming the item on a single target, resulting in multiple indicators with the old ones being de-referenced, lost
+            // and not destroyed after expiring.
+            if(SpreadIndicator)
+            {
+                UnityEngine.Object.Destroy(SpreadIndicator);
+                SpreadIndicator = null;
+            }
 
+            // Uses a modified range indicator from the "NearbyDamageBonus" (focus crystal) item.
+            GameObject original = Resources.Load<GameObject>("Prefabs/NetworkedObjects/NearbyDamageBonusIndicator");
+            SpreadIndicator = original.InstantiateClone("NidusVirusSpreadIndicator", true);
+            PrefabAPI.RegisterNetworkPrefab(SpreadIndicator);
+
+
+            SpreadIndicator.GetComponent<NetworkedBodyAttachment>().AttachToGameObjectAndSpawn(victim.healthComponent.body.gameObject, null);
+
+            var donut = SpreadIndicator.transform.GetChild(1); // 2nd child of the range indicator object controls the donut's visual properties.
+            donut.localScale = new Vector3(5f, 5f, 5f); // 50 unit radius to match the item's range.
+            donut.GetComponent<MeshRenderer>().material.SetColor("_TintColor", new Color(0.45f, 0.56f, 0f)); // Blue tint instead of red.
+            donut.GetComponent<MeshRenderer>().material.SetFloat("_SoftFactor", 0.1f); // Soften the edges of the donut.
+
+            victim.StartCoroutine(DestroyIndicator(1f, SpreadIndicator));
+            
             slot.InvalidateCurrentTarget();
 
             return true;
@@ -153,12 +177,14 @@ namespace MoreItems.Equipments
         {
             On.RoR2.EquipmentSlot.UpdateTargets += (orig, self, equipmentIndex, isEquipmentActivation) =>
             {
+                // Skip if not the equipment def for nidus virus. Also includes complementary NRE catcher :)
                 if (!EquipmentSlot || equipmentIndex != EquipmentSlot.equipmentIndex) 
                 {
                     orig(self, equipmentIndex, isEquipmentActivation);
                     return;
                 }
 
+                // Setup targetting to search for enemies, load the target icon (if null) and set the target to an aimed entity, if there is one.
                 self.ConfigureTargetFinderForEnemies();
 
                 if (!targetIcon)
@@ -171,6 +197,7 @@ namespace MoreItems.Equipments
                 self.currentTarget = new EquipmentSlot.UserTargetInfo(entity);
 
 
+                // If there is a target, setup the aim indicator, and record the target's transform and hurtbox.
                 bool hasTransform = self.currentTarget.transformToIndicateAt;
 
                 if (self.currentTarget.transformToIndicateAt)
@@ -183,14 +210,44 @@ namespace MoreItems.Equipments
                     }
 
                 }
-
                 self.targetIndicator.targetTransform = hasTransform ? self.currentTarget.transformToIndicateAt : null;
+
+                // Cancel the targetting if the equipment is on cooldown.
                 self.targetIndicator.active = hasTransform && self.stock > 0;
 
                 return;
-
-                // todo: figure out how to make the indicator disappear when the focus on the current target is lost.
             };
+        }
+
+        public IEnumerator DestroyIndicator(float duration, GameObject spreadIndicator)
+        {
+            // Expands the donut for the duration of the spread effect dyamically over time, up to the maximum radius of 50 units.
+            // Does not affect the actual spread effect, just a visual indicator of the range.
+
+            var donut = spreadIndicator.transform.GetChild(1);
+
+            Vector3 originalScale = donut.localScale;
+            float counter = 0f;
+
+            // Stop if the indicator was destroyed.
+            while (counter <= duration)
+            {
+                counter += Time.deltaTime;
+
+                if(!spreadIndicator)
+                {
+                    yield break;
+                }
+                donut.localScale = Vector3.Lerp(originalScale, new Vector3(100f, 100f, 100f), counter / duration);
+                yield return null;
+            }
+
+            if(counter >= duration && spreadIndicator)
+            {
+                UnityEngine.Object.Destroy(spreadIndicator);
+                spreadIndicator = null;
+                yield break;
+            }
         }
     }
 
