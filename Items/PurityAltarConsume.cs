@@ -13,13 +13,13 @@ namespace MoreItems.Items
 {
     /// <summary>
     /// Non-usable Item.
-    /// <para> Its only purpose is to provide a sprite and description when the Time Warp equipment consumes an item.</para>
+    /// <para> Its only purpose is to provide a sprite and description when the Altar of Purity equipment consumes an item.</para>
     /// <para>This item is just primarily for flavour text, has no functionality, and should be impossible to pick up.</para>
     /// </summary>
-    public class TimeWarpConsume : Item
+    public class PurityAltarConsume : Item
     {
         public override string Name => "ITEM SACRIFICED";
-        public override string NameToken => "TIMEWARPCONSUME";
+        public override string NameToken => "PURITYALTARCONSUME";
         public override string PickupToken => "";
         public override string Description => "";
         public override string Lore => "";
@@ -30,7 +30,7 @@ namespace MoreItems.Items
         public override ItemTag[] Tags => new ItemTag[] { };
         public override bool AIBlackList => true;
 
-        public override Sprite Icon => MainAssets.LoadAsset<Sprite>("TimeWarpConsume.png");
+        public override Sprite Icon => MainAssets.LoadAsset<Sprite>("PurityAltarConsume.png");
         public override GameObject Model => null;
     }
 }

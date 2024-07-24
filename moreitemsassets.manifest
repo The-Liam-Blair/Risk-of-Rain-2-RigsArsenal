@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2733984025
+CRC: 2605663096
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d8fa72369f37d12647df0e335362a792
+    Hash: ada3efd9d862ead2f78afa93c555fd51
   TypeTreeHash:
     serializedVersion: 2
     Hash: 1fe3abd029edb3522ae5dbbc711d0a74
@@ -44,6 +44,7 @@ Assets:
 - Assets/Materials/Item/ChaosRune/M_RockDark.mat
 - Assets/Materials/Item/BountyHunterBadge/YellowTex2.png
 - Assets/Materials/Item/WristMountedShotgun/M_DeepBlack.mat
+- Assets/Materials/Equipment/PurityAltar/OfferingPit.png
 - Assets/Materials/Item/WristMountedShotgun/M_Shotgun.mat
 - Assets/Materials/Item/CoolantPack/M_Cap.mat
 - Assets/Materials/Equipment/NidusVirus/glassRemapRamp.png
@@ -56,6 +57,7 @@ Assets:
 - Assets/Materials/Item/CoolantPack/M_Button.mat
 - Assets/Materials/Equipment/SanguineShieldBattery/M_MetalFixtures.mat
 - Assets/Materials/Item/ChaosRune/Rock.png
+- Assets/Materials/Equipment/PurityAltar/M_LesserGlow.mat
 - Assets/Materials/Equipment/NidusVirus/M_Screw.mat
 - Assets/Materials/Item/WornOutStimpack/M_Base.mat
 - Assets/Materials/Item/WornOutStimpack/WornOutStimpack.png
@@ -63,6 +65,7 @@ Assets:
 - Assets/Materials/Item/WornOutStimpack/M_HealIcon.mat
 - Assets/Materials/Item/WristMountedShotgun/M_Gray.mat
 - Assets/Materials/Equipment/SanguineShieldBattery/FlowMap.png
+- Assets/Materials/Equipment/PurityAltar/AltarFlowNormal.png
 - Assets/Materials/Equipment/NidusVirus/M_PlateOutline.mat
 - Assets/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.blend
 - Assets/Prefabs/Item/CoolantPack/CoolantPack.prefab
@@ -80,9 +83,10 @@ Assets:
 - Assets/Materials/Item/NeedleRounds/M_Tape.mat
 - Assets/Materials/Item/ReactiveArmourPlate/M_Armour.mat
 - Assets/Prefabs/Item/CoolantPack/CoolantPack.blend
-- Assets/Materials/Equipment/TimeWarp/TimeWarpConsume.png
+- Assets/Materials/Equipment/PurityAltar/PurityAltarConsume.png
 - Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlating.png
 - Assets/Prefabs/Equipment/SanguineShieldBattery/SanguineShieldBattery.blend
+- Assets/Materials/Equipment/PurityAltar/PurityAltar.png
 - Assets/Prefabs/Item/WornOutStimpack/WornOutStimpack.prefab
 - Assets/Materials/Item/ChaosRune/M_Rock.mat
 - Assets/Materials/Item/ChaosRune/ChaosRune.png
@@ -92,10 +96,12 @@ Assets:
 - Assets/Prefabs/Item/WristMountedShotgun/WristMountedShotgun.prefab
 - Assets/Materials/Item/KineticBattery/KineticBatteryBuff.png
 - Assets/Materials/Item/CoolantPack/M_Tank.mat
+- Assets/Materials/Equipment/PurityAltar/M_Altar.mat
 - Assets/Materials/Item/WristMountedShotgun/WristMountedShotgun.png
 - Assets/Materials/Item/KineticBattery/its texturin time.png
 - Assets/Prefabs/Equipment/NidusVirus/NidusVirusObject.blend
 - Assets/Materials/Item/WristMountedShotgun/M_ShotgunComponent.mat
+- Assets/Materials/Equipment/PurityAltar/Darkness.png
 - Assets/Materials/Item/ReactiveArmourPlate/GripTex.png
 - Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlatingBuff.png
 - Assets/Materials/Equipment/SanguineShieldBattery/flowmapnormals.png
@@ -105,7 +111,9 @@ Assets:
 - Assets/Materials/Equipment/NidusVirus/NidusVirus.png
 - Assets/Materials/Item/WristMountedShotgun/Strap.png
 - Assets/Materials/Item/BountyHunterBadge/M_YELLA-ER.mat
+- Assets/Materials/Equipment/PurityAltar/M_Glow.mat
 - Assets/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.prefab
+- Assets/Prefabs/Equipment/PurityAltar/PurityAltar.prefab
 - Assets/Materials/Item/ReactiveArmourPlate/M_Underlay.mat
 - Assets/Materials/Equipment/SanguineShieldBattery/M_BatteryShine.mat
 - Assets/Prefabs/Item/ChaosRune/ChaosRune.blend
@@ -116,6 +124,8 @@ Assets:
 - Assets/Materials/Equipment/NidusVirus/M_VirusBulb.mat
 - Assets/Materials/Item/CoolantPack/CoolantPack.png
 - Assets/Materials/Item/ChaosRune/M_LesserGlow.mat
+- Assets/Prefabs/Equipment/PurityAltar/PurityAltar.blend
+- Assets/Materials/Equipment/PurityAltar/M_Void.mat
 - Assets/Materials/Item/ReactiveArmourPlate/UnderlayTex.png
 - Assets/Materials/Item/NeedleRounds/M_BulletBase.mat
 - Assets/Materials/Item/BountyHunterBadge/YellowTex1.png

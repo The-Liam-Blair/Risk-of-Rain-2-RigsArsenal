@@ -141,8 +141,8 @@ namespace MoreItems
             }
             else if (Input.GetKeyDown(KeyCode.F10))
             {
-                DebugLog.Log("F8 pressed, spawning Time Warp");
-                DEBUG_SpawnEquipment("TIMEWARP");
+                DebugLog.Log("F8 pressed, spawning Altar of Purity");
+                DEBUG_SpawnEquipment("PURITYALTAR");
             }
 
             // Clear all items from the player's inventory.

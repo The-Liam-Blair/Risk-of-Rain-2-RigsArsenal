@@ -16,24 +16,24 @@ using static RoR2.MasterSpawnSlotController;
 
 namespace MoreItems.Equipments
 {
-    public class TimeWarp : Equipment
+    public class PurityAltar : Equipment
     {
-        public override string Name => "Time Warp";
+        public override string Name => "Altar of Purity";
 
-        public override string NameToken => "TIMEWARP";
+        public override string NameToken => "PURITYALTAR";
 
         public override string PickupToken => "Restore a random broken or depleted item.<style=cIsHealth> Sacrifices a random item per restoration.</style>";
 
         public override string Description => "Restore a <style=cIsUtility>single random</style> consumed item or <style=cLunarObjective>cure a single tonic affliction.</style> <style=cIsHealth>A common item is sacrificed per restoration.</style> <style=cDeath>A legendary item is sacrificed for legendary-tier items.</style>";
-        public override string Lore => "";
+        public override string Lore => "<style=cLunarObjective>Peer into the abyss. Be tempted. Curiosity will take hold. Allow it.\n\nGaze into the abyss. It offers great power. To turn back time. To undue mistakes.\n\nStare into the abyss. For with each glance, I grow in power. And you grow weaker.\n\nI am coming for you. With your stolen strength.</style>";
 
         public override bool isLunar => true;
 
         public override float cooldown => 45f;
 
-        public override Sprite Icon => null;
+        public override Sprite Icon => MainAssets.LoadAsset<Sprite>("PurityAltar.png");
 
-        public override GameObject Model => null;
+        public override GameObject Model => MainAssets.LoadAsset<GameObject>("PurityAltar.prefab");
 
         private List<Tuple<ItemDef, ItemDef>> validItems;
 
@@ -74,9 +74,13 @@ namespace MoreItems.Equipments
                     // Give the player the restored item.
                     slot.characterBody.inventory.GiveItem(item.Item2.itemIndex, 1);
 
-                    // Broadcast to the player the item they restored, as if they picked it up normally.
-                    GenericPickupController.SendPickupMessage(slot.characterBody.master, PickupCatalog.FindPickupIndex(item.Item2.itemIndex));
-                    break;
+                    // Broadcast to the player the item they restored, with the message being the opposite of the broken item message
+                    // (Broken item icon transformed into normal item icon counterpart).
+                    CharacterMasterNotificationQueue.SendTransformNotification(slot.characterBody.master,
+                    item.Item1.itemIndex,
+                    item.Item2.itemIndex,
+                    CharacterMasterNotificationQueue.TransformationType.Default);
+                    return true;
                 }
             }   
 
@@ -121,10 +125,9 @@ namespace MoreItems.Equipments
             self.inventory.RemoveItem(deadItem, 1);
 
             // Modifying the item conversion notification, indicate to the player what item was destroyed, with additional flavour text.
-            var consumeItem = ItemList.Find(x => x.NameToken == "TIMEWARPCONSUME").itemDef;
+            var consumeItem = ItemList.Find(x => x.NameToken == "PURITYALTARCONSUME").itemDef;
             consumeItem.pickupToken = null;
-            consumeItem.pickupToken = SetTimeWarpConsumeFlavourText();
-
+            consumeItem.pickupToken = SetPurityAltarConsumeFlavourText();
 
             CharacterMasterNotificationQueue.SendTransformNotification(self.master,
             deadItem, 
@@ -152,7 +155,7 @@ namespace MoreItems.Equipments
             };
         }
 
-        private string SetTimeWarpConsumeFlavourText()
+        private string SetPurityAltarConsumeFlavourText()
         {
             string[] MithrixResponses = new string[]
             {
