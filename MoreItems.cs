@@ -93,8 +93,8 @@ namespace MoreItems
 
             if (Input.GetKeyDown(KeyCode.F1))
             {
-                DebugLog.Log("F1 pressed, spawning stimpack.");
-                DEBUG_SpawnItem("WORNOUTSTIMPACK");
+                DebugLog.Log("F1 pressed, spawning Chunk");
+                DEBUG_SpawnItem("PRIMORDIALCHUNK");
             }
             else if (Input.GetKeyDown(KeyCode.F2))
             { 
