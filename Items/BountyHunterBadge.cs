@@ -72,10 +72,10 @@ namespace MoreItems.Items
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
                     followerPrefab = display,
-                    childName = "ThighL",
-                    localPos = new Vector3(0.06313F, 0.22037F, 0.09908F),
-                    localAngles = new Vector3(45.34884F, 106.977F, 165.8645F),
-                    localScale = new Vector3(0F, 0F, 0F)
+                    childName = "Chest",
+                    localPos = new Vector3(0.10743F, 0.30175F, 0.19213F),
+                    localAngles = new Vector3(0.17714F, -0.00021F, 0.0013F),
+                    localScale = new Vector3(0.1F, 0.1F, 0.1F)
                 }
             });
 
@@ -85,10 +85,10 @@ namespace MoreItems.Items
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
                     followerPrefab = display,
-                    childName = "ThighL",
-                    localPos = new Vector3(0f, 0f, 0f),
-                    localAngles = new Vector3(0f, 0f, 0f),
-                    localScale = new Vector3(0f, 0f, 0f)
+                    childName = "Chest",
+                    localPos = new Vector3(0.07504F, 0.17202F, 0.15712F),
+                    localAngles = new Vector3(2.56275F, 14.52645F, 358.1089F),
+                    localScale = new Vector3(0.1F, 0.1F, 0.1F)
                 }
             });
 
@@ -98,10 +98,10 @@ namespace MoreItems.Items
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
                     followerPrefab = display,
-                    childName = "ThighL",
-                    localPos = new Vector3(0f, 0f, 0f),
-                    localAngles = new Vector3(0f, 0f, 0f),
-                    localScale = new Vector3(0f, 0f, 0f)
+                    childName = "Chest",
+                    localPos = new Vector3(-0.05685F, 0.26051F, 0.16124F),
+                    localAngles = new Vector3(6.70086F, 355.7871F, 6.15939F),
+                    localScale = new Vector3(0.1F, 0.1F, 0.1F)
                 }
             });
 
@@ -111,10 +111,10 @@ namespace MoreItems.Items
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
                     followerPrefab = display,
-                    childName = "ThighL",
-                    localPos = new Vector3(0f, 0f, 0f),
-                    localAngles = new Vector3(0f, 0f, 0f),
-                    localScale = new Vector3(0f, 0f, 0f)
+                    childName = "Chest",
+                    localPos = new Vector3(0.72756F, 1.54271F, 2.53721F),
+                    localAngles = new Vector3(305.5826F, 38.15262F, 355.9051F),
+                    localScale = new Vector3(0.75F, 0.75F, 0.75F)
                 }
             });
 
@@ -124,10 +124,10 @@ namespace MoreItems.Items
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
                     followerPrefab = display,
-                    childName = "UpperArmL",
-                    localPos = new Vector3(0.09373F, 0.03316F, 0.01377F),
-                    localAngles = new Vector3(28.99673F, 162.3914F, 172.891F),
-                    localScale = new Vector3(0F, 0F, 0F)
+                    childName = "Chest",
+                    localPos = new Vector3(0.13421F, 0.11844F, 0.26207F),
+                    localAngles = new Vector3(46.96029F, 21.93491F, 11.08918F),
+                    localScale = new Vector3(0.15F, 0.15F, 0.15F)
                 }
             });
 
@@ -137,10 +137,10 @@ namespace MoreItems.Items
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
                     followerPrefab = display,
-                    childName = "ThighR",
-                    localPos = new Vector3(-0.08462F, 0.36293F, 0.1016F),
-                    localAngles = new Vector3(37.80873F, 12.43991F, 179.8899F),
-                    localScale = new Vector3(0F, 0F, 0F)
+                    childName = "Chest",
+                    localPos = new Vector3(-0.0862F, 0.16567F, 0.13002F),
+                    localAngles = new Vector3(358.0246F, 344.458F, 359.4603F),
+                    localScale = new Vector3(0.1F, 0.1F, 0.1F)
                 }
             });
 
@@ -150,10 +150,10 @@ namespace MoreItems.Items
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
                     followerPrefab = display,
-                    childName = "ThighR",
-                    localPos = new Vector3(-0.13209F, 0.20849F, -0.02851F),
-                    localAngles = new Vector3(43.4352F, 350.5829F, 195.3876F),
-                    localScale = new Vector3(0F, 0F, 0F)
+                    childName = "Chest",
+                    localPos = new Vector3(-0.10726F, 0.19529F, 0.17658F),
+                    localAngles = new Vector3(14.99381F, 326.543F, 331.1239F),
+                    localScale = new Vector3(0.125F, 0.125F, 0.125F)
                 }
             });
 
@@ -164,9 +164,9 @@ namespace MoreItems.Items
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
                     followerPrefab = display,
                     childName = "Base",
-                    localPos = new Vector3(0f, 0f, 0f),
-                    localAngles = new Vector3(0f, 0f, 0f),
-                    localScale = new Vector3(0f, 0f, 0f)
+                    localPos = new Vector3(0.24581F, 0.90731F, 0.18949F),
+                    localAngles = new Vector3(318.722F, 19.27121F, 329.7198F),
+                    localScale = new Vector3(0.2F, 0.2F, 0.2F)
                 }
             });
 
@@ -176,10 +176,10 @@ namespace MoreItems.Items
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
                     followerPrefab = display,
-                    childName = "ThighL",
-                    localPos = new Vector3(0f, 0f, 0f),
-                    localAngles = new Vector3(0f, 0f, 0f),
-                    localScale = new Vector3(0f, 0f, 0f)
+                    childName = "MechBase",
+                    localPos = new Vector3(-0.21185F, 0.21048F, 0.45862F),
+                    localAngles = new Vector3(337.298F, 359.106F, 181.9463F),
+                    localScale = new Vector3(0.125F, 0.125F, 0.125F)
                 }
             });
 
@@ -189,10 +189,10 @@ namespace MoreItems.Items
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
                     followerPrefab = display,
-                    childName = "ThighL",
-                    localPos = new Vector3(0f, 0f, 0f),
-                    localAngles = new Vector3(0f, 0f, 0f),
-                    localScale = new Vector3(0f, 0f, 0f)
+                    childName = "Chest",
+                    localPos = new Vector3(-0.96572F, 0.80718F, -2.2202F),
+                    localAngles = new Vector3(19.39222F, 193.9269F, 3.58492F),
+                    localScale = new Vector3(1F, 1F, 1F)
                 }
             });
 
@@ -202,10 +202,10 @@ namespace MoreItems.Items
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
                     followerPrefab = display,
-                    childName = "ThighL",
-                    localPos = new Vector3(0f, 0f, 0f),
-                    localAngles = new Vector3(0f, 0f, 0f),
-                    localScale = new Vector3(0f, 0f, 0f)
+                    childName = "Chest",
+                    localPos = new Vector3(-0.11515F, 0.22685F, 0.18258F),
+                    localAngles = new Vector3(13.17887F, 344.5229F, 355.9233F),
+                    localScale = new Vector3(0.125F, 0.125F, 0.125F)
                 }
             });
 
@@ -215,10 +215,10 @@ namespace MoreItems.Items
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
                     followerPrefab = display,
-                    childName = "ThighL",
-                    localPos = new Vector3(0f, 0f, 0f),
-                    localAngles = new Vector3(0f, 0f, 0f),
-                    localScale = new Vector3(0f, 0f, 0f)
+                    childName = "Chest",
+                    localPos = new Vector3(-0.00939F, 0.12427F, 0.12764F),
+                    localAngles = new Vector3(0F, 0F, 0F),
+                    localScale = new Vector3(0.1F, 0.1F, 0.1F)
                 }
             });
 
@@ -228,10 +228,10 @@ namespace MoreItems.Items
                 {
                     ruleType = ItemDisplayRuleType.ParentedPrefab,
                     followerPrefab = display,
-                    childName = "ThighL",
-                    localPos = new Vector3(0f, 0f, 0f),
-                    localAngles = new Vector3(0f, 0f, 0f),
-                    localScale = new Vector3(0f, 0f, 0f)
+                    childName = "Chest",
+                    localPos = new Vector3(-0.07594F, 0.0512F, 0.20567F),
+                    localAngles = new Vector3(4.57003F, 30.82439F, 89.66632F),
+                    localScale = new Vector3(0.1F, 0.1F, 0.1F)
                 }
             });
 
