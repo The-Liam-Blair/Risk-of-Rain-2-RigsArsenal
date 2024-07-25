@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using EntityStates;
+using MoreItems.Items;
 using R2API;
 using R2API.Utils;
 using Rewired;
@@ -9,7 +10,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
 using static MoreItems.MoreItems;
 
-namespace MoreItems.Items
+namespace MoreItems.Misc
 {
     /// <summary>
     /// Non-usable Item.

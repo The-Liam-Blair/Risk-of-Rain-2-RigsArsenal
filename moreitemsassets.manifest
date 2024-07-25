@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2605663096
+CRC: 1972082767
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ada3efd9d862ead2f78afa93c555fd51
+    Hash: 4ee3fcd80db9e502c723b9ae2972ca8a
   TypeTreeHash:
     serializedVersion: 2
     Hash: 1fe3abd029edb3522ae5dbbc711d0a74
@@ -33,6 +33,7 @@ Assets:
 - Assets/Materials/Item/WornOutStimpack/M_White.mat
 - Assets/Materials/Item/NeedleRounds/NeedleRounds.png
 - Assets/Materials/Item/BountyHunterBadge/BountyHunterBadge.png
+- Assets/Materials/Item/PrimordialChunk/youngTeleporterNormal.png
 - Assets/Materials/Item/WornOutStimpack/M_DepletedIcon.mat
 - Assets/Prefabs/Item/ChaosRune/ChaosRune.prefab
 - Assets/Materials/Item/WornOutStimpack/M_Button.mat
@@ -41,12 +42,15 @@ Assets:
 - Assets/Materials/Equipment/NidusVirus/M_TextBacking.mat
 - Assets/Materials/Item/ReactiveArmourPlate/ArmourTex.png
 - Assets/Prefabs/Equipment/NidusVirus/NidusVirus.blend
+- Assets/Prefabs/Item/PrimordialChunk/PrimordialChunk.blend
 - Assets/Materials/Item/ChaosRune/M_RockDark.mat
 - Assets/Materials/Item/BountyHunterBadge/YellowTex2.png
 - Assets/Materials/Item/WristMountedShotgun/M_DeepBlack.mat
 - Assets/Materials/Equipment/PurityAltar/OfferingPit.png
 - Assets/Materials/Item/WristMountedShotgun/M_Shotgun.mat
+- Assets/Materials/Item/PrimordialChunk/youngTeleporterDiffuse.png
 - Assets/Materials/Item/CoolantPack/M_Cap.mat
+- Assets/Prefabs/Item/PrimordialChunk/PrimordialChunk.prefab
 - Assets/Materials/Equipment/NidusVirus/glassRemapRamp.png
 - Assets/Materials/Equipment/SanguineShieldBattery/SanguineShieldBattery.png
 - Assets/Materials/Equipment/NidusVirus/M_VirusBall.mat
@@ -81,11 +85,13 @@ Assets:
 - Assets/Materials/Equipment/NidusVirus/M_BoxLight.mat
 - Assets/Materials/Item/CoolantPack/M_TankMetre.mat
 - Assets/Materials/Item/NeedleRounds/M_Tape.mat
+- Assets/Materials/Item/PrimordialChunk/M_Chunk.mat
 - Assets/Materials/Item/ReactiveArmourPlate/M_Armour.mat
 - Assets/Prefabs/Item/CoolantPack/CoolantPack.blend
 - Assets/Materials/Equipment/PurityAltar/PurityAltarConsume.png
 - Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlating.png
 - Assets/Prefabs/Equipment/SanguineShieldBattery/SanguineShieldBattery.blend
+- Assets/Materials/Item/PrimordialChunk/PrimordialChunk.png
 - Assets/Materials/Equipment/PurityAltar/PurityAltar.png
 - Assets/Prefabs/Item/WornOutStimpack/WornOutStimpack.prefab
 - Assets/Materials/Item/ChaosRune/M_Rock.mat
