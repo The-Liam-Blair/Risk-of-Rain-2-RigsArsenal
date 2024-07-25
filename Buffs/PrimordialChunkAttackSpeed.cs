@@ -14,7 +14,7 @@ namespace MoreItems.Buffs
         public override bool canStack => true;
         public override bool isDebuff => false;
         public override Color BuffColor => Color.white;
-        public override Sprite Icon => null;
+        public override Sprite Icon => MainAssets.LoadAsset<Sprite>("PrimordialChunkAttackSpeedBuff.png");
 
         public override void SetupHooks()
         {

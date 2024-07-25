@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_yellaNoTex
+  m_Name: M_Main
   m_Shader: {fileID: 4800000, guid: 4ec969b1664a735448af9c2b87fdf680, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: FRESNEL_EMISSION
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -64,11 +64,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FresnelMask:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 6fcd9d55b00e7694fb6233a3a4500225, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FresnelRamp:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 5000ac4aa181ae44d982b4ba8b4e06e0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GreenChannelNormalTex:
@@ -81,7 +81,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 15, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -89,8 +89,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _NormalTex:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Scale: {x: 5, y: 5}
+        m_Offset: {x: 0.8, y: 0.6}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -128,7 +128,7 @@ Material:
     - _EliteIndex: 0
     - _EmPower: 0
     - _EnableCutout: 0
-    - _FEON: 0
+    - _FEON: 1
     - _Fade: 1
     - _FadeBias: 0
     - _FlowEmissionStrength: 1
@@ -140,8 +140,8 @@ Material:
     - _FlowTextureScaleFactor: 1
     - _FlowmapOn: 0
     - _ForceSpecOn: 0
-    - _FresnelBoost: 1
-    - _FresnelPower: 1
+    - _FresnelBoost: 1.15
+    - _FresnelPower: 6
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -151,7 +151,7 @@ Material:
     - _LimbRemovalOn: 0
     - _Metallic: 0
     - _Mode: 0
-    - _NormalStrength: 1
+    - _NormalStrength: 0.6
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _PrintBias: 0
@@ -174,7 +174,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.7490196, g: 0.3372549, b: 0.09411765, a: 1}
-    - _EmColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 0.70980394, g: 0.6392157, b: 0.09803922, a: 1}
+    - _EmColor: {r: 1, g: 1, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FlashColor: {r: 0, g: 0, b: 0, a: 1}

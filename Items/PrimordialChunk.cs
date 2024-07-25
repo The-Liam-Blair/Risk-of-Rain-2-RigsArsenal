@@ -24,7 +24,7 @@ namespace MoreItems.Items
         public override string NameToken => "PRIMORDIALCHUNK";
         public override string PickupToken => "Gain increasing attack speed while charging a teleporter.";
         public override string Description => "Gain <style=cIsDamage>9% attack speed</style> every second <style=cIsUtility>while charging a teleporter</style>. Maximum cap of 27% <style=cStack>(+27% per stack)</style> attack speed.";
-        public override string Lore => "''The teleporters manipulate space and time to transport beings across vast distances. This chunk here can't teleport us anymore, but it still exhibits some latent, dormant energy.\n\nTry bringing it near an active teleporter and see what happens when the dormant energy is reactivated. Its temporal energy in theory could warp space and time in a small radius around you, literally speeding up time locally. \n\nOf course its only a theory, but thats why we have lab rats like you, right?\n\nGood luck.''";
+        public override string Lore => "''The teleporters manipulate space and time to transport beings across vast distances. This chunk from the primordial teleporter can't teleport us anymore, but it still exhibits some latent, dormant energy.\n\nTry bringing it near an active teleporter and see what happens when the dormant energy is reactivated. Its temporal energy in theory could warp space and time in a small radius around you, literally speeding up time locally. \n\nOf course its only a theory, but thats why we have lab rats like you, right?\n\nGood luck.''";
 
         public override ItemTier Tier => ItemTier.Tier1;
 

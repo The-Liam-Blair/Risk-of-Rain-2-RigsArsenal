@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2517468863
+CRC: 4019311597
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d1037e8abcc27cb68f4c9b27d00b1ed7
+    Hash: a510064da382a553077b9b7a1d74ac8c
   TypeTreeHash:
     serializedVersion: 2
     Hash: 1fe3abd029edb3522ae5dbbc711d0a74
@@ -46,6 +46,7 @@ Assets:
 - Assets/Materials/Item/ChaosRune/M_RockDark.mat
 - Assets/Materials/Item/BountyHunterBadge/YellowTex2.png
 - Assets/Materials/Item/WristMountedShotgun/M_DeepBlack.mat
+- Assets/Materials/Item/BountyHunterBadge/M_Backing.mat
 - Assets/Materials/Equipment/PurityAltar/OfferingPit.png
 - Assets/Materials/Item/WristMountedShotgun/M_Shotgun.mat
 - Assets/Materials/Item/PrimordialChunk/youngTeleporterDiffuse.png
@@ -81,7 +82,7 @@ Assets:
 - Assets/Materials/Item/WristMountedShotgun/M_Shadow.mat
 - Assets/Materials/Equipment/SanguineShieldBattery/M_Gauge.mat
 - Assets/Materials/Item/WornOutStimpack/M_WhiteBright.mat
-- Assets/Materials/Item/BountyHunterBadge/M_yella.mat
+- Assets/Materials/Item/BountyHunterBadge/M_Edges.mat
 - Assets/Materials/Equipment/NidusVirus/M_BoxLight.mat
 - Assets/Materials/Item/CoolantPack/M_TankMetre.mat
 - Assets/Materials/Item/NeedleRounds/M_Tape.mat
@@ -104,6 +105,7 @@ Assets:
 - Assets/Materials/Item/CoolantPack/M_Tank.mat
 - Assets/Materials/Equipment/PurityAltar/M_Altar.mat
 - Assets/Materials/Item/WristMountedShotgun/WristMountedShotgun.png
+- Assets/Materials/Item/PrimordialChunk/PrimordialChunkAttackSpeedBuff.png
 - Assets/Materials/Item/KineticBattery/its texturin time.png
 - Assets/Prefabs/Equipment/NidusVirus/NidusVirusObject.blend
 - Assets/Materials/Item/WristMountedShotgun/M_ShotgunComponent.mat
@@ -116,7 +118,7 @@ Assets:
 - Assets/Materials/Item/WristMountedShotgun/M_RedDotSight.mat
 - Assets/Materials/Equipment/NidusVirus/NidusVirus.png
 - Assets/Materials/Item/WristMountedShotgun/Strap.png
-- Assets/Materials/Item/BountyHunterBadge/M_YELLA-ER.mat
+- Assets/Materials/Item/BountyHunterBadge/M_Main.mat
 - Assets/Materials/Equipment/PurityAltar/M_Glow.mat
 - Assets/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.prefab
 - Assets/Prefabs/Equipment/PurityAltar/PurityAltar.prefab
@@ -149,7 +151,6 @@ Assets:
 - Assets/Materials/Item/ReactiveArmourPlate/MetallicTex.png
 - Assets/Materials/Item/NeedleRounds/M_BulletStripe.mat
 - Assets/Materials/Equipment/NidusVirus/M_VirusStem.mat
-- Assets/Materials/Item/BountyHunterBadge/M_yellaNoTex.mat
 - Assets/Materials/Item/CoolantPack/Coolant.png
 - Assets/Materials/Item/ReactiveArmourPlate/M_Grip.mat
 - Assets/Prefabs/Item/NeedleRounds/NeedleRounds.blend
