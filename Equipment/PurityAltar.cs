@@ -164,7 +164,7 @@ namespace MoreItems.Equipments
                 "<style=cLunarObjective>My strength grows.</style>",
                 "<style=cDeath>Behind you.</style>",
                 "<style=cLunarObjective>You will perish.</style>",
-                "<style=cLunarObjective>I am your end.</style>",
+                "<style=cLunarObjective>I am your end.</style>", // DHUUMS GAZE FALLS ON ME
                 "<style=cLunarObjective>Surrender in body and spirit.</style>",
             };
 

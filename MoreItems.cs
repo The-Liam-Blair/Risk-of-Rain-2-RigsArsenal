@@ -40,7 +40,6 @@ namespace MoreItems
         
         public static ConfigEntry<bool> EnableShotgunMarker { get; set; }
 
-
         public void Awake()
         {
             DebugLog.Init(Logger);
@@ -53,6 +52,19 @@ namespace MoreItems
 
             ApplyShaders();
 
+            EnableShotgunMarker = Config.Bind("Wrist-Mounted Shotgun", "EnableShotgunMarker", true, "Shows or hides the range indicator for the wrist-mounted shotgun item.");
+
+            // Fetch all the items by type, and load each one (Populate each item's class definition then add to the item list).
+            var Items = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Item)));
+
+            foreach (var item in Items)
+            {
+                Item anItem = (Item)System.Activator.CreateInstance(item);
+                anItem.Init();
+                ItemList.Add(anItem);
+            }
+
+
             var Buffs = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Buff)));
 
            foreach (var buff in Buffs)
@@ -62,17 +74,6 @@ namespace MoreItems
                BuffList.Add(aBuff);
            }
 
-
-            // Fetch all the items by type, and load each one (Populate each item's class definition then add to the item list).
-            var Items = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Item)));
-
-            foreach (var item in Items)
-            {
-                Item anItem = (Item) System.Activator.CreateInstance(item);
-                anItem.Init();
-                ItemList.Add(anItem);
-            }
-
             var theEquipment = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Equipment)));
 
             foreach (var equipment in theEquipment)
@@ -81,8 +82,6 @@ namespace MoreItems
                 equip.Init();
                 EquipmentList.Add(equip);
             }
-
-            EnableShotgunMarker = Config.Bind("Wrist-Mounted Shotgun", "EnableShotgunMarker", true, "Shows or hides the range indicator for the wrist-mounted shotgun item.");
         }
 
 
@@ -98,8 +97,8 @@ namespace MoreItems
             }
             else if (Input.GetKeyDown(KeyCode.F2))
             { 
-                DebugLog.Log("F2 pressed, spawning bounty hunter's badge.");
-                DEBUG_SpawnItem("BOUNTYHUNTERBADGE");
+                DebugLog.Log("F2 pressed, spawning Dissonant Edge");
+                DEBUG_SpawnItem("DISSONANTEDGE");
             }
 
             else if (Input.GetKeyDown(KeyCode.F3))

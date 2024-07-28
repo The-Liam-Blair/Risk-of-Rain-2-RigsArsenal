@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 4019311597
+CRC: 3557490350
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a510064da382a553077b9b7a1d74ac8c
+    Hash: 5e57455f61ddf5b44866c35a2ced48e5
   TypeTreeHash:
     serializedVersion: 2
     Hash: 1fe3abd029edb3522ae5dbbc711d0a74
@@ -38,6 +38,7 @@ Assets:
 - Assets/Prefabs/Item/ChaosRune/ChaosRune.prefab
 - Assets/Materials/Item/WornOutStimpack/M_Button.mat
 - Assets/Materials/Equipment/NidusVirus/M_Glass.mat
+- Assets/Materials/Item/PrimordialChunk/image3.png
 - Assets/shaders/deferred/hgstandard.shader
 - Assets/Materials/Equipment/NidusVirus/M_TextBacking.mat
 - Assets/Materials/Item/ReactiveArmourPlate/ArmourTex.png
@@ -53,6 +54,7 @@ Assets:
 - Assets/Materials/Item/CoolantPack/M_Cap.mat
 - Assets/Prefabs/Item/PrimordialChunk/PrimordialChunk.prefab
 - Assets/Materials/Equipment/NidusVirus/glassRemapRamp.png
+- Assets/Materials/Item/PrimordialChunk/3.mat
 - Assets/Materials/Equipment/SanguineShieldBattery/SanguineShieldBattery.png
 - Assets/Materials/Equipment/NidusVirus/M_VirusBall.mat
 - Assets/shaders/fx/hgcloudremap.shader
@@ -75,17 +77,23 @@ Assets:
 - Assets/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.blend
 - Assets/Prefabs/Item/CoolantPack/CoolantPack.prefab
 - Assets/shaders/fx/hgintersectioncloudremap.shader
+- Assets/Materials/Item/DissonantEdge/M_Hilt.mat
 - Assets/Materials/Item/NeedleRounds/M_BulletAttachment.mat
 - Assets/Materials/Item/BountyHunterBadge/BackingTex.png
 - Assets/Materials/Equipment/NidusVirus/M_BoxSign.mat
+- Assets/Materials/Item/PrimordialChunk/image.png
 - Assets/Prefabs/Equipment/SanguineShieldBattery/SanguineShieldBattery.prefab
 - Assets/Materials/Item/WristMountedShotgun/M_Shadow.mat
 - Assets/Materials/Equipment/SanguineShieldBattery/M_Gauge.mat
 - Assets/Materials/Item/WornOutStimpack/M_WhiteBright.mat
 - Assets/Materials/Item/BountyHunterBadge/M_Edges.mat
+- Assets/Materials/Item/PrimordialChunk/image2.png
 - Assets/Materials/Equipment/NidusVirus/M_BoxLight.mat
+- Assets/Materials/Item/DissonantEdge/M_Blade.mat
 - Assets/Materials/Item/CoolantPack/M_TankMetre.mat
 - Assets/Materials/Item/NeedleRounds/M_Tape.mat
+- Assets/Prefabs/Item/DissonantEdge/DissonantEdge.blend
+- Assets/Materials/Item/DissonantEdge/M_Glow.mat
 - Assets/Materials/Item/PrimordialChunk/M_Chunk.mat
 - Assets/Materials/Item/ReactiveArmourPlate/M_Armour.mat
 - Assets/Prefabs/Item/CoolantPack/CoolantPack.blend
@@ -93,6 +101,7 @@ Assets:
 - Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlating.png
 - Assets/Prefabs/Equipment/SanguineShieldBattery/SanguineShieldBattery.blend
 - Assets/Materials/Item/PrimordialChunk/PrimordialChunk.png
+- Assets/Materials/Item/DissonantEdge/M_Addons.mat
 - Assets/Materials/Equipment/PurityAltar/PurityAltar.png
 - Assets/Prefabs/Item/WornOutStimpack/WornOutStimpack.prefab
 - Assets/Materials/Item/ChaosRune/M_Rock.mat
@@ -106,14 +115,17 @@ Assets:
 - Assets/Materials/Equipment/PurityAltar/M_Altar.mat
 - Assets/Materials/Item/WristMountedShotgun/WristMountedShotgun.png
 - Assets/Materials/Item/PrimordialChunk/PrimordialChunkAttackSpeedBuff.png
+- Assets/Materials/Item/DissonantEdge/M_Guard.mat
 - Assets/Materials/Item/KineticBattery/its texturin time.png
 - Assets/Prefabs/Equipment/NidusVirus/NidusVirusObject.blend
 - Assets/Materials/Item/WristMountedShotgun/M_ShotgunComponent.mat
+- Assets/Materials/Item/PrimordialChunk/2.mat
 - Assets/Materials/Equipment/PurityAltar/Darkness.png
 - Assets/Materials/Item/ReactiveArmourPlate/GripTex.png
 - Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlatingBuff.png
 - Assets/Materials/Equipment/SanguineShieldBattery/flowmapnormals.png
 - Assets/Materials/Equipment/SanguineShieldBattery/SanguineShieldBatteryBuff.png
+- Assets/Prefabs/Item/DissonantEdge/DissonantEdge.prefab
 - Assets/Prefabs/Item/KineticBattery/KineticBattery.prefab
 - Assets/Materials/Item/WristMountedShotgun/M_RedDotSight.mat
 - Assets/Materials/Equipment/NidusVirus/NidusVirus.png
@@ -154,4 +166,5 @@ Assets:
 - Assets/Materials/Item/CoolantPack/Coolant.png
 - Assets/Materials/Item/ReactiveArmourPlate/M_Grip.mat
 - Assets/Prefabs/Item/NeedleRounds/NeedleRounds.blend
+- Assets/Materials/Item/PrimordialChunk/1.mat
 Dependencies: []

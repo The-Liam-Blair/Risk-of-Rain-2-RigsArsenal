@@ -87,6 +87,10 @@ namespace MoreItems.Items
                     itemDef.deprecatedTier = ItemTier.NoTier;
                     break;
 
+                case ItemTier.Lunar:
+                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/Base/Common/LunarTierDef.asset").WaitForCompletion();
+                    break;
+
                 default:
                     DebugLog.Log($"Item {itemDef.name} has an invalid item tier. Defaulting to Tier1.");
                     itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/Base/Common/Tier1Def.asset").WaitForCompletion();
