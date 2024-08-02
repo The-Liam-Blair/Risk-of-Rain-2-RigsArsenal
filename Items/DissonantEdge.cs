@@ -31,7 +31,7 @@ namespace MoreItems.Items
         public override ItemTag[] Tags => new ItemTag[] { ItemTag.Damage };
         public override bool AIBlackList => false;
 
-        public override Sprite Icon => null;
+        public override Sprite Icon => MainAssets.LoadAsset<Sprite>("DissonantEdge.png");
         public override GameObject Model => MainAssets.LoadAsset<GameObject>("DissonantEdge.prefab");
 
         public override void SetupHooks()

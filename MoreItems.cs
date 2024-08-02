@@ -30,7 +30,7 @@ namespace MoreItems
         public const string P_GUID = $"{P_Author}.{P_Name}";
         public const string P_Author = "RigsInRags";
         public const string P_Name = "RigsArsenal";
-        public const string P_Version = "1.1.0";
+        public const string P_Version = "1.2.0";
 
         public static AssetBundle MainAssets;
 
@@ -84,88 +84,7 @@ namespace MoreItems
             }
         }
 
-
-        private void Update()
-        {
-            // Debugging method to spawn items in-game.
-            // Disabled for release version.
-
-            if (Input.GetKeyDown(KeyCode.F1))
-            {
-                DebugLog.Log("F1 pressed, spawning Chunk");
-                DEBUG_SpawnItem("PRIMORDIALCHUNK");
-            }
-            else if (Input.GetKeyDown(KeyCode.F2))
-            { 
-                DebugLog.Log("F2 pressed, spawning Dissonant Edge");
-                DEBUG_SpawnItem("DISSONANTEDGE");
-            }
-
-            else if (Input.GetKeyDown(KeyCode.F3))
-            {
-                DebugLog.Log("F3 pressed, spawning kinetic battery.");
-                DEBUG_SpawnItem("KINETICBATTERY");
-            }
-
-            else if (Input.GetKeyDown(KeyCode.F4))
-            {
-                DebugLog.Log("F4 pressed, spawning reactive armour plating.");
-                DEBUG_SpawnItem("REACTIVEARMOURPLATING");
-            }
-
-            else if (Input.GetKeyDown(KeyCode.F5))
-            {
-                DebugLog.Log("F5 pressed, spawning Under-Barrel Shotgun");
-                DEBUG_SpawnItem("UNDERBARRELSHOTGUN");
-            }
-            else if (Input.GetKeyDown(KeyCode.F6))
-            {
-                DebugLog.Log("F6 pressed, spawning Chaos Rune");
-                DEBUG_SpawnItem("CHAOSRUNE");
-            }
-            else if(Input.GetKeyDown(KeyCode.F7))
-            {
-                DebugLog.Log("F7 pressed, spawning Coolant Pack");
-                DEBUG_SpawnItem("COOLANTPACK");
-            }
-            else if (Input.GetKeyDown(KeyCode.F8))
-            {
-                DebugLog.Log("F8 pressed, spawning Nidus Virus");
-                DEBUG_SpawnEquipment("NIDUSVIRUS");
-            }
-            else if (Input.GetKeyDown(KeyCode.F9))
-            {
-                DebugLog.Log("F8 pressed, spawning Sanguine Shield Battery");
-                DEBUG_SpawnEquipment("SANGUINESHIELDBATTERY");
-            }
-            else if (Input.GetKeyDown(KeyCode.F10))
-            {
-                DebugLog.Log("F8 pressed, spawning Altar of Purity");
-                DEBUG_SpawnEquipment("PURITYALTAR");
-            }
-
-            // Clear all items from the player's inventory.
-            else if (Input.GetKeyDown(KeyCode.F11))
-            {
-                var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
-                for (int i = 0; i < ItemList.Count; i++)
-                {
-                    var item = ItemList[i];
-                    var count = player.GetComponent<CharacterBody>().inventory.GetItemCount(item.itemDef);
-                    if (count > 0)
-                    {
-                        player.GetComponent<CharacterBody>().inventory.RemoveItem(item.itemDef, count);
-                    }
-                }
-            }
-            else if (Input.GetKeyDown(KeyCode.F10))
-            {
-                // Give player money
-                var player = PlayerCharacterMasterController.instances[0].master;
-                player.GiveMoney(100000);
-            }
-        }
-
+        /*
         private void DEBUG_SpawnItem(string itemName)
         {
             var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
@@ -181,6 +100,7 @@ namespace MoreItems
 
             PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(equip.equipmentDef.equipmentIndex), player.position, player.forward * 20f);
         }
+        */
 
         /// <summary>
         /// Swap from stubbed shaders to the actual in-game shaders per material (This enables emissions, specular reflections, normal maps, etc).

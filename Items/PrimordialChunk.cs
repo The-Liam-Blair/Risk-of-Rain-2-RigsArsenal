@@ -38,7 +38,6 @@ namespace MoreItems.Items
 
         public override BuffDef ItemBuffDef => BuffList.Find(x => x.Name == "PrimordialChunkAttackSpeed").buffDef;
 
-
         private float buffDuration = 5f;
 
         public override void SetupHooks()
