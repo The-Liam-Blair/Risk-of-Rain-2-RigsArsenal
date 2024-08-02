@@ -82,31 +82,9 @@ namespace MoreItems
                 equip.Init();
                 EquipmentList.Add(equip);
             }
-
-            //todo: check model sizes incase i fucked up lmao
-            // foreach item in itemlist -> debug_spawnitem(token);
-            // and same for equipment
         }
 
         /*
-        private void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.F1))
-            {
-                foreach (var item in ItemList)
-                {
-                    DEBUG_SpawnItem(item.NameToken);
-                }
-                foreach (var equip in EquipmentList)
-                {
-                    DEBUG_SpawnEquipment(equip.NameToken);
-                }
-            }
-        }
-        */
-
-
-
         private void DEBUG_SpawnItem(string itemName)
         {
             var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
@@ -122,6 +100,7 @@ namespace MoreItems
 
             PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(equip.equipmentDef.equipmentIndex), player.position, player.forward * 20f * Random.Range(0.1f, 3f));
         }
+        */
 
         /// <summary>
         /// Swap from stubbed shaders to the actual in-game shaders per material (This enables emissions, specular reflections, normal maps, etc).
