@@ -19,7 +19,7 @@ Adds 10 new items and 3 new equipment into the game. The mod is in active progre
 | Chaos Rune | ![ChaosRune](https://raw.githubusercontent.com/The-Liam-Blair/Risk-of-Rain-2-RigsArsenal/main/UnityProject/Assets/Materials/Item/ChaosRune/ChaosRune.png) | When inflicting a damaging debuff, chance to inflict additional damaging debuffs. <br><br><details> <summary> Additional Details:</summary> <br>- Can inflict bleed, burn, Acrid's blight and collapse.</details> |
 ||||
 ||||
-| Dissonant Edge | ![Dissonant Edge](https://raw.githubusercontent.com/The-Liam-Blair/Risk-of-Rain-2-RigsArsenal/main/UnityProject/Assets/Materials/Item/DissonantEdge/DissonantEdge.png) | Deal increased damage to foes with a lower health percentage than you. Deal reduced damage to fies with a higher health percentage than you. |
+| Dissonant Edge | ![Dissonant Edge](https://raw.githubusercontent.com/The-Liam-Blair/Risk-of-Rain-2-RigsArsenal/main/UnityProject/Assets/Materials/Item/DissonantEdge/DissonantEdge.png) | Deal increased damage to foes with a lower health percentage than you. Deal reduced damage to foes with a higher health percentage than you. |
 
 <br><br><br>
 
