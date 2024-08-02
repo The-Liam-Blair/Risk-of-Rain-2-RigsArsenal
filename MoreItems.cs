@@ -46,9 +46,9 @@ namespace MoreItems
 
             // Load the asset bundle for this mod.
             using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("MoreItems.moreitemsassets"))
-           {
+            {
                 MainAssets = AssetBundle.LoadFromStream(stream);
-           }
+            }
 
             ApplyShaders();
 
@@ -67,12 +67,12 @@ namespace MoreItems
 
             var Buffs = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Buff)));
 
-           foreach (var buff in Buffs)
-           {
-               Buff aBuff = (Buff)System.Activator.CreateInstance(buff);
-               aBuff.Init();
-               BuffList.Add(aBuff);
-           }
+            foreach (var buff in Buffs)
+            {
+                Buff aBuff = (Buff)System.Activator.CreateInstance(buff);
+                aBuff.Init();
+                BuffList.Add(aBuff);
+            }
 
             var theEquipment = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Equipment)));
 
@@ -82,15 +82,37 @@ namespace MoreItems
                 equip.Init();
                 EquipmentList.Add(equip);
             }
+
+            //todo: check model sizes incase i fucked up lmao
+            // foreach item in itemlist -> debug_spawnitem(token);
+            // and same for equipment
         }
 
         /*
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.F1))
+            {
+                foreach (var item in ItemList)
+                {
+                    DEBUG_SpawnItem(item.NameToken);
+                }
+                foreach (var equip in EquipmentList)
+                {
+                    DEBUG_SpawnEquipment(equip.NameToken);
+                }
+            }
+        }
+        */
+
+
+
         private void DEBUG_SpawnItem(string itemName)
         {
             var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
             var item = ItemList.Find(x => x.NameToken == itemName);
 
-            PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(item.itemDef.itemIndex), player.position, player.forward * 20f);
+            PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(item.itemDef.itemIndex), player.position, player.forward * 20f * Random.Range(0.1f, 3f));
         }
 
         private void DEBUG_SpawnEquipment(string equipmentName)
@@ -98,9 +120,8 @@ namespace MoreItems
             var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
             var equip = EquipmentList.Find(x => x.NameToken == equipmentName);
 
-            PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(equip.equipmentDef.equipmentIndex), player.position, player.forward * 20f);
+            PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(equip.equipmentDef.equipmentIndex), player.position, player.forward * 20f * Random.Range(0.1f, 3f));
         }
-        */
 
         /// <summary>
         /// Swap from stubbed shaders to the actual in-game shaders per material (This enables emissions, specular reflections, normal maps, etc).

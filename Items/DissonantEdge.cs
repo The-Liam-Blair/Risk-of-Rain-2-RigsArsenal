@@ -38,16 +38,16 @@ namespace MoreItems.Items
         {
             On.RoR2.HealthComponent.TakeDamage += (orig, self, damageInfo) =>
             {
-                if(!damageInfo.attacker || !self.body) { return; }
+                orig(self, damageInfo);
+                if (!self) { return; }
+
+                var body = self.body;
+                if (!body || !body.inventory) { return; }
+
+                var count = body.inventory.GetItemCount(itemDef);
+                if (count <= 0) { return; }
 
                 var attacker = damageInfo.attacker.GetComponent<CharacterBody>();
-                var count = attacker.inventory.GetItemCount(itemDef);
-
-                if(count <= 0)
-                {
-                    orig(self, damageInfo);
-                    return;
-                }
 
                 var attackerHealth = attacker.healthComponent.combinedHealthFraction;
                 var victimHealth = self.combinedHealthFraction;
