@@ -1,11 +1,12 @@
 # Risk of Rain 2 Mod - Rigs Arsenal
-Adds 7 vanilla-friendly items into the game. The mod is in active progress and more items and content will be added soon.
+Adds 10 new items and 3 new equipment into the game. The mod is in active progress and more items and content will be added soon.
 
 ### Items
 | Name | Image | Description |
 | ---------- | ---------- | ---------- |
 | Worn-Out Stimpack | ![Worn Out Stimpack](https://raw.githubusercontent.com/The-Liam-Blair/Risk-of-Rain-2-RigsArsenal/main/UnityProject/Assets/Materials/Item/WornOutStimpack/WornOutStimpack.png) | Gain increased movement speed and health regeneration while at or under 50% health. |
 | Kinetic Battery | ![Kinetic Battery](https://raw.githubusercontent.com/The-Liam-Blair/Risk-of-Rain-2-RigsArsenal/main/UnityProject/Assets/Materials/Item/KineticBattery/KineticBattery.PNG) | Gain barrier after using your utility skill. Incurs a short cooldown after use. |
+| Primordial Chunk | ![Primordial Chunk](https://raw.githubusercontent.com/The-Liam-Blair/Risk-of-Rain-2-RigsArsenal/main/UnityProject/Assets/Materials/Item/PrimordialChunk/PrimordialChunk.png) | Gain increasing attack speed while charging a teleporter. |
 ||||
 ||||
 | Bounty Hunter's Badge | ![Bounty Hunter's Badge](https://raw.githubusercontent.com/The-Liam-Blair/Risk-of-Rain-2-RigsArsenal/main/UnityProject/Assets/Materials/Item/BountyHunterBadge/BountyHunterBadge.png) | Gain increased gold when killing an elite enemy.<br><br><details> <summary> Additional Details:</summary> <br> - Hyperbolic scaling. </details> |
@@ -16,14 +17,18 @@ Adds 7 vanilla-friendly items into the game. The mod is in active progress and m
 ||||
 ||||
 | Chaos Rune | ![ChaosRune](https://raw.githubusercontent.com/The-Liam-Blair/Risk-of-Rain-2-RigsArsenal/main/UnityProject/Assets/Materials/Item/ChaosRune/ChaosRune.png) | When inflicting a damaging debuff, chance to inflict additional damaging debuffs. <br><br><details> <summary> Additional Details:</summary> <br>- Can inflict bleed, burn, Acrid's blight and collapse.</details> |
+||||
+||||
+| Dissonant Edge | ![Dissonant Edge](https://raw.githubusercontent.com/The-Liam-Blair/Risk-of-Rain-2-RigsArsenal/main/UnityProject/Assets/Materials/Item/DissonantEdge/DissonantEdge.png) | Deal increased damage to foes with a lower health percentage than you. Deal reduced damage to fies with a higher health percentage than you. |
 
 <br><br><br>
 
 ### Equipment
-| Name | Image | Description | Cooldown |
-| ---------- | ---------- | ---------- | ---------- |
-| Nidus Virus | ![Nidus Virus](https://raw.githubusercontent.com/The-Liam-Blair/Risk-of-Rain-2-RigsArsenal/main/UnityProject/Assets/Materials/Equipment/NidusVirus/NidusVirus.png) | Spread the target enemy's debuffs to all enemies within a large radius. <br><details><summary>Can additionally spread debuffs produced from items, and most character-unique debuffs.</summary><br>- Can spread all character-unique damage over time debuffs.<br>-  Can spread Rex's weakness and fruiting. Cannot spread entangle.<br>-  Cannot spread Mercenary's expose. | 35 |
-| Sanguine Shield Battery | ![Sanguine Shield Battery](https://raw.githubusercontent.com/The-Liam-Blair/Risk-of-Rain-2-RigsArsenal/main/UnityProject/Assets/Materials/Equipment/SanguineShieldBattery/SanguineShieldBattery.png) | Convert health into barrier for a few seconds. Barrier decay rate is halved while in use. Ends prematurely if the user has very low health. | 20 |
+| Name | Image | Description |
+| ---------- | ---------- | ---------- |
+| Nidus Virus | ![Nidus Virus](https://raw.githubusercontent.com/The-Liam-Blair/Risk-of-Rain-2-RigsArsenal/main/UnityProject/Assets/Materials/Equipment/NidusVirus/NidusVirus.png) | Spread the target enemy's debuffs to all enemies within a large radius. Can additionally spread debuffs produced from items, and most character-unique debuffs.<br>35 second cooldown.<br><br><details><summary>Additional Details:</summary><br>- Can spread all character-unique damage over time debuffs.<br>-  Can spread Rex's weakness and fruiting. Cannot spread entangle.<br>-  Cannot spread Mercenary's expose. |
+| Sanguine Shield Battery | ![Sanguine Shield Battery](https://raw.githubusercontent.com/The-Liam-Blair/Risk-of-Rain-2-RigsArsenal/main/UnityProject/Assets/Materials/Equipment/SanguineShieldBattery/SanguineShieldBattery.png) | Convert health into barrier for a few seconds. Barrier decay rate is halved while in use. Ends prematurely if the user has very low health.<br>20 second cooldown. |
+| Purity Altar | ![Purity Altar](https://raw.githubusercontent.com/The-Liam-Blair/Risk-of-Rain-2-RigsArsenal/main/UnityProject/Assets/Materials/Equipment/PurityAltar/PurityAltar.png) | Restores a random broken or depleted item. Sacrifices a random item of equal rarity per restoration.<br>45 second cooldown.<br><br><details> <summary> Additional Details:</summary> <br>- Can sacrifice a random common item to restore Power Elixirs, Delicate Watches, and cure tonic afflictions.<br>- Can sacrifice a random legendary item to restore Dio's Best Friend and Pluripotent Larva.<br>- Void items can also be used for sacrifice.</details> |
 
 <br><br>
 
