@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿/*
+using System.Runtime.CompilerServices;
 using EntityStates;
 using R2API;
 using R2API.Utils;
@@ -36,21 +37,57 @@ namespace MoreItems.Items
 
         public override void SetupHooks()
         {
+            // todo: investigate strange error callbacks from this hook, possibly when spawning on a stage with a void seed.
+            // once solution is built test:
+            // - blood shrine usage,
+            // - damage from and damaging clay pots and acid objects (neutral, non enemy damage),
+            // - fall damage,
+            // - health sacrifices from void cauldrons,
+            // - damage from and damaging normal enemies (this should be always fine).
             On.RoR2.HealthComponent.TakeDamage += (orig, self, damageInfo) =>
             {
-                orig(self, damageInfo);
-                if (!self) { return; }
+                DebugLog.Log($"test dot, is: {damageInfo.damageType}");
+                if (damageInfo.damageType == DamageType.DoT || damageInfo.damageType == DamageType.NonLethal) 
+                {
+                    //DebugLog.Log("is dot");
+                    orig(self, damageInfo); 
+                    return; 
+                }
 
-                var body = self.body;
-                if (!body || !body.inventory) { return; }
 
-                var count = body.inventory.GetItemCount(itemDef);
-                if (count <= 0) { return; }
+                DebugLog.Log($"test self and self inventory: {self.body}, {self.body.inventory}");
+                if (!self.body || !self.body.inventory) 
+                { 
+                    DebugLog.Log("no self or self inventory");
+                    orig(self, damageInfo); 
+                    return; 
+                }
 
                 var attacker = damageInfo.attacker.GetComponent<CharacterBody>();
+                DebugLog.Log($"test attacker and attacker inventory: {attacker}, {attacker.inventory}, {attacker.healthComponent}");
+                if (!attacker || !attacker.inventory || !attacker.healthComponent)
+                {
+                    DebugLog.Log("no attacker or attacker inventory or attacker health component");
+                    orig(self, damageInfo); 
+                    return; 
+                }
+
+                var count = attacker.inventory.GetItemCount(itemDef);
+                DebugLog.Log($"test item count: {count}");
+                if (count <= 0) 
+                {
+                    DebugLog.Log("no item count");
+                    orig(self, damageInfo); 
+                    return; 
+                }
 
                 var attackerHealth = attacker.healthComponent.combinedHealthFraction;
+
+                DebugLog.Log($"test attacker health: {attackerHealth}");
                 var victimHealth = self.combinedHealthFraction;
+
+                DebugLog.Log($"test victim health: {victimHealth}");
+
 
                 // Damage modifier of the attack increases by 10% per stack if the attacker has more health than the victim.
                 // Damage modifier of the attack decreases by 25% if the attacker has less health than the victim, regardless of stack count.
@@ -92,7 +129,7 @@ namespace MoreItems.Items
                     childName = "ThighL",
                     localPos = new Vector3(0.06313F, 0.22037F, 0.09908F),
                     localAngles = new Vector3(45.34884F, 106.977F, 165.8645F),
-                    localScale = new Vector3(1.66F, 1.66F, 1.66F)
+                    localScale = new Vector3(0F, 0F, 0F)
                 }
             });
 
@@ -105,7 +142,7 @@ namespace MoreItems.Items
                     childName = "ThighL",
                     localPos = new Vector3(0.1173F, 0.15272F, -0.00641F),
                     localAngles = new Vector3(41.80785F, 191.3737F, 184.3928F),
-                    localScale = new Vector3(1.66F, 1.66F, 1.66F)
+                    localScale = new Vector3(0F, 0F, 0F)
                 }
             });
 
@@ -118,7 +155,7 @@ namespace MoreItems.Items
                     childName = "ThighR",
                     localPos = new Vector3(-0.0298F, 0.2107F, 0.07734F),
                     localAngles = new Vector3(20.04926F, 47.88525F, 178.8776F),
-                    localScale = new Vector3(1.66F, 1.66F, 1.66F)
+                    localScale = new Vector3(0F, 0F, 0F)
                 }
             });
 
@@ -131,7 +168,7 @@ namespace MoreItems.Items
                     childName = "ExtraCalfL",
                     localPos = new Vector3(-0.88015F, 0.89902F, 0.05056F),
                     localAngles = new Vector3(325.1124F, 179.5492F, 5.23199F),
-                    localScale = new Vector3(9F, 9F, 9F)
+                    localScale = new Vector3(0F, 0F, 0F)
                 }
             });
 
@@ -144,7 +181,7 @@ namespace MoreItems.Items
                     childName = "UpperArmL",
                     localPos = new Vector3(0.09373F, 0.03316F, 0.01377F),
                     localAngles = new Vector3(28.99673F, 162.3914F, 172.891F),
-                    localScale = new Vector3(1.66F, 1.66F, 1.66F)
+                    localScale = new Vector3(0F, 0F, 0F)
                 }
            });
 
@@ -157,7 +194,7 @@ namespace MoreItems.Items
                     childName = "ThighR",
                     localPos = new Vector3(-0.08462F, 0.36293F, 0.1016F),
                     localAngles = new Vector3(37.80873F, 12.43991F, 179.8899F),
-                    localScale = new Vector3(1.66F, 1.66F, 1.66F)
+                    localScale = new Vector3(0F, 0F, 0F)
                 }
             });
 
@@ -170,7 +207,7 @@ namespace MoreItems.Items
                     childName = "ThighR",
                     localPos = new Vector3(-0.13209F, 0.20849F, -0.02851F),
                     localAngles = new Vector3(43.4352F, 350.5829F, 195.3876F),
-                    localScale = new Vector3(1.66F, 1.66F, 1.66F)
+                    localScale = new Vector3(0F, 0F, 0F)
                 }
             });
 
@@ -183,7 +220,7 @@ namespace MoreItems.Items
                     childName = "FlowerBase",
                     localPos = new Vector3(-0.49788F, 0.79773F, -0.57944F),
                     localAngles = new Vector3(351.3225F, 156.2976F, 35.23988F),
-                    localScale = new Vector3(3F, 3F, 3F)
+                    localScale = new Vector3(0F, 0F, 0F)
                 }
             });
 
@@ -196,7 +233,7 @@ namespace MoreItems.Items
                     childName = "ThighR",
                     localPos = new Vector3(-0.12428F, 0.20452F, 0.04312F),
                     localAngles = new Vector3(22.53534F, 0.66831F, 188.5954F),
-                    localScale = new Vector3(1.66F, 1.66F, 1.66F)
+                    localScale = new Vector3(0F, 0F, 0F)
                 }
             });
 
@@ -209,7 +246,7 @@ namespace MoreItems.Items
                     childName = "ThighR",
                     localPos = new Vector3(-1.18375F, 0.75609F, -0.29474F),
                     localAngles = new Vector3(26.76363F, 329.0323F, 182.0514F),
-                    localScale = new Vector3(10F, 10F, 10F)
+                    localScale = new Vector3(0F, 0F, 0F)
                 }
             });
 
@@ -222,7 +259,7 @@ namespace MoreItems.Items
                     childName = "Stomach",
                     localPos = new Vector3(-0.35971F, 0.04198F, -0.042F),
                     localAngles = new Vector3(328.5733F, 176.5325F, 13.82045F),
-                    localScale = new Vector3(1.8F, 1.8F, 1.8F)
+                    localScale = new Vector3(0F, 0F, 0F)
                 }
             });
 
@@ -235,7 +272,7 @@ namespace MoreItems.Items
                     childName = "Pelvis",
                     localPos = new Vector3(0.21541F, 0.20836F, -0.00426F),
                     localAngles = new Vector3(43.55844F, 204.8219F, 212.8925F),
-                    localScale = new Vector3(1.6F, 1.6F, 1.6F)
+                    localScale = new Vector3(0F, 0F, 0F)
                 }
             });
 
@@ -248,7 +285,7 @@ namespace MoreItems.Items
                     childName = "UpperArmR",
                     localPos = new Vector3(0.2064F, 0.06196F, 0.11423F),
                     localAngles = new Vector3(48.37803F, 145.3048F, 172.1066F),
-                    localScale = new Vector3(1.66F, 1.66F, 1.66F)
+                    localScale = new Vector3(0F, 0F, 0F)
                 }
             });
 
@@ -256,3 +293,4 @@ namespace MoreItems.Items
         }
     }
 }
+*/

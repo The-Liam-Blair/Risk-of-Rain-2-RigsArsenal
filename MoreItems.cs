@@ -85,6 +85,14 @@ namespace MoreItems
         }
 
         /*
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.F1))
+            {
+                DEBUG_SpawnItem("DISSONANTEDGE");
+            }
+        }
+
         private void DEBUG_SpawnItem(string itemName)
         {
             var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
