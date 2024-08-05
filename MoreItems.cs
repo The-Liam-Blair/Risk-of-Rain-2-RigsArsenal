@@ -84,12 +84,11 @@ namespace MoreItems
             }
         }
 
-        /*
         private void Update()
         {
             if(Input.GetKeyDown(KeyCode.F1))
             {
-                DEBUG_SpawnItem("DISSONANTEDGE");
+                DEBUG_SpawnItem("PRIMORDIALCHUNK");
             }
         }
 
@@ -108,7 +107,6 @@ namespace MoreItems
 
             PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(equip.equipmentDef.equipmentIndex), player.position, player.forward * 20f * Random.Range(0.1f, 3f));
         }
-        */
 
         /// <summary>
         /// Swap from stubbed shaders to the actual in-game shaders per material (This enables emissions, specular reflections, normal maps, etc).

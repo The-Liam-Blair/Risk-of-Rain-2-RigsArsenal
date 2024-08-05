@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Diagnostics;
 using UnityEngine.UIElements;
+using UnityEngine.XR;
 using static MoreItems.MoreItems;
 
 namespace MoreItems.Items
@@ -42,21 +43,19 @@ namespace MoreItems.Items
 
         public override void SetupHooks()
         {
-            On.RoR2.TeleporterInteraction.FixedUpdate += (orig, self) =>
+            On.RoR2.HoldoutZoneController.FixedUpdate += (orig, self) =>
             {
                 orig(self);
 
-                // Only run if the teleporter is charging.
-                if (!self.isCharging) { return; }
+                if(!self.isAnyoneCharging) { return; }
 
-                var zone = self.holdoutZoneController;
                 ReadOnlyCollection<TeamComponent> playerTeam = TeamComponent.GetTeamMembers(TeamIndex.Player);
 
                 // For each player..
-                foreach(var player in playerTeam)
+                foreach (var player in playerTeam)
                 {
                     // If a player is within the charging radius of the teleporter...
-                    if(HoldoutZoneController.IsBodyInChargingRadius(zone, zone.transform.position, zone.currentRadius * zone.currentRadius, player.body))
+                    if (HoldoutZoneController.IsBodyInChargingRadius(self, self.transform.position, self.currentRadius * self.currentRadius, player.body))
                     {
                         // Give them the item's buff if they don't have it.
                         var itemCount = player.body.inventory.GetItemCount(itemDef);
@@ -72,7 +71,7 @@ namespace MoreItems.Items
                         {
                             var buffStacks = player.body.timedBuffs.Where(x => x.buffIndex == ItemBuffDef.buffIndex);
 
-                            foreach(var buff in buffStacks)
+                            foreach (var buff in buffStacks)
                             {
                                 buff.timer = buffDuration;
                             }

@@ -1,5 +1,4 @@
-﻿/*
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using EntityStates;
 using R2API;
 using R2API.Utils;
@@ -37,70 +36,40 @@ namespace MoreItems.Items
 
         public override void SetupHooks()
         {
-            // todo: investigate strange error callbacks from this hook, possibly when spawning on a stage with a void seed.
-            // once solution is built test:
-            // - blood shrine usage,
-            // - damage from and damaging clay pots and acid objects (neutral, non enemy damage),
-            // - fall damage,
-            // - health sacrifices from void cauldrons,
-            // - damage from and damaging normal enemies (this should be always fine).
             On.RoR2.HealthComponent.TakeDamage += (orig, self, damageInfo) =>
             {
-                DebugLog.Log($"test dot, is: {damageInfo.damageType}");
-                if (damageInfo.damageType == DamageType.DoT || damageInfo.damageType == DamageType.NonLethal) 
+                if (!damageInfo.attacker || damageInfo.damageType == DamageType.DoT || damageInfo.damageType == DamageType.NonLethal) 
                 {
-                    //DebugLog.Log("is dot");
                     orig(self, damageInfo); 
                     return; 
                 }
 
-
-                DebugLog.Log($"test self and self inventory: {self.body}, {self.body.inventory}");
                 if (!self.body || !self.body.inventory) 
                 { 
-                    DebugLog.Log("no self or self inventory");
                     orig(self, damageInfo); 
                     return; 
                 }
 
                 var attacker = damageInfo.attacker.GetComponent<CharacterBody>();
-                DebugLog.Log($"test attacker and attacker inventory: {attacker}, {attacker.inventory}, {attacker.healthComponent}");
                 if (!attacker || !attacker.inventory || !attacker.healthComponent)
                 {
-                    DebugLog.Log("no attacker or attacker inventory or attacker health component");
                     orig(self, damageInfo); 
                     return; 
                 }
 
                 var count = attacker.inventory.GetItemCount(itemDef);
-                DebugLog.Log($"test item count: {count}");
                 if (count <= 0) 
                 {
-                    DebugLog.Log("no item count");
                     orig(self, damageInfo); 
                     return; 
                 }
 
                 var attackerHealth = attacker.healthComponent.combinedHealthFraction;
-
-                DebugLog.Log($"test attacker health: {attackerHealth}");
                 var victimHealth = self.combinedHealthFraction;
-
-                DebugLog.Log($"test victim health: {victimHealth}");
-
 
                 // Damage modifier of the attack increases by 10% per stack if the attacker has more health than the victim.
                 // Damage modifier of the attack decreases by 25% if the attacker has less health than the victim, regardless of stack count.
-                var damageScalar = 1f;
-
-                if(attackerHealth >= victimHealth)
-                {
-                    damageScalar += 0.10f * count;
-                }
-                else if(attackerHealth < victimHealth)
-                {
-                    damageScalar -= 0.25f;
-                }
+                var damageScalar = 1f + (attackerHealth >= victimHealth ? 0.10f * count : -0.25f);
 
                 damageInfo.damage *= damageScalar;
 
@@ -293,4 +262,3 @@ namespace MoreItems.Items
         }
     }
 }
-*/
