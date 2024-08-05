@@ -84,14 +84,7 @@ namespace MoreItems
             }
         }
 
-        private void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.F1))
-            {
-                DEBUG_SpawnItem("PRIMORDIALCHUNK");
-            }
-        }
-
+        /*
         private void DEBUG_SpawnItem(string itemName)
         {
             var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
@@ -107,6 +100,7 @@ namespace MoreItems
 
             PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(equip.equipmentDef.equipmentIndex), player.position, player.forward * 20f * Random.Range(0.1f, 3f));
         }
+        */
 
         /// <summary>
         /// Swap from stubbed shaders to the actual in-game shaders per material (This enables emissions, specular reflections, normal maps, etc).
