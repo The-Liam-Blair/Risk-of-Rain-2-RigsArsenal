@@ -76,8 +76,6 @@ namespace MoreItems.Items
             // is applied or refreshed.
             On.RoR2.HealthComponent.Heal += (orig, self, amount, mask, regen) =>
             {
-                orig(self, amount, mask, regen);
-
                 if(!self) { return orig(self, amount, mask, regen); }
 
                 var body = self.body;

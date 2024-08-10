@@ -30,7 +30,7 @@ namespace MoreItems
         public const string P_GUID = $"{P_Author}.{P_Name}";
         public const string P_Author = "RigsInRags";
         public const string P_Name = "RigsArsenal";
-        public const string P_Version = "1.2.4";
+        public const string P_Version = "1.2.5";
 
         public static AssetBundle MainAssets;
 
@@ -85,6 +85,23 @@ namespace MoreItems
         }
 
         /*
+        Spawn all items for debugging purposes
+
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.F1))
+            {
+                foreach (var item in ItemList)
+                {
+                    DEBUG_SpawnItem(item.NameToken);
+                }
+                foreach (var equip in EquipmentList)
+                {
+                    DEBUG_SpawnEquipment(equip.NameToken);
+                }
+            }
+        }
+
         private void DEBUG_SpawnItem(string itemName)
         {
             var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
