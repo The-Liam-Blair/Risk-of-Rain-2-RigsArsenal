@@ -39,6 +39,8 @@ namespace MoreItems
         public static List<Buff> BuffList = new List<Buff>();
         
         public static ConfigEntry<bool> EnableShotgunMarker { get; set; }
+        public static ConfigEntry<bool> EnableFrenziedFlamesVFX { get; set; }
+
 
         public void Awake()
         {
@@ -53,6 +55,7 @@ namespace MoreItems
             ApplyShaders();
 
             EnableShotgunMarker = Config.Bind("Wrist-Mounted Shotgun", "EnableShotgunMarker", true, "Shows or hides the range indicator for the wrist-mounted shotgun item.");
+            EnableFrenziedFlamesVFX = Config.Bind("Frenzied Flames", "EnableFrenziedFlamesVFX", true, "Shows or hides the item's explosion visual effect.");
 
             // Fetch all the items by type, and load each one (Populate each item's class definition then add to the item list).
             var Items = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Item)));
@@ -84,9 +87,7 @@ namespace MoreItems
             }
         }
 
-        /*
-        Spawn all items for debugging purposes
-
+        //Spawn all items for debugging purposes
         private void Update()
         {
             if(Input.GetKeyDown(KeyCode.F1))
@@ -117,7 +118,6 @@ namespace MoreItems
 
             PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(equip.equipmentDef.equipmentIndex), player.position, player.forward * 20f * Random.Range(0.1f, 3f));
         }
-        */
 
         /// <summary>
         /// Swap from stubbed shaders to the actual in-game shaders per material (This enables emissions, specular reflections, normal maps, etc).

@@ -1,107 +1,141 @@
 ﻿using System.Runtime.CompilerServices;
+using Newtonsoft.Json.Linq;
 using R2API;
 using R2API.Utils;
 using RoR2;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Diagnostics;
 using UnityEngine.UIElements;
 using static MoreItems.MoreItems;
-using static RoR2.MasterSpawnSlotController;
 
-namespace MoreItems.Items
+namespace MoreItems.Items.VoidItems
 {
     /// <summary>
-    /// Chaos Rune - T3 (Legendary) Item
-    /// <para>When applying a damaging debuff to an entity, chance to apply a random damaging debuff as well.</para>
-    /// <para>Stacking increases the number of rolls, increasing overall chance and number of debuffs that can be applied at once.</para>
-    /// <para>The damage of the debuff scales off of the attack that caused it.</para>
+    /// Frenzied Flames - Void T1 (Void Common) Item
+    /// <para>Once per second, apply a damaging flaming explosion centred on the user.</para>
+    /// <para>Stacking increases the burn damage and slightly increases the radius of the explosion.</para>
+    /// <para>This item corrupts all Gasoline items.</para>
     /// </summary>
-    public class ChaosRune : Item
+    public class FrenziedFlames : Item
     {
-        public override string Name => "Chaos Rune";
-        public override string NameToken => "CHAOSRUNE";
-        public override string PickupToken => "Chance to inflict additional damaging debuffs when applying any damaging debuff.";
-        public override string Description => "When applying a damaging debuff to an enemy, there is a <style=cIsDamage>33% chance</style><style=cStack> (+1 roll per stack)</style> to apply <style=cIsHealth>additional damaging debuffs</style> up to 1 <style=cStack>(+1 per 2 stacks)</style> more.";
-        public override string Lore => "<style=cMono>// ARTIFACT RECOVERY NOTES: EXCAVATION SITE 165-A34 //</style>\n\nName: Runic Stone Carving\n\nSize: 20cm by 20cm by 3cm\n\nSite Notes: ''Weighty and shimmers a bright red hue. The miner that recovered this artifact was found an hour after contact in tremendous pain, dehydrated and collapsed, still holding onto the artifact. Artifact was additionally glowing incredibly brightly, and is allegedly scalding to the touch for some while bone-chillingly cold to others.\n\nDo NOT handle directly. Do NOT stare into it's glow. Do NOT listen to what it offers. Be not tempted.''\n\n<style=cMono>// END OF NOTES //";
+        public override string Name => "Frenzied Flames";
+        public override string NameToken => "FRENZIEDFLAMES";
+        public override string PickupToken => "Damage and burn all nearby enemies.";
+        public override string Description => "<style=cDeath>Burn</style> all enemies within <style=cIsUtility>8m</style> <style=cStack>(+1m per stack)</style> for <style=cIsDamage>75%</style> base damage, and <style=cIsDamage>ignite</style> them for <style=cIsDamage>50%</style> <style=cStack>(+50% per stack)</style> base damage. Occurs <style=cIsUtility>once</style> per second.";
+        public override string Lore => "";
 
-        public override ItemTier Tier => ItemTier.Tier3;
+        public override ItemTier Tier => ItemTier.Tier1;
 
         public override bool CanRemove => true;
 
         public override ItemTag[] Tags => new ItemTag[] { ItemTag.Damage };
-        public override bool AIBlackList => true; // Even though the AI could get this item, its only going to be useful if the enemy can inflict damaging DOTs
-                                                   // naturally or is able to with another item, so its too niche.
-        
-        public override Sprite Icon => MainAssets.LoadAsset<Sprite>("ChaosRune.png");
-        public override GameObject Model => MainAssets.LoadAsset<GameObject>("ChaosRune.prefab");
+        public override bool AIBlackList => false;
 
-        private bool hasRun = false;
-        private DamageInfo damageInfo { get; set; }
+        public override Sprite Icon => null;
+        public override GameObject Model => null;
+
+        private FrenzyTimer timer = null;
+
+        private float timerStart = 1f;
 
         public override void SetupHooks()
         {
-            On.RoR2.DotController.InflictDot_refInflictDotInfo += (On.RoR2.DotController.orig_InflictDot_refInflictDotInfo orig, ref InflictDotInfo inflictDotInfo) =>
+            On.RoR2.CharacterBody.Update += (orig, self) =>
             {
-                orig(ref inflictDotInfo);
+                orig(self);
 
-                if(hasRun) { return; }
+                if(!Run.instance || !self || !self.inventory) { return; }
 
-                if(!inflictDotInfo.attackerObject || !inflictDotInfo.victimObject) { return; }
+                var count = self.inventory.GetItemCount(itemDef);
 
-                var attacker = inflictDotInfo.attackerObject.GetComponent<CharacterBody>();
-                var victim = inflictDotInfo.victimObject.GetComponent<CharacterBody>();
+                if (count <= 0){ return; }
 
-                if(!attacker.inventory) { return; }
-
-                var count = attacker.inventory.GetItemCount(itemDef);
-                if(count <= 0) { return; }
-
-                var maxSuccessfulRolls = 1 + Mathf.Floor(count * 0.5f); // Up to 1 successful roll, and another per 2 stacks.
-                var currentSucessfulRolls = 0;
-                
-                var roll = 33; // 1/3 chance of a successful roll per stack.
-                
-                for(int i = 0; i < count; i++)
+                if(!timer)
                 {
-                    if(currentSucessfulRolls >= maxSuccessfulRolls) { break; }
+                    // Component that holds a timer to track the cooldown of each explosion.
+                    timer = self.gameObject.AddComponent<FrenzyTimer>();
+                }
 
-                    if (Util.CheckRoll(roll, attacker.master))
+                if (timer.timer <= 0f)
+                {
+                    timer.timer = timerStart;
+
+                    // 8m + 1m per stack
+                    var radius = 7f + (count * 1f);
+
+                    // Damage of each "explosion" is 75% of the user's damage.
+                    var explosionDamage = self.damage * 0.75f;
+
+                    // Damage of the DOT is 50% (+50% per stack) of the user's damage.
+                    var DOTDamage = self.damage * 0.5f * count;
+
+                    var pos = self.corePosition;
+
+                    // Borrowing the implementation of the igniteOnKill (gasoline) proc activation function:
+
+                    // Get all non-friendly entities within the calculated radius.
+                    SphereSearch igniteOnKillSphereSearch = new SphereSearch();
+
+                    GlobalEventManager.igniteOnKillSphereSearch.origin = pos;
+                    GlobalEventManager.igniteOnKillSphereSearch.mask = LayerIndex.entityPrecise.mask;
+                    GlobalEventManager.igniteOnKillSphereSearch.radius = radius;
+                    GlobalEventManager.igniteOnKillSphereSearch.RefreshCandidates();
+                    GlobalEventManager.igniteOnKillSphereSearch.FilterCandidatesByHurtBoxTeam(TeamMask.GetUnprotectedTeams(self.teamComponent.teamIndex));
+                    GlobalEventManager.igniteOnKillSphereSearch.FilterCandidatesByDistinctHurtBoxEntities();
+                    GlobalEventManager.igniteOnKillSphereSearch.OrderCandidatesByDistance();
+                    GlobalEventManager.igniteOnKillSphereSearch.GetHurtBoxes(GlobalEventManager.igniteOnKillHurtBoxBuffer);
+                    GlobalEventManager.igniteOnKillSphereSearch.ClearCandidates();
+
+                    // For each entity found, apply the burn DOT.
+                    for (int i = 0; i < GlobalEventManager.igniteOnKillHurtBoxBuffer.Count; i++)
                     {
-                        hasRun = true;
-                        currentSucessfulRolls++;
-
-                        // todo: some visual or audio effect maybe to indicate the item has triggered.
-
-                        int DotIndex = UnityEngine.Random.Range(0, 4); // 4 DOTs: Bleed, Burn (Including ignition tank upgraded burn), Blight and Collapse.
-
-                        switch (DotIndex)
+                        HurtBox hurtBox = GlobalEventManager.igniteOnKillHurtBoxBuffer[i];
+                        if (hurtBox.healthComponent)
                         {
-                            case 0: // Bleed
-                                InflictDot(attacker, victim, DotController.DotIndex.Bleed, attacker.damage, damageInfo.procCoefficient);
-                                break;
-
-                            case 1: // Burn
-                                InflictDot(attacker, victim, DotController.DotIndex.Burn, attacker.damage, damageInfo.procCoefficient);
-                                break;
-
-                            case 2: // Blight
-                                InflictDot(attacker, victim, DotController.DotIndex.Blight, attacker.damage, damageInfo.procCoefficient);
-                                break;
-
-                            case 3: // Collapse
-                                InflictDot(attacker, victim, DotController.DotIndex.Fracture, attacker.damage, damageInfo.procCoefficient);
-                                break;
+                            InflictDotInfo inflictDotInfo = new InflictDotInfo
+                            {
+                                victimObject = hurtBox.healthComponent.gameObject,
+                                attackerObject = self.gameObject,
+                                totalDamage = DOTDamage,
+                                dotIndex = DotController.DotIndex.Burn,
+                                damageMultiplier = 1f
+                            };
+                            StrengthenBurnUtils.CheckDotForUpgrade(self.inventory, ref inflictDotInfo);
+                            DotController.InflictDot(ref inflictDotInfo);
                         }
                     }
-                }
-            };
+                    GlobalEventManager.igniteOnKillHurtBoxBuffer.Clear();
 
-            On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, DamageInfo, victim) =>
-            {
-                damageInfo = DamageInfo; // Store damage info for possible later use to get the attack's proc coefficient.
-                hasRun = false; // Reset flag for triggering this item.
-                orig(self, damageInfo, victim);
+                    // Generate the explosion damage.
+                    new BlastAttack
+                    {
+                        radius = radius,
+                        baseDamage = explosionDamage,
+                        procCoefficient = 0f,
+                        crit = Util.CheckRoll(self.crit, self.master),
+                        damageColorIndex = DamageColorIndex.Item,
+                        attackerFiltering = AttackerFiltering.Default,
+                        falloffModel = BlastAttack.FalloffModel.None,
+                        attacker = self.gameObject,
+                        teamIndex = self.teamComponent.teamIndex,
+                        position = pos
+                    }.Fire();
+
+                    // Create the visual effect of the explosion.
+                    // Explosion vfx is not created if its disabled in the config or if the user is out of combat/danger.
+                    // Todo: Maybe change the effect to be more fitting for the item.
+                    if (MoreItems.EnableFrenziedFlamesVFX.Value && (!self.outOfCombat || !self.outOfDanger))
+                    {
+                        EffectManager.SpawnEffect(GlobalEventManager.CommonAssets.igniteOnKillExplosionEffectPrefab, new EffectData
+                        {
+                            origin = pos,
+                            scale = radius,
+                            rotation = Util.QuaternionSafeLookRotation(Vector3.up)
+                        }, true);
+                    }
+                }
             };
         }
 
@@ -284,6 +318,21 @@ namespace MoreItems.Items
             });
 
             return rules;
+        }
+    }
+
+    public class FrenzyTimer : MonoBehaviour
+    {
+        public float timer;
+
+        private void Start()
+        {
+            timer = 1f;
+        }
+
+        private void Update()
+        {
+            timer -= Time.deltaTime;
         }
     }
 }

@@ -62,7 +62,6 @@ namespace MoreItems.Equipments
                     if (!DestroyRandomItem(sacrificeTier, slot.characterBody)) { continue; }
 
                     // Remove the consumed item.
-                    DebugLog.Log($"Removing { item.Item1.nameToken}");
                     slot.characterBody.inventory.RemoveItem(item.Item1, 1);
 
                     // (Don't give a restored item if a tonic affliction stack was removed as it has no item counterpart).
@@ -95,14 +94,9 @@ namespace MoreItems.Equipments
             // Record the relevant void tier. that can also be sacrificed.
             var voidSacrificeTier = (sacrificeTier == ItemTier.Tier1) ? ItemTier.VoidTier1 : ItemTier.VoidTier3;
 
-            DebugLog.Log($"Tier: {sacrificeTier}, Void Tier: {voidSacrificeTier}");
-
             // Return false if there are no items available to sacrifice for the chosen rarity.
-            DebugLog.Log($"Number of items of same tier is {self.inventory.GetTotalItemCountOfTier(sacrificeTier)} and {self.inventory.GetTotalItemCountOfTier(voidSacrificeTier)}");
-
             if(self.inventory.GetTotalItemCountOfTier(sacrificeTier) <= 0 && self.inventory.GetTotalItemCountOfTier(voidSacrificeTier) <= 0)
             {
-                DebugLog.Log("No valid items to sacrifice.");
                 return false;
             }
 
@@ -121,7 +115,6 @@ namespace MoreItems.Equipments
 
             // Destroy a single valid item randomly.
             var deadItem = ValidItems[UnityEngine.Random.Range(0, ValidItems.Count)];
-            DebugLog.Log($"Destroying {ItemCatalog.GetItemDef(deadItem).name}");
             self.inventory.RemoveItem(deadItem, 1);
 
             // Modifying the item conversion notification, indicate to the player what item was destroyed, with additional flavour text.
@@ -169,7 +162,6 @@ namespace MoreItems.Equipments
             };
 
             var result = MithrixResponses[UnityEngine.Random.Range(0, MithrixResponses.Length)];
-            DebugLog.Log($"Returning {result}");
             return result;
         }   
     }
