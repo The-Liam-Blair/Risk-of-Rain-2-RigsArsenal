@@ -40,6 +40,7 @@ namespace MoreItems
         
         public static ConfigEntry<bool> EnableShotgunMarker { get; set; }
         public static ConfigEntry<bool> EnableUmbralPyreVFX { get; set; }
+        public static List<ConfigEntry<bool>> EnableItems { get; set; }
 
 
         public void Awake()
@@ -54,17 +55,40 @@ namespace MoreItems
 
             ApplyShaders();
 
-            EnableShotgunMarker = Config.Bind("Wrist-Mounted Shotgun", "EnableShotgunMarker", true, "Shows or hides the range indicator for the wrist-mounted shotgun item.");
-            EnableUmbralPyreVFX = Config.Bind("UmbralPyre", "EnableUmbralPyreVFX", true, "Shows or hides the item's explosion visual effect.");
+            EnableShotgunMarker = Config.Bind("Wrist-Mounted Shotgun Config", "EnableShotgunMarker", true, "Shows or hides the range indicator for the wrist-mounted shotgun item.");
+            EnableUmbralPyreVFX = Config.Bind("Umbral Pyre Config", "EnableUmbralPyreVFX", true, "Shows or hides the item's explosion visual effect.");
 
             // Fetch all the items by type, and load each one (Populate each item's class definition then add to the item list).
             var Items = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Item)));
 
+            EnableItems = new List<ConfigEntry<bool>>();
+
+            string itemName = "";
+
+            // For each item...
             foreach (var item in Items)
             {
+                // Instantiate the class.
                 Item anItem = (Item)System.Activator.CreateInstance(item);
-                anItem.Init();
-                ItemList.Add(anItem);
+
+                // For the config display, for the item name, replace all spaces with underscores and remove any apostrophes.
+                itemName = anItem.Name.Replace(" ", "_");
+                itemName = itemName.Replace("'", "");
+
+                // If the item is not hidden (NoTier), add it to the config file as a way of disabling the item from loading.
+                if(anItem.Tier != ItemTier.NoTier)
+                {
+                    EnableItems.Add(Config.Bind("Item Selection", itemName, true, "Enables or disables this item from appearing in game."));
+                }
+
+                // If the item is enabled in the config or is a hidden item, initialize it for use in game.
+                // NOTE: The item tier check >HAS< to be done first as hidden items interrupt the sequence in the config list.
+                //       Bless OR operators skipping the second check if the first is true.
+                if (anItem.Tier == ItemTier.NoTier || EnableItems[EnableItems.Count - 1].Value)
+                {
+                    anItem.Init();
+                    ItemList.Add(anItem);
+                }
             }
 
 
@@ -77,13 +101,23 @@ namespace MoreItems
                 BuffList.Add(aBuff);
             }
 
+
             var theEquipment = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Equipment)));
 
             foreach (var equipment in theEquipment)
             {
                 Equipment equip = (Equipment)System.Activator.CreateInstance(equipment);
-                equip.Init();
-                EquipmentList.Add(equip);
+
+                itemName = equip.Name.Replace(" ", "_");
+                itemName = itemName.Replace("'", "");
+
+                EnableItems.Add(Config.Bind("Equipment Selection", itemName, true, "Enables or disables this equipment from appearing in game."));
+
+                if(EnableItems[EnableItems.Count - 1].Value)
+                {
+                    equip.Init();
+                    EquipmentList.Add(equip);
+                }
             }
         }
 
