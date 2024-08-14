@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 4122763840
+CRC: 1451896222
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f2168aaa03321f367a32f47f83fd19e3
+    Hash: 470ead463a2cb80e9d33223c12407f47
   TypeTreeHash:
     serializedVersion: 2
     Hash: 1fe3abd029edb3522ae5dbbc711d0a74
@@ -67,7 +67,6 @@ Assets:
 - Assets/Materials/Equipment/NidusVirus/M_Screw.mat
 - Assets/Prefabs/Item/UmbralPyre/UmbralPyre.blend
 - Assets/Materials/Item/WornOutStimpack/M_Base.mat
-- Assets/Materials/Item/WornOutStimpack/WornOutStimpack.png
 - Assets/Materials/Item/BountyHunterBadge/M_Black.mat
 - Assets/Materials/Item/WornOutStimpack/M_HealIcon.mat
 - Assets/Materials/Item/WristMountedShotgun/M_Gray.mat
@@ -142,6 +141,7 @@ Assets:
 - Assets/Materials/Item/CoolantPack/M_Backing.mat
 - Assets/Materials/Item/ChaosRune/M_RockFace.mat
 - Assets/Materials/Equipment/NidusVirus/M_VirusBulb.mat
+- Assets/Materials/Item/WornOutStimpack/WornOutStimpack.png
 - Assets/Materials/Item/UmbralPyre/M_Casing.mat
 - Assets/Materials/Item/CoolantPack/CoolantPack.png
 - Assets/Materials/Item/ChaosRune/M_LesserGlow.mat

@@ -88,10 +88,7 @@ namespace MoreItems.Equipments
 
         private bool DestroyRandomItem(ItemTier sacrificeTier, CharacterBody self)
         {
-            // Dump all variable data to DebugLog.Log on Ror2.Content.Items.TonicAffliction.
-            // Name every dump value beforehand.
-
-            // Record the relevant void tier. that can also be sacrificed.
+            // Also records the void counterpart of the chosen rarity, as those can also be sacrificed.
             var voidSacrificeTier = (sacrificeTier == ItemTier.Tier1) ? ItemTier.VoidTier1 : ItemTier.VoidTier3;
 
             // Return false if there are no items available to sacrifice for the chosen rarity.
