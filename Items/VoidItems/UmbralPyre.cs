@@ -9,22 +9,23 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.Diagnostics;
 using UnityEngine.UIElements;
 using static MoreItems.MoreItems;
+using static UnityEngine.UI.Image;
 
 namespace MoreItems.Items.VoidItems
 {
     /// <summary>
-    /// Frenzied Flames - Void T1 (Void Common) Item
+    /// Umbral Pyre - Void T1 (Void Common) Item
     /// <para>Once per second, apply a damaging flaming explosion centred on the user.</para>
     /// <para>Stacking increases the burn damage and slightly increases the radius of the explosion.</para>
     /// <para>This item corrupts all Gasoline items.</para>
     /// </summary>
-    public class FrenziedFlames : Item
+    public class UmbralPyre : Item
     {
-        public override string Name => "Frenzied Flames";
-        public override string NameToken => "FRENZIEDFLAMES";
-        public override string PickupToken => "Damage and burn all nearby enemies.";
-        public override string Description => "<style=cDeath>Burn</style> all enemies within <style=cIsUtility>8m</style> <style=cStack>(+1m per stack)</style> for <style=cIsDamage>75%</style> base damage, and <style=cIsDamage>ignite</style> them for <style=cIsDamage>50%</style> <style=cStack>(+50% per stack)</style> base damage. Occurs <style=cIsUtility>once</style> per second.";
-        public override string Lore => "";
+        public override string Name => "Umbral Pyre";
+        public override string NameToken => "UMBRALPYRE";
+        public override string PickupToken => "Damage and burn all nearby enemies. <Style=cIsVoid>Corrupts all Gasoline</style>.";
+        public override string Description => "<style=cDeath>Burn</style> all enemies within <style=cIsUtility>8m</style> <style=cStack>(+1m per stack)</style> for <style=cIsDamage>75%</style> base damage, and <style=cIsDamage>ignite</style> them for <style=cIsDamage>50%</style> <style=cStack>(+50% per stack)</style> base damage. Occurs <style=cIsUtility>once</style> per second. <Style=cIsVoid>Corrupts all Gasoline</style>.";
+        public override string Lore => "<style=cMono>========================================\r\n====   MyBabel Machine Translator   ====\r\n====     [Version 15.01.3.000 ]   ======\r\n========================================\r\nTraining... <1000000000 cycles>\r\nTraining... <1000000000 cycles>\r\nTraining... <4054309 cycles>\r\nComplete!\r\nDisplay result? Y/N\r\nY\r\n========================================</style>\r\n\r\n<style=cIsVoid>Imperfect design. Uncontrolled. Prone to friendly fire. Human design, of course.\r\n\r\nImprove. Remove the redundant elements. The base form enables its power, unsuppressed.\r\n\r\nIt knows. Friend and foe. Teach and inform, it will listen, and it will only hurt the opposition.\r\n\r\nReplicate. The air holds enough mass to enable replication. It will continue unhindered.\r\n\r\nHuman design, made perfect.\r\n\r\nGo now, and spread our message. Knowledge through disintegration.</style>";
 
         public override ItemTier Tier => ItemTier.Tier1;
 
@@ -33,8 +34,8 @@ namespace MoreItems.Items.VoidItems
         public override ItemTag[] Tags => new ItemTag[] { ItemTag.Damage };
         public override bool AIBlackList => false;
 
-        public override Sprite Icon => null;
-        public override GameObject Model => null;
+        public override Sprite Icon => MainAssets.LoadAsset<Sprite>("UmbralPyre.png");
+        public override GameObject Model => MainAssets.LoadAsset<GameObject>("UmbralPyre.prefab");
 
         private FrenzyTimer timer = null;
 
@@ -50,7 +51,7 @@ namespace MoreItems.Items.VoidItems
 
                 var count = self.inventory.GetItemCount(itemDef);
 
-                if (count <= 0){ return; }
+                if (count <= 0) { return; }
 
                 if(!timer)
                 {
@@ -94,16 +95,7 @@ namespace MoreItems.Items.VoidItems
                         HurtBox hurtBox = GlobalEventManager.igniteOnKillHurtBoxBuffer[i];
                         if (hurtBox.healthComponent)
                         {
-                            InflictDotInfo inflictDotInfo = new InflictDotInfo
-                            {
-                                victimObject = hurtBox.healthComponent.gameObject,
-                                attackerObject = self.gameObject,
-                                totalDamage = DOTDamage,
-                                dotIndex = DotController.DotIndex.Burn,
-                                damageMultiplier = 1f
-                            };
-                            StrengthenBurnUtils.CheckDotForUpgrade(self.inventory, ref inflictDotInfo);
-                            DotController.InflictDot(ref inflictDotInfo);
+                            MoreItems.InflictDot(self, hurtBox.healthComponent.body, DotController.DotIndex.Burn, DOTDamage);
                         }
                     }
                     GlobalEventManager.igniteOnKillHurtBoxBuffer.Clear();
@@ -124,10 +116,13 @@ namespace MoreItems.Items.VoidItems
                     }.Fire();
 
                     // Create the visual effect of the explosion.
-                    // Explosion vfx is not created if its disabled in the config or if the user is out of combat/danger.
-                    // Todo: Maybe change the effect to be more fitting for the item.
-                    if (MoreItems.EnableFrenziedFlamesVFX.Value && (!self.outOfCombat || !self.outOfDanger))
+                    // Explosion vfx is not created if its disabled in the config or if the user is out of
+                    // combat/danger (They haven't recently taken damage or initiated an attack).
+                    // This is to prevent the effect from being created when it is likely unneeded at that time, reducing visual clutter.
+                    // TODO: Custom visual effects.
+                    if (MoreItems.EnableUmbralPyreVFX.Value &&  (!self.outOfCombat || !self.outOfDanger))
                     {
+
                         EffectManager.SpawnEffect(GlobalEventManager.CommonAssets.igniteOnKillExplosionEffectPrefab, new EffectData
                         {
                             origin = pos,

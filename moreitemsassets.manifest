@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1968612976
+CRC: 4122763840
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 931f42d1a110cbc9d863fd83c3678a53
+    Hash: f2168aaa03321f367a32f47f83fd19e3
   TypeTreeHash:
     serializedVersion: 2
     Hash: 1fe3abd029edb3522ae5dbbc711d0a74
@@ -60,10 +60,12 @@ Assets:
 - Assets/Materials/Item/ReactiveArmourPlate/M_ArmourEdge.mat
 - Assets/Materials/Item/KineticBattery/M_Screw.mat
 - Assets/Materials/Item/CoolantPack/M_Button.mat
+- Assets/Materials/Item/UmbralPyre/UmbralPyre.png
 - Assets/Materials/Equipment/SanguineShieldBattery/M_MetalFixtures.mat
 - Assets/Materials/Item/ChaosRune/Rock.png
 - Assets/Materials/Equipment/PurityAltar/M_LesserGlow.mat
 - Assets/Materials/Equipment/NidusVirus/M_Screw.mat
+- Assets/Prefabs/Item/UmbralPyre/UmbralPyre.blend
 - Assets/Materials/Item/WornOutStimpack/M_Base.mat
 - Assets/Materials/Item/WornOutStimpack/WornOutStimpack.png
 - Assets/Materials/Item/BountyHunterBadge/M_Black.mat
@@ -88,6 +90,7 @@ Assets:
 - Assets/Materials/Item/DissonantEdge/M_Blade.mat
 - Assets/Materials/Item/CoolantPack/M_TankMetre.mat
 - Assets/Materials/Item/NeedleRounds/M_Tape.mat
+- Assets/Materials/Item/UmbralPyre/M_FlameGlow.mat
 - Assets/Prefabs/Item/DissonantEdge/DissonantEdge.blend
 - Assets/Materials/Item/DissonantEdge/M_Glow.mat
 - Assets/Materials/Item/PrimordialChunk/M_Chunk.mat
@@ -102,6 +105,7 @@ Assets:
 - Assets/Prefabs/Item/WornOutStimpack/WornOutStimpack.prefab
 - Assets/Materials/Item/ChaosRune/M_Rock.mat
 - Assets/Materials/Item/ChaosRune/ChaosRune.png
+- Assets/Prefabs/Item/UmbralPyre/UmbralPyre.prefab
 - Assets/Materials/Item/WornOutStimpack/WornOutStimpackBuff.png
 - Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.prefab
 - Assets/Materials/Equipment/SanguineShieldBattery/M_Body.mat
@@ -116,6 +120,7 @@ Assets:
 - Assets/Prefabs/Equipment/NidusVirus/NidusVirusObject.blend
 - Assets/Materials/Item/WristMountedShotgun/M_ShotgunComponent.mat
 - Assets/Materials/Equipment/PurityAltar/Darkness.png
+- Assets/Materials/Item/UmbralPyre/flowmapnormals2.png
 - Assets/Materials/Item/ReactiveArmourPlate/GripTex.png
 - Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlatingBuff.png
 - Assets/Materials/Equipment/SanguineShieldBattery/flowmapnormals.png
@@ -137,6 +142,7 @@ Assets:
 - Assets/Materials/Item/CoolantPack/M_Backing.mat
 - Assets/Materials/Item/ChaosRune/M_RockFace.mat
 - Assets/Materials/Equipment/NidusVirus/M_VirusBulb.mat
+- Assets/Materials/Item/UmbralPyre/M_Casing.mat
 - Assets/Materials/Item/CoolantPack/CoolantPack.png
 - Assets/Materials/Item/ChaosRune/M_LesserGlow.mat
 - Assets/Prefabs/Equipment/PurityAltar/PurityAltar.blend
@@ -144,6 +150,7 @@ Assets:
 - Assets/Materials/Item/ReactiveArmourPlate/UnderlayTex.png
 - Assets/Materials/Item/NeedleRounds/M_BulletBase.mat
 - Assets/Materials/Item/BountyHunterBadge/YellowTex1.png
+- Assets/Materials/Item/UmbralPyre/M_Crystal.mat
 - Assets/Materials/Item/DissonantEdge/DissonantEdge.png
 - Assets/Materials/Item/BountyHunterBadge/scratchTex.png
 - Assets/Materials/Item/NeedleRounds/M_BulletTop.mat

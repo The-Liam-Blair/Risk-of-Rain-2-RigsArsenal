@@ -39,7 +39,7 @@ namespace MoreItems
         public static List<Buff> BuffList = new List<Buff>();
         
         public static ConfigEntry<bool> EnableShotgunMarker { get; set; }
-        public static ConfigEntry<bool> EnableFrenziedFlamesVFX { get; set; }
+        public static ConfigEntry<bool> EnableUmbralPyreVFX { get; set; }
 
 
         public void Awake()
@@ -55,7 +55,7 @@ namespace MoreItems
             ApplyShaders();
 
             EnableShotgunMarker = Config.Bind("Wrist-Mounted Shotgun", "EnableShotgunMarker", true, "Shows or hides the range indicator for the wrist-mounted shotgun item.");
-            EnableFrenziedFlamesVFX = Config.Bind("Frenzied Flames", "EnableFrenziedFlamesVFX", true, "Shows or hides the item's explosion visual effect.");
+            EnableUmbralPyreVFX = Config.Bind("UmbralPyre", "EnableUmbralPyreVFX", true, "Shows or hides the item's explosion visual effect.");
 
             // Fetch all the items by type, and load each one (Populate each item's class definition then add to the item list).
             var Items = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Item)));
@@ -147,7 +147,7 @@ namespace MoreItems
                     break;
 
                 case DotIndex.Burn:
-                case DotIndex.StrongerBurn:
+                //case DotIndex.StrongerBurn:
                     InflictDotInfo burnDot = new InflictDotInfo()
                     {
                         attackerObject = attacker.gameObject,
@@ -181,6 +181,7 @@ namespace MoreItems
                     break;
 
                 default: // All the other dots: default implementation
+                    DebugLog.Log($"Default dot called for dot {dotType}. This should not happen!");
                     DotController.InflictDot(victim.gameObject, attacker.gameObject, dotType, damage, procCoefficent);
                     break;
             }

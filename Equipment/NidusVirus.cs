@@ -174,7 +174,7 @@ namespace MoreItems.Equipments
             On.RoR2.EquipmentSlot.UpdateTargets += (orig, self, equipmentIndex, isEquipmentActivation) =>
             {
                 // Skip if not the equipment def for nidus virus. Also includes complementary NRE catcher :)
-                if (!EquipmentSlot || equipmentIndex != EquipmentSlot.equipmentIndex) 
+                if (!EquipmentSlot || equipmentIndex != equipmentDef.equipmentIndex) 
                 {
                     orig(self, equipmentIndex, isEquipmentActivation);
                     return;
