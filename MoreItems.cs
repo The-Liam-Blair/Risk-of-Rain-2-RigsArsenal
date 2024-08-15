@@ -71,7 +71,7 @@ namespace MoreItems
                 // Instantiate the class.
                 Item anItem = (Item)System.Activator.CreateInstance(item);
 
-                // For the config display, for the item name, replace all spaces with underscores and remove any apostrophes.
+                // For the config display, to remove invalid characters, convert all spaces into underscores and remove apostrophes.
                 itemName = anItem.Name.Replace(" ", "_");
                 itemName = itemName.Replace("'", "");
 

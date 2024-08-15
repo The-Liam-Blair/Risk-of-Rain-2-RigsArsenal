@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using HarmonyLib;
 using R2API;
 using RoR2;
+using RoR2.ExpansionManagement;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -24,6 +27,10 @@ namespace MoreItems.Items
         public abstract bool AIBlackList { get; } // Determines if the enemy can receive this item, such as from the void fields.
 
         public ItemDef itemDef { get; private set; } // Reference to the item definition.
+
+        public virtual ItemDef pureItemDef { get; set; } = null; // Reference to the "pure" item that corrupts into this item,
+                                                                 // if the item is a void item.
+                                                                 // For non-void items, it will be null and not used.
 
         public abstract Sprite Icon { get; } // Icon sprite.
         public abstract GameObject Model { get; } // Item model.
@@ -67,6 +74,11 @@ namespace MoreItems.Items
             itemDef.hidden = false;
             itemDef.canRemove = CanRemove;
 
+            if(pureItemDef && Tier is ItemTier.VoidTier1 or ItemTier.VoidTier2 or ItemTier.VoidTier3)
+            {
+                DebugLog.Log($"Warning: Item {Name} is a void item but does not have a pure item reference.");
+            }
+
             switch (Tier)
             {
                 case ItemTier.Tier1:
@@ -81,18 +93,36 @@ namespace MoreItems.Items
                     itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/Base/Common/Tier3Def.asset").WaitForCompletion();
                     break;
 
+
+                case ItemTier.VoidTier1:
+                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/DLC1/Common/VoidTier1Def.asset").WaitForCompletion();
+                    SetupVoidItem();
+                    break;
+
+                case ItemTier.VoidTier2:
+                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/DLC1/Common/VoidTier2Def.asset").WaitForCompletion();
+                    SetupVoidItem();
+                    break;
+
+                case ItemTier.VoidTier3:
+                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/DLC1/Common/VoidTier3Def.asset").WaitForCompletion();
+                    SetupVoidItem();
+                    break;
+
+
                 case ItemTier.NoTier:
                     itemDef.tier = ItemTier.NoTier;
                     itemDef.hidden = true;
                     itemDef.deprecatedTier = ItemTier.NoTier;
                     break;
 
+
                 case ItemTier.Lunar:
                     itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/Base/Common/LunarTierDef.asset").WaitForCompletion();
                     break;
 
                 default:
-                    DebugLog.Log($"Item {itemDef.name} has an invalid item tier. Defaulting to Tier1.");
+                    DebugLog.Log($"Warning: Item {itemDef.name} has an invalid item tier. Defaulting to Tier1.");
                     itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/Base/Common/Tier1Def.asset").WaitForCompletion();
                     break;
             }
@@ -150,5 +180,27 @@ namespace MoreItems.Items
         }
 
         public virtual void SetupHooks() { }
+
+        private void SetupVoidItem()
+        {
+            // Void items require the "Survivors of the Void" expansion to be enabled.
+            itemDef.requiredExpansion = ExpansionCatalog.expansionDefs.FirstOrDefault(x => x.nameToken == "DLC1_NAME");
+
+            // Set up the item pair for the void item and its pure item counterpart.
+            On.RoR2.Items.ContagiousItemManager.Init += (orig) =>
+            {
+                ItemDef.Pair voidTransform = new ItemDef.Pair
+                {
+                    itemDef1 = pureItemDef,
+                    itemDef2 = itemDef
+                };
+
+                // Add the item pair to the item relationship list.
+                ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem]
+                = ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem].AddToArray(voidTransform);
+
+                orig();
+            };
+        }
     }
 }
