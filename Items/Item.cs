@@ -96,17 +96,14 @@ namespace MoreItems.Items
 
                 case ItemTier.VoidTier1:
                     itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/DLC1/Common/VoidTier1Def.asset").WaitForCompletion();
-                    SetupVoidItem();
                     break;
 
                 case ItemTier.VoidTier2:
                     itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/DLC1/Common/VoidTier2Def.asset").WaitForCompletion();
-                    SetupVoidItem();
                     break;
 
                 case ItemTier.VoidTier3:
                     itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/DLC1/Common/VoidTier3Def.asset").WaitForCompletion();
-                    SetupVoidItem();
                     break;
 
 
@@ -180,27 +177,5 @@ namespace MoreItems.Items
         }
 
         public virtual void SetupHooks() { }
-
-        private void SetupVoidItem()
-        {
-            // Void items require the "Survivors of the Void" expansion to be enabled.
-            itemDef.requiredExpansion = ExpansionCatalog.expansionDefs.FirstOrDefault(x => x.nameToken == "DLC1_NAME");
-
-            // Set up the item pair for the void item and its pure item counterpart.
-            On.RoR2.Items.ContagiousItemManager.Init += (orig) =>
-            {
-                ItemDef.Pair voidTransform = new ItemDef.Pair
-                {
-                    itemDef1 = pureItemDef,
-                    itemDef2 = itemDef
-                };
-
-                // Add the item pair to the item relationship list.
-                ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem]
-                = ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem].AddToArray(voidTransform);
-
-                orig();
-            };
-        }
     }
 }

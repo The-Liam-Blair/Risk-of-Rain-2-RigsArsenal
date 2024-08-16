@@ -12,6 +12,8 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using R2API.Utils;
 using static RoR2.DotController;
+using HarmonyLib;
+using RoR2.ExpansionManagement;
 
 namespace MoreItems
 {
@@ -88,6 +90,11 @@ namespace MoreItems
                 {
                     anItem.Init();
                     ItemList.Add(anItem);
+                }
+
+                if(anItem.Tier == ItemTier.VoidTier1 || anItem.Tier == ItemTier.VoidTier2 || anItem.Tier == ItemTier.VoidTier3)
+                {
+                    SetupVoidItem(anItem);
                 }
             }
 
@@ -219,6 +226,31 @@ namespace MoreItems
                     DotController.InflictDot(victim.gameObject, attacker.gameObject, dotType, damage, procCoefficent);
                     break;
             }
+        }
+
+        // todo: convert into list of pairs for mass addition once 2+ void items are implemented.
+        /// <summary>
+        /// Add expansion definition and set the transformation pair for void items.
+        /// </summary>
+        private void SetupVoidItem(Item item)
+        {
+            // Set up the item pair for the void item and its pure item counterpart.
+            On.RoR2.Items.ContagiousItemManager.Init += (orig) =>
+            {
+                item.itemDef.requiredExpansion = ExpansionCatalog.expansionDefs.FirstOrDefault(x => x.nameToken == "DLC1_NAME");
+
+                ItemDef.Pair voidTransform = new ItemDef.Pair
+                {
+                    itemDef1 = item.pureItemDef,
+                    itemDef2 = item.itemDef
+                };
+
+                // Add the item pair to the item relationship list.
+                ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem]
+                = ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem].AddToArray(voidTransform);
+
+                orig();
+            };
         }
     }
 }
