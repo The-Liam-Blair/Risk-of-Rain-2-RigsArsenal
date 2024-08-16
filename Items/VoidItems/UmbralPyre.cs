@@ -24,7 +24,7 @@ namespace MoreItems.Items.VoidItems
         public override string Name => "Umbral Pyre";
         public override string NameToken => "UMBRALPYRE";
         public override string PickupToken => "Damage and burn all nearby enemies. <Style=cIsVoid>Corrupts all Gasoline</style>.";
-        public override string Description => "<style=cDeath>Burn</style> all enemies within <style=cIsUtility>8m</style> <style=cStack>(+1m per stack)</style> for <style=cIsDamage>75%</style> base damage, and <style=cIsDamage>ignite</style> them for <style=cIsDamage>50%</style> <style=cStack>(+50% per stack)</style> base damage. Occurs <style=cIsUtility>once</style> per second. <Style=cIsVoid>Corrupts all Gasoline</style>.";
+        public override string Description => "<style=cDeath>Burn</style> all enemies within <style=cIsUtility>8m</style> <style=cStack>(+1m per stack)</style> for <style=cIsDamage>100%</style> base damage, and <style=cIsDamage>ignite</style> them for <style=cIsDamage>75%</style> <style=cStack>(+75% per stack)</style> base damage. Occurs <style=cIsUtility>once</style> per second. <Style=cIsVoid>Corrupts all Gasoline</style>.";
         public override string Lore => "<style=cMono>========================================\r\n====   MyBabel Machine Translator   ====\r\n====     [Version 15.01.3.000 ]   ======\r\n========================================\r\nTraining... <1000000000 cycles>\r\nTraining... <1000000000 cycles>\r\nTraining... <4054309 cycles>\r\nComplete!\r\nDisplay result? Y/N\r\nY\r\n========================================</style>\r\n\r\n<style=cIsVoid>Imperfect design. Uncontrolled. Prone to friendly fire. Human design, of course.\r\n\r\nImprove. Remove the redundant elements. The base form enables its power, unsuppressed.\r\n\r\nIt knows. Friend and foe. Teach and inform, it will listen, and it will only hurt the opposition.\r\n\r\nReplicate. The air holds enough mass to enable replication. It will continue unhindered.\r\n\r\nHuman design, made perfect.\r\n\r\nGo now, and spread our message. Knowledge through disintegration.</style>";
 
         public override ItemTier Tier => ItemTier.VoidTier1;
@@ -68,11 +68,11 @@ namespace MoreItems.Items.VoidItems
                     // 8m + 1m per stack
                     var radius = 7f + (count * 1f);
 
-                    // Damage of each "explosion" is 75% of the user's damage.
-                    var explosionDamage = self.damage * 0.75f;
+                    // Damage of each "explosion" is 100% of the user's damage.
+                    var explosionDamage = self.damage;
 
-                    // Damage of the DOT is 50% (+50% per stack) of the user's damage.
-                    var DOTDamage = self.damage * 0.5f * count;
+                    // Damage of the DOT is 75% (+75% per stack) of the user's damage.
+                    var DOTDamage = self.damage * 0.75f * count;
 
                     var pos = self.corePosition;
 
@@ -100,7 +100,6 @@ namespace MoreItems.Items.VoidItems
                             MoreItems.InflictDot(self, hurtBox.healthComponent.body, DotController.DotIndex.Burn, DOTDamage);
                         }
                     }
-                    GlobalEventManager.igniteOnKillHurtBoxBuffer.Clear();
 
                     // Generate the explosion damage.
                     new BlastAttack
@@ -118,11 +117,9 @@ namespace MoreItems.Items.VoidItems
                     }.Fire();
 
                     // Create the visual effect of the explosion.
-                    // Explosion vfx is not created if its disabled in the config or if the user is out of
-                    // combat/danger (They haven't recently taken damage or initiated an attack).
-                    // This is to prevent the effect from being created when it is likely unneeded at that time, reducing visual clutter.
+                    // Explosion vfx is not created if its disabled in the config or if no targets were hit.
                     // TODO: Custom visual effects.
-                    if (MoreItems.EnableUmbralPyreVFX.Value &&  (!self.outOfCombat || !self.outOfDanger))
+                    if (MoreItems.EnableUmbralPyreVFX.Value && GlobalEventManager.igniteOnKillHurtBoxBuffer.Count > 0)
                     {
 
                         EffectManager.SpawnEffect(GlobalEventManager.CommonAssets.igniteOnKillExplosionEffectPrefab, new EffectData
@@ -132,6 +129,8 @@ namespace MoreItems.Items.VoidItems
                             rotation = Util.QuaternionSafeLookRotation(Vector3.up)
                         }, true);
                     }
+
+                    GlobalEventManager.igniteOnKillHurtBoxBuffer.Clear();
                 }
             };
         }

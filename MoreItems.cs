@@ -67,6 +67,8 @@ namespace MoreItems
 
             string itemName = "";
 
+            List <Item> voidItems = new List<Item>();
+
             // For each item...
             foreach (var item in Items)
             {
@@ -90,12 +92,17 @@ namespace MoreItems
                 {
                     anItem.Init();
                     ItemList.Add(anItem);
-                }
 
-                if(anItem.Tier == ItemTier.VoidTier1 || anItem.Tier == ItemTier.VoidTier2 || anItem.Tier == ItemTier.VoidTier3)
-                {
-                    SetupVoidItem(anItem);
+                    if (anItem.Tier == ItemTier.VoidTier1 || anItem.Tier == ItemTier.VoidTier2 || anItem.Tier == ItemTier.VoidTier3)
+                    {
+                        voidItems.Add(anItem);
+                    }
                 }
+            }
+
+            if(voidItems.Count > 0)
+            {
+                SetupVoidItem(voidItems);
             }
 
 
@@ -232,23 +239,25 @@ namespace MoreItems
         /// <summary>
         /// Add expansion definition and set the transformation pair for void items.
         /// </summary>
-        private void SetupVoidItem(Item item)
+        private void SetupVoidItem(List<Item> items)
         {
             // Set up the item pair for the void item and its pure item counterpart.
             On.RoR2.Items.ContagiousItemManager.Init += (orig) =>
             {
-                item.itemDef.requiredExpansion = ExpansionCatalog.expansionDefs.FirstOrDefault(x => x.nameToken == "DLC1_NAME");
-
-                ItemDef.Pair voidTransform = new ItemDef.Pair
+                foreach (var item in items)
                 {
-                    itemDef1 = item.pureItemDef,
-                    itemDef2 = item.itemDef
-                };
+                    item.itemDef.requiredExpansion = ExpansionCatalog.expansionDefs.FirstOrDefault(x => x.nameToken == "DLC1_NAME");
 
-                // Add the item pair to the item relationship list.
-                ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem]
-                = ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem].AddToArray(voidTransform);
+                    ItemDef.Pair voidTransform = new ItemDef.Pair
+                    {
+                        itemDef1 = item.pureItemDef,
+                        itemDef2 = item.itemDef
+                    };
 
+                    // Add the item pair to the item relationship list.
+                    ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem]
+                    = ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem].AddToArray(voidTransform);
+                }
                 orig();
             };
         }
