@@ -1,107 +1,86 @@
 ﻿using System.Runtime.CompilerServices;
+using Newtonsoft.Json.Linq;
 using R2API;
 using R2API.Utils;
 using RoR2;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Diagnostics;
 using UnityEngine.UIElements;
 using static MoreItems.MoreItems;
-using static RoR2.MasterSpawnSlotController;
+using static UnityEngine.UI.Image;
 
-namespace MoreItems.Items
+namespace MoreItems.Items.VoidItems
 {
     /// <summary>
-    /// Chaos Rune - T3 (Legendary) Item
-    /// <para>When applying a damaging debuff to an entity, chance to apply a random damaging debuff as well.</para>
-    /// <para>Stacking increases the number of rolls, increasing overall chance and number of debuffs that can be applied at once.</para>
-    /// <para>The damage of the debuff scales off of the attack that caused it.</para>
+    /// Obsidian Rounds - Void T2 (Void Uncommon) Item
+    /// <para>Attack enemies to build up stacks of analysis.</para>
+    /// <para>Enemies become analysed at maximum stacks, and take increased critical hit damage from all attacks.</para>
+    /// <para>This item corrupts all Needle Rounds items.</para>
     /// </summary>
-    public class ChaosRune : Item
+    public class RazorLeeches : Item
     {
-        public override string Name => "Chaos Rune";
-        public override string NameToken => "CHAOSRUNE";
-        public override string PickupToken => "Chance to inflict additional damaging debuffs when applying any damaging debuff.";
-        public override string Description => "When applying a damaging debuff to an enemy, there is a <style=cIsDamage>33% chance</style><style=cStack> (+1 roll per stack)</style> to apply <style=cIsHealth>additional damaging debuffs</style> up to 1 <style=cStack>(+1 per 2 stacks)</style> more.";
-        public override string Lore => "<style=cMono>// ARTIFACT RECOVERY NOTES: EXCAVATION SITE 165-A34 //</style>\n\nName: Runic Stone Carving\n\nSize: 20cm by 20cm by 3cm\n\nSite Notes: ''Weighty and shimmers a bright red hue. The miner that recovered this artifact was found an hour after contact in tremendous pain, dehydrated and collapsed, still holding onto the artifact. Artifact was additionally glowing incredibly brightly, and is allegedly scalding to the touch for some while bone-chillingly cold to others.\n\nDo NOT handle directly. Do NOT stare into it's glow. Do NOT listen to what it offers. Be not tempted.''\n\n<style=cMono>// END OF NOTES //";
+        public override string Name => "Razor Leeches";
+        public override string NameToken => "RAZORLEECHES";
+        public override string PickupToken => "Perforate foes by critically striking. Perforated enemies have a chance to receive damage over time from attacks.<style=cIsVoid> Corrupts all Needle Rounds.";
+        public override string Description => "Critically striking an enemy<style=cIsDamage> perforates</style> them for <style=cIsUtility>5</style> seconds. <style=cIsDamage>Perforated</style> enemies have a <style=cIsUtility>20%</style> <style=cStack>(+20% per stack)</style> chance to receive <style=cIsUtility>50%</style> of <style=cIsDamage>ANY</style> incoming damage as <style=cIsDamage>additional damage over time</style>. <style=cIsVoid> Corrupts all Needle Rounds</style>.";
+        public override string Lore => "";
 
-        public override ItemTier Tier => ItemTier.Tier3;
+        // TODO:
+        // - Debuff Icon.
+        // - (Optional?) Damage oer time bleed/splatter effect per damage application.
+        // - Model (And Sprite).
+        // - Sound effect?
+
+        public override ItemTier Tier => ItemTier.VoidTier2;
 
         public override bool CanRemove => true;
 
         public override ItemTag[] Tags => new ItemTag[] { ItemTag.Damage };
-        public override bool AIBlackList => true; // Even though the AI could get this item, its only going to be useful if the enemy can inflict damaging DOTs
-                                                   // naturally or is able to with another item, so its too niche.
-        
-        public override Sprite Icon => MainAssets.LoadAsset<Sprite>("ChaosRune.png");
-        public override GameObject Model => MainAssets.LoadAsset<GameObject>("ChaosRune.prefab");
+        public override bool AIBlackList => false;
 
-        private bool hasRun = false;
-        private DamageInfo damageInfo { get; set; }
+        public override Sprite Icon => null;
+        public override GameObject Model => null;
+
+        public override BuffDef ItemBuffDef => BuffList.Find(x => x.Name == "RazorLeechWound").buffDef;
+
+        public override ItemDef pureItemDef => ItemList.Find(x => x.NameToken == "NEEDLEROUNDS").itemDef; // Needle Rounds
 
         public override void SetupHooks()
         {
-            On.RoR2.DotController.InflictDot_refInflictDotInfo += (On.RoR2.DotController.orig_InflictDot_refInflictDotInfo orig, ref InflictDotInfo inflictDotInfo) =>
+            On.RoR2.HealthComponent.TakeDamage += (orig, self, info) =>
             {
-                orig(ref inflictDotInfo);
+                orig(self, info);
 
-                if(hasRun) { return; }
+                if (!self) { return; }
 
-                if(!inflictDotInfo.attackerObject || !inflictDotInfo.victimObject) { return; }
+                var attackerObj = info.attacker;
+                if (!attackerObj || !attackerObj.GetComponent<CharacterBody>()) { return; }
 
-                var attacker = inflictDotInfo.attackerObject.GetComponent<CharacterBody>();
-                var victim = inflictDotInfo.victimObject.GetComponent<CharacterBody>();
-
-                if(!attacker.inventory) { return; }
+                var attacker = attackerObj.GetComponent<CharacterBody>();
+                if (!attacker.inventory) { return; }
 
                 var count = attacker.inventory.GetItemCount(itemDef);
-                if(count <= 0) { return; }
 
-                var maxSuccessfulRolls = 1 + Mathf.Floor(count * 0.5f); // Up to 1 successful roll, and another per 2 stacks.
-                var currentSucessfulRolls = 0;
-                
-                var roll = 33; // 1/3 chance of a successful roll per stack.
-                
-                for(int i = 0; i < count; i++)
+                if (count > 0 && info.crit)
                 {
-                    if(currentSucessfulRolls >= maxSuccessfulRolls) { break; }
+                    var victim = self.body;
+                    if (!victim) { return; }
 
-                    if (Util.CheckRoll(roll, attacker.master))
-                    {
-                        hasRun = true;
-                        currentSucessfulRolls++;
-
-                        // todo: some custom visual or audio effect maybe to indicate the item has triggered.
-
-                        int DotIndex = UnityEngine.Random.Range(0, 4); // 4 DOTs: Bleed, Burn (Including ignition tank upgraded burn), Blight and Collapse.
-
-                        switch (DotIndex)
-                        {
-                            case 0: // Bleed
-                                InflictDot(attacker, victim, DotController.DotIndex.Bleed, attacker.damage, damageInfo.procCoefficient);
-                                break;
-
-                            case 1: // Burn
-                                InflictDot(attacker, victim, DotController.DotIndex.Burn, attacker.damage, damageInfo.procCoefficient);
-                                break;
-
-                            case 2: // Blight
-                                InflictDot(attacker, victim, DotController.DotIndex.Blight, attacker.damage, damageInfo.procCoefficient);
-                                break;
-
-                            case 3: // Collapse
-                                InflictDot(attacker, victim, DotController.DotIndex.Fracture, attacker.damage, damageInfo.procCoefficient);
-                                break;
-                        }
-                    }
+                    victim.AddTimedBuff(ItemBuffDef, 5f, 1);
                 }
             };
 
-            On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, DamageInfo, victim) =>
+            // Item gives +5% flat crit chance, much like harvester scythe and predatory instincts.
+            R2API.RecalculateStatsAPI.GetStatCoefficients += (self, args) =>
             {
-                damageInfo = DamageInfo; // Store damage info for possible later use to get the attack's proc coefficient.
-                hasRun = false; // Reset flag for triggering this item.
-                orig(self, damageInfo, victim);
+                if (!self || !self.inventory || !self.isPlayerControlled) { return; }
+
+                if(self.inventory.GetItemCount(itemDef) > 0)
+                {
+                    args.critAdd += 5f;
+                }
             };
         }
 

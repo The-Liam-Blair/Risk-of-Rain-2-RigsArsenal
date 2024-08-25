@@ -74,11 +74,6 @@ namespace MoreItems.Items
             itemDef.hidden = false;
             itemDef.canRemove = CanRemove;
 
-            if(pureItemDef && Tier is ItemTier.VoidTier1 or ItemTier.VoidTier2 or ItemTier.VoidTier3)
-            {
-                DebugLog.Log($"Warning: Item {Name} is a void item but does not have a pure item reference.");
-            }
-
             switch (Tier)
             {
                 case ItemTier.Tier1:

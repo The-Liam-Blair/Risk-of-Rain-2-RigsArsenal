@@ -14,6 +14,7 @@ using R2API.Utils;
 using static RoR2.DotController;
 using HarmonyLib;
 using RoR2.ExpansionManagement;
+using MoreItems.DOTs;
 
 namespace MoreItems
 {
@@ -39,7 +40,9 @@ namespace MoreItems
         public static List<Item> ItemList = new List<Item>();
         public static List<Equipment> EquipmentList = new List<Equipment>();
         public static List<Buff> BuffList = new List<Buff>();
+        public static List<DOT> DOTList = new List<DOT>();
         
+
         public static ConfigEntry<bool> EnableShotgunMarker { get; set; }
         public static ConfigEntry<bool> EnableUmbralPyreVFX { get; set; }
         public static List<ConfigEntry<bool>> EnableItems { get; set; }
@@ -68,6 +71,25 @@ namespace MoreItems
             string itemName = "";
 
             List <Item> voidItems = new List<Item>();
+
+
+            var Buffs = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Buff)));
+
+            foreach (var buff in Buffs)
+            {
+                Buff aBuff = (Buff)System.Activator.CreateInstance(buff);
+                aBuff.Init();
+                BuffList.Add(aBuff);
+            }
+
+            var DOTs = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(DOT)));
+            foreach (var DOT in DOTs)
+            {
+                DOT aDot = (DOT)System.Activator.CreateInstance(DOT);
+                aDot.Init();
+                DOTList.Add(aDot);
+            }
+
 
             // For each item...
             foreach (var item in Items)
@@ -103,16 +125,6 @@ namespace MoreItems
             if(voidItems.Count > 0)
             {
                 SetupVoidItem(voidItems);
-            }
-
-
-            var Buffs = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Buff)));
-
-            foreach (var buff in Buffs)
-            {
-                Buff aBuff = (Buff)System.Activator.CreateInstance(buff);
-                aBuff.Init();
-                BuffList.Add(aBuff);
             }
 
 
@@ -235,7 +247,29 @@ namespace MoreItems
             }
         }
 
-        // todo: convert into list of pairs for mass addition once 2+ void items are implemented.
+        /// <summary>
+        /// Inflict a custom dot on a target. Similar to the standard dot infliction function but uses a custom dot class parameter instead.
+        /// </summary>
+        public static void InflictCustomDot(CharacterBody attacker, CharacterBody victim, DOT dot, float damage)
+        {
+            switch(dot.Name)
+            {
+                case "RazorLeechBleed":
+                    InflictDotInfo leechBleed = new InflictDotInfo()
+                    {
+                        attackerObject = attacker.gameObject,
+                        victimObject = victim.gameObject,
+                        totalDamage = damage,
+                        damageMultiplier = dot.dotDef.damageCoefficient,
+                        dotIndex = dot.dotIndex,
+                        preUpgradeDotIndex = dot.dotIndex,
+                        maxStacksFromAttacker = 999,
+                    };
+                    DotController.InflictDot(ref leechBleed);
+                    break;
+            }
+        }
+
         /// <summary>
         /// Add expansion definition and set the transformation pair for void items.
         /// </summary>
