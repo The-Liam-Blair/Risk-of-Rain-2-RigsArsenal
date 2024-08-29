@@ -34,15 +34,9 @@ namespace MoreItems.Buffs
                 // Ignore damage types that are environmental or dots.
                 if(info.damageType is DamageType.DoT or DamageType.NonLethal or DamageType.FallDamage or DamageType.OutOfBounds) { return; }
 
-                var itemDef = ItemList.Find(x => x.NameToken.Equals("RAZORLEECHES")).itemDef;
-                if(!itemDef) { return; }
-
                 DOT leechBleed = DOTList.Find(x => x.Name.Equals("RazorLeechBleed"));
 
-                var count = attacker.inventory.GetItemCount(itemDef);
-
-                var roll = 1 - (1 / (1 + count * 0.25f)); // Hyperbolic scaling approaches 100% proc chance.
-                roll *= 100f; // Convert into percentage (The above calculation has a range of 0 to 1).
+                var roll = 25f; // 25% chance.
 
                 if (victim.HasBuff(buffDef) && Util.CheckRoll(roll, attacker.master))
                 {

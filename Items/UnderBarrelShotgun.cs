@@ -48,6 +48,7 @@ namespace MoreItems.Items
         {
             base.Init();
 
+            /*
             GameObject proj = Resources.Load<GameObject>("prefabs/projectiles/RailgunnerPistolProjectile");
             pellet = proj.InstantiateClone("UnderBarrelShotgunPellet", true);
 
@@ -73,11 +74,12 @@ namespace MoreItems.Items
             PrefabAPI.RegisterNetworkPrefab(ghost);
 
             ContentAddition.AddProjectile(pellet);
+            */
         }
 
         public override void SetupHooks()
         {
-
+            /*
             On.RoR2.HealthComponent.TakeDamage += (orig, self, info) =>
             {
                 orig(self, info);
@@ -143,6 +145,7 @@ namespace MoreItems.Items
 
                 }
             };
+            */
 
             On.RoR2.Run.Start += (orig, self) =>
             {

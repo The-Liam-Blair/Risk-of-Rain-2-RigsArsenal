@@ -1,7 +1,6 @@
 ﻿using MoreItems.Buffs;
 using MoreItems.Items;
 using R2API;
-using R2API.Networking;
 using Rewired.ComponentControls.Data;
 using Rewired.Utils;
 using RoR2;

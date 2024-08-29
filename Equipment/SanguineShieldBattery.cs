@@ -1,6 +1,5 @@
 ﻿using MoreItems.Buffs;
 using R2API;
-using R2API.Networking;
 using Rewired.ComponentControls.Data;
 using Rewired.Utils;
 using RoR2;
@@ -62,8 +61,10 @@ namespace MoreItems.Equipments
             return true;
         }
 
+        
         public override void SetupHooks()
         {
+            /*
             On.RoR2.Run.Update += (orig, self) =>
             {
                 orig(self);
@@ -117,6 +118,7 @@ namespace MoreItems.Equipments
                     EquipmentSlot.characterBody.barrierDecayRate *= 0.5f;
                 }
             };
+            */
         }
     }
 }

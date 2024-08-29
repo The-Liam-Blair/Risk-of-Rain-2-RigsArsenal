@@ -44,7 +44,7 @@ namespace MoreItems.Items
         {
             InitLang();
             CreateItem();
-            SetupHooks();
+            //SetupHooks();
         }
 
         /// <summary>

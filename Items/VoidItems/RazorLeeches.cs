@@ -9,22 +9,22 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.Diagnostics;
 using UnityEngine.UIElements;
 using static MoreItems.MoreItems;
-using static UnityEngine.UI.Image;
 
 namespace MoreItems.Items.VoidItems
 {
     /// <summary>
-    /// Obsidian Rounds - Void T2 (Void Uncommon) Item
-    /// <para>Attack enemies to build up stacks of analysis.</para>
-    /// <para>Enemies become analysed at maximum stacks, and take increased critical hit damage from all attacks.</para>
+    /// Razor Leeches - Void T2 (Void Uncommon) Item
+    /// <para>Critically strike enemies to perforate them.</para>
+    /// <para>Perforated enemies have a chance of receiving damage over time from incoming attacks.</para>
+    /// <para>Certain types of damage, including damage over time damage and environmental damage, are exempt.</para>
     /// <para>This item corrupts all Needle Rounds items.</para>
     /// </summary>
     public class RazorLeeches : Item
     {
         public override string Name => "Razor Leeches";
         public override string NameToken => "RAZORLEECHES";
-        public override string PickupToken => "Perforate foes by critically striking. Perforated enemies have a chance to receive damage over time from attacks.<style=cIsVoid> Corrupts all Needle Rounds.";
-        public override string Description => "Critically striking an enemy<style=cIsDamage> perforates</style> them for <style=cIsUtility>5</style> seconds. <style=cIsDamage>Perforated</style> enemies have a <style=cIsUtility>20%</style> <style=cStack>(+20% per stack)</style> chance to receive <style=cIsUtility>50%</style> of <style=cIsDamage>ANY</style> incoming damage as <style=cIsDamage>additional damage over time</style>. <style=cIsVoid> Corrupts all Needle Rounds</style>.";
+        public override string PickupToken => "Perforate foes by critically striking. Perforated enemies have a chance to receive additional damage over time from attacks.<style=cIsVoid> Corrupts all Needle Rounds.";
+        public override string Description => "Critically striking an enemy<style=cIsDamage> perforates</style> them for <style=cIsUtility>2</style> <style=cStack>(+1 per stack) seconds. <style=cIsDamage>Perforated</style> enemies have a <style=cIsUtility>25%</style> chance to receive <style=cIsUtility>50%</style> of <style=cIsDamage>ANY</style> incoming damage as <style=cIsDamage>additional damage over time</style>. <style=cIsVoid> Corrupts all Needle Rounds</style>.";
         public override string Lore => "";
 
         // TODO:
@@ -68,7 +68,7 @@ namespace MoreItems.Items.VoidItems
                     var victim = self.body;
                     if (!victim) { return; }
 
-                    victim.AddTimedBuff(ItemBuffDef, 5f, 1);
+                    victim.AddTimedBuff(ItemBuffDef, 2f + count, 1);
                 }
             };
 

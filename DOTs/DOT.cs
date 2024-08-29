@@ -65,6 +65,8 @@ namespace MoreItems.DOTs
             dotDef.associatedBuff = buffDef;
             dotDef.damageColorIndex = dotDamageColorIndex;
             dotDef.resetTimerOnAdd = resetTimerOnAdd;
+
+            // Implemented DOTS will register the dot definition after this base method.
         }
     }
 }
