@@ -60,11 +60,10 @@ namespace MoreItems.Equipments
 
             return true;
         }
-
         
         public override void SetupHooks()
         {
-            /*
+            
             On.RoR2.Run.Update += (orig, self) =>
             {
                 orig(self);
@@ -118,7 +117,6 @@ namespace MoreItems.Equipments
                     EquipmentSlot.characterBody.barrierDecayRate *= 0.5f;
                 }
             };
-            */
         }
     }
 }

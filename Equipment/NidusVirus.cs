@@ -41,6 +41,8 @@ namespace MoreItems.Equipments
         private GameObject targetIcon;
         private GameObject SpreadIndicator;
 
+        // todo: Investigate NRE bug possibly from the spawned radial visual effect.
+
         public override bool UseEquipment(EquipmentSlot slot)
         {
             // Special debuffs this CAN spread:
@@ -188,7 +190,8 @@ namespace MoreItems.Equipments
                     targetIcon = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("Prefabs/LightningIndicator"), "NidusIndicator", false);
                 }
 
-                self.targetFinder.candidatesEnumerable = (List<BullseyeSearch.CandidateInfo>)(from candidate in self.targetFinder.candidatesEnumerable select candidate);
+                //self.targetFinder.candidatesEnumerable = (List<BullseyeSearch.CandidateInfo>)(from candidate in self.targetFinder.candidatesEnumerable select candidate);
+                self.targetFinder.candidatesEnumerable = (from candidate in self.targetFinder.candidatesEnumerable select candidate).ToList();
                 HurtBox entity = self.targetFinder.GetResults().FirstOrDefault();
                 self.currentTarget = new EquipmentSlot.UserTargetInfo(entity);
 

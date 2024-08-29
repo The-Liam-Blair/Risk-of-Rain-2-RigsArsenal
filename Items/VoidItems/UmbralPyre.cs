@@ -45,7 +45,7 @@ namespace MoreItems.Items.VoidItems
 
         public override void SetupHooks()
         {
-            /*
+            
             On.RoR2.CharacterBody.Update += (orig, self) =>
             {
                 orig(self);
@@ -134,7 +134,7 @@ namespace MoreItems.Items.VoidItems
                     GlobalEventManager.igniteOnKillHurtBoxBuffer.Clear();
                 }
             };
-                */
+                
         }
 
         public override ItemDisplayRuleDict CreateItemDisplayRules()
