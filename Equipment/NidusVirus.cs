@@ -188,7 +188,7 @@ namespace MoreItems.Equipments
                     targetIcon = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("Prefabs/LightningIndicator"), "NidusIndicator", false);
                 }
 
-                self.targetFinder.candidatesEnumerable = from candidate in self.targetFinder.candidatesEnumerable select candidate;
+                self.targetFinder.candidatesEnumerable = (List<BullseyeSearch.CandidateInfo>)(from candidate in self.targetFinder.candidatesEnumerable select candidate);
                 HurtBox entity = self.targetFinder.GetResults().FirstOrDefault();
                 self.currentTarget = new EquipmentSlot.UserTargetInfo(entity);
 

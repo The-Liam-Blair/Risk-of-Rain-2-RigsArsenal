@@ -43,7 +43,7 @@ namespace MoreItems.Items
 
         public override void SetupHooks()
         {
-            On.RoR2.HoldoutZoneController.FixedUpdate += (orig, self) =>
+            On.RoR2.HoldoutZoneController.Update += (orig, self) =>
             {
                 orig(self);
 

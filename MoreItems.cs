@@ -21,6 +21,8 @@ namespace MoreItems
     [BepInDependency(ItemAPI.PluginGUID)]
     [BepInDependency(LanguageAPI.PluginGUID)]
     [BepInDependency(RecalculateStatsAPI.PluginGUID)]
+    [BepInDependency(PrefabAPI.PluginGUID)]
+    [BepInDependency(DotAPI.PluginGUID)]
 
     [BepInPlugin(P_GUID, P_Name, P_Version)]
 

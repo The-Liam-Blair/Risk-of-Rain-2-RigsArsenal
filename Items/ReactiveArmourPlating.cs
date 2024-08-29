@@ -46,7 +46,8 @@ namespace MoreItems.Items
                     var body = self.body;
                     if (body.inventory == null) { return; }
 
-                    if(damageInfo.damageType is DamageType.OutOfBounds or DamageType.FallDamage) { return; }
+                    if(damageInfo.damageType == DamageType.OutOfBounds
+                        || damageInfo.damageType == DamageType.FallDamage) { return; }
 
                     var count = body.inventory.GetItemCount(itemDef);
                     if (count <= 0) { return; }

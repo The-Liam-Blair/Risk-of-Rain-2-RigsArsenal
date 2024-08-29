@@ -32,7 +32,10 @@ namespace MoreItems.Buffs
                 if (!attacker.inventory) { return; }
 
                 // Ignore damage types that are environmental or dots.
-                if(info.damageType is DamageType.DoT or DamageType.NonLethal or DamageType.FallDamage or DamageType.OutOfBounds) { return; }
+                if(info.damageType == DamageType.DoT
+                    || info.damageType == DamageType.NonLethal
+                    || info.damageType == DamageType.FallDamage
+                    || info.damageType == DamageType.OutOfBounds) { return; }
 
                 DOT leechBleed = DOTList.Find(x => x.Name.Equals("RazorLeechBleed"));
 
