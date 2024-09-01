@@ -9,7 +9,6 @@ using System.Reflection;
 using MoreItems.Buffs;
 using MoreItems.Equipments;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using R2API.Utils;
 using static RoR2.DotController;
 using HarmonyLib;
@@ -18,16 +17,17 @@ using MoreItems.DOTs;
 
 namespace MoreItems
 {
+    [BepInPlugin(P_GUID, P_Name, P_Version)]
+
+    [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
+
     [BepInDependency(ItemAPI.PluginGUID)]
     [BepInDependency(LanguageAPI.PluginGUID)]
     [BepInDependency(RecalculateStatsAPI.PluginGUID)]
     [BepInDependency(PrefabAPI.PluginGUID)]
     [BepInDependency(DotAPI.PluginGUID)]
 
-    [BepInPlugin(P_GUID, P_Name, P_Version)]
-
-    [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
-
+    [BepInDependency("com.rune500.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
     // Main Plugin Class
     public class MoreItems : BaseUnityPlugin
     {
@@ -62,11 +62,17 @@ namespace MoreItems
 
             ApplyShaders();
 
-            EnableShotgunMarker = Config.Bind("Wrist-Mounted Shotgun Config", "EnableShotgunMarker", true, "Shows or hides the range indicator for the wrist-mounted shotgun item.");
-            EnableUmbralPyreVFX = Config.Bind("Umbral Pyre Config", "EnableUmbralPyreVFX", true, "Shows or hides the item's explosion visual effect.");
+            EnableShotgunMarker = Config.Bind("Wrist-Mounted Shotgun Config", "EnableShotgunMarker", true, "Shows or hides the range indicator for the Wrist-Mounted Shotgun item.");
+            EnableUmbralPyreVFX = Config.Bind("Umbral Pyre Config", "EnableUmbralPyreVFX", true, "Shows or hides the explosion visual effect for the Umbral Pyre item.");
+
+            // Check for Risk of Options, if present setup the Risk of Options configs for this mod.
+            if (RiskOfOptionsCompatibility.enabled)
+            {
+                RiskOfOptionsCompatibility.SetupRiskOfOptionsConfigs();
+            }
 
             // Fetch all the items by type, and load each one (Populate each item's class definition then add to the item list).
-            var Items = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Item)));
+var Items = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Item)));
 
             EnableItems = new List<ConfigEntry<bool>>();
 

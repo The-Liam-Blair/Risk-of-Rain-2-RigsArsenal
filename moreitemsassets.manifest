@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1451896222
+CRC: 2872203389
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 470ead463a2cb80e9d33223c12407f47
+    Hash: bb2781595d7a8a0b8b5aaa586c2ff3df
   TypeTreeHash:
     serializedVersion: 2
     Hash: 1fe3abd029edb3522ae5dbbc711d0a74
@@ -150,6 +150,7 @@ Assets:
 - Assets/Materials/Item/ReactiveArmourPlate/UnderlayTex.png
 - Assets/Materials/Item/NeedleRounds/M_BulletBase.mat
 - Assets/Materials/Item/BountyHunterBadge/YellowTex1.png
+- Assets/Materials/modIcon.png
 - Assets/Materials/Item/UmbralPyre/M_Crystal.mat
 - Assets/Materials/Item/DissonantEdge/DissonantEdge.png
 - Assets/Materials/Item/BountyHunterBadge/scratchTex.png
