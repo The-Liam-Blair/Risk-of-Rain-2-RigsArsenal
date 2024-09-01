@@ -115,8 +115,14 @@ namespace MoreItems.Equipments
 
             // Modifying the item conversion notification, indicate to the player what item was destroyed, with additional flavour text.
             var consumeItem = ItemList.Find(x => x.NameToken == "PURITYALTARCONSUME").itemDef;
-            consumeItem.pickupToken = null;
-            consumeItem.pickupToken = SetPurityAltarConsumeFlavourText();
+
+            var mithrixResponse = SetPurityAltarConsumeFlavourText();
+
+            consumeItem.pickupToken = mithrixResponse;
+
+            // For UI mods like looking glass, they can replace the short description (pickuptoken) with the long description
+            // (descriptiontoken) so this ensures that no matter what settings are used, the same flavour text is displayed.
+            consumeItem.descriptionToken = mithrixResponse;
 
             CharacterMasterNotificationQueue.SendTransformNotification(self.master,
             deadItem, 

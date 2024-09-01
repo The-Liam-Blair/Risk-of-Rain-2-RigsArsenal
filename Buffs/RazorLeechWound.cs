@@ -13,6 +13,8 @@ namespace MoreItems.Buffs
         public override Color BuffColor => Color.white;
         public override Sprite Icon => null;
 
+        private DOT leechBleed = DOTList.Find(x => x.Name.Equals("RazorLeechBleed"));
+
 
         public override void SetupHooks()
         {
@@ -36,8 +38,6 @@ namespace MoreItems.Buffs
                     || info.damageType == DamageType.NonLethal
                     || info.damageType == DamageType.FallDamage
                     || info.damageType == DamageType.OutOfBounds) { return; }
-
-                DOT leechBleed = DOTList.Find(x => x.Name.Equals("RazorLeechBleed"));
 
                 var roll = 25f; // 25% chance.
 

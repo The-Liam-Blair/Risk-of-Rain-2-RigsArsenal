@@ -16,8 +16,6 @@ namespace MoreItems.DOTs
 
         public override bool canStack => true;
 
-        public override bool isDebuff => false; // DOTs are (apparently?) classed as debuffs already so would double dip for death's mark etc.
-
         public override Color BuffColor => Color.white;
 
         public override Sprite Icon => null;

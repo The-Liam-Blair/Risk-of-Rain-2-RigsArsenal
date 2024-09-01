@@ -74,12 +74,11 @@ namespace MoreItems.Items
             PrefabAPI.RegisterNetworkPrefab(ghost);
 
             ContentAddition.AddProjectile(pellet);
-            
         }
 
         public override void SetupHooks()
         {
-            
+
             On.RoR2.HealthComponent.TakeDamage += (orig, self, info) =>
             {
                 orig(self, info);
@@ -133,7 +132,7 @@ namespace MoreItems.Items
                         damageColorIndex = DamageColorIndex.Item,
                         speedOverride = -1f,
                         damageTypeOverride = DamageType.AOE,
-                    };            
+                    };
 
                     projectileInfo.rotation = Util.QuaternionSafeLookRotation(projectileInfo.target.transform.position - projectileInfo.position);
 
@@ -145,7 +144,7 @@ namespace MoreItems.Items
 
                 }
             };
-            
+
 
             On.RoR2.Run.Start += (orig, self) =>
             {

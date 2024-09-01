@@ -36,9 +36,6 @@ namespace MoreItems.Items
 
         public override BuffDef ItemBuffDef => BuffList.Find(x => x.Name == "StimpackHealCooldown").buffDef;
 
-
-        private float lowHealthThreshold = 0.5f;
-
         private float speedScalar = 0.10f;
         private float finalSpeed = 0f;
 
@@ -58,7 +55,7 @@ namespace MoreItems.Items
                     var count = body.inventory.GetItemCount(itemDef);
                     if(count <= 0) { return; }
 
-                    if(body.healthComponent.combinedHealthFraction > lowHealthThreshold) { return; }
+                    if(body.healthComponent.health >= body.healthComponent.fullHealth * 0.5f) { return; }
 
                     // Add buff for 5 second duration. If buff already exists, refresh the duration.
                     if (body.GetBuffCount(ItemBuffDef) <= 0)
@@ -84,7 +81,7 @@ namespace MoreItems.Items
                 var count = body.inventory.GetItemCount(itemDef);
                 if (count <= 0) { return orig(self, amount, mask, regen); }
 
-                if (body.healthComponent.combinedHealthFraction > lowHealthThreshold) { return orig(self, amount, mask, regen); }
+                if (body.healthComponent.health >= body.healthComponent.fullHealth * 0.5f) { return orig(self, amount, mask, regen); }
 
                 if (body.GetBuffCount(ItemBuffDef) <= 0)
                 {

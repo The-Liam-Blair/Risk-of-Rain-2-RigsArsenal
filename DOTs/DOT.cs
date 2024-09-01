@@ -14,7 +14,7 @@ namespace MoreItems.DOTs
         public BuffDef buffDef { get; set; }
 
         public abstract bool canStack { get; }
-        public abstract bool isDebuff { get; }
+        public virtual bool isDebuff { get; } = false; // DOTs are (apparently?) classed as debuffs already so would double dip for death's mark etc.
 
         public virtual bool isHidden { get; } = false;
         public virtual bool isCooldown { get; } = false;
