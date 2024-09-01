@@ -28,6 +28,7 @@ namespace MoreItems
     [BepInDependency(DotAPI.PluginGUID)]
 
     [BepInDependency("com.rune500.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
+
     // Main Plugin Class
     public class MoreItems : BaseUnityPlugin
     {
