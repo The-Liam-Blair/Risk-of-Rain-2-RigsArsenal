@@ -41,6 +41,7 @@ namespace MoreItems.Buffs
 
                 var roll = 25f; // 25% chance.
 
+                // 25% chance to apply the custom bleed dot, with total damage equal to 50% of the damage dealt.
                 if (victim.HasBuff(buffDef) && Util.CheckRoll(roll, attacker.master))
                 {
                     MoreItems.InflictCustomDot(attacker, victim, leechBleed, info.damage * 0.5f);
