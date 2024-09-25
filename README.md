@@ -30,11 +30,11 @@ Adds 10 new items and 3 new equipment into the game. The mod is in active progre
 | Sanguine Shield Battery | ![Sanguine Shield Battery](https://raw.githubusercontent.com/The-Liam-Blair/Risk-of-Rain-2-RigsArsenal/main/UnityProject/Assets/Materials/Equipment/SanguineShieldBattery/SanguineShieldBattery.png) | Convert health into barrier for a few seconds. Barrier decay rate is halved while in use. Ends prematurely if the user has very low health.<br>20 second cooldown. |
 ||||
 ||||
-| Purity Altar | ![Purity Altar](https://raw.githubusercontent.com/The-Liam-Blair/Risk-of-Rain-2-RigsArsenal/main/UnityProject/Assets/Materials/Equipment/PurityAltar/PurityAltar.png) | Restores a random broken or depleted item. Sacrifices a random item of equal rarity per restoration.<br>45 second cooldown.<br><br><details> <summary> Additional Details:</summary> <br>- Can sacrifice a random common item to restore Power Elixirs, Delicate Watches, and cure tonic afflictions.<br>- Can sacrifice a random legendary item to restore Dio's Best Friend and Pluripotent Larva.<br>- Void items can also be used for sacrifice.</details> |
+| Altar of Purity | ![Purity Altar](https://raw.githubusercontent.com/The-Liam-Blair/Risk-of-Rain-2-RigsArsenal/main/UnityProject/Assets/Materials/Equipment/PurityAltar/PurityAltar.png) | Restores a random broken or depleted item. Sacrifices a random item of equal rarity per restoration.<br>45 second cooldown.<br><br><details> <summary> Additional Details:</summary> <br>- Can sacrifice a random common item to restore Power Elixirs, Delicate Watches, and cure tonic afflictions.<br>- Can sacrifice a random legendary item to restore Dio's Best Friend and Pluripotent Larva.<br>- Void items can also be used for sacrifice.</details> |
 
 <br><br>
 
-#### Questions or problems? Message me on Discord (rigsinrags) or submit an issue or pull request on GitHub.
+#### Questions or problems? Submit an issue on the GitHub page or message me (RigsInRags) on the Risk of Rain 2 Modding Discord!
 
 <br>
 
