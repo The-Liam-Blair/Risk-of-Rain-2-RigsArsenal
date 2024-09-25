@@ -158,20 +158,20 @@ namespace MoreItems.Items
             {
                 orig(self);
 
-                if (MoreItems.EnableShotgunMarker.Value && self.isPlayerControlled && self.inventory.GetItemCount(itemDef) > 0 && !rangeIndicator)
-                {
-                    // Uses a modified range indicator from the "NearbyDamageBonus" (focus crystal) item.
-                    GameObject original = Resources.Load<GameObject>("Prefabs/NetworkedObjects/NearbyDamageBonusIndicator");
-                    rangeIndicator = original.InstantiateClone("UnderBarrelShotgunRangeIndicator", true);
+                if (!MoreItems.EnableShotgunMarker.Value || rangeIndicator || !self.isPlayerControlled || !self.inventory
+                    || self.inventory.GetItemCount(itemDef) <= 0) { return; }
 
-                    PrefabAPI.RegisterNetworkPrefab(rangeIndicator);
+                // Uses a modified range indicator from the "NearbyDamageBonus" (focus crystal) item.
+                GameObject original = Resources.Load<GameObject>("Prefabs/NetworkedObjects/NearbyDamageBonusIndicator");
+                rangeIndicator = original.InstantiateClone("UnderBarrelShotgunRangeIndicator", true);
 
-                    rangeIndicator.GetComponent<NetworkedBodyAttachment>().AttachToGameObjectAndSpawn(self.gameObject, null);
+                PrefabAPI.RegisterNetworkPrefab(rangeIndicator);
 
-                    var donut = rangeIndicator.transform.GetChild(1); // 2nd child of the range indicator object controls the donut's visual properties.
-                    donut.localScale = new Vector3(70f, 70f, 70f); // 35 unit radius to match the item's range.
-                    donut.GetComponent<MeshRenderer>().material.SetColor("_TintColor", new Color(0f, 0.03f, 0.3f)); // Blue tint instead of red.
-                }
+                rangeIndicator.GetComponent<NetworkedBodyAttachment>().AttachToGameObjectAndSpawn(self.gameObject, null);
+
+                var donut = rangeIndicator.transform.GetChild(1); // 2nd child of the range indicator object controls the donut's visual properties.
+                donut.localScale = new Vector3(70f, 70f, 70f); // 35 unit radius to match the item's range.
+                donut.GetComponent<MeshRenderer>().material.SetColor("_TintColor", new Color(0f, 0.03f, 0.3f)); // Blue tint instead of red.
             };
         }
 

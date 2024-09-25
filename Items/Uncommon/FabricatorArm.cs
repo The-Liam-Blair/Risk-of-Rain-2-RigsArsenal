@@ -1,20 +1,10 @@
-﻿using System.Collections;
+﻿/*
+using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using EntityStates.Drone;
-using IL.RoR2.Networking;
 using R2API;
-using R2API.Utils;
 using RoR2;
-using RoR2.Items;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.Diagnostics;
-using UnityEngine.Networking;
-using UnityEngine.UIElements;
-using UnityEngine.XR;
 using static MoreItems.MoreItems;
-using static Newtonsoft.Json.Converters.DiscriminatedUnionConverter;
 
 namespace MoreItems.Items
 {
@@ -40,7 +30,7 @@ namespace MoreItems.Items
         public override bool AIBlackList => true;
 
         public override Sprite Icon => null;
-        public override GameObject Model => null;
+        public override GameObject Model => MainAssets.LoadAsset<GameObject>("FabricatorArm.prefab");
 
         // Drone1 - Gunner drone.
         // Drone2 - Healing drone.
@@ -77,8 +67,6 @@ namespace MoreItems.Items
         // todo: exhaustive testing.
         public override void SetupHooks()
         {
-
-            //todo: investigate double nul ref error.
             On.RoR2.Run.AdvanceStage += (orig, self, stage) =>
             {
                 orig(self, stage);
@@ -105,6 +93,7 @@ namespace MoreItems.Items
             };
         }
 
+        // Fabricates drones for all players that have the item.
         IEnumerator AddDrone(System.Collections.ObjectModel.ReadOnlyCollection<PlayerCharacterMasterController> players)
         {
             // Short delay to allow the players to spawn into the next stage.
@@ -146,7 +135,7 @@ namespace MoreItems.Items
                     }
 
 
-                    // Decrement all fabricator arm drones' lifetimes by one stage.
+                    // Decrement all current fabricator arm drones' lifetimes by one stage.
                     droneTimer.DecreaseDroneLifeTimes();
 
                     // Instantiate the new drone and give it to the player with the item.
@@ -162,6 +151,8 @@ namespace MoreItems.Items
 
                     summonedDrone.GetBody().baseNameToken = drones[droneIndex].Item2;
 
+                    // Component that overrides the drone's death behaviour to prevent it from dropping into the "broken" interactable state.
+                    // Stops duplication of drones (Fabricated drone dies -> Wreckage is purchased -> Spawns as a normal, permament drone).
                     summonedDrone.gameObject.AddComponent<DontDropInteractableOnDeath>();
 
                     // Add the drone to the list with lifetime of 2 stages + 1 stage per item stack.
@@ -404,7 +395,7 @@ namespace MoreItems.Items
                 drones[i].drone.GetComponent<CharacterMaster>().GetBody().baseNameToken = drones[i].nameToken;
             }
 
-            // Remove elements after the loop is completed so the list is not modified during iteration.
+            // Remove drones from the list after the for loop above is completed so the list is not modified during iteration.
             if (dronesToRemove.Count > 0)
             {
                 for (int i = 0; i < dronesToRemove.Count; i++)
@@ -453,3 +444,4 @@ namespace MoreItems.Items
         }
     }
 }
+*/

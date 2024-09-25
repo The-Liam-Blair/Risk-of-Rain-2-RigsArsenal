@@ -191,15 +191,19 @@ namespace MoreItems.Equipments
                 }
 
                 //self.targetFinder.candidatesEnumerable = (List<BullseyeSearch.CandidateInfo>)(from candidate in self.targetFinder.candidatesEnumerable select candidate);
-                self.targetFinder.candidatesEnumerable = (from candidate in self.targetFinder.candidatesEnumerable select candidate).ToList();
+                //self.targetFinder.candidatesEnumerable = (from candidate in self.targetFinder.candidatesEnumerable select candidate).ToList();
                 HurtBox entity = self.targetFinder.GetResults().FirstOrDefault();
-                self.currentTarget = new EquipmentSlot.UserTargetInfo(entity);
+
+                if (entity)
+                {
+                    self.currentTarget = new EquipmentSlot.UserTargetInfo(entity);
+                }
 
 
                 // If there is a target, setup the aim indicator, and record the target's transform and hurtbox.
                 bool hasTransform = self.currentTarget.transformToIndicateAt;
 
-                if (self.currentTarget.transformToIndicateAt)
+                if (hasTransform)
                 {
                     EquipmentSlot.UserTargetInfo currentTarget = self.currentTarget;
 
@@ -212,7 +216,13 @@ namespace MoreItems.Equipments
                 self.targetIndicator.targetTransform = hasTransform ? self.currentTarget.transformToIndicateAt : null;
 
                 // Cancel the targetting if the equipment is on cooldown.
-                self.targetIndicator.active = hasTransform && self.stock > 0;
+                // todo: ?? stack trace says an error is encountered on this line based on a null ref exception when setting the renderer to active.
+                // should maybe fix this but I'm not sure how the error is occuring.
+                if (self.targetIndicator.visualizerPrefab)
+                {
+                    self.targetIndicator.active = hasTransform && self.stock > 0;
+                }
+
 
                 return;
             };

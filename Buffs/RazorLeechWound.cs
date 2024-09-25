@@ -1,4 +1,5 @@
-﻿using MoreItems.DOTs;
+﻿/*
+using MoreItems.DOTs;
 using RoR2;
 using UnityEngine;
 using static MoreItems.MoreItems;
@@ -13,7 +14,7 @@ namespace MoreItems.Buffs
         public override Color BuffColor => Color.white;
         public override Sprite Icon => null;
 
-        private DOT leechBleed = DOTList.Find(x => x.Name.Equals("RazorLeechBleed"));
+        private DOT leechBleed = null;
 
 
         public override void SetupHooks()
@@ -25,13 +26,18 @@ namespace MoreItems.Buffs
                 if (!self) { return; }
 
                 var victim = self.body;
-                if (!victim || !victim.inventory) { return; }
+                if (!victim || !victim.inventory || !victim.gameObject || !victim.healthComponent) { return; }
 
                 var attackerObj = info.attacker;
                 if (!attackerObj || !attackerObj.GetComponent<CharacterBody>()) { return; }
 
                 var attacker = attackerObj.GetComponent<CharacterBody>();
-                if (!attacker.inventory) { return; }
+                if (!attacker.healthComponent || !attacker.inventory) { return; }
+
+                if(leechBleed == null)
+                {
+                    leechBleed = DOTList.Find(x => x.Name.Equals("RazorLeechBleed"));
+                }
 
                 // Ignore damage types that are environmental or dots.
                 if(info.damageType == DamageType.DoT
@@ -51,3 +57,4 @@ namespace MoreItems.Buffs
         }
     }
 }
+*/

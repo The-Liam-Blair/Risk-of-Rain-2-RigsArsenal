@@ -1,4 +1,4 @@
-﻿using MoreItems.Buffs;
+﻿/*using MoreItems.Buffs;
 using R2API;
 using RoR2;
 using System;
@@ -43,3 +43,4 @@ namespace MoreItems.DOTs
         }
     }
 }
+*/

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1025720069
+CRC: 1262976775
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: cbd88dff59b26d36c31dc16216890409
+    Hash: 31a95bdf7dcee8d1a35cfd37318fdebf
   TypeTreeHash:
     serializedVersion: 2
     Hash: a7a21288fe2bd6ae3724c7054e7a1302
@@ -32,6 +32,7 @@ Assets:
 - Assets/Materials/Item/ChaosRune/ChaosRune.png
 - Assets/Materials/Item/CoolantPack/M_Button.mat
 - Assets/Materials/Item/DissonantEdge/M_Hilt.mat
+- Assets/Materials/Item/FabricatorArm/M_Wire.mat
 - Assets/Materials/Item/WristMountedShotgun/M_DeepBlack.mat
 - Assets/Materials/Item/KineticBattery/M_Body.mat
 - Assets/Materials/Item/UmbralPyre/UmbralPyre.png
@@ -55,6 +56,7 @@ Assets:
 - Assets/Materials/Item/CoolantPack/Coolant.png
 - Assets/Materials/Item/UmbralPyre/M_FlameGlow.mat
 - Assets/shaders/deferred/hgstandard.shader
+- Assets/Prefabs/Item/FabricatorArm/FabricatorArm.prefab
 - Assets/Materials/Item/ReactiveArmourPlate/M_Grip.mat
 - Assets/Materials/Equipment/SanguineShieldBattery/M_Body.mat
 - Assets/Materials/Equipment/PurityAltar/Darkness.png
@@ -66,12 +68,14 @@ Assets:
 - Assets/Materials/Equipment/NidusVirus/NidusVirus.png
 - Assets/Materials/Item/NeedleRounds/M_BulletAttachment.mat
 - Assets/Materials/Item/BountyHunterBadge/M_Edges.mat
+- Assets/Materials/Item/FabricatorArm/M_Claw.mat
 - Assets/Materials/Equipment/PurityAltar/M_LesserGlow.mat
 - Assets/Materials/Item/ChaosRune/M_RockDark.mat
 - Assets/Materials/Item/WristMountedShotgun/M_ShotgunComponent.mat
 - Assets/Materials/Equipment/SanguineShieldBattery/FlowMap.png
 - Assets/Materials/Item/PrimordialChunk/M_Chunk.mat
 - Assets/Prefabs/Item/CoolantPack/CoolantPack.prefab
+- Assets/Prefabs/Item/FabricatorArm/FabricatorArm.fbx
 - Assets/Materials/Item/ChaosRune/M_LesserGlow.mat
 - Assets/Materials/Item/NeedleRounds/M_BulletTop.mat
 - Assets/Materials/Item/PrimordialChunk/PrimordialChunk.png
@@ -104,6 +108,7 @@ Assets:
 - Assets/Prefabs/Item/ChaosRune/ChaosRune.blend
 - Assets/Materials/Equipment/SanguineShieldBattery/M_Crystal.mat
 - Assets/Prefabs/Item/PrimordialChunk/PrimordialChunk.blend
+- Assets/Materials/Item/FabricatorArm/M_Rotators.mat
 - Assets/Materials/Item/WornOutStimpack/M_DepletedIcon.mat
 - Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.blend
 - Assets/Materials/Item/BountyHunterBadge/M_Black.mat
@@ -131,6 +136,7 @@ Assets:
 - Assets/Materials/Item/WristMountedShotgun/M_Shadow.mat
 - Assets/Materials/Equipment/SanguineShieldBattery/SanguineShieldBatteryBuff.png
 - Assets/Materials/Item/NeedleRounds/M_Tape.mat
+- Assets/Materials/Item/FabricatorArm/M_Arms.mat
 - Assets/Materials/Item/WristMountedShotgun/M_Gray.mat
 - Assets/Materials/Item/ReactiveArmourPlate/GripTex.png
 - Assets/Prefabs/Equipment/PurityAltar/PurityAltar.prefab
@@ -138,6 +144,7 @@ Assets:
 - Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlatingBuff.png
 - Assets/Materials/Equipment/SanguineShieldBattery/M_BatteryShine.mat
 - Assets/Materials/Equipment/NidusVirus/M_TextBacking.mat
+- Assets/Materials/Item/FabricatorArm/M_Base.mat
 - Assets/Prefabs/Item/UmbralPyre/UmbralPyre.prefab
 - Assets/Materials/Item/WristMountedShotgun/WristMountedShotgun.png
 - Assets/Materials/Item/DissonantEdge/M_Addons.mat
