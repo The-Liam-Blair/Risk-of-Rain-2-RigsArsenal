@@ -16,7 +16,7 @@ Adds 10 new items and 3 new equipment into the game. The mod is in active progre
 | Needle Rounds | ![Needle Rounds](https://raw.githubusercontent.com/The-Liam-Blair/Risk-of-Rain-2-RigsArsenal/main/UnityProject/Assets/Materials/Item/NeedleRounds/NeedleRounds.png) | Gain +15% (+15% per stack) increased critical strike chance and critical strike damage. |
 ||||
 ||||
-| Chaos Rune | ![ChaosRune](https://raw.githubusercontent.com/The-Liam-Blair/Raisk-of-Rain-2-RigsArsenal/main/UnityProject/Assets/Materials/Item/ChaosRune/ChaosRune.png) | When inflicting a damaging debuff, 33% chance (+1 roll per stack) to inflict additional damaging debuffs, up to +1 (+1 per 2 stacks) more. <br><br><details> <summary> Additional Details:</summary> <br>- Can inflict bleed, burn, Acrid's blight and collapse.</details> |
+| Chaos Rune | ![ChaosRune](https://raw.githubusercontent.com/The-Liam-Blair/Risk-of-Rain-2-RigsArsenal/main/UnityProject/Assets/Materials/Item/ChaosRune/ChaosRune.png) | When inflicting a damaging debuff, 33% chance (+1 roll per stack) to inflict additional damaging debuffs, up to +1 (+1 per 2 stacks) more. <br><br><details> <summary> Additional Details:</summary> <br>- Can inflict bleed, burn, Acrid's blight and collapse.</details> |
 ||||
 ||||
 | Dissonant Edge | ![Dissonant Edge](https://raw.githubusercontent.com/The-Liam-Blair/Risk-of-Rain-2-RigsArsenal/main/UnityProject/Assets/Materials/Item/DissonantEdge/DissonantEdge.png) | Deal +10% (+10% per stack) increased damage to foes with a lower health percentage than you. Deal 25% REDUCED damage to foes with a higher health percentage than you. |
