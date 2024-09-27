@@ -1,5 +1,4 @@
-﻿/*
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using R2API;
 using RoR2;
@@ -9,15 +8,15 @@ using static MoreItems.MoreItems;
 namespace MoreItems.Items
 {
     /// <summary>
-    /// Fabricator Arm- T2 (Uncommon) Item
+    /// Defective Assembly Arm- T2 (Uncommon) Item
     /// <para>At the start of each stage, fabricate a random basic drone that expires after progressing a certain amount of stages.</para>
-    /// <para>There is a chance for the fabricator to instead fabricate a random powerful drone instead of a basic drone.</para>
+    /// <para>There is a chance for the assembly arm to instead fabricate a random powerful drone instead of a basic drone.</para>
     /// <para>Enemies are unable to get this item.</para>
     /// </summary>
-    public class FabricatorArm : Item
+    public class DefectiveAssemblyArm : Item
     {
-        public override string Name => "Fabricator Arm";
-        public override string NameToken => "FABRICATORARM";
+        public override string Name => "Defective Assembly Arm";
+        public override string NameToken => "DEFECTIVEASSEMBLYARM";
         public override string PickupToken => "Fabricates a random drone with a limited lifetime at the start of each stage.";
         public override string Description => "<style=cIsUtility>Fabricate</style> a random drone at the start of each stage. <style=cIsUtility>Fabricated</style> drones expire after completing <style=cIsDamage>3</style><style=cStack> (+1 per stack)</style><style=cIsDamage> stages</style>. There is a <style=cIsDamage>20%</style><style=cStack> (+5% per stack)</style> chance to instead fabricate a <style=cIsUtility>powerful</style> drone.";
         public override string Lore => "";
@@ -30,7 +29,7 @@ namespace MoreItems.Items
         public override bool AIBlackList => true;
 
         public override Sprite Icon => null;
-        public override GameObject Model => MainAssets.LoadAsset<GameObject>("FabricatorArm.prefab");
+        public override GameObject Model => MainAssets.LoadAsset<GameObject>("DefectiveAssemblyArm.prefab");
 
         // Drone1 - Gunner drone.
         // Drone2 - Healing drone.
@@ -107,7 +106,7 @@ namespace MoreItems.Items
 
                 if (count > 0)
                 {
-                    // Drone timers keep a reference of all the drones made by the fabricator arm, and their lifetimes.
+                    // Drone timers keep a reference of all the drones made by the Defective Assembly Arm, and their lifetimes.
                     // The component is only given if the player has the item.
                     if (!player.master.GetComponent<DroneTimers>())
                     {
@@ -135,7 +134,7 @@ namespace MoreItems.Items
                     }
 
 
-                    // Decrement all current fabricator arm drones' lifetimes by one stage.
+                    // Decrement all current Defective Assembly Arm drones' lifetimes by one stage.
                     droneTimer.DecreaseDroneLifeTimes();
 
                     // Instantiate the new drone and give it to the player with the item.
@@ -366,7 +365,7 @@ namespace MoreItems.Items
             drones.Add(new droneLifeTimes { drone = drone, timeLeft = time, nameToken = name });
         }
 
-        // Decrease fabricator arm drones' lifetimes by one stage (Called on stage transition). If lifetime reaches zero, the drone is destroyed.
+        // Decrease Defective Assembly Arm drones' lifetimes by one stage (Called on stage transition). If lifetime reaches zero, the drone is destroyed.
         public void DecreaseDroneLifeTimes()
         {
             if(drones.Count <= 0) { return; }
@@ -410,7 +409,7 @@ namespace MoreItems.Items
             return drones.Count;
         }
 
-        // Upon losing the fabricator arm item, the drones are lost with it.
+        // Upon losing the Defective Assembly Arm item, the drones are lost with it.
         public void DestroyAllDrones()
         {
             for (int i = 0; i < drones.Count; i++)
@@ -444,4 +443,3 @@ namespace MoreItems.Items
         }
     }
 }
-*/

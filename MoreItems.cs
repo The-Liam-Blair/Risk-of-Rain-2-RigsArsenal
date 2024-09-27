@@ -158,7 +158,7 @@ var Items = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbs
         }
 
         //Spawn all items for debugging purposes
-        /*
+        
         private void Update()
         {
             if(Input.GetKeyDown(KeyCode.F1))
@@ -173,7 +173,7 @@ var Items = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbs
                 }
             }
         }
-        */
+        
 
         private void DEBUG_SpawnItem(string itemName)
         {
