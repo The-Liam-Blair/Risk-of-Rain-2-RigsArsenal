@@ -158,7 +158,7 @@ namespace RigsArsenal
         }
 
         //Spawn all items for debugging purposes
-        
+        /*
         private void Update()
         {
             if(Input.GetKeyDown(KeyCode.F1))
@@ -173,6 +173,7 @@ namespace RigsArsenal
                 }
             }
         }
+        */
         
 
         private void DEBUG_SpawnItem(string itemName)
