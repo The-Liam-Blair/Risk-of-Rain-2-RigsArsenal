@@ -1,14 +1,14 @@
-﻿/*using MoreItems.Buffs;
+﻿/*using RigsArsenal.Buffs;
 using R2API;
 using RoR2;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
-using static MoreItems.MoreItems;
+using static RigsArsenal.RigsArsenal;
 
 
-namespace MoreItems.DOTs
+namespace RigsArsenal.DOTs
 {
     public class RazorLeechBleed : DOT
     {

@@ -1,4 +1,4 @@
-﻿using MoreItems.Buffs;
+﻿using RigsArsenal.Buffs;
 using R2API;
 using Rewired.ComponentControls.Data;
 using Rewired.Utils;
@@ -9,9 +9,9 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
-using static MoreItems.MoreItems;
+using static RigsArsenal.RigsArsenal;
 
-namespace MoreItems.Equipments
+namespace RigsArsenal.Equipments
 {
     public class SanguineShieldBattery : Equipment
     {
@@ -76,6 +76,7 @@ namespace MoreItems.Equipments
                     intervalTimer = 0.25f;
 
                     var body = EquipmentSlot.characterBody;
+                    if(!body) { return; }
 
                     // (Re)calculate the player's max health.
                     float maxHealth = body.healthComponent.fullHealth;

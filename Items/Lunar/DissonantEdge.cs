@@ -6,9 +6,9 @@ using RoR2;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
-using static MoreItems.MoreItems;
+using static RigsArsenal.RigsArsenal;
 
-namespace MoreItems.Items
+namespace RigsArsenal.Items
 {
     /// <summary>
     /// Dissonant Edge - Lunar Item
@@ -36,9 +36,12 @@ namespace MoreItems.Items
 
         public override void SetupHooks()
         {
+            // todo: use global event manager hooks to resolve error with multiple dps/kill scenarios with void dmg or some shit.
+            // also rename all moreitems into rigsarsenal.
             On.RoR2.HealthComponent.TakeDamage += (orig, self, damageInfo) =>
             {
-                if (!damageInfo.attacker || damageInfo.damageType == DamageType.DoT || damageInfo.damageType == DamageType.NonLethal) 
+                if (!damageInfo.attacker || 
+                damageInfo.damageType == DamageType.DoT || damageInfo.damageType == DamageType.NonLethal || damageInfo.damageType == DamageType.BypassBlock) 
                 {
                     orig(self, damageInfo); 
                     return; 

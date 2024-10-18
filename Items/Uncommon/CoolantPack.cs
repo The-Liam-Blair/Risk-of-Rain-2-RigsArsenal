@@ -6,9 +6,9 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Diagnostics;
 using UnityEngine.UIElements;
-using static MoreItems.MoreItems;
+using static RigsArsenal.RigsArsenal;
 
-namespace MoreItems.Items
+namespace RigsArsenal.Items
 {
     /// <summary>
     /// Coolant Pack - T2 (Uncommon) Item

@@ -8,10 +8,10 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Diagnostics;
 using UnityEngine.UIElements;
-using static MoreItems.MoreItems;
+using static RigsArsenal.RigsArsenal;
 using static UnityEngine.UI.Image;
 
-namespace MoreItems.Items.VoidItems
+namespace RigsArsenal.Items.VoidItems
 {
     /// <summary>
     /// Umbral Pyre - Void T1 (Void Common) Item
@@ -98,7 +98,7 @@ namespace MoreItems.Items.VoidItems
                         HurtBox hurtBox = GlobalEventManager.igniteOnKillHurtBoxBuffer[i];
                         if (hurtBox.healthComponent)
                         {
-                            MoreItems.InflictDot(self, hurtBox.healthComponent.body, DotController.DotIndex.Burn, DOTDamage);
+                            RigsArsenal.InflictDot(self, hurtBox.healthComponent.body, DotController.DotIndex.Burn, DOTDamage);
                         }
                     }
 
@@ -120,7 +120,7 @@ namespace MoreItems.Items.VoidItems
                     // Create the visual effect of the explosion.
                     // Explosion vfx is not created if its disabled in the config or if no targets were hit.
                     // TODO: Custom visual effects.
-                    if (MoreItems.EnableUmbralPyreVFX.Value && GlobalEventManager.igniteOnKillHurtBoxBuffer.Count > 0)
+                    if (RigsArsenal.EnableUmbralPyreVFX.Value && GlobalEventManager.igniteOnKillHurtBoxBuffer.Count > 0)
                     {
 
                         EffectManager.SpawnEffect(GlobalEventManager.CommonAssets.igniteOnKillExplosionEffectPrefab, new EffectData

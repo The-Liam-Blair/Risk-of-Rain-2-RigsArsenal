@@ -8,7 +8,7 @@ using RoR2.ExpansionManagement;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace MoreItems.Items
+namespace RigsArsenal.Items
 {
     // Generic item class
     public abstract class Item

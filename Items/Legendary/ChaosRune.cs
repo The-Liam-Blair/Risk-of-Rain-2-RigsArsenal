@@ -6,10 +6,10 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Diagnostics;
 using UnityEngine.UIElements;
-using static MoreItems.MoreItems;
+using static RigsArsenal.RigsArsenal;
 using static RoR2.MasterSpawnSlotController;
 
-namespace MoreItems.Items
+namespace RigsArsenal.Items
 {
     /// <summary>
     /// Chaos Rune - T3 (Legendary) Item

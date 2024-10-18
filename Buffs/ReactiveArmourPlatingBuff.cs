@@ -4,9 +4,9 @@ using R2API;
 using RoR2;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using static MoreItems.MoreItems;
+using static RigsArsenal.RigsArsenal;
 
-namespace MoreItems.Buffs
+namespace RigsArsenal.Buffs
 {
     public class ReactiveArmourPlatingBuff : Buff
     {
@@ -16,14 +16,13 @@ namespace MoreItems.Buffs
         public override Color BuffColor => Color.white;
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("ReactiveArmourPlatingBuff.png");
 
-        private ItemDef itemDef;
-
         public override void SetupHooks()
         {
             // While the buff is active, gain +20 armour per stack.
             R2API.RecalculateStatsAPI.GetStatCoefficients += (self, args) =>
             {
-                itemDef = ItemList.Find(x => x.NameToken.Equals("REACTIVEARMOURPLATING")).itemDef;
+                var _itemDef = ItemList.Find(x => x.NameToken.Equals("REACTIVEARMOURPLATING"));
+                var itemDef = _itemDef?.itemDef;
 
                 if(!itemDef || !self || !self.inventory) { return; }
                 if(!self.HasBuff(buffDef)) {  return; }

@@ -4,17 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using IL.EntityStates;
-using MoreItems.Buffs;
+using RigsArsenal.Buffs;
 using On.RoR2.Projectile;
 using R2API;
 using RoR2.Projectile;
 using UnityEngine;
 using UnityEngine.Networking;
 using ProjectileController = RoR2.Projectile.ProjectileController;
-using static MoreItems.MoreItems;
+using static RigsArsenal.RigsArsenal;
 using ProjectileGhostController = RoR2.Projectile.ProjectileGhostController;
 
-namespace MoreItems.Items
+namespace RigsArsenal.Items
 {
     /// <summary>
     /// Wrist-Mounted Shotgun - T2 (Uncommon) Item.
@@ -78,12 +78,12 @@ namespace MoreItems.Items
 
         public override void SetupHooks()
         {
-
-            On.RoR2.HealthComponent.TakeDamage += (orig, self, info) =>
+            GlobalEventManager.onServerDamageDealt += (damageReport) =>
             {
-                orig(self, info);
+                var info = damageReport.damageInfo;
+                var self = damageReport.victim;
 
-                if (!self || !info.attacker || info.procCoefficient <= 0f || info.procChainMask.HasProc(ProcType.Missile)) { return; }
+                if (!info.attacker || info.procCoefficient <= 0f || info.procChainMask.HasProc(ProcType.Missile)) { return; }
 
 
                 var victim = self.body;
@@ -99,10 +99,6 @@ namespace MoreItems.Items
 
                 // 10% (scaled by the attack's proc coefficient) chance to trigger the effect.
                 if (!Util.CheckRoll(10f * info.procCoefficient, attacker.master)) { return; }
-
-                // Because they're projectiles, also performs a line of sight check so that the shot is actually able to hit it's target and not hit a wall instead.
-                // (Not entirely consistent).
-                if (Physics.Linecast(attacker.transform.position, victim.transform.position, 0)) { return; }
 
                 int pelletCount = 13;
                 float stackingDamageMultiplier = 0.25f * count; // 25% the attack's damage per pellet per stack.
@@ -141,25 +137,21 @@ namespace MoreItems.Items
                     projectileInfo.rotation = ApplySpread(projectileInfo.rotation, 4f);
 
                     RoR2.Projectile.ProjectileManager.instance.FireProjectile(projectileInfo);
-
                 }
             };
 
-
-            On.RoR2.Run.Start += (orig, self) =>
-            {
-                orig(self);
-
-                rangeIndicator = null;
-            };
-
             // Adds a visual range indicator when a player has the item.
+
             On.RoR2.CharacterBody.OnInventoryChanged += (orig, self) =>
             {
                 orig(self);
 
-                if (!MoreItems.EnableShotgunMarker.Value || rangeIndicator || !self.isPlayerControlled || !self.inventory
-                    || self.inventory.GetItemCount(itemDef) <= 0) { return; }
+                if (!RigsArsenal.EnableShotgunMarker.Value || rangeIndicator || !self.isPlayerControlled || !self.inventory
+                    || self.inventory.GetItemCount(itemDef) <= 0) 
+                {
+                    if(rangeIndicator) {  GameObject.Destroy(rangeIndicator); rangeIndicator = null; }
+                    return; 
+                }
 
                 // Uses a modified range indicator from the "NearbyDamageBonus" (focus crystal) item.
                 GameObject original = Resources.Load<GameObject>("Prefabs/NetworkedObjects/NearbyDamageBonusIndicator");

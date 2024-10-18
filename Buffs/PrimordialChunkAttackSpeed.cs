@@ -4,9 +4,9 @@ using R2API;
 using RoR2;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using static MoreItems.MoreItems;
+using static RigsArsenal.RigsArsenal;
 
-namespace MoreItems.Buffs
+namespace RigsArsenal.Buffs
 {
     public class PrimordialChunkAttackSpeedBuff : Buff
     {

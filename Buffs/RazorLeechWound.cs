@@ -1,10 +1,10 @@
 ﻿/*
-using MoreItems.DOTs;
+using RigsArsenal.DOTs;
 using RoR2;
 using UnityEngine;
-using static MoreItems.MoreItems;
+using static RigsArsenal.RigsArsenal;
 
-namespace MoreItems.Buffs
+namespace RigsArsenal.Buffs
 {
     public class RazorLeechWound : Buff
     {
@@ -50,7 +50,7 @@ namespace MoreItems.Buffs
                 // 25% chance to apply the custom bleed dot, with total damage equal to 50% of the damage dealt.
                 if (victim.HasBuff(buffDef) && Util.CheckRoll(roll, attacker.master))
                 {
-                    MoreItems.InflictCustomDot(attacker, victim, leechBleed, info.damage * 0.5f);
+                    RigsArsenal.InflictCustomDot(attacker, victim, leechBleed, info.damage * 0.5f);
                 }
 
             };

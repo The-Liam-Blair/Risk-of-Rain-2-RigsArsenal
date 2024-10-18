@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using EntityStates;
-using MoreItems.Items;
+using RigsArsenal.Items;
 using R2API;
 using R2API.Utils;
 using Rewired;
@@ -8,9 +8,9 @@ using RoR2;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
-using static MoreItems.MoreItems;
+using static RigsArsenal.RigsArsenal;
 
-namespace MoreItems.Misc
+namespace RigsArsenal.Misc
 {
     /// <summary>
     /// Non-usable Item.

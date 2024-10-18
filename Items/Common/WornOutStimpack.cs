@@ -6,9 +6,9 @@ using RoR2;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
-using static MoreItems.MoreItems;
+using static RigsArsenal.RigsArsenal;
 
-namespace MoreItems.Items
+namespace RigsArsenal.Items
 {
     /// <summary>
     /// WornOutStimpack - T1 (Common) Item

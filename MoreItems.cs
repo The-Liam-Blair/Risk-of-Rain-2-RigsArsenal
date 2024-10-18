@@ -1,21 +1,21 @@
 ﻿using System.Collections.Generic;
 using BepInEx;
 using BepInEx.Configuration;
-using MoreItems.Items;
+using RigsArsenal.Items;
 using R2API;
 using RoR2;
 using System.Linq;
 using System.Reflection;
-using MoreItems.Buffs;
-using MoreItems.Equipments;
+using RigsArsenal.Buffs;
+using RigsArsenal.Equipments;
 using UnityEngine;
 using R2API.Utils;
 using static RoR2.DotController;
 using HarmonyLib;
 using RoR2.ExpansionManagement;
-//using MoreItems.DOTs;
+//using RigsArsenal.DOTs;
 
-namespace MoreItems
+namespace RigsArsenal
 {
     [BepInPlugin(P_GUID, P_Name, P_Version)]
 
@@ -30,13 +30,13 @@ namespace MoreItems
     [BepInDependency("com.rune500.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
 
     // Main Plugin Class
-    public class MoreItems : BaseUnityPlugin
+    public class RigsArsenal : BaseUnityPlugin
     {
         // Plugin metadata and version
         public const string P_GUID = $"{P_Author}.{P_Name}";
         public const string P_Author = "RigsInRags";
         public const string P_Name = "RigsArsenal";
-        public const string P_Version = "1.3.0";
+        public const string P_Version = "1.3.2";
 
         public static AssetBundle MainAssets;
 
@@ -56,7 +56,7 @@ namespace MoreItems
             DebugLog.Init(Logger);
 
             // Load the asset bundle for this mod.
-            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("MoreItems.moreitemsassets"))
+            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("RigsArsenal.rigsassets"))
             {
                 MainAssets = AssetBundle.LoadFromStream(stream);
             }
@@ -73,7 +73,7 @@ namespace MoreItems
             }
 
             // Fetch all the items by type, and load each one (Populate each item's class definition then add to the item list).
-var Items = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Item)));
+            var Items = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Item)));
 
             EnableItems = new List<ConfigEntry<bool>>();
 

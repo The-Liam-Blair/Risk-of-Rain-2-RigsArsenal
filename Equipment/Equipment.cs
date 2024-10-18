@@ -5,7 +5,7 @@ using RoR2;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace MoreItems.Equipments
+namespace RigsArsenal.Equipments
 {
     // Generic item class
     public abstract class Equipment
@@ -105,7 +105,14 @@ namespace MoreItems.Equipments
 
             ItemAPI.Add(new CustomEquipment(equipmentDef, CreateItemDisplayRules()));
 
-            On.RoR2.EquipmentSlot.PerformEquipmentAction += ActivateEquipment;
+            On.RoR2.EquipmentSlot.PerformEquipmentAction += (orig, self, _equipDef) =>
+            {
+                if (_equipDef == equipmentDef)
+                {
+                    return UseEquipment(self);
+                }
+                return orig(self, _equipDef);
+            };
 
             On.RoR2.EquipmentSlot.UpdateInventory += (orig, self) =>
             {
@@ -116,15 +123,6 @@ namespace MoreItems.Equipments
                     EquipmentSlot = self;
                 }
             };
-        }
-
-        private bool ActivateEquipment(On.RoR2.EquipmentSlot.orig_PerformEquipmentAction orig, EquipmentSlot self, EquipmentDef _equipDef)
-        {
-            if(_equipDef == equipmentDef)
-            {
-                return UseEquipment(self);
-            }
-            return orig(self, _equipDef);
         }
 
         public virtual ItemDisplayRuleDict CreateItemDisplayRules() => null;

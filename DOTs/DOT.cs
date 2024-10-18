@@ -6,7 +6,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine;
 using RoR2;
 
-namespace MoreItems.DOTs
+namespace RigsArsenal.DOTs
 {
     public abstract class DOT
     {

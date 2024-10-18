@@ -1,5 +1,5 @@
-﻿using MoreItems.Buffs;
-using MoreItems.Items;
+﻿using RigsArsenal.Buffs;
+using RigsArsenal.Items;
 using R2API;
 using Rewired.ComponentControls.Data;
 using Rewired.Utils;
@@ -10,10 +10,10 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
-using static MoreItems.MoreItems;
+using static RigsArsenal.RigsArsenal;
 using static RoR2.MasterSpawnSlotController;
 
-namespace MoreItems.Equipments
+namespace RigsArsenal.Equipments
 {
     public class PurityAltar : Equipment
     {

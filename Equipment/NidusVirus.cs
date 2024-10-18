@@ -8,13 +8,13 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 using static RoR2.MasterSpawnSlotController;
-using static MoreItems.MoreItems;
+using static RigsArsenal.RigsArsenal;
 using R2API;
 using System.Collections;
 using BepInEx.Configuration;
 using EntityStates.VoidRaidCrab;
 
-namespace MoreItems.Equipments
+namespace RigsArsenal.Equipments
 {
     public class NidusVirus : Equipment
     {
@@ -137,7 +137,7 @@ namespace MoreItems.Equipments
                         // Spread dots
                         foreach(var dot in UniqueDots)
                         {
-                            MoreItems.InflictDot(slot.characterBody, entity.body, dot.Item1.dotIndex, slot.characterBody.damage);
+                            RigsArsenal.InflictDot(slot.characterBody, entity.body, dot.Item1.dotIndex, slot.characterBody.damage);
                         }
                     }
                 }

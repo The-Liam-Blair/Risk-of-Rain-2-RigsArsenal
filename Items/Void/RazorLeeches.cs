@@ -9,9 +9,9 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Diagnostics;
 using UnityEngine.UIElements;
-using static MoreItems.MoreItems;
+using static RigsArsenal.RigsArsenal;
 
-namespace MoreItems.Items.VoidItems
+namespace RigsArsenal.Items.VoidItems
 {
     /// <summary>
     /// Razor Leeches - Void T2 (Void Uncommon) Item

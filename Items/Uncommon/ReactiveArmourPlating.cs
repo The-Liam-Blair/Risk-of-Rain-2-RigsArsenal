@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using IL.EntityStates;
-using MoreItems.Buffs;
+using RigsArsenal.Buffs;
 using UnityEngine;
-using static MoreItems.MoreItems;
+using static RigsArsenal.RigsArsenal;
 using R2API;
 
-namespace MoreItems.Items
+namespace RigsArsenal.Items
 {
     /// <summary>
     /// Reactive Armour Plating - T2 (Uncommon) Item.
@@ -38,30 +38,27 @@ namespace MoreItems.Items
         public override void SetupHooks()
         {
             // On damage taken, give the entity the relevant reactive armour plating buff that increases armour.
-            On.RoR2.HealthComponent.TakeDamage +=
-                (orig, self, damageInfo) =>
+            GlobalEventManager.onServerDamageDealt += (damageReport) =>
+            {
+                var body = damageReport.victim.body;
+                if (body.inventory == null) { return; }
+
+                if (damageReport.damageInfo.damageType == DamageType.OutOfBounds
+                    || damageReport.damageInfo.damageType == DamageType.FallDamage) { return; }
+
+                var count = body.inventory.GetItemCount(itemDef);
+                if (count <= 0) { return; }
+
+                if (body.HasBuff(ItemBuffDef))
                 {
-                    orig(self, damageInfo);
-
-                    var body = self.body;
-                    if (body.inventory == null) { return; }
-
-                    if(damageInfo.damageType == DamageType.OutOfBounds
-                        || damageInfo.damageType == DamageType.FallDamage) { return; }
-
-                    var count = body.inventory.GetItemCount(itemDef);
-                    if (count <= 0) { return; }
-
-                    if (body.HasBuff(ItemBuffDef))
-                    {
-                        body.ClearTimedBuffs(ItemBuffDef);
-                        body.AddTimedBuff(ItemBuffDef, 3f);
-                    }
-                    else
-                    {
-                        body.AddTimedBuff(ItemBuffDef, 3f);
-                    }
-                };
+                    body.ClearTimedBuffs(ItemBuffDef);
+                    body.AddTimedBuff(ItemBuffDef, 3f);
+                }
+                else
+                {
+                    body.AddTimedBuff(ItemBuffDef, 3f);
+                }
+            };
 
             // If the entity has at least 1 stack of this item, they passively gain 20 armour.
             R2API.RecalculateStatsAPI.GetStatCoefficients += (self, args) =>

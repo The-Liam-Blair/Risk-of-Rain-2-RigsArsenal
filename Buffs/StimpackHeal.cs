@@ -4,9 +4,9 @@ using R2API;
 using RoR2;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using static MoreItems.MoreItems;
+using static RigsArsenal.RigsArsenal;
 
-namespace MoreItems.Buffs
+namespace RigsArsenal.Buffs
 {
     public class StimpackHealCooldownBuff : Buff
     {
@@ -21,7 +21,9 @@ namespace MoreItems.Buffs
             // While the buff is active, gain +10% movement speed and +0.5 health regen per stack.
             R2API.RecalculateStatsAPI.GetStatCoefficients += (self, args) =>
             {
-                var itemDef = ItemList.Find(x => x.NameToken == "WORNOUTSTIMPACK").itemDef;
+                var _itemDef = ItemList.Find(x => x.NameToken == "WORNOUTSTIMPACK");
+                var itemDef = _itemDef?.itemDef;
+
                 if(!itemDef || !self || !self.inventory) { return; }
 
                 if (!self.HasBuff(buffDef)) { return; }

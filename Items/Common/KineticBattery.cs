@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using IL.EntityStates;
-using MoreItems.Buffs;
+using RigsArsenal.Buffs;
 using UnityEngine;
-using static MoreItems.MoreItems;
+using static RigsArsenal.RigsArsenal;
 using R2API;
 
-namespace MoreItems.Items
+namespace RigsArsenal.Items
 {
     /// <summary>
     /// Kinetic Battery - T1 (Common) Item.

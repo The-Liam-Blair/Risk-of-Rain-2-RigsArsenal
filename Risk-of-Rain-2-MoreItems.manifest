@@ -1,7 +1,7 @@
 ManifestFileVersion: 0
-CRC: 2145380307
+CRC: 773243295
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: moreitemsassets
+      Name: rigsassets
       Dependencies: {}

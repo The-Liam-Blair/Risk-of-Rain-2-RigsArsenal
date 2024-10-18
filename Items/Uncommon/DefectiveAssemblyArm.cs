@@ -1,11 +1,11 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using R2API;
 using RoR2;
 using UnityEngine;
-using static MoreItems.MoreItems;
+using static RigsArsenal.RigsArsenal;
 
-namespace MoreItems.Items
+namespace RigsArsenal.Items
 {
     /// <summary>
     /// Defective Assembly Arm- T2 (Uncommon) Item
@@ -443,3 +443,4 @@ namespace MoreItems.Items
         }
     }
 }
+*/

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BepInEx.Logging;
 
-namespace MoreItems
+namespace RigsArsenal
 {
     // Displaying debug messages in the game console.
     internal static class DebugLog
