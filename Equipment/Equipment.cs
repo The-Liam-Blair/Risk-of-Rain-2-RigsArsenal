@@ -103,6 +103,24 @@ namespace RigsArsenal.Equipments
                 equipmentDef.passiveBuffDef = EquipmentBuffDef;
             }
 
+
+            var modelView = equipmentDef.pickupModelPrefab.AddComponent<ModelPanelParameters>();
+
+            modelView.focusPointTransform = new GameObject("FocusPoint").transform;
+            modelView.focusPointTransform.SetParent(equipmentDef.pickupModelPrefab.transform);
+
+            modelView.cameraPositionTransform = new GameObject("CameraPosition").transform;
+            modelView.cameraPositionTransform.SetParent(equipmentDef.pickupModelPrefab.transform);
+
+            // todo: this shit.
+            //modelView.modelRotation = itemDef.pickupModelPrefab.transform.GetChild(0).rotation; // Rotation of the model: Face the camera.
+            //modelView.minDistance = 1f; // Minimum + Maximum distances from the camera, controls the zoom level.
+            //modelView.maxDistance = 3f; // Also sets the default distance from the camera.
+
+            // To set the rotations more easily: Adjust the rotation of all models to face the camera given a default rotation value of 0,0,0.
+            // To set the zoom levels: Either experiment with a best fit min and max distance general values, or each item retains their own values
+
+
             ItemAPI.Add(new CustomEquipment(equipmentDef, CreateItemDisplayRules()));
 
             On.RoR2.EquipmentSlot.PerformEquipmentAction += (orig, self, _equipDef) =>
