@@ -33,6 +33,9 @@ namespace RigsArsenal.Items
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("BountyHunterBadge.png");
         public override GameObject Model => MainAssets.LoadAsset<GameObject>("BountyHunterBadge.prefab");
 
+        public override float minViewport => 1f;
+        public override float maxViewport => 2.5f;
+
         public override void SetupHooks()
         {
             // Give the player more gold when they kill an elite enemy.

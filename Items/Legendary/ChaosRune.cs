@@ -36,6 +36,9 @@ namespace RigsArsenal.Items
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("ChaosRune.png");
         public override GameObject Model => MainAssets.LoadAsset<GameObject>("ChaosRune.prefab");
 
+        public override float minViewport => 1f;
+        public override float maxViewport => 1.8f;
+
         private bool hasRun = false;
         private DamageInfo damageInfo { get; set; }
 

@@ -33,5 +33,8 @@ namespace RigsArsenal.Misc
 
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("PurityAltarConsume.png");
         public override GameObject Model => null;
+
+        public override float minViewport => 1f;
+        public override float maxViewport => 1f;
     }
 }

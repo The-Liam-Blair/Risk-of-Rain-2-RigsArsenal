@@ -35,6 +35,9 @@ namespace RigsArsenal.Items
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("ReactiveArmourPlating.png");
         public override GameObject Model => MainAssets.LoadAsset<GameObject>("ReactiveArmourPlating.prefab");
 
+        public override float minViewport => 1f;
+        public override float maxViewport => 2f;
+
         public override void SetupHooks()
         {
             // On damage taken, give the entity the relevant reactive armour plating buff that increases armour.

@@ -29,8 +29,10 @@ namespace RigsArsenal.Equipments
         public override float cooldown => 20f;
 
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("SanguineShieldBattery.png");
-
         public override GameObject Model => MainAssets.LoadAsset<GameObject>("SanguineShieldBattery.prefab");
+
+        public override float minViewport => 1f;
+        public override float maxViewport => 1.5f;
 
         public override BuffDef EquipmentBuffDef => BuffList.Find(x => x.Name == "SanguineShieldBatteryDuration").buffDef;
 

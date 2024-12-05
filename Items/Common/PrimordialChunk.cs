@@ -37,6 +37,9 @@ namespace RigsArsenal.Items
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("PrimordialChunk.png");
         public override GameObject Model => MainAssets.LoadAsset<GameObject>("PrimordialChunk.prefab");
 
+        public override float minViewport => 1f;
+        public override float maxViewport => 2f;
+
         public override BuffDef ItemBuffDef => BuffList.Find(x => x.Name == "PrimordialChunkAttackSpeed").buffDef;
 
         private float buffDuration = 5f;

@@ -39,6 +39,11 @@ namespace RigsArsenal.Items
 
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("WristMountedShotgun.png");
         public override GameObject Model => MainAssets.LoadAsset<GameObject>("WristMountedShotgun.prefab");
+
+        public override float minViewport => 1f;
+        public override float maxViewport => 2.5f;
+
+
         private GameObject pellet;
 
         // Donut ring object that attaches to the player when the item is active to indicate range, much like the focus crystal.

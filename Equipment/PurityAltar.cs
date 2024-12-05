@@ -31,8 +31,11 @@ namespace RigsArsenal.Equipments
         public override float cooldown => 45f;
 
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("PurityAltar.png");
-
         public override GameObject Model => MainAssets.LoadAsset<GameObject>("PurityAltar.prefab");
+
+        public override float minViewport => 3f;
+        public override float maxViewport => 5f;
+
 
         private List<Tuple<ItemDef, ItemDef>> validItems;
 

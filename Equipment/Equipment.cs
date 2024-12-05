@@ -25,6 +25,10 @@ namespace RigsArsenal.Equipments
         public abstract Sprite Icon { get; } // Icon sprite.
         public abstract GameObject Model { get; } // Equipment model.
 
+        // Min and max distances for the equipment's model view in the logbook.
+        public abstract float minViewport { get; }
+        public abstract float maxViewport { get; }
+
         public virtual BuffDef EquipmentBuffDef { get; } = null; // Reference to the buff definition.
         public virtual bool IsBuffPassive { get; } = false; // Determines if the buff from the equipment is a constant passive buff or not.
 
@@ -110,13 +114,10 @@ namespace RigsArsenal.Equipments
             modelView.cameraPositionTransform = new GameObject("CameraPosition").transform;
             modelView.cameraPositionTransform.SetParent(equipmentDef.pickupModelPrefab.transform);
 
-            // todo: this shit.
-            //modelView.modelRotation = itemDef.pickupModelPrefab.transform.GetChild(0).rotation; // Rotation of the model: Face the camera.
-            //modelView.minDistance = 1f; // Minimum + Maximum distances from the camera, controls the zoom level.
-            //modelView.maxDistance = 3f; // Also sets the default distance from the camera.
+            modelView.modelRotation = equipmentDef.pickupModelPrefab.transform.rotation;
 
-            // To set the rotations more easily: Adjust the rotation of all models to face the camera given a default rotation value of 0,0,0.
-            // To set the zoom levels: Either experiment with a best fit min and max distance general values, or each item retains their own values
+            modelView.minDistance = minViewport;
+            modelView.maxDistance = maxViewport;
 
 
             ItemAPI.Add(new CustomEquipment(equipmentDef, CreateItemDisplayRules()));

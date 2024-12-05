@@ -33,6 +33,9 @@ namespace RigsArsenal.Items
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("CoolantPack.png");
         public override GameObject Model => MainAssets.LoadAsset<GameObject>("CoolantPack.prefab");
 
+        public override float minViewport => 1f;
+        public override float maxViewport => 2f;
+
         public override void SetupHooks()
         {
             On.RoR2.HealthComponent.TakeDamage += (orig, self, info) =>

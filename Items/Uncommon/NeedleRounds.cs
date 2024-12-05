@@ -32,6 +32,9 @@ namespace RigsArsenal.Items
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("NeedleRounds.png");
         public override GameObject Model => MainAssets.LoadAsset<GameObject>("NeedleRounds.prefab");
 
+        public override float minViewport => 1f;
+        public override float maxViewport => 2.75f;
+
         public override void SetupHooks()
         {
             R2API.RecalculateStatsAPI.GetStatCoefficients += (self, args) =>

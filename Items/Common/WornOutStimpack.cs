@@ -34,10 +34,10 @@ namespace RigsArsenal.Items
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("WornOutStimpack.png");
         public override GameObject Model => MainAssets.LoadAsset<GameObject>("WornOutStimpack.prefab");
 
-        public override BuffDef ItemBuffDef => BuffList.Find(x => x.Name == "StimpackHealCooldown").buffDef;
+        public override float minViewport => 1f;
+        public override float maxViewport => 3f;
 
-        private float speedScalar = 0.10f;
-        private float finalSpeed = 0f;
+        public override BuffDef ItemBuffDef => BuffList.Find(x => x.Name == "StimpackHealCooldown").buffDef;
 
         public override void SetupHooks()
         {

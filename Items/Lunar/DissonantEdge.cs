@@ -34,6 +34,9 @@ namespace RigsArsenal.Items
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("DissonantEdge.png");
         public override GameObject Model => MainAssets.LoadAsset<GameObject>("DissonantEdge.prefab");
 
+        public override float minViewport => 2f;
+        public override float maxViewport => 3f;
+
         public override void SetupHooks()
         {
             // todo: use global event manager hooks to resolve error with multiple dps/kill scenarios with void dmg or some shit.

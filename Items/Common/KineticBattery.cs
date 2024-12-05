@@ -35,6 +35,9 @@ namespace RigsArsenal.Items
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("KineticBattery.png");
         public override GameObject Model => MainAssets.LoadAsset<GameObject>("KineticBattery.prefab");
 
+        public override float minViewport => 1f;
+        public override float maxViewport => 3f;
+
         public override void SetupHooks()
         {
             // When the player uses their utility skill, give a barrier and apply the cooldown buff.
