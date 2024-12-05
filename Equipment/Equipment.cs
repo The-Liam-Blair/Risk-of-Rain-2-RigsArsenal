@@ -67,13 +67,11 @@ namespace RigsArsenal.Equipments
             if(isLunar)
             {
                 equipmentDef.isLunar = true;
-                equipmentDef.isBoss = false;
                 equipmentDef.colorIndex = ColorCatalog.ColorIndex.LunarItem;
             }
             else
             {
                 equipmentDef.isLunar = false;
-                equipmentDef.isBoss = true;
                 equipmentDef.colorIndex = ColorCatalog.ColorIndex.Equipment;
             }
 
