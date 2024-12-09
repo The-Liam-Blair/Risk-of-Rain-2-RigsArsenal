@@ -19,6 +19,7 @@ namespace RigsArsenal.Buffs
         public override void SetupHooks()
         {
             // While the buff is active, gain +10% movement speed and +0.5 health regen per stack.
+            // Buff stacks with the item's GetStatCofficients call to double the effects.
             R2API.RecalculateStatsAPI.GetStatCoefficients += (self, args) =>
             {
                 var _itemDef = ItemList.Find(x => x.NameToken == "WORNOUTSTIMPACK");

@@ -20,8 +20,8 @@ namespace RigsArsenal.Items
 
         public override string Name => "Worn-Out Stimpack";
         public override string NameToken => "WORNOUTSTIMPACK";
-        public override string PickupToken => "Increased movement speed and health regeneration when health is low.";
-        public override string Description => "While at or under <style=cIsHealth>50% health</style>, gain <style=cIsUtility>+10%</style><style=cStack> (+10% per stack)</style> <style=cIsUtility>movement speed</style> and <style=cIsHealing>+0.5 <style=cStack>(+0.5 per stack)</style> base health regeneration</style>.";
+        public override string PickupToken => "Increased movement speed and health regeneration. Effects double at low health.";
+        public override string Description => "Gain <style=cIsUtility>+10%</style><style=cStack> (+10% per stack)</style> <style=cIsUtility>movement speed</style> and <style=cIsHealing>+0.5 <style=cStack>(+0.5 per stack)</style> health regeneration</style>. While at or under <style=cIsHealth>50% health</style>, all effects are <style=cIsUtility>doubled</style>.";
         public override string Lore => "<style=cMono>// INTERCEPTED TRANSMISSIONS FROM KOPRULU QUADRANT, SECTOR 19 //</style>\n\n''Looks like you've used this here Stimpack one too many times. Save it for when you REALLY need that extra kick.''\n\n''But sir... I need to heal up before the next fight.''\n\n''Nonsense. You will always recover slowly, no matter the situation. But sometimes, you'll fight enemies so strong that the healing isn't enough to offset their damage. That's where the secondary use of your Stimpack becomes clear: the adrenaline, the speed.''\n\n''I don't understand sir.''\n\n''Big strong foes are slow and lumber about. With a speed advantage, you can easily avoid their fire and come out unscathed. Outsmart your foes, and you will always come out victorious.''\n\n<style=cMono>// END OF TRANSMISSION //</style>";
 
         public override ItemTier Tier => ItemTier.Tier1;
@@ -94,6 +94,20 @@ namespace RigsArsenal.Items
                 }
 
                 return orig(self, amount, mask, regen);
+            };
+
+            // Item increases movement speed by 10% and health regen by 0.5 per stack.
+            R2API.RecalculateStatsAPI.GetStatCoefficients += (self, args) =>
+            {
+                if (!self || !self.inventory) { return; }
+
+                var count = self.inventory.GetItemCount(itemDef);
+
+                if (count > 0)
+                {
+                    args.moveSpeedMultAdd += 0.1f * count;
+                    args.baseRegenAdd += 0.5f * count;
+                }
             };
         }
 
