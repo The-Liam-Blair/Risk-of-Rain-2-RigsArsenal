@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using R2API;
+using RigsArsenal.Items;
 using RoR2;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -16,6 +17,8 @@ namespace RigsArsenal.Buffs
         public override Color BuffColor => Color.white;
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("PrimordialChunkAttackSpeedBuff.png");
 
+        private float atkSpeedBonus = PrimordialChunk.atkSpeedBonus.Value;
+
         public override void SetupHooks()
         {
             // For each stack of the buff, give +9% attack speed.
@@ -24,7 +27,7 @@ namespace RigsArsenal.Buffs
                 if (!self || !self.inventory || !self.isPlayerControlled) { return; }
                 if (!self.HasBuff(buffDef)) { return; }
 
-                args.attackSpeedMultAdd += 0.09f * self.GetBuffCount(buffDef);
+                args.attackSpeedMultAdd += atkSpeedBonus * self.GetBuffCount(buffDef);
             };
         }
     }

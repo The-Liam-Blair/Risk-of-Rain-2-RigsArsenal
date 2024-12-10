@@ -8,6 +8,7 @@ using RigsArsenal.Buffs;
 using UnityEngine;
 using static RigsArsenal.RigsArsenal;
 using R2API;
+using BepInEx.Configuration;
 
 namespace RigsArsenal.Items
 {
@@ -21,7 +22,7 @@ namespace RigsArsenal.Items
         public override string Name => "Kinetic Battery";
         public override string NameToken => "KINETICBATTERY";
         public override string PickupToken => "Gain barrier after using your utility skill.";
-        public override string Description => "After using a <style=cIsUtility>utility skill</style>, gain <style=cIsHealing>35</style> <style=cStack>(+35 per stack)</style> <style=cIsHealing>barrier</style>. Goes on a <style=cIsUtility>3 second cooldown</style> after use.";
+        public override string Description => $"After using a <style=cIsUtility>utility skill</style>, gain <style=cIsHealing>{barrierAmount.Value}</style> <style=cStack>(+{barrierAmount.Value} per stack)</style> <style=cIsHealing>barrier</style>. Goes on a <style=cIsUtility>{cooldown.Value:0.0} second cooldown</style> after use.";
         public override string Lore => "This little battery can hook directly into your shield system to provide a quick, temporary burst of shielding!\n\nIt's real strength however is that it can recharge itself through quick motion! A burst of speed is enough for the battery to power your shields for a brief moment, perfect for when you need to quickly remove yourself from any situation safely.\n\nJust don't touch the glowing parts, or even the bars for that matter.";
 
         public override BuffDef ItemBuffDef => BuffList.Find(x => x.Name == "KineticBatteryCooldown").buffDef;
@@ -37,6 +38,9 @@ namespace RigsArsenal.Items
 
         public override float minViewport => 1f;
         public override float maxViewport => 3f;
+
+        private ConfigEntry<int> barrierAmount;
+        private ConfigEntry<float> cooldown;
 
         public override void SetupHooks()
         {
@@ -54,13 +58,19 @@ namespace RigsArsenal.Items
                     var count = self.inventory.GetItemCount(itemDef);
                     if (count > 0)
                     {
-                        var finalBarrierValue = 35 * count; // 35 per stack.
+                        var finalBarrierValue = barrierAmount.Value * count; // 35 (Base) barrier per stack.
                         self.healthComponent.AddBarrier(finalBarrierValue);
-                        self.AddTimedBuff(ItemBuffDef, 3f);
+                        self.AddTimedBuff(ItemBuffDef, cooldown.Value); // 3 second cooldown (Base).
                     }
                 }
                 
             };
+        }
+
+        public override void AddConfigOptions()
+        {
+            barrierAmount = configFile.Bind("Kinetic_Battery Config", "barrierAmount", 35, "The barrier given by this item.");
+            cooldown = configFile.Bind("Kinetic_Battery Config", "cooldown", 3.0f, "The cooldown duration of the item.");
         }
 
         public override ItemDisplayRuleDict CreateItemDisplayRules()

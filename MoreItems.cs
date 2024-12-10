@@ -50,6 +50,8 @@ namespace RigsArsenal
         //public static ConfigEntry<bool> EnableUmbralPyreVFX { get; set; }
         public static List<ConfigEntry<bool>> EnableItems { get; set; }
 
+        public static ConfigFile configFile;
+
 
         public void Awake()
         {
@@ -60,6 +62,8 @@ namespace RigsArsenal
             {
                 MainAssets = AssetBundle.LoadFromStream(stream);
             }
+
+            configFile = Config;
 
             ApplyShaders();
 
@@ -80,26 +84,6 @@ namespace RigsArsenal
             string itemName = "";
 
             List <Item> voidItems = new List<Item>();
-
-
-            var Buffs = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Buff)));
-
-            foreach (var buff in Buffs)
-            {
-                Buff aBuff = (Buff)System.Activator.CreateInstance(buff);
-                aBuff.Init();
-                BuffList.Add(aBuff);
-            }
-
-            /*
-            var DOTs = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(DOT)));
-            foreach (var DOT in DOTs)
-            {
-                DOT aDot = (DOT)System.Activator.CreateInstance(DOT);
-                aDot.Init();
-                DOTList.Add(aDot);
-            }
-            */
 
             // For each item...
             foreach (var item in Items)
@@ -138,6 +122,16 @@ namespace RigsArsenal
             }
 
 
+            var Buffs = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Buff)));
+
+            foreach (var buff in Buffs)
+            {
+                Buff aBuff = (Buff)System.Activator.CreateInstance(buff);
+                aBuff.Init();
+                BuffList.Add(aBuff);
+            }
+
+
             var theEquipment = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Equipment)));
 
             foreach (var equipment in theEquipment)
@@ -155,6 +149,17 @@ namespace RigsArsenal
                     EquipmentList.Add(equip);
                 }
             }
+
+
+            /*
+            var DOTs = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(DOT)));
+            foreach (var DOT in DOTs)
+            {
+                DOT aDot = (DOT)System.Activator.CreateInstance(DOT);
+                aDot.Init();
+                DOTList.Add(aDot);
+            }
+            */
         }
 
         //Spawn all items for debugging purposes
@@ -174,8 +179,8 @@ namespace RigsArsenal
             }
         }
         */
-        
-        
+
+
 
         private void DEBUG_SpawnItem(string itemName)
         {

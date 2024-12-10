@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BepInEx.Configuration;
 using HarmonyLib;
 using R2API;
 using RoR2;
@@ -39,6 +40,7 @@ namespace RigsArsenal.Items
         public abstract float minViewport { get; }
         public abstract float maxViewport { get; }
 
+
         public virtual BuffDef ItemBuffDef { get; } = null; // Reference to the buff definition.
 
         /// <summary>
@@ -46,6 +48,7 @@ namespace RigsArsenal.Items
         /// </summary>
         public virtual void Init()
         {
+            AddConfigOptions();
             InitLang();
             CreateItem();
             SetupHooks();
@@ -159,6 +162,8 @@ namespace RigsArsenal.Items
 
             ItemAPI.Add(new CustomItem(itemDef, CreateItemDisplayRules()));
         }
+
+        public virtual void AddConfigOptions() {}
 
         public virtual ItemDisplayRuleDict CreateItemDisplayRules() => null;
 
