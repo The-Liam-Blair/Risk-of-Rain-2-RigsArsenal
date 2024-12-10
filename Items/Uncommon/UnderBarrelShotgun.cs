@@ -13,6 +13,7 @@ using UnityEngine.Networking;
 using ProjectileController = RoR2.Projectile.ProjectileController;
 using static RigsArsenal.RigsArsenal;
 using ProjectileGhostController = RoR2.Projectile.ProjectileGhostController;
+using BepInEx.Configuration;
 
 namespace RigsArsenal.Items
 {
@@ -27,7 +28,7 @@ namespace RigsArsenal.Items
         public override string Name => "Wrist-Mounted Shotgun";
         public override string NameToken => "UNDERBARRELSHOTGUN";
         public override string PickupToken => "Chance to fire a cluster of projectiles with high spread.";
-        public override string Description => "<style=cIsDamage>10%</style> chance to fire<style=cIsDamage> 13 projectiles</style> with high spread. Each projectile inflicts <style=cIsDamage>25%</style> <style=cStack>(+25% per stack)</style> TOTAL damage.";
+        public override string Description => $"<style=cIsDamage>{itemProcChance.Value}%</style> chance to fire<style=cIsDamage> {projectileCount.Value} projectiles</style> with high spread. Each projectile inflicts <style=cIsDamage>{projectileDamage.Value * 100f}%</style> <style=cStack>(+{projectileDamage.Value * 100f}% per stack)</style> TOTAL damage.";
         public override string Lore => "<style=cMono>// UNKNOWN CHATTER RECORDED ONBOARD THE UES CONTACT LIGHT //</style>\n\n''Guns are so lame; heavy, cumbersome, generic, lacking style and flair.''\n\n''Who cares? It's a weapon, it has a purpose already, it does not need flair.''\n\n''Why couldn't it have flair? Picture this: Shooting baddies, left, right and centre, just by pointing at them. Like a superhero. Absolutely magic man. And compare that to carrying a heavy, uncomfortable steel rifle.''\n\n''What do you mean 'Like a superhero'? You just bolted a bunch of underbarrel shotguns onto a crude plate of metal hammered into a half-pipe shape. You've successfully made a gun thats more difficult to maintain and use in the name of 'style', not to mention that four shotguns firing at once is just plain overkill.''\n\n''It's just something you won't understand...''\n\n''Maybe...How do 4 masterkey shotguns fire a total of 13 pellets anyway? Are some of them malfunctioning?''\n\n''Its luck, y'know. My lucky number.''\n\n<style=cMono>// END OF CONVERSATION //</style>";
 
         public override ItemTier Tier => ItemTier.Tier2;
@@ -48,6 +49,13 @@ namespace RigsArsenal.Items
 
         // Donut ring object that attaches to the player when the item is active to indicate range, much like the focus crystal.
         private GameObject rangeIndicator = null;
+
+        private ConfigEntry<float> itemProcChance;
+        private ConfigEntry<int> itemRange;
+        private ConfigEntry<int> projectileCount;
+        private ConfigEntry<float> projectileDamage;
+        private ConfigEntry<float> projectileProcRate;
+
 
         public override void Init()
         {
@@ -99,14 +107,14 @@ namespace RigsArsenal.Items
                 var count = attacker.inventory.GetItemCount(itemDef);
                 if (count <= 0) { return; }
 
-                // Only triggers against entities 35 or fewer units away
-                if (Vector3.Distance(victim.transform.position, attacker.transform.position) > 35f) { return; }
+                // Only triggers against entities 35 metres away or less (At base values).
+                if (Vector3.Distance(victim.transform.position, attacker.transform.position) > itemRange.Value) { return; }
 
                 // 10% (scaled by the attack's proc coefficient) chance to trigger the effect.
-                if (!Util.CheckRoll(10f * info.procCoefficient, attacker.master)) { return; }
+                if (!Util.CheckRoll(itemProcChance.Value * info.procCoefficient, attacker.master)) { return; }
 
-                int pelletCount = 13;
-                float stackingDamageMultiplier = 0.25f * count; // 25% the attack's damage per pellet per stack.
+                int pelletCount = projectileCount.Value;
+                float stackingDamageMultiplier = projectileDamage.Value * count; // 25% the attack's damage per pellet per stack. (With base values).
 
                 ProcChainMask mask = info.procChainMask;
                 mask.AddProc(ProcType.Missile);
@@ -114,9 +122,10 @@ namespace RigsArsenal.Items
                 float damage = Util.OnHitProcDamage(info.damage * stackingDamageMultiplier, attacker.damage, info.procCoefficient);
 
                 // Each pellet has 25% of the attack's proc coefficient. This totals to a 3.25 proc coefficient factor combined on average if every shot hits.
-                pellet.GetComponent<ProjectileController>().procCoefficient = info.procCoefficient * 0.25f;
+                // (With base values).
+                pellet.GetComponent<ProjectileController>().procCoefficient = info.procCoefficient * projectileProcRate.Value;
 
-                // todo: shotgun sound effect (that one used by lesser wisps will do).
+                // todo: shotgun sound effect.
 
                 for (int i = 0; i < pelletCount; i++)
                 {
@@ -151,7 +160,7 @@ namespace RigsArsenal.Items
             {
                 orig(self);
 
-                if (!RigsArsenal.EnableShotgunMarker.Value || rangeIndicator || !self.isPlayerControlled || !self.inventory
+                if (!RigsArsenal.EnableShotgunMarker.Value || !self.isPlayerControlled || !self.inventory
                     || self.inventory.GetItemCount(itemDef) <= 0) 
                 {
                     if(rangeIndicator) {  GameObject.Destroy(rangeIndicator); rangeIndicator = null; }
@@ -167,9 +176,19 @@ namespace RigsArsenal.Items
                 rangeIndicator.GetComponent<NetworkedBodyAttachment>().AttachToGameObjectAndSpawn(self.gameObject, null);
 
                 var donut = rangeIndicator.transform.GetChild(1); // 2nd child of the range indicator object controls the donut's visual properties.
-                donut.localScale = new Vector3(70f, 70f, 70f); // 35 unit radius to match the item's range.
+                donut.localScale = new Vector3(itemRange.Value * 2f, itemRange.Value * 2f, itemRange.Value * 2f); // Scaled by the item's range.
                 donut.GetComponent<MeshRenderer>().material.SetColor("_TintColor", new Color(0f, 0.03f, 0.3f)); // Blue tint instead of red.
             };
+        }
+
+        public override void AddConfigOptions()
+        {
+            itemProcChance = configFile.Bind("Wrist-Mounted Shotgun Config", "itemProcChance", 10f, "The base proc chance of the item as a percentage.");
+            itemRange = configFile.Bind("Wrist-Mounted Shotgun Config", "itemRange", 35, "The maximum range which this item can trigger. Also scales the visual indicator range if enabled.");
+            projectileCount = configFile.Bind("Wrist-Mounted Shotgun Config", "projectileCount", 13, "The number of projectiles fired by the item.");
+            projectileDamage = configFile.Bind("Wrist-Mounted Shotgun Config", "projectileDamage", 0.25f, "The damage of each projectile (Scaled from the damage of the proc that triggered the item).");
+            projectileProcRate = configFile.Bind("Wrist-Mounted Shotgun Config", "projectileProcRate", 0.25f, "The proc coefficient of each projectile (Scaled from the proc coefficient of the attack that triggered the item)");
+
         }
 
         /// <summary>

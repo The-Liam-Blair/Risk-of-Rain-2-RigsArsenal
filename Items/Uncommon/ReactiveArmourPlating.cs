@@ -8,6 +8,7 @@ using RigsArsenal.Buffs;
 using UnityEngine;
 using static RigsArsenal.RigsArsenal;
 using R2API;
+using BepInEx.Configuration;
 
 namespace RigsArsenal.Items
 {
@@ -21,7 +22,7 @@ namespace RigsArsenal.Items
         public override string Name => "Reactive Armour Plating";
         public override string NameToken => "REACTIVEARMOURPLATING";
         public override string PickupToken => "Briefly gain armour when hit.";
-        public override string Description => "Gain <style=cIsDamage>20 permanent armour.</style> Briefly gain <style=cIsDamage>20</style> <style=cStack>(+20 per stack)</style> <style=cIsDamage>armour</style> after receiving damage.";
+        public override string Description => $"Gain <style=cIsDamage>20 permanent armour.</style> Briefly gain <style=cIsDamage>{armourPerStack.Value}</style> <style=cStack>(+{armourPerStack.Value} per stack)</style> <style=cIsDamage>armour</style> for <style=cIsUtility>{buffDuration.Value:0.0} seconds</style> after receiving damage.";
         public override string Lore => "<style=cMono>// ARTIFACT SCAVENGER TEAM - UPRISING AT HAEDRON MINING TOWN AFTERMATH - CONVERSATION EXCERPT //</style>\n\n''...Wielded by the leader of the rebels, this plating, ripped straight from the hull of a light interceptor ship with a handle crudely welded to the back, weighs approximately 650 kilos, and is designed to withstand low grade ship weapon fire. Nanobots tucked inside the plating constantly repair the plate and reinforce it to adapt to the current weapon fire it's receiving for maximum durability.''\n\n''Wow! How was he even able to lift that, let alone use it as a shield?''\n\n''He figured that if it could withstand ship weaponry, it'd be able to deflect any weaponry carried by the town guards. With that thing, he was almost invincible.''\n\n''In that case, how did they manage to put him down?''\n\n''They shot him from behind. Never saw it coming.''\n\n<style=cMono>// END OF EXCERPT //";
 
         public override BuffDef ItemBuffDef => BuffList.Find(x => x.Name == "ReactiveArmourPlatingBuff").buffDef;
@@ -38,6 +39,9 @@ namespace RigsArsenal.Items
         public override float minViewport => 1f;
         public override float maxViewport => 2f;
 
+        public static ConfigEntry<int> armourPerStack;
+        private ConfigEntry<float> buffDuration;
+
         public override void SetupHooks()
         {
             // On damage taken, give the entity the relevant reactive armour plating buff that increases armour.
@@ -52,14 +56,15 @@ namespace RigsArsenal.Items
                 var count = body.inventory.GetItemCount(itemDef);
                 if (count <= 0) { return; }
 
+                // 3 second duration (base).
                 if (body.HasBuff(ItemBuffDef))
                 {
                     body.ClearTimedBuffs(ItemBuffDef);
-                    body.AddTimedBuff(ItemBuffDef, 3f);
+                    body.AddTimedBuff(ItemBuffDef, buffDuration.Value);
                 }
                 else
                 {
-                    body.AddTimedBuff(ItemBuffDef, 3f);
+                    body.AddTimedBuff(ItemBuffDef, buffDuration.Value);
                 }
             };
 
@@ -71,6 +76,13 @@ namespace RigsArsenal.Items
                     args.armorAdd += 20;
                 }
             };
+        }
+
+        public override void AddConfigOptions()
+        {
+            armourPerStack = configFile.Bind("Reactive_Armour_Plating Config", "armourPerStack", 20, "Armour given by the item buff per item stack.");
+            buffDuration = configFile.Bind("Reactive_Armour_Plating Config Config", "buffDuration", 3f, "The duration of the buff.");
+
         }
 
         public override ItemDisplayRuleDict CreateItemDisplayRules()

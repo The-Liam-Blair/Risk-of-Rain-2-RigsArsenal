@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using R2API;
+using RigsArsenal.Items;
 using RoR2;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -16,9 +17,11 @@ namespace RigsArsenal.Buffs
         public override Color BuffColor => Color.white;
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("ReactiveArmourPlatingBuff.png");
 
+        private float armour = ReactiveArmourPlating.armourPerStack.Value;
+
         public override void SetupHooks()
         {
-            // While the buff is active, gain +20 armour per stack.
+            // While the buff is active, gain +20 armour per stack (Base).
             R2API.RecalculateStatsAPI.GetStatCoefficients += (self, args) =>
             {
                 var _itemDef = ItemList.Find(x => x.NameToken.Equals("REACTIVEARMOURPLATING"));
@@ -31,7 +34,7 @@ namespace RigsArsenal.Buffs
 
                 if (count > 0)
                 {
-                    args.armorAdd += 20 * count;
+                    args.armorAdd += armour * count;
                 }
             };
         }

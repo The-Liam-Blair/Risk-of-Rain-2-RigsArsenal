@@ -91,7 +91,7 @@ namespace RigsArsenal.Items
 
         public override void AddConfigOptions()
         {
-            atkSpeedBonus = configFile.Bind("Primordial_Chunk Config", "atkSpeedBonus", 0.09f, "The attack speed bonus per buff stack.");
+            atkSpeedBonus = configFile.Bind("Primordial_Chunk Config", "atkSpeedBonus", 0.09f, "The attack speed bonus per buff stack. (0.09 = +9%)");
             maxBuffStacks = configFile.Bind("Primordial_Chunk Config", "maxBuffStacks", 3, "The maximum number of buff stacks per item stack.");
             buffDuration = configFile.Bind("Primordial_Chunk Config", "buffDuration", 5f, "The duration of the buff in seconds.");
         }
