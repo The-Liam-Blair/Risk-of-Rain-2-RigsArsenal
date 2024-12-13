@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using BepInEx.Configuration;
 using R2API;
 using R2API.Utils;
 using RoR2;
@@ -22,7 +23,7 @@ namespace RigsArsenal.Items
         public override string Name => "Chaos Rune";
         public override string NameToken => "CHAOSRUNE";
         public override string PickupToken => "Chance to inflict additional damaging debuffs when applying any damaging debuff.";
-        public override string Description => "When applying a damaging debuff to an enemy, there is a <style=cIsDamage>33% chance</style><style=cStack> (+1 roll per stack)</style> to apply <style=cIsHealth>additional damaging debuffs</style> up to 1 <style=cStack>(+1 per 2 stacks)</style> more.";
+        public override string Description => $"When applying a damaging debuff to an enemy, there is a <style=cIsDamage>{procChance.Value}% chance</style><style=cStack> (+{rollsPerStack.Value} roll(s) per stack)</style> to apply <style=cIsHealth>additional damaging debuffs</style>.";
         public override string Lore => "<style=cMono>// ARTIFACT RECOVERY NOTES: EXCAVATION SITE 165-A34 //</style>\n\nName: Runic Stone Carving\n\nSize: 20cm by 20cm by 3cm\n\nSite Notes: ''Weighty and shimmers a bright red hue. The miner that recovered this artifact was found an hour after contact in tremendous pain, dehydrated and collapsed, still holding onto the artifact. Artifact was additionally glowing incredibly brightly, and is allegedly scalding to the touch for some while bone-chillingly cold to others.\n\nDo NOT handle directly. Do NOT stare into it's glow. Do NOT listen to what it offers. Be not tempted.''\n\n<style=cMono>// END OF NOTES //";
 
         public override ItemTier Tier => ItemTier.Tier3;
@@ -38,6 +39,10 @@ namespace RigsArsenal.Items
 
         public override float minViewport => 1f;
         public override float maxViewport => 1.8f;
+
+        ConfigEntry<int> procChance;
+        ConfigEntry<int> rollsPerStack;
+
 
         private bool hasRun = false;
         private DamageInfo damageInfo { get; set; }
@@ -59,20 +64,14 @@ namespace RigsArsenal.Items
 
                 var count = attacker.inventory.GetItemCount(itemDef);
                 if(count <= 0) { return; }
-
-                var maxSuccessfulRolls = 1 + Mathf.Floor(count * 0.5f); // Up to 1 successful roll, and another per 2 stacks.
-                var currentSucessfulRolls = 0;
                 
-                var roll = 33; // 1/3 chance of a successful roll per stack.
+                var roll = procChance.Value; // 1/3 chance of a successful roll per stack (With base values).
                 
-                for(int i = 0; i < count; i++)
+                for(int i = 0; i < rollsPerStack.Value; i++)
                 {
-                    if(currentSucessfulRolls >= maxSuccessfulRolls) { break; }
-
                     if (Util.CheckRoll(roll, attacker.master))
                     {
                         hasRun = true;
-                        currentSucessfulRolls++;
 
                         // todo: some custom visual or audio effect maybe to indicate the item has triggered.
 
@@ -106,6 +105,12 @@ namespace RigsArsenal.Items
                 hasRun = false; // Reset flag for triggering this item.
                 orig(self, damageInfo, victim);
             };
+        }
+
+        public override void AddConfigOptions()
+        {
+            procChance = configFile.Bind("Chaos_Rune Config", "procChance", 33, "The chance of the item's effect triggering per item stack on applying a DOT.");
+            rollsPerStack = configFile.Bind("Chaos_Rune Config", "rollsPerStack", 1, "Number of times the item will roll on activation per item stack.");
         }
 
         public override ItemDisplayRuleDict CreateItemDisplayRules()
