@@ -1,4 +1,4 @@
-﻿/*using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using Newtonsoft.Json.Linq;
 using R2API;
 using R2API.Utils;
@@ -23,8 +23,8 @@ namespace RigsArsenal.Items.VoidItems
     {
         public override string Name => "Umbral Pyre";
         public override string NameToken => "UMBRALPYRE";
-        public override string PickupToken => "Damage and burn all nearby enemies. <Style=cIsVoid>Corrupts all Gasoline</style>.";
-        public override string Description => "<style=cDeath>Burn</style> all enemies within <style=cIsUtility>8m</style> <style=cStack>(+1m per stack)</style> for <style=cIsDamage>100%</style> base damage, and <style=cIsDamage>ignite</style> them for <style=cIsDamage>75%</style> <style=cStack>(+75% per stack)</style> base damage. Occurs <style=cIsUtility>once</style> per second. <Style=cIsVoid>Corrupts all Gasoline</style>.";
+        public override string PickupToken => "Damage and burn all nearby enemies. <style=cIsVoid>Corrupts all Gasoline</style>.";
+        public override string Description => "<style=cDeath>Burn</style> all enemies within <style=cIsUtility>8m</style> <style=cStack>(+1m per stack)</style> for <style=cIsDamage>100%</style> base damage, and <style=cIsDamage>ignite</style> them for <style=cIsDamage>75%</style> <style=cStack>(+75% per stack)</style> base damage. Occurs <style=cIsUtility>once</style> per second. <style=cIsVoid>Corrupts all Gasoline</style>.";
         public override string Lore => "<style=cMono>========================================\r\n====   MyBabel Machine Translator   ====\r\n====     [Version 15.01.3.000 ]   ======\r\n========================================\r\nTraining... <1000000000 cycles>\r\nTraining... <1000000000 cycles>\r\nTraining... <4054309 cycles>\r\nComplete!\r\nDisplay result? Y/N\r\nY\r\n========================================</style>\r\n\r\n<style=cIsVoid>Imperfect design. Uncontrolled. Prone to friendly fire. Human design, of course.\r\n\r\nImprove. Remove the redundant elements. The base form enables its power, unsuppressed.\r\n\r\nIt knows. Friend and foe. Teach and inform, it will listen, and it will only hurt the opposition.\r\n\r\nReplicate. The air holds enough mass to enable replication. It will continue unhindered.\r\n\r\nHuman design, made perfect.\r\n\r\nGo now, and spread our message. Knowledge through disintegration.</style>";
 
         public override ItemTier Tier => ItemTier.VoidTier1;
@@ -36,6 +36,9 @@ namespace RigsArsenal.Items.VoidItems
 
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("UmbralPyre.png");
         public override GameObject Model => MainAssets.LoadAsset<GameObject>("UmbralPyre.prefab");
+
+        public override float minViewport => 0.66f;
+        public override float maxViewport => 1.33f;
 
         public override ItemDef pureItemDef => RoR2Content.Items.IgniteOnKill; // Gasoline
 
@@ -334,4 +337,3 @@ namespace RigsArsenal.Items.VoidItems
         }
     }
 }
-*/

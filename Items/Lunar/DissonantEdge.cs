@@ -38,9 +38,8 @@ namespace RigsArsenal.Items
         public override float maxViewport => 3f;
 
         public override void SetupHooks()
-        {
-            // todo: use global event manager hooks to resolve error with multiple dps/kill scenarios with void dmg or some shit.
-            // also rename all moreitems into rigsarsenal.
+        {         
+            // todo: Investigate potential solutions to using GEM.onServerDamageDealt instead for stability.
             On.RoR2.HealthComponent.TakeDamage += (orig, self, damageInfo) =>
             {
                 if (!damageInfo.attacker || 
@@ -84,6 +83,7 @@ namespace RigsArsenal.Items
 
                 orig(self, damageInfo);
             };
+            
         }
 
         public override ItemDisplayRuleDict CreateItemDisplayRules()

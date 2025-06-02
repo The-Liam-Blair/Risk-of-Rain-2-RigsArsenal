@@ -1,5 +1,4 @@
-﻿/*
-using RigsArsenal.DOTs;
+﻿using RigsArsenal.DOTs;
 using RoR2;
 using UnityEngine;
 using static RigsArsenal.RigsArsenal;
@@ -19,42 +18,32 @@ namespace RigsArsenal.Buffs
 
         public override void SetupHooks()
         {
-            On.RoR2.HealthComponent.TakeDamage += (orig, self, info) =>
+            GlobalEventManager.onServerDamageDealt += (damageReport) =>
             {
-                orig(self, info);
-
-                if (!self) { return; }
-
-                var victim = self.body;
+                var victim = damageReport.victim.body;
                 if (!victim || !victim.inventory || !victim.gameObject || !victim.healthComponent) { return; }
 
-                var attackerObj = info.attacker;
-                if (!attackerObj || !attackerObj.GetComponent<CharacterBody>()) { return; }
+                var attacker = damageReport.attackerBody;
+                if (!attacker || !attacker.inventory || !attacker.gameObject || !attacker.healthComponent) { return; }
 
-                var attacker = attackerObj.GetComponent<CharacterBody>();
-                if (!attacker.healthComponent || !attacker.inventory) { return; }
 
-                if(leechBleed == null)
-                {
-                    leechBleed = DOTList.Find(x => x.Name.Equals("RazorLeechBleed"));
-                }
+                if (leechBleed == null) { leechBleed = DOTList.Find(x => x.Name.Equals("RazorLeechBleed")); }
 
                 // Ignore damage types that are environmental or dots.
-                if(info.damageType == DamageType.DoT
-                    || info.damageType == DamageType.NonLethal
-                    || info.damageType == DamageType.FallDamage
-                    || info.damageType == DamageType.OutOfBounds) { return; }
+                var damageInfo = damageReport.damageInfo;
 
-                var roll = 25f; // 25% chance.
+                // Ignore damage types that are environmental or dots.
+                if (damageInfo.damageType == DamageType.DoT
+                    || damageInfo.damageType == DamageType.NonLethal
+                    || damageInfo.damageType == DamageType.FallDamage
+                    || damageInfo.damageType == DamageType.OutOfBounds) { return; }
 
-                // 25% chance to apply the custom bleed dot, with total damage equal to 50% of the damage dealt.
-                if (victim.HasBuff(buffDef) && Util.CheckRoll(roll, attacker.master))
+                // Inflict the DOT equal to 20% of the damage dealt.
+                if (victim.HasBuff(buffDef))
                 {
-                    RigsArsenal.InflictCustomDot(attacker, victim, leechBleed, info.damage * 0.5f);
+                    RigsArsenal.InflictCustomDot(attacker, victim, leechBleed, damageInfo.damage * 0.2f);
                 }
-
             };
         }
     }
 }
-*/

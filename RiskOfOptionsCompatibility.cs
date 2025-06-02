@@ -21,7 +21,7 @@ namespace RigsArsenal
             ModSettingsManager.SetModDescription("Mod that adds new items and equipment.", RigsArsenal.P_GUID, "Rigs Arsenal");
             ModSettingsManager.SetModIcon(RigsArsenal.MainAssets.LoadAsset<Sprite>("modIcon.png"));
 
-            //ModSettingsManager.AddOption(new CheckBoxOption(RigsArsenal.EnableUmbralPyreVFX));
+            ModSettingsManager.AddOption(new CheckBoxOption(RigsArsenal.EnableUmbralPyreVFX));
             ModSettingsManager.AddOption(new CheckBoxOption(RigsArsenal.EnableShotgunMarker));
         }
     }

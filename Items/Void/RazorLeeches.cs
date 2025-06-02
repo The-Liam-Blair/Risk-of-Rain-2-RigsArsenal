@@ -1,5 +1,4 @@
-﻿/*
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using Newtonsoft.Json.Linq;
 using R2API;
 using R2API.Utils;
@@ -16,7 +15,7 @@ namespace RigsArsenal.Items.VoidItems
     /// <summary>
     /// Razor Leeches - Void T2 (Void Uncommon) Item
     /// <para>Critically strike enemies to perforate them.</para>
-    /// <para>Perforated enemies have a chance of receiving damage over time from incoming attacks.</para>
+    /// <para>Perforated enemies receive additional damage over time proportional to the damage they receive.</para>
     /// <para>Certain types of damage, including damage over time damage and environmental damage, are exempt.</para>
     /// <para>This item corrupts all Needle Rounds items.</para>
     /// </summary>
@@ -24,8 +23,8 @@ namespace RigsArsenal.Items.VoidItems
     {
         public override string Name => "Razor Leeches";
         public override string NameToken => "RAZORLEECHES";
-        public override string PickupToken => "Perforate foes by critically striking. Perforated enemies have a chance to receive additional damage over time from attacks.<style=cIsVoid> Corrupts all Needle Rounds.";
-        public override string Description => "Critically striking an enemy<style=cIsDamage> perforates</style> them for <style=cIsUtility>2</style> <style=cStack>(+1 per stack)</style> seconds. <style=cIsDamage>Perforated</style> enemies have a <style=cIsUtility>25%</style> chance to receive <style=cIsUtility>50%</style> of <style=cIsDamage>ANY</style> incoming damage as <style=cIsDamage>additional damage over time</style>. <style=cIsVoid> Corrupts all Needle Rounds</style>.";
+        public override string PickupToken => "Perforate foes by critically striking. Perforated enemies receive additional damage over time from attacks.<style=cIsVoid> Corrupts all Needle Rounds.";
+        public override string Description => "Critically striking an enemy<style=cIsDamage> perforates</style> them for <style=cIsUtility>2</style> <style=cStack>(+1 per stack)</style> seconds. <style=cIsDamage>Perforated</style> enemies receive <style=cIsUtility>20%</style> of incoming damage as<style=cIsDamage>additional damage over time</style>. <style=cIsVoid> Corrupts all Needle Rounds</style>.";
         public override string Lore => "";
 
         // TODO:
@@ -44,12 +43,19 @@ namespace RigsArsenal.Items.VoidItems
         public override Sprite Icon => null;
         public override GameObject Model => null;
 
+        public override float minViewport => 1f;
+        public override float maxViewport => 3f;
+
         public override BuffDef ItemBuffDef => BuffList.Find(x => x.Name == "RazorLeechWound").buffDef;
 
         public override ItemDef pureItemDef => ItemList.Find(x => x.NameToken == "NEEDLEROUNDS").itemDef; // Needle Rounds
 
         public override void SetupHooks()
         {
+            // todo: Possible item rework idea: Crit damage becomes 1 (Or no inherent crit damage). For every % crit chance, DOT damage conversion increases by x%.
+            //       (For this idea, investigate guaranteed crits mechanic from bandit and railgunner to ensure compatibility).
+
+            // todo 2: Convert hook from TakeDamage to GEM.onServerDamageDealt, its better :)
             On.RoR2.HealthComponent.TakeDamage += (orig, self, info) =>
             {
                 orig(self, info);
@@ -268,4 +274,3 @@ namespace RigsArsenal.Items.VoidItems
         }
     }
 }
-*/

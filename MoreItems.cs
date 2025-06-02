@@ -13,7 +13,7 @@ using R2API.Utils;
 using static RoR2.DotController;
 using HarmonyLib;
 using RoR2.ExpansionManagement;
-//using RigsArsenal.DOTs;
+using RigsArsenal.DOTs;
 
 namespace RigsArsenal
 {
@@ -43,11 +43,11 @@ namespace RigsArsenal
         public static List<Item> ItemList = new List<Item>();
         public static List<Equipment> EquipmentList = new List<Equipment>();
         public static List<Buff> BuffList = new List<Buff>();
-        //public static List<DOT> DOTList = new List<DOT>();
+        public static List<DOT> DOTList = new List<DOT>();
         
 
         public static ConfigEntry<bool> EnableShotgunMarker { get; set; }
-        //public static ConfigEntry<bool> EnableUmbralPyreVFX { get; set; }
+        public static ConfigEntry<bool> EnableUmbralPyreVFX { get; set; }
         public static List<ConfigEntry<bool>> EnableItems { get; set; }
 
         public static ConfigFile configFile;
@@ -68,7 +68,7 @@ namespace RigsArsenal
             ApplyShaders();
 
             EnableShotgunMarker = Config.Bind("Wrist-Mounted Shotgun Config", "EnableShotgunMarker", true, "Shows or hides the range indicator for the Wrist-Mounted Shotgun item.");
-            //EnableUmbralPyreVFX = Config.Bind("Umbral Pyre Config", "EnableUmbralPyreVFX", true, "Shows or hides the explosion visual effect for the Umbral Pyre item.");
+            EnableUmbralPyreVFX = Config.Bind("Umbral Pyre Config", "EnableUmbralPyreVFX", true, "Shows or hides the explosion visual effect for the Umbral Pyre item.");
 
             // Check for Risk of Options, if present setup the Risk of Options configs for this mod.
             if (RiskOfOptionsCompatibility.enabled)
@@ -151,7 +151,7 @@ namespace RigsArsenal
             }
 
 
-            /*
+            
             var DOTs = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(DOT)));
             foreach (var DOT in DOTs)
             {
@@ -159,11 +159,10 @@ namespace RigsArsenal
                 aDot.Init();
                 DOTList.Add(aDot);
             }
-            */
+            
         }
 
         //Spawn all items for debugging purposes
-        /*
         private void Update()
         {
             if(Input.GetKeyDown(KeyCode.F1))
@@ -178,9 +177,7 @@ namespace RigsArsenal
                 }
             }
         }
-        */
-
-
+        
 
         private void DEBUG_SpawnItem(string itemName)
         {
@@ -266,7 +263,7 @@ namespace RigsArsenal
             }
         }
 
-        /*
+        
         /// <summary>
         /// Inflict a custom dot on a target. Similar to the standard dot infliction function but uses a custom dot class parameter instead.
         /// </summary>
@@ -274,24 +271,23 @@ namespace RigsArsenal
         {
             DebugLog.Log($"{attacker.name} is inflicting custom dot {dot.Name} on {victim.name} for {damage} damage.");
 
-            switch(dot.Name)
+            switch(dot.dotName)
             {
-                case "RazorLeechBleed":
+                case RigsArsenalDOTs.RazorLeechBleed:
                     InflictDotInfo leechBleed = new InflictDotInfo()
                     {
                         attackerObject = attacker.gameObject,
                         victimObject = victim.gameObject,
-                        totalDamage = damage,
-                        damageMultiplier = dot.dotDef.damageCoefficient,
                         dotIndex = dot.dotIndex,
                         preUpgradeDotIndex = dot.dotIndex,
-                        maxStacksFromAttacker = 999,
+                        duration = dot.dotDuration,
+                        damageMultiplier = damage / (dot.dotDuration / dot.dotInterval)
                     };
                     DotController.InflictDot(ref leechBleed);
                     break;
             }
         }
-        */
+        
 
         /// <summary>
         /// Add expansion definition and set the transformation pair for void items.

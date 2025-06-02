@@ -1,4 +1,4 @@
-﻿/*using R2API;
+﻿using R2API;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,11 +23,14 @@ namespace RigsArsenal.DOTs
 
         public abstract Sprite Icon { get; }
 
+        public abstract RigsArsenalDOTs dotName { get; }
+
         public DotController.DotDef dotDef { get; set; }
         public DotController.DotIndex dotIndex { get; set; }
 
         public abstract float dotDamageCoefficient { get; }
         public abstract float dotInterval { get; }
+        public abstract float dotDuration { get; }
         public abstract DamageColorIndex dotDamageColorIndex { get; }
         public virtual bool resetTimerOnAdd { get; } = false;
 
@@ -69,5 +72,9 @@ namespace RigsArsenal.DOTs
             // Implemented DOTS will register the dot definition after this base method.
         }
     }
+
+    public enum RigsArsenalDOTs
+    {
+        RazorLeechBleed,
+    }
 }
-*/
