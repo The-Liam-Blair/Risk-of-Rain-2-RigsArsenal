@@ -54,8 +54,7 @@ namespace RigsArsenal.Items.VoidItems
         {
             // todo: Possible item rework idea: Crit damage becomes 1 (Or no inherent crit damage). For every % crit chance, DOT damage conversion increases by x%.
             //       (For this idea, investigate guaranteed crits mechanic from bandit and railgunner to ensure compatibility).
-
-            // todo 2: Convert hook from TakeDamage to GEM.onServerDamageDealt, its better :)
+            /*
             On.RoR2.HealthComponent.TakeDamage += (orig, self, info) =>
             {
                 orig(self, info);
@@ -79,6 +78,28 @@ namespace RigsArsenal.Items.VoidItems
                     victim.AddTimedBuff(ItemBuffDef, 2f + count, 1);
                 }
             };
+            */
+
+            GlobalEventManager.onServerDamageDealt += (damageReport) =>
+            {
+                var attackerObj = damageReport.attacker;
+                if (!attackerObj || !attackerObj.GetComponent<CharacterBody>()) { return; }
+
+                var attacker = attackerObj.GetComponent<CharacterBody>();
+                if (!attacker.inventory) { return; }
+
+                var count = attacker.inventory.GetItemCount(itemDef);
+
+                // Apply perforate (wounded) debuff to the victim if the attack was a crit and the attacker has the item.
+                if (count > 0 && damageReport.damageInfo.crit)
+                {
+                    var victim = damageReport.victimBody;
+                    if (!victim) { return; }
+
+                    victim.AddTimedBuff(ItemBuffDef, 2f + count, 1);
+                }
+            };
+                
 
             // Item gives +5% flat crit chance, much like harvester scythe and predatory instincts.
             R2API.RecalculateStatsAPI.GetStatCoefficients += (self, args) =>

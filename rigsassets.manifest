@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1520311804
+CRC: 2109576925
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 80542e268e5518ab0f23f7cd9b8e5f29
+    Hash: 7df0223a1fddff1ddfcac109666e8217
   TypeTreeHash:
     serializedVersion: 2
     Hash: a7a21288fe2bd6ae3724c7054e7a1302
@@ -100,10 +100,11 @@ Assets:
 - Assets/Materials/Item/KineticBattery/KineticBattery.PNG
 - Assets/Materials/Item/UmbralPyre/M_Casing.mat
 - Assets/Materials/Item/NeedleRounds/NeedleRounds.png
-- Assets/Materials/Equipment/SanguineShieldBattery/M_MetalFixtures.mat
+- Assets/Materials/Item/Outlines/M_Invisible-Outline.mat
 - Assets/Prefabs/Item/ChaosRune/ChaosRune.blend
-- Assets/Materials/Equipment/SanguineShieldBattery/M_Crystal.mat
+- Assets/Materials/Equipment/SanguineShieldBattery/M_MetalFixtures.mat
 - Assets/Prefabs/Item/PrimordialChunk/PrimordialChunk.blend
+- Assets/Materials/Equipment/SanguineShieldBattery/M_Crystal.mat
 - Assets/Materials/Item/WornOutStimpack/M_DepletedIcon.mat
 - Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.blend
 - Assets/Materials/Item/BountyHunterBadge/M_Black.mat
@@ -132,6 +133,7 @@ Assets:
 - Assets/Materials/Equipment/SanguineShieldBattery/SanguineShieldBatteryBuff.png
 - Assets/Materials/Item/NeedleRounds/M_Tape.mat
 - Assets/Materials/Item/WristMountedShotgun/M_Gray.mat
+- Assets/shaders/outline.shader
 - Assets/Materials/Item/ReactiveArmourPlate/GripTex.png
 - Assets/Prefabs/Equipment/PurityAltar/PurityAltar.prefab
 - Assets/Materials/Item/DissonantEdge/M_Guard.mat

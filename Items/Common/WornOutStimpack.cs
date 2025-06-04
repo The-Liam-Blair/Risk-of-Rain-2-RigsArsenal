@@ -38,7 +38,7 @@ namespace RigsArsenal.Items
         public override float minViewport => 1f;
         public override float maxViewport => 3f;
 
-        public override BuffDef ItemBuffDef => BuffList.Find(x => x.Name == "StimpackHealCooldown").buffDef;
+        public override BuffDef ItemBuffDef => BuffList.Find(x => x.Name == "StimpackHealStrong").buffDef;
 
         private ConfigEntry<float> movementBonus;
         private ConfigEntry<float> regenBonus;
@@ -47,6 +47,7 @@ namespace RigsArsenal.Items
         {
             // If entity takes damage that drops their health below the low health threshold, add the buff.
             // Buff is refreshed if it's currently active.
+            /*
             On.RoR2.HealthComponent.TakeDamage +=
                 (orig, self, damageInfo) =>
                 {
@@ -72,6 +73,28 @@ namespace RigsArsenal.Items
                         body.AddTimedBuff(ItemBuffDef, 5f);
                     }
                 };
+            */
+            GlobalEventManager.onServerDamageDealt += (damageReport) =>
+            {
+                var self = damageReport.victimBody;
+                if (!self || !self.inventory) { return; }
+
+                var count = self.inventory.GetItemCount(itemDef);
+                if (count <= 0) { return; }
+
+                if (self.healthComponent.health >= self.healthComponent.fullHealth * 0.5f) { return; }
+
+                // Add buff for 5 second duration. If buff already exists, refresh the duration.
+                if (self.GetBuffCount(ItemBuffDef) <= 0)
+                {
+                    self.AddTimedBuff(ItemBuffDef, 5f);
+                }
+                else
+                {
+                    self.ClearTimedBuffs(ItemBuffDef);
+                    self.AddTimedBuff(ItemBuffDef, 5f);
+                }
+            };
 
             // If an entity receives healing, has the buff, and is currently under the low health threshold, the buff
             // is applied or refreshed.

@@ -8,9 +8,9 @@ using static RigsArsenal.RigsArsenal;
 
 namespace RigsArsenal.Buffs
 {
-    public class StimpackHealCooldownBuff : Buff
+    public class StimpackHealStrongBuff : Buff
     {
-        public override string Name => "StimpackHealCooldown";
+        public override string Name => "StimpackHealStrong";
         public override bool canStack => false;
         public override bool isDebuff => false;
         public override Color BuffColor => Color.white;
