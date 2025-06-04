@@ -53,18 +53,21 @@ namespace RigsArsenal.Items
             {
                 orig(ref inflictDotInfo);
 
-                if(hasRun) { return; }
+                if (hasRun) { return; }
 
-                if(!inflictDotInfo.attackerObject || !inflictDotInfo.victimObject) { return; }
+                if (!inflictDotInfo.attackerObject || !inflictDotInfo.victimObject) { return; }
 
                 var attacker = inflictDotInfo.attackerObject.GetComponent<CharacterBody>();
                 var victim = inflictDotInfo.victimObject.GetComponent<CharacterBody>();
 
-                if(!attacker.inventory) { return; }
+                if (!attacker.inventory) { return; }
 
                 var count = attacker.inventory.GetItemCount(itemDef);
-                if(count <= 0) { return; }
-                
+                if (count <= 0) { return; }
+
+                var procCoefficient = damageInfo.procCoefficient;
+                if (procCoefficient <= 0f) {  procCoefficient = 1f; } // For niche items that apply DOTs with a proc coefficient of 0: Gasoline and Umbral Pyre.
+
                 var roll = procChance.Value; // 1/3 chance of a successful roll per stack (With base values).
                 
                 for(int i = 0; i < rollsPerStack.Value; i++)
@@ -80,19 +83,19 @@ namespace RigsArsenal.Items
                         switch (DotIndex)
                         {
                             case 0: // Bleed
-                                InflictDot(attacker, victim, DotController.DotIndex.Bleed, attacker.damage, damageInfo.procCoefficient);
+                                InflictDot(attacker, victim, DotController.DotIndex.Bleed, attacker.damage, procCoefficient);
                                 break;
 
                             case 1: // Burn
-                                InflictDot(attacker, victim, DotController.DotIndex.Burn, attacker.damage, damageInfo.procCoefficient);
+                                InflictDot(attacker, victim, DotController.DotIndex.Burn, attacker.damage, procCoefficient);
                                 break;
 
                             case 2: // Blight
-                                InflictDot(attacker, victim, DotController.DotIndex.Blight, attacker.damage, damageInfo.procCoefficient);
+                                InflictDot(attacker, victim, DotController.DotIndex.Blight, attacker.damage, procCoefficient);
                                 break;
 
                             case 3: // Collapse
-                                InflictDot(attacker, victim, DotController.DotIndex.Fracture, attacker.damage, damageInfo.procCoefficient);
+                                InflictDot(attacker, victim, DotController.DotIndex.Fracture, attacker.damage, procCoefficient);
                                 break;
                         }
                     }
