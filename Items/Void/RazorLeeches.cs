@@ -52,34 +52,6 @@ namespace RigsArsenal.Items.VoidItems
 
         public override void SetupHooks()
         {
-            // todo: Possible item rework idea: Crit damage becomes 1 (Or no inherent crit damage). For every % crit chance, DOT damage conversion increases by x%.
-            //       (For this idea, investigate guaranteed crits mechanic from bandit and railgunner to ensure compatibility).
-            /*
-            On.RoR2.HealthComponent.TakeDamage += (orig, self, info) =>
-            {
-                orig(self, info);
-
-                if (!self) { return; }
-
-                var attackerObj = info.attacker;
-                if (!attackerObj || !attackerObj.GetComponent<CharacterBody>()) { return; }
-
-                var attacker = attackerObj.GetComponent<CharacterBody>();
-                if (!attacker.inventory) { return; }
-
-                var count = attacker.inventory.GetItemCount(itemDef);
-
-                // Apply perforate (wounded) debuff to the victim if the attack was a crit and the attacker has the item.
-                if (count > 0 && info.crit)
-                {
-                    var victim = self.body;
-                    if (!victim) { return; }
-
-                    victim.AddTimedBuff(ItemBuffDef, 2f + count, 1);
-                }
-            };
-            */
-
             GlobalEventManager.onServerDamageDealt += (damageReport) =>
             {
                 var attackerObj = damageReport.attacker;

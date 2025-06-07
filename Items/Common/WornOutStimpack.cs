@@ -74,6 +74,8 @@ namespace RigsArsenal.Items
                     }
                 };
             */
+
+            // todo: investigate when characterBody.recalculatestats fires, perform buff application logic in there instead of checking all instances of damage and healing?
             GlobalEventManager.onServerDamageDealt += (damageReport) =>
             {
                 var self = damageReport.victimBody;
