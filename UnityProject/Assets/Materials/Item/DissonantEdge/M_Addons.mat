@@ -2,14 +2,17 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Addons
   m_Shader: {fileID: 4800000, guid: 4ec969b1664a735448af9c2b87fdf680, type: 3}
-  m_ShaderKeywords: DITHER FLOWMAP
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - DITHER
+  - FLOWMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -52,15 +55,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FlowHeightRamp:
-        m_Texture: {fileID: 2800000, guid: 5000ac4aa181ae44d982b4ba8b4e06e0, type: 3}
+        m_Texture: {fileID: 2800000, guid: 92929466eab76674d903168b38b844fe, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FlowHeightmap:
-        m_Texture: {fileID: 2800000, guid: 5000ac4aa181ae44d982b4ba8b4e06e0, type: 3}
+        m_Texture: {fileID: 2800000, guid: 92929466eab76674d903168b38b844fe, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FlowTex:
-        m_Texture: {fileID: 2800000, guid: 5000ac4aa181ae44d982b4ba8b4e06e0, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5ef9961364386954485e5ad792fdd2ca, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FresnelMask:
@@ -111,6 +114,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _BlueChannelBias: 0
     - _BlueChannelSmoothness: 0
@@ -126,18 +130,18 @@ Material:
     - _EliteBrightnessMax: 1
     - _EliteBrightnessMin: 0
     - _EliteIndex: 0
-    - _EmPower: 2.75
+    - _EmPower: 0
     - _EnableCutout: 0
     - _FEON: 0
     - _Fade: 1
     - _FadeBias: 0.6
-    - _FlowEmissionStrength: 3.5
-    - _FlowHeightBias: 0.8
-    - _FlowHeightPower: 14.6
-    - _FlowMaskStrength: 3.6
-    - _FlowNormalStrength: 1.2
-    - _FlowSpeed: 8.9
-    - _FlowTextureScaleFactor: 5.2
+    - _FlowEmissionStrength: 0.2
+    - _FlowHeightBias: -0.14
+    - _FlowHeightPower: 7
+    - _FlowMaskStrength: 0.36
+    - _FlowNormalStrength: 1.75
+    - _FlowSpeed: 4.2
+    - _FlowTextureScaleFactor: 2.14
     - _FlowmapOn: 1
     - _ForceSpecOn: 0
     - _FresnelBoost: 1
@@ -174,7 +178,8 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0, g: 0.023529412, b: 0.59607846, a: 1}
-    - _EmColor: {r: 0, g: 0.53, b: 1, a: 1}
+    - _Color: {r: 0, g: 0, b: 0, a: 1}
+    - _EmColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FlashColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []

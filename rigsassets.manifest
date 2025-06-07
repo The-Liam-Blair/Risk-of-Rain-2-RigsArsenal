@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2077700576
+CRC: 2684203356
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9dca7db446177917c2da8fed6c8fee2f
+    Hash: 85a61cfbf3da19625f6e7ae480410472
   TypeTreeHash:
     serializedVersion: 2
     Hash: a7a21288fe2bd6ae3724c7054e7a1302
@@ -67,6 +67,7 @@ Assets:
 - Assets/Materials/Item/NeedleRounds/M_BulletAttachment.mat
 - Assets/Materials/Item/BountyHunterBadge/M_Edges.mat
 - Assets/Materials/Equipment/PurityAltar/M_LesserGlow.mat
+- Assets/Materials/Item/DissonantEdge/M_Addons.mat
 - Assets/Materials/Item/ChaosRune/M_RockDark.mat
 - Assets/Materials/Item/WristMountedShotgun/M_ShotgunComponent.mat
 - Assets/Materials/Equipment/SanguineShieldBattery/FlowMap.png
@@ -78,6 +79,7 @@ Assets:
 - Assets/Prefabs/Item/NeedleRounds/NeedleRounds.prefab
 - Assets/Materials/Item/WristMountedShotgun/Strap.png
 - Assets/Materials/Item/WornOutStimpack/M_Button.mat
+- Assets/Materials/Item/DissonantEdge/M_Addons3.mat
 - Assets/Materials/modIcon.png
 - Assets/Materials/Item/KineticBattery/M_Screw.mat
 - Assets/Materials/Equipment/SanguineShieldBattery/flowmapnormals.png
@@ -113,6 +115,7 @@ Assets:
 - Assets/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.prefab
 - Assets/Prefabs/Item/ChaosRune/ChaosRune.prefab
 - Assets/Prefabs/Item/NeedleRounds/NeedleRounds.blend
+- Assets/Materials/Item/DissonantEdge/M_Addons2.mat
 - Assets/Materials/Item/ReactiveArmourPlate/UnderlayTex.png
 - Assets/Materials/Item/BountyHunterBadge/YellowTex1.png
 - Assets/Materials/Equipment/PurityAltar/AltarFlowNormal.png
@@ -123,9 +126,10 @@ Assets:
 - Assets/Materials/Equipment/NidusVirus/M_VirusBall.mat
 - Assets/Prefabs/Equipment/NidusVirus/NidusVirus.prefab
 - Assets/Prefabs/Item/WristMountedShotgun/WristMountedShotgun.prefab
-- Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlating.png
+- Assets/Materials/Item/DissonantEdge/M_Addons4.mat
 - Assets/Prefabs/Item/ReactiveArmourPlating/ReactiveArmourPlating.blend
 - Assets/Materials/Item/CoolantPack/M_Tank.mat
+- Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlating.png
 - Assets/Materials/Equipment/NidusVirus/M_VirusBulb.mat
 - Assets/Materials/Equipment/NidusVirus/M_BoxLight.mat
 - Assets/Materials/Item/KineticBattery/M_Bars.mat
@@ -139,15 +143,15 @@ Assets:
 - Assets/Materials/Item/DissonantEdge/M_Guard.mat
 - Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlatingBuff.png
 - Assets/Materials/Equipment/SanguineShieldBattery/M_BatteryShine.mat
+- Assets/Materials/Item/DissonantEdge/energyGlow.png
 - Assets/Materials/Equipment/NidusVirus/M_TextBacking.mat
 - Assets/Prefabs/Item/UmbralPyre/UmbralPyre.prefab
 - Assets/Materials/Item/WristMountedShotgun/WristMountedShotgun.png
-- Assets/Materials/Item/DissonantEdge/M_Addons.mat
+- Assets/Materials/Item/CoolantPack/M_Backing.mat
 - Assets/Materials/Item/BountyHunterBadge/M_Gray.mat
 - Assets/Materials/Item/BountyHunterBadge/BountyHunterBadge.png
 - Assets/Materials/Item/DissonantEdge/M_Glow.mat
 - Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.prefab
-- Assets/Materials/Item/CoolantPack/M_Backing.mat
 - Assets/Materials/Item/BountyHunterBadge/scratchTex.png
 - Assets/Materials/Equipment/PurityAltar/M_Void.mat
 - Assets/Prefabs/Equipment/PurityAltar/PurityAltar.blend
