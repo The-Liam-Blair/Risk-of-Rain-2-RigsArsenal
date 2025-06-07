@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2684203356
+CRC: 2319491048
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 85a61cfbf3da19625f6e7ae480410472
+    Hash: 634befd6da1b0d2c2f8524b52deae701
   TypeTreeHash:
     serializedVersion: 2
     Hash: a7a21288fe2bd6ae3724c7054e7a1302
@@ -97,6 +97,7 @@ Assets:
 - Assets/Prefabs/Item/DissonantEdge/DissonantEdge.prefab
 - Assets/Materials/Item/NeedleRounds/M_BulletBase.mat
 - Assets/Prefabs/Equipment/NidusVirus/Virus.prefab
+- Assets/Materials/Equipment/SanguineShieldBattery/M_Crystal3.mat
 - Assets/Prefabs/Item/WristMountedShotgun/WristMountedShotgun.blend
 - Assets/Materials/Item/WristMountedShotgun/M_RedDotSight.mat
 - Assets/Materials/Item/KineticBattery/KineticBattery.PNG
@@ -174,6 +175,7 @@ Assets:
 - Assets/Materials/Item/WornOutStimpack/M_White.mat
 - Assets/Materials/Equipment/NidusVirus/M_BoxSign.mat
 - Assets/Materials/Item/DissonantEdge/M_Blade.mat
+- Assets/Materials/Equipment/SanguineShieldBattery/M_Crystal2.mat
 - Assets/Materials/Item/ChaosRune/Rock.png
 - Assets/Materials/Item/PrimordialChunk/youngTeleporterDiffuse.png
 Dependencies: []

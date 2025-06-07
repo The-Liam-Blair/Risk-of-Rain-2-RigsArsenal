@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Crystal
+  m_Name: M_Crystal2
   m_Shader: {fileID: 4800000, guid: 4ec969b1664a735448af9c2b87fdf680, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
@@ -141,8 +141,8 @@ Material:
     - _FlowHeightPower: 12.4
     - _FlowMaskStrength: 0.93
     - _FlowNormalStrength: 0.76
-    - _FlowSpeed: 7
-    - _FlowTextureScaleFactor: 1.38
+    - _FlowSpeed: 10
+    - _FlowTextureScaleFactor: 1.5
     - _FlowmapOn: 1
     - _ForceSpecOn: 1
     - _FresnelBoost: 3.4213

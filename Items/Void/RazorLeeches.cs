@@ -24,7 +24,7 @@ namespace RigsArsenal.Items.VoidItems
         public override string Name => "Razor Leeches";
         public override string NameToken => "RAZORLEECHES";
         public override string PickupToken => "Perforate foes by critically striking. Perforated enemies receive additional damage over time from attacks.<style=cIsVoid> Corrupts all Needle Rounds.";
-        public override string Description => "Critically striking an enemy<style=cIsDamage> perforates</style> them for <style=cIsUtility>2</style> <style=cStack>(+1 per stack)</style> seconds. <style=cIsDamage>Perforated</style> enemies receive <style=cIsUtility>20%</style> of incoming damage as<style=cIsDamage>additional damage over time</style>. <style=cIsVoid> Corrupts all Needle Rounds</style>.";
+        public override string Description => "Critically striking an enemy<style=cIsDamage> perforates</style> them for <style=cIsUtility>2</style> <style=cStack>(+1 per stack)</style> seconds. <style=cIsDamage>Perforated</style> enemies receive <style=cIsUtility>20%</style> of incoming damage as<style=cIsDamage> additional damage over time</style>. <style=cIsVoid> Corrupts all Needle Rounds</style>.";
         public override string Lore => "";
 
         // TODO:
