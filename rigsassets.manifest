@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2319491048
+CRC: 140964436
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 634befd6da1b0d2c2f8524b52deae701
+    Hash: cfad7ce3464ce4d666668bc128726155
   TypeTreeHash:
     serializedVersion: 2
     Hash: a7a21288fe2bd6ae3724c7054e7a1302
@@ -73,6 +73,7 @@ Assets:
 - Assets/Materials/Equipment/SanguineShieldBattery/FlowMap.png
 - Assets/Materials/Item/PrimordialChunk/M_Chunk.mat
 - Assets/Prefabs/Item/CoolantPack/CoolantPack.prefab
+- Assets/Materials/Item/KineticBattery/M_Glass.mat
 - Assets/Materials/Item/ChaosRune/M_LesserGlow.mat
 - Assets/Materials/Item/NeedleRounds/M_BulletTop.mat
 - Assets/Materials/Item/PrimordialChunk/PrimordialChunk.png
@@ -85,6 +86,7 @@ Assets:
 - Assets/Materials/Equipment/SanguineShieldBattery/flowmapnormals.png
 - Assets/Materials/Item/WornOutStimpack/M_Base.mat
 - Assets/Materials/Item/KineticBattery/its texturin time.png
+- Assets/Prefabs/Item/KineticBattery/KineticBattery.blend
 - Assets/Materials/Item/BountyHunterBadge/YellowTex2.png
 - Assets/Materials/Equipment/NidusVirus/M_Casing.mat
 - Assets/Materials/Item/ReactiveArmourPlate/ArmourTex.png

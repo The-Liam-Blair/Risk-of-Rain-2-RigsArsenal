@@ -82,8 +82,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 8483fa5912cad0d4498e94c2b948610f, type: 3}
-        m_Scale: {x: 67.44, y: -11.05}
+        m_Texture: {fileID: 2800000, guid: 32d76b2fa2b9ebd42af02481bf267d3d, type: 3}
+        m_Scale: {x: 436, y: 69.7}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -162,15 +162,15 @@ Material:
     - _PrintDirection: 0
     - _PrintEmissionToAlbedoLerp: 0
     - _PrintOn: 0
-    - _RampInfo: 0
+    - _RampInfo: 1
     - _SliceAlphaDepth: 0.1
     - _SliceBandHeight: 1
     - _SliceHeight: 5
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
-    - _SpecularExponent: 1.25
+    - _SpecularExponent: 1.5
     - _SpecularHighlights: 1
-    - _SpecularStrength: 0.025
+    - _SpecularStrength: 0.02
     - _SplatmapOn: 0
     - _SplatmapTileScale: 1
     - _SrcBlend: 1
