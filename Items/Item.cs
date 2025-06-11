@@ -159,8 +159,8 @@ namespace RigsArsenal.Items
             modelView.minDistance = minViewport;
             modelView.maxDistance = maxViewport;
 
-
-            ItemAPI.Add(new CustomItem(itemDef, CreateItemDisplayRules()));
+            ItemDisplayRuleDict rules = new(null);
+            ItemAPI.Add(new CustomItem(itemDef, rules)); // CreateItemDisplatRules() not being called currently, will maybe later on when item displays are added for other items.
         }
 
         public virtual void AddConfigOptions() {}

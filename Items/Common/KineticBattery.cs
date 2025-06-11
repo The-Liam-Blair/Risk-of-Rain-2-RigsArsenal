@@ -23,7 +23,7 @@ namespace RigsArsenal.Items
         public override string NameToken => "KINETICBATTERY";
         public override string PickupToken => "Gain barrier after using your utility skill.";
         public override string Description => $"After using a <style=cIsUtility>utility skill</style>, gain <style=cIsHealing>{barrierAmount.Value}</style> <style=cStack>(+{barrierAmount.Value} per stack)</style> <style=cIsHealing>barrier</style>. Goes on a <style=cIsUtility>{cooldown.Value:0.0} second cooldown</style> after use.";
-        public override string Lore => "This little battery can hook directly into your shield system to provide a quick, temporary burst of shielding!\n\nIt's real strength however is that it can recharge itself through quick motion! A burst of speed is enough for the battery to power your shields for a brief moment, perfect for when you need to quickly remove yourself from any situation safely.\n\nJust don't touch the glowing parts, or even the glass for that matter.";
+        public override string Lore => "This little battery can hook directly into your shield system to provide a quick, temporary burst of shielding!\n\nIt's real strength however is that it can be recharged with kinetic energy! A burst of speed is enough for the battery to power your shields for a brief moment, perfect for when you need to quickly remove yourself from any situation safely.\n\nJust don't touch the glowing parts, or even the glass for that matter.";
 
         public override BuffDef ItemBuffDef => BuffList.Find(x => x.Name == "KineticBatteryCooldown").buffDef;
         public override ItemTier Tier => ItemTier.Tier1;
