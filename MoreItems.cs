@@ -11,9 +11,11 @@ using RigsArsenal.Equipments;
 using UnityEngine;
 using R2API.Utils;
 using static RoR2.DotController;
-using HarmonyLib;
 using RoR2.ExpansionManagement;
 using RigsArsenal.DOTs;
+using HarmonyLib;
+
+[assembly: HG.Reflection.SearchableAttribute.OptIn]
 
 namespace RigsArsenal
 {
@@ -67,8 +69,8 @@ namespace RigsArsenal
 
             ApplyShaders();
 
-            EnableShotgunMarker = Config.Bind("Wrist-Mounted Shotgun Config", "EnableShotgunMarker", true, "Shows or hides the range indicator for the Wrist-Mounted Shotgun item.");
-            EnableUmbralPyreVFX = Config.Bind("Umbral Pyre Config", "EnableUmbralPyreVFX", true, "Shows or hides the explosion visual effect for the Umbral Pyre item.");
+            EnableShotgunMarker = Config.Bind("Wrist-Mounted_Shotgun Config", "EnableShotgunMarker", true, "Shows or hides the range indicator for the Wrist-Mounted Shotgun item.");
+            EnableUmbralPyreVFX = Config.Bind("Umbral_Pyre Config", "EnableUmbralPyreVFX", true, "Shows or hides the explosion visual effect for the Umbral Pyre item.");
 
             // Check for Risk of Options, if present setup the Risk of Options configs for this mod.
             if (RiskOfOptionsCompatibility.enabled)
@@ -98,7 +100,7 @@ namespace RigsArsenal
                 // If the item is not hidden (NoTier), add it to the config file as a way of disabling the item from loading.
                 if(anItem.Tier != ItemTier.NoTier)
                 {
-                    EnableItems.Add(Config.Bind("Item Selection", itemName, true, "Enables or disables this item from appearing in game."));
+                    EnableItems.Add(Config.Bind("_Item Selection", itemName, true, "Enables or disables this item from appearing in game."));
                 }
 
                 // If the item is enabled in the config or is a hidden item, initialize it for use in game.
@@ -141,7 +143,7 @@ namespace RigsArsenal
                 itemName = equip.Name.Replace(" ", "_");
                 itemName = itemName.Replace("'", "");
 
-                EnableItems.Add(Config.Bind("Equipment Selection", itemName, true, "Enables or disables this equipment from appearing in game."));
+                EnableItems.Add(Config.Bind("_Equipment Selection", itemName, true, "Enables or disables this equipment from appearing in game."));
 
                 if(EnableItems[EnableItems.Count - 1].Value)
                 {
@@ -159,7 +161,6 @@ namespace RigsArsenal
                 aDot.Init();
                 DOTList.Add(aDot);
             }
-            
         }
 
         //Spawn all items for debugging purposes
@@ -228,7 +229,7 @@ namespace RigsArsenal
                     {
                         attackerObject = attacker.gameObject,
                         victimObject = victim.gameObject,
-                        totalDamage = damage * 0.5f,
+                        totalDamage = damage,
                         damageMultiplier = 1f,
                         dotIndex = DotIndex.Burn
                     };

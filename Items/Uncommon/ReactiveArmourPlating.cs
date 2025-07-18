@@ -81,7 +81,7 @@ namespace RigsArsenal.Items
         public override void AddConfigOptions()
         {
             armourPerStack = configFile.Bind("Reactive_Armour_Plating Config", "armourPerStack", 20, "Armour given by the item buff per item stack.");
-            buffDuration = configFile.Bind("Reactive_Armour_Plating Config Config", "buffDuration", 3f, "The duration of the buff.");
+            buffDuration = configFile.Bind("Reactive_Armour_Plating Config", "buffDuration", 3f, "The duration of the buff.");
 
         }
 

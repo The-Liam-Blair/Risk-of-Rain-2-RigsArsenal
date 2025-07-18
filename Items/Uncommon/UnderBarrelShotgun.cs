@@ -155,7 +155,6 @@ namespace RigsArsenal.Items
             };
 
             // Adds a visual range indicator when a player has the item.
-
             On.RoR2.CharacterBody.OnInventoryChanged += (orig, self) =>
             {
                 orig(self);
@@ -183,11 +182,11 @@ namespace RigsArsenal.Items
 
         public override void AddConfigOptions()
         {
-            itemProcChance = configFile.Bind("Wrist-Mounted Shotgun Config", "itemProcChance", 10f, "The base proc chance of the item as a percentage.");
-            itemRange = configFile.Bind("Wrist-Mounted Shotgun Config", "itemRange", 35, "The maximum range which this item can trigger. Also scales the visual indicator range if enabled.");
-            projectileCount = configFile.Bind("Wrist-Mounted Shotgun Config", "projectileCount", 13, "The number of projectiles fired by the item.");
-            projectileDamage = configFile.Bind("Wrist-Mounted Shotgun Config", "projectileDamage", 0.25f, "The damage of each projectile (Scaled from the damage of the proc that triggered the item).");
-            projectileProcRate = configFile.Bind("Wrist-Mounted Shotgun Config", "projectileProcRate", 0.25f, "The proc coefficient of each projectile (Scaled from the proc coefficient of the attack that triggered the item)");
+            itemProcChance = configFile.Bind("Wrist-Mounted_Shotgun Config", "itemProcChance", 10f, "The base proc chance of the item as a percentage.");
+            itemRange = configFile.Bind("Wrist-Mounted_Shotgun Config", "itemRange", 35, "The maximum range which this item can trigger. Also scales the visual indicator range if enabled.");
+            projectileCount = configFile.Bind("Wrist-Mounted_Shotgun Config", "projectileCount", 13, "The number of projectiles fired by the item.");
+            projectileDamage = configFile.Bind("Wrist-Mounted_Shotgun Config", "projectileDamage", 0.25f, "The damage of each projectile (Scaled from the damage of the proc that triggered the item).");
+            projectileProcRate = configFile.Bind("Wrist-Mounted_Shotgun Config", "projectileProcRate", 0.25f, "The proc coefficient of each projectile (Scaled from the proc coefficient of the attack that triggered the item)");
 
         }
 
@@ -199,7 +198,7 @@ namespace RigsArsenal.Items
         /// <returns>The original angle offsetted randomly according to the spread intensity.</returns>
         private Quaternion ApplySpread(Quaternion direction, float spread)
         {
-            // Randomize the spread angles in radians for yaw and pitch (In radians).
+            // Randomize the spread angles in radians for yaw and pitch.
             float yawAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
             float pitchAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
 
@@ -207,7 +206,7 @@ namespace RigsArsenal.Items
             float xOffset = spread * Mathf.Cos(yawAngle);
             float zOffset = spread * Mathf.Sin(pitchAngle);
 
-            // Apply the spread offsets to the aim direction
+            // Apply the spread offsets to the aim direction.
             Quaternion spreadYaw = Quaternion.Euler(0f, xOffset, 0f);
             Quaternion spreadPitch = Quaternion.Euler(zOffset, 0f, 0f);
             Quaternion spreadDirection = spreadYaw * spreadPitch * direction;

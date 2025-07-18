@@ -48,9 +48,8 @@ namespace RigsArsenal.Items
                 var body = self.body;
                 if (!body || !body.inventory) { orig(self, info); return; }
 
-                var count = self.body.inventory.GetItemCount(itemDef);
-                var damageType = info.damageType;
-                if (damageType == DamageType.DoT && count > 0)
+                var count = body.inventory.GetItemCount(itemDef);
+                if (info.damageType == DamageType.DoT && count > 0)
                 {
                     var fractionalBit = 1 - (1 / (1 + count * damageReduction.Value)); // Hyperbolic Scaling, approaching 100% damage reduction.
                     info.damage *= 1 - fractionalBit;
