@@ -22,14 +22,14 @@ namespace RigsArsenal.Equipments
 
         public override string NameToken => "NIDUSVIRUS";
 
-        public override string PickupToken => "Target enemy's debuffs are spread to nearby enemies.";
+        public override string PickupToken => "Target an enemy to spread their debuffs to nearby enemies.";
 
-        public override string Description => "Target an enemy and spread their <style=cIsUtility>debuffs</style> to enemies up to <style=cIsUtility>50 metres</style> away for <style=cIsUtility>5 seconds</style>. <style=cIsHealth>Damaging debuffs</style> are duplicated to enemies for their normal duration.";
+        public override string Description => $"Target an enemy and spread their <style=cIsUtility>debuffs</style> to enemies up to <style=cIsUtility>{spreadRadius.Value} metres</style> away for <style=cIsUtility>{debuffDuration.Value} seconds</style>. <style=cIsHealth>Damaging debuffs</style> are duplicated to enemies for their normal duration.";
         public override string Lore => "''Toxicology team, report!''\n\n''Virus 'ND-1421' outbreak has been successfully contained.''\n\n''Casualties?''\n\n''Over the two month outbreak, approximately 500 million humans, about 95% of the planet's population, has died. Animal reports are still underway, but we estimate up to 80 thousand species are extinct or critically endangered.''\n\n''My god...''\n\n''Most of the local fauna were destroyed. Entire groves of flowers and forests, eradicated. This cannot happen again, ever. If a hostile agent managed to retrieve this virus-''\n\n''It will be sealed in the strongest container money can buy. This virus is one of the deadlest in the known universe and must be studied, to learn how it spreads, and for a cure to make sure an outbreak like this never happens again. Have it sent to the lab on Earth, as soon as possible''\n\n''Yes sir, on it.''";
 
         public override bool isLunar => false;
 
-        public override float cooldown => 35f;
+        public override float cooldown => equipCooldown.Value;
 
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("NidusVirus.png");
         public override GameObject Model => MainAssets.LoadAsset<GameObject>("NidusVirus.prefab");
@@ -37,8 +37,9 @@ namespace RigsArsenal.Equipments
         public override float minViewport => 1f;
         public override float maxViewport => 1.8f;
 
-        private int spreadRadius = 50;
-        private float debuffDefaultDuration = 5f;
+        private ConfigEntry<int> equipCooldown;
+        private ConfigEntry<int> spreadRadius;
+        private ConfigEntry<int> debuffDuration;
 
         private GameObject targetIcon;
         private GameObject SpreadIndicator;
@@ -124,8 +125,8 @@ namespace RigsArsenal.Equipments
             {
                 if(entity.teamIndex == victimTeam)
                 {
-                    // If the entity is within the spread radius, apply the recorded debuffs and dots to that entity.
-                    if(Vector3.Distance(victim.healthComponent.body.corePosition, entity.body.corePosition) <= spreadRadius)
+                    // If the entity is within the spread radius (50m by default), apply the recorded debuffs and dots to that entity.
+                    if(Vector3.Distance(victim.healthComponent.body.corePosition, entity.body.corePosition) <= spreadRadius.Value)
                     {
                         // Skip if the entity was the victim itself to prevent them from receiving their own debuffs.
                         if(entity.body == victim.healthComponent.body) { continue; }
@@ -133,7 +134,7 @@ namespace RigsArsenal.Equipments
                         // Spread non-damaging debuffs.
                         foreach(var debuff in UniqueDebuffs)
                         {
-                            entity.body.AddTimedBuff(debuff.Item1, debuffDefaultDuration, debuff.Item2);
+                            entity.body.AddTimedBuff(debuff.Item1, debuffDuration.Value, debuff.Item2);
                         }
 
                         // Spread dots
@@ -162,7 +163,7 @@ namespace RigsArsenal.Equipments
             SpreadIndicator.GetComponent<NetworkedBodyAttachment>().AttachToGameObjectAndSpawn(victim.healthComponent.body.gameObject, null);
 
             var donut = SpreadIndicator.transform.GetChild(1); // 2nd child of the range indicator object controls the donut's visual properties.
-            donut.localScale = new Vector3(5f, 5f, 5f); // 50 unit radius to match the item's range.
+            donut.localScale = new Vector3(5f, 5f, 5f);
             donut.GetComponent<MeshRenderer>().material.SetColor("_TintColor", new Color(0.45f, 0.56f, 0f)); // Blue tint instead of red.
             donut.GetComponent<MeshRenderer>().material.SetFloat("_SoftFactor", 0.1f); // Soften the edges of the donut.
 
@@ -230,10 +231,18 @@ namespace RigsArsenal.Equipments
             };
         }
 
+        public override void AddConfigOptions()
+        {
+            equipCooldown = configFile.Bind("Nidus_Virus Config", "equipCooldown", 35, "Cooldown for this equipment.");
+            spreadRadius = configFile.Bind("Nidus_Virus Config", "spreadRadius", 50, "The spread radius in metres.");
+            debuffDuration = configFile.Bind("Nidus_Virus Config", "debuffDuration", 5, "Duration of all non-DOTs spread to enemies.");
+        }
+
+
         public IEnumerator DestroyIndicator(float duration, GameObject spreadIndicator)
         {
-            // Expands the donut for the duration of the spread effect dyamically over time, up to the maximum radius of 50 units.
-            // Does not affect the actual spread effect, just a visual indicator of the range.
+            // Expands the donut for the duration of the spread effect dyamically over time, up to the maximum radius of 50 units. (By default).
+            // Only acts as a visual indicator for the range, the spread effect is instant across the maximum radius.
 
             var donut = spreadIndicator.transform.GetChild(1);
 
@@ -249,7 +258,7 @@ namespace RigsArsenal.Equipments
                 {
                     yield break;
                 }
-                donut.localScale = Vector3.Lerp(originalScale, new Vector3(100f, 100f, 100f), counter / duration);
+                donut.localScale = Vector3.Lerp(originalScale, new Vector3(spreadRadius.Value * 2, spreadRadius.Value * 2, spreadRadius.Value * 2), counter / duration);
                 yield return null;
             }
 

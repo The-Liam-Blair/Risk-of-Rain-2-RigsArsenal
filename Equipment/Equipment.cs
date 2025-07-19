@@ -39,6 +39,7 @@ namespace RigsArsenal.Equipments
         /// </summary>
         public virtual void Init()
         {
+            AddConfigOptions();
             InitLang();
             CreateItem();
             SetupHooks();
@@ -146,5 +147,7 @@ namespace RigsArsenal.Equipments
 
         public abstract bool UseEquipment(EquipmentSlot slot);
         public virtual void SetupHooks() {}
+        public virtual void AddConfigOptions() { }
+
     }
 }

@@ -118,14 +118,15 @@ namespace RigsArsenal
                 }
             }
 
+            // Initialize the void pairings for void tier items.
             if(voidItems.Count > 0)
             {
                 SetupVoidItem(voidItems);
             }
 
 
+            // Similar to item implementation but for custom buffs.
             var Buffs = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Buff)));
-
             foreach (var buff in Buffs)
             {
                 Buff aBuff = (Buff)System.Activator.CreateInstance(buff);
@@ -134,8 +135,8 @@ namespace RigsArsenal
             }
 
 
+            // Similar to item implementation but for custom equipment.
             var theEquipment = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(Equipment)));
-
             foreach (var equipment in theEquipment)
             {
                 Equipment equip = (Equipment)System.Activator.CreateInstance(equipment);
@@ -153,7 +154,8 @@ namespace RigsArsenal
             }
 
 
-            
+
+            // Similar to item implementation but for custom DOTs.
             var DOTs = Assembly.GetExecutingAssembly().GetTypes().Where(type => !type.IsAbstract && type.IsSubclassOf(typeof(DOT)));
             foreach (var DOT in DOTs)
             {
@@ -270,8 +272,6 @@ namespace RigsArsenal
         /// </summary>
         public static void InflictCustomDot(CharacterBody attacker, CharacterBody victim, DOT dot, float damage)
         {
-            DebugLog.Log($"{attacker.name} is inflicting custom dot {dot.Name} on {victim.name} for {damage} damage.");
-
             switch(dot.dotName)
             {
                 case RigsArsenalDOTs.RazorLeechBleed:
