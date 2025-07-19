@@ -1,8 +1,9 @@
-﻿using System.Runtime.CompilerServices;
+﻿using BepInEx.Configuration;
 using Newtonsoft.Json.Linq;
 using R2API;
 using R2API.Utils;
 using RoR2;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -24,7 +25,7 @@ namespace RigsArsenal.Items.VoidItems
         public override string Name => "Razor Leeches";
         public override string NameToken => "RAZORLEECHES";
         public override string PickupToken => "Perforate foes by critically striking. Perforated enemies receive additional damage over time from attacks.<style=cIsVoid> Corrupts all Needle Rounds.";
-        public override string Description => "Critically striking an enemy<style=cIsDamage> perforates</style> them for <style=cIsUtility>2</style> <style=cStack>(+1 per stack)</style> seconds. <style=cIsDamage>Perforated</style> enemies receive <style=cIsUtility>20%</style> of incoming damage as<style=cIsDamage> additional damage over time</style>. <style=cIsVoid> Corrupts all Needle Rounds</style>.";
+        public override string Description => $"Critically striking an enemy<style=cIsDamage> perforates</style> them for <style=cIsUtility>{baseDuration.Value}</style> <style=cStack>(+{baseDurationPerStack.Value} per stack)</style> seconds. <style=cIsDamage>Perforated</style> enemies receive <style=cIsUtility>{damageScalar.Value * 100f}%</style> of incoming damage as<style=cIsDamage> additional damage over time</style>. <style=cIsVoid> Corrupts all Needle Rounds</style>.";
         public override string Lore => "";
 
         // TODO:
@@ -50,6 +51,10 @@ namespace RigsArsenal.Items.VoidItems
 
         public override ItemDef pureItemDef => ItemList.Find(x => x.NameToken == "NEEDLEROUNDS").itemDef; // Needle Rounds
 
+        private ConfigEntry<int> baseDuration;
+        private ConfigEntry<int> baseDurationPerStack;
+        public static ConfigEntry<float> damageScalar;
+
         public override void SetupHooks()
         {
             GlobalEventManager.onServerDamageDealt += (damageReport) =>
@@ -68,7 +73,8 @@ namespace RigsArsenal.Items.VoidItems
                     var victim = damageReport.victimBody;
                     if (!victim) { return; }
 
-                    victim.AddTimedBuff(ItemBuffDef, 2f + count, 1);
+                    // Base durations: 2 seconds + 1 second per stack.
+                    victim.AddTimedBuff(ItemBuffDef, baseDuration.Value + (count * baseDurationPerStack.Value), 1);
                 }
             };
                 
@@ -83,6 +89,13 @@ namespace RigsArsenal.Items.VoidItems
                     args.critAdd += 5f;
                 }
             };
+        }
+
+        public override void AddConfigOptions()
+        {
+            baseDuration = configFile.Bind("Razor_Leeches Config", "baseDuration", 2, "The base duration of the wound effect.");
+            baseDurationPerStack = configFile.Bind("Razor_Leeches Config", "baseDurationPerStack", 1, "The duration increase of the wound effect per stack.");
+            damageScalar = configFile.Bind("Razor_Leeches Config", "damageScalar", 0.2f, "The percentage of damage dealt that is applied as damage over time to the perforated enemy (0.2 = 20% of damage dealt).");
         }
 
         public override ItemDisplayRuleDict CreateItemDisplayRules()

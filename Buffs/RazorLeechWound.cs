@@ -1,4 +1,6 @@
 ﻿using RigsArsenal.DOTs;
+using RigsArsenal.Items;
+using RigsArsenal.Items.VoidItems;
 using RoR2;
 using UnityEngine;
 using static RigsArsenal.RigsArsenal;
@@ -15,6 +17,10 @@ namespace RigsArsenal.Buffs
 
         private DOT leechBleed = null;
 
+        // Base value of 0.2 (20% of damage dealt).
+        private float damageScalar = RazorLeeches.damageScalar.Value;
+
+
 
         public override void SetupHooks()
         {
@@ -27,22 +33,18 @@ namespace RigsArsenal.Buffs
                 if (!attacker || !attacker.inventory || !attacker.gameObject || !attacker.healthComponent) { return; }
 
 
-                if (leechBleed == null) { leechBleed = DOTList.Find(x => x.Name.Equals("RazorLeechBleed")); }
-
-                // Ignore damage types that are environmental or dots.
                 var damageInfo = damageReport.damageInfo;
 
-                // Ignore damage types that are environmental or dots.
-                if (damageInfo.damageType == DamageType.DoT
+                // Skip if the victim is not wounded, and ignore damage types that are environmental or dots.
+                if (!victim.HasBuff(buffDef)
+                    || damageInfo.damageType == DamageType.DoT
                     || damageInfo.damageType == DamageType.NonLethal
                     || damageInfo.damageType == DamageType.FallDamage
                     || damageInfo.damageType == DamageType.OutOfBounds) { return; }
 
                 // Inflict the DOT equal to 20% of the damage dealt.
-                if (victim.HasBuff(buffDef))
-                {
-                    RigsArsenal.InflictCustomDot(attacker, victim, leechBleed, damageInfo.damage * 0.2f);
-                }
+                leechBleed ??= DOTList.Find(x => x.Name.Equals("RazorLeechBleed"));
+                RigsArsenal.InflictCustomDot(attacker, victim, leechBleed, damageInfo.damage * damageScalar);
             };
         }
     }

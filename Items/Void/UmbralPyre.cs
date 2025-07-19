@@ -26,7 +26,7 @@ namespace RigsArsenal.Items.VoidItems
         public override string Name => "Umbral Pyre";
         public override string NameToken => "UMBRALPYRE";
         public override string PickupToken => "Damage and burn all nearby enemies once per second. <style=cIsVoid>Corrupts all Gasoline</style>.";
-        public override string Description => $"<style=cDeath>Burn</style> all enemies within <style=cIsUtility>{baseRange.Value + rangePerStack.Value}m</style> <style=cStack>(+{rangePerStack.Value}m per stack)</style> for <style=cIsDamage>{explosionDamage.Value*100f}%</style> base damage, and <style=cIsDamage>ignite</style> them for <style=cIsDamage>{burnDamage.Value*100f}%</style> <style=cStack>(+{burnDamage.Value*100f}% per stack)</style> base damage. Occurs <style=cIsUtility>{explosionsPerSecond.Value}</style> per second. <style=cIsVoid>Corrupts all Gasoline</style>.";
+        public override string Description => $"<style=cDeath>Burn</style> all enemies within <style=cIsUtility>{baseRange.Value + rangePerStack.Value}m</style> <style=cStack>(+{rangePerStack.Value}m per stack)</style> for <style=cIsDamage>{explosionDamage.Value*100f}%</style> base damage, and <style=cIsDamage>ignite</style> them for <style=cIsDamage>{burnDamage.Value*100f}%</style> <style=cStack>(+{burnDamage.Value*100f}% per stack)</style> base damage. Triggers <style=cIsUtility>{explosionsPerSecond.Value}</style> times per second. <style=cIsVoid>Corrupts all Gasoline</style>.";
         public override string Lore => "<style=cMono>========================================\r\n====   MyBabel Machine Translator   ====\r\n====     [Version 15.01.3.000 ]   ======\r\n========================================\r\nTraining... <1000000000 cycles>\r\nTraining... <1000000000 cycles>\r\nTraining... <4054309 cycles>\r\nComplete!\r\nDisplay result? Y/N\r\nY\r\n========================================</style>\r\n\r\n<style=cIsVoid>Imperfect design. Uncontrolled. Prone to friendly fire. Human design, of course.\r\n\r\nImprove. Remove the redundant elements. The base form enables its power, unsuppressed.\r\n\r\nIt knows. Friend and foe. Teach and inform, it will listen, and it will only hurt the opposition.\r\n\r\nReplicate. The air holds enough mass to enable replication. It will continue unhindered.\r\n\r\nHuman design, made perfect.\r\n\r\nGo now, and spread our message. Knowledge through disintegration.</style>";
 
         public override ItemTier Tier => ItemTier.VoidTier1;
@@ -50,114 +50,11 @@ namespace RigsArsenal.Items.VoidItems
 
         public override ItemDef pureItemDef => RoR2Content.Items.IgniteOnKill; // Gasoline
 
+        
+        /// Implementation uses an item body behaviour [<see cref="UmbralPyreItemBehaviour">] instead of a hook
         /*
         public override void SetupHooks()
-        {         
-            On.RoR2.CharacterBody.FixedUpdate += (orig, self) =>
-            {
-                orig(self);
-
-                if(!Run.instance || !self || !self.inventory) { return; }
-
-                var count = self.inventory.GetItemCount(itemDef);
-
-                // If the player has no stacks of this item, remove the timer component (if one exists).
-                if (count <= 0) 
-                {
-                    if (timer)
-                    {
-                        GameObject.Destroy(timer);
-                        timer = null;
-                        timerStart = 1f;
-                    }
-                    return; 
-                }
-
-                if(!timer)
-                {
-                    DebugLog.Log($"Timer start ({timerStart}) set to {1f/explosionsPerSecond.Value}.");
-                    // Component that holds a timer to track the cooldown of each explosion.
-                    timer = self.gameObject.AddComponent<PyreTimer>();
-                    timerStart = 1f / explosionsPerSecond.Value;
-                    DebugLog.Log($"Umbral Pyre timer set to {timerStart} seconds per explosion.");
-                }
-
-                if (timer.timer <= 0f)
-                {
-                    DebugLog.Log($"Umbral Pyre explosion triggered with seconds = {timer.timer}.");
-                    timer.timer = timerStart;
-
-                    DebugLog.Log($"Resetting timer to {timer.timer} seconds.");
-
-                    // 8m + 1m per stack (Base values).
-                    var radius = baseRange.Value + (count * rangePerStack.Value);
-
-                    // Damage of each "explosion" is 100% of the user's damage (Base values).
-                    var explosiveDamage = self.damage * explosionDamage.Value;
-
-                    // Damage of the DOT is 75% (+75% per stack) of the user's damage (Base values).
-                    var DOTDamage = self.damage * burnDamage.Value * count;
-
-                    var pos = self.corePosition;
-
-                    // Borrowing the implementation of the igniteOnKill (gasoline) proc activation function:
-
-                    // Get all non-friendly entities within the calculated radius.
-                    SphereSearch igniteOnKillSphereSearch = new SphereSearch();
-
-                    GlobalEventManager.igniteOnKillSphereSearch.origin = pos;
-                    GlobalEventManager.igniteOnKillSphereSearch.mask = LayerIndex.entityPrecise.mask;
-                    GlobalEventManager.igniteOnKillSphereSearch.radius = radius;
-                    GlobalEventManager.igniteOnKillSphereSearch.RefreshCandidates();
-                    GlobalEventManager.igniteOnKillSphereSearch.FilterCandidatesByHurtBoxTeam(TeamMask.GetUnprotectedTeams(self.teamComponent.teamIndex));
-                    GlobalEventManager.igniteOnKillSphereSearch.FilterCandidatesByDistinctHurtBoxEntities();
-                    GlobalEventManager.igniteOnKillSphereSearch.OrderCandidatesByDistance();
-                    GlobalEventManager.igniteOnKillSphereSearch.GetHurtBoxes(GlobalEventManager.igniteOnKillHurtBoxBuffer);
-                    GlobalEventManager.igniteOnKillSphereSearch.ClearCandidates();
-
-                    // For each entity found, apply the burn DOT.
-                    for (int i = 0; i < GlobalEventManager.igniteOnKillHurtBoxBuffer.Count; i++)
-                    {
-                        HurtBox hurtBox = GlobalEventManager.igniteOnKillHurtBoxBuffer[i];
-                        if (hurtBox.healthComponent)
-                        {
-                            RigsArsenal.InflictDot(self, hurtBox.healthComponent.body, DotController.DotIndex.Burn, DOTDamage);
-                        }
-                    }
-
-                    // Generate the explosion damage.
-                    new BlastAttack
-                    {
-                        radius = radius,
-                        baseDamage = explosiveDamage,
-                        procCoefficient = 0f,
-                        crit = Util.CheckRoll(self.crit, self.master),
-                        damageColorIndex = DamageColorIndex.Item,
-                        attackerFiltering = AttackerFiltering.Default,
-                        falloffModel = BlastAttack.FalloffModel.None,
-                        attacker = self.gameObject,
-                        teamIndex = self.teamComponent.teamIndex,
-                        position = pos
-                    }.Fire();
-
-                    // Create the visual effect of the explosion.
-                    // Explosion vfx is not created if its disabled in the config or if no targets were hit.
-                    // TODO: Custom visual effects.
-                    if (RigsArsenal.EnableUmbralPyreVFX.Value && GlobalEventManager.igniteOnKillHurtBoxBuffer.Count > 0)
-                    {
-                        EffectManager.SpawnEffect(GlobalEventManager.CommonAssets.igniteOnKillExplosionEffectPrefab, new EffectData
-                        {
-                            origin = pos,
-                            scale = radius,
-                            rotation = Util.QuaternionSafeLookRotation(Vector3.up)
-                        }, true);
-                    }
-
-                    GlobalEventManager.igniteOnKillHurtBoxBuffer.Clear();
-                }
-            };
-                
-        }
+        {}
         */
 
         public override void AddConfigOptions()
@@ -352,7 +249,7 @@ namespace RigsArsenal.Items.VoidItems
     }
 
     /// <summary>
-    /// Item body behaviour that controls the "explosions" of the Umbral Pyre item. Essentially the implementation of the item.
+    /// Item body behaviour that controls the "explosions" of the Umbral Pyre item. The implementation of the item.
     /// </summary>
     public class UmbralPyreItemBehaviour : BaseItemBodyBehavior
     {
@@ -389,8 +286,6 @@ namespace RigsArsenal.Items.VoidItems
                 var radius = UmbralPyre.baseRange.Value + (UmbralPyre.rangePerStack.Value * stack);
                 var explosionDamage = body.damage * UmbralPyre.explosionDamage.Value;
                 var DOTDamage = body.damage * UmbralPyre.burnDamage.Value * stack;
-
-                DebugLog.Log($"Damage: {explosionDamage}, DOT Damage: {DOTDamage}, Radius: {radius}");
 
 
                 // Borrowing the implementation of the igniteOnKill (gasoline) proc activation function:
