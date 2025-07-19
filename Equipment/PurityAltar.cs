@@ -12,6 +12,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using static RigsArsenal.RigsArsenal;
 using static RoR2.MasterSpawnSlotController;
+using BepInEx.Configuration;
 
 namespace RigsArsenal.Equipments
 {
@@ -28,13 +29,16 @@ namespace RigsArsenal.Equipments
 
         public override bool isLunar => true;
 
-        public override float cooldown => 45f;
+        public override float cooldown => equipCooldown.Value;
 
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("PurityAltar.png");
         public override GameObject Model => MainAssets.LoadAsset<GameObject>("PurityAltar.prefab");
 
         public override float minViewport => 3f;
         public override float maxViewport => 5f;
+
+        private ConfigEntry<int> equipCooldown;
+        private ConfigEntry<bool> angryMithrix;
 
 
         private List<Tuple<ItemDef, ItemDef>> validItems;
@@ -119,7 +123,8 @@ namespace RigsArsenal.Equipments
             // Modifying the item conversion notification, indicate to the player what item was destroyed, with additional flavour text.
             var consumeItem = ItemList.Find(x => x.NameToken == "PURITYALTARCONSUME").itemDef;
 
-            var mithrixResponse = SetPurityAltarConsumeFlavourText();
+            // Pass in the tier for bonus flavour text for legendary items.
+            var mithrixResponse = SetPurityAltarConsumeFlavourText(ItemCatalog.GetItemDef(deadItem).tier);
 
             consumeItem.pickupToken = mithrixResponse;
 
@@ -153,10 +158,51 @@ namespace RigsArsenal.Equipments
             };
         }
 
-        private string SetPurityAltarConsumeFlavourText()
+        public override void AddConfigOptions()
         {
-            string[] MithrixResponses = new string[]
+            equipCooldown = configFile.Bind("Altar_Of_Purity Config", "equipCooldown", 45, "Cooldown for this equipment.");
+            angryMithrix = configFile.Bind("Altar_Of_Purity Config", "angryMithrix", false, "When enabled, Mithrix will use more non-vulgar aggressive and sarcastic taunts when sacrificing items. Disable for more generic sacrifice dialogue.");
+        }
+
+        private string SetPurityAltarConsumeFlavourText(ItemTier tier)
+        {
+            string[] MithrixResponses;
+
+            // Angry mithrix is true: Use more aggressive/sarcastic taunts as well as a couple game references.
+            if (angryMithrix.Value)
             {
+                // If the sacrificed item was a legendary, instead use a more tailored set of responses to really salt the wound.
+                if (tier == ItemTier.Tier3 || tier == ItemTier.VoidTier3)
+                {
+                    MithrixResponses = new string[]
+                    {
+                        "<style=cIsUtility>You call that a sacrifice? I call it a tribute.</style>",
+                        "<style=cIsUtility>An offering worthy of a king.</style>",
+                        "<style=cIsUtility>What a waste of a legendary item.</style>",
+                        "<style=cIsUtility>One does not pawn divinity and escape mockery.</style>"
+                    };
+                }
+                else
+                {
+                    MithrixResponses = new string[]
+                    {
+                    "<style=cLunarObjective>Oops... was that one important?</style>",
+                    "<style=cLunarObjective>One step forward, ten steps back.</style>",
+                    "<style=cLunarObjective>Two words my friend: No refunds!</style>",
+                    "<style=cLunarObjective>I'll always take items you don't need.</style>",
+                    "<style=cDeath>I see you..!</style>",
+                    "<style=cLunarObjective>Come for a fight? Oh, should have dressed for a funeral!</style>",
+                    "<style=cLunarObjective>Did you really think I would let you keep that?</style>",
+                    "<style=cLunarObjective>What are you without your baubles and trinkets?</style>"
+                    };
+                }
+            }
+
+            // Angry Mithrix is false: Use more neutral taunts.
+            else
+            {
+                MithrixResponses = new string[]
+                {
                 "<style=cLunarObjective>You only grow my power.</style>",
                 "<style=cLunarObjective>I draw closer.</style>",
                 "<style=cLunarObjective>My strength grows.</style>",
@@ -164,7 +210,9 @@ namespace RigsArsenal.Equipments
                 "<style=cLunarObjective>You will perish.</style>",
                 "<style=cLunarObjective>I am your end.</style>", // DHUUMS GAZE FALLS ON ME
                 "<style=cLunarObjective>Surrender in body and spirit.</style>",
-            };
+                "<style=cLunarObjective>Yes, stare into the altar... let it take you.</style>"
+                };
+            }
 
             var result = MithrixResponses[UnityEngine.Random.Range(0, MithrixResponses.Length)];
             return result;
