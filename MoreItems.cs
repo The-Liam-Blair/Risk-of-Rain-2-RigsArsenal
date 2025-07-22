@@ -163,6 +163,12 @@ namespace RigsArsenal
                 aDot.Init();
                 DOTList.Add(aDot);
             }
+
+            var harmony = new Harmony(P_GUID);
+            var targetMethod = AccessTools.Method(typeof(RoR2.HealthComponent), "TakeDamage");
+            var prefix = typeof(DissonantEdge).GetMethod("DissonantEdgeScaleDamage", BindingFlags.Public | BindingFlags.Static);
+
+            harmony.Patch(targetMethod, prefix: new HarmonyMethod(prefix));
         }
 
         //Spawn all items for debugging purposes

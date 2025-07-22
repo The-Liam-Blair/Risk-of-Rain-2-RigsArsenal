@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 631693551
+CRC: 4189777403
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b508a37ba382a3a82744a0450e01f092
+    Hash: 6822d6d818d85115e72d0ac267687b8c
   TypeTreeHash:
     serializedVersion: 2
     Hash: a7a21288fe2bd6ae3724c7054e7a1302
@@ -29,12 +29,14 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
+- Assets/Materials/Item/RazorLeeches/M_Skin.mat
 - Assets/Materials/Item/ChaosRune/ChaosRune.png
 - Assets/Materials/Item/CoolantPack/M_Button.mat
 - Assets/Materials/Item/DissonantEdge/M_Hilt.mat
 - Assets/Materials/Item/WristMountedShotgun/M_DeepBlack.mat
 - Assets/Materials/Item/KineticBattery/M_Body.mat
 - Assets/Materials/Item/UmbralPyre/UmbralPyre.png
+- Assets/Prefabs/Item/RazorLeeches/RazorLeeches.prefab
 - Assets/Materials/Equipment/NidusVirus/M_VirusStem.mat
 - Assets/Materials/Equipment/PurityAltar/OfferingPit.png
 - Assets/Prefabs/Item/WornOutStimpack/WornOutStimpack.prefab
@@ -91,6 +93,7 @@ Assets:
 - Assets/Materials/Item/BountyHunterBadge/YellowTex2.png
 - Assets/Materials/Equipment/NidusVirus/M_Casing.mat
 - Assets/Prefabs/Item/KineticBattery/KineticBattery.blend
+- Assets/Materials/Item/RazorLeeches/M_Teeth.mat
 - Assets/Materials/Item/ReactiveArmourPlate/ArmourTex.png
 - Assets/Materials/Item/BountyHunterBadge/BackingTex.png
 - Assets/Materials/Item/WornOutStimpack/M_StimFluid.mat
@@ -158,7 +161,9 @@ Assets:
 - Assets/Materials/Item/BountyHunterBadge/M_Gray.mat
 - Assets/Materials/Item/BountyHunterBadge/BountyHunterBadge.png
 - Assets/Materials/Item/DissonantEdge/M_Glow.mat
+- Assets/Materials/Item/RazorLeeches/M_InnerMouth.mat
 - Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.prefab
+- Assets/Materials/Item/RazorLeeches/M_VoidString.mat
 - Assets/Materials/Item/BountyHunterBadge/scratchTex.png
 - Assets/Materials/Equipment/PurityAltar/M_Void.mat
 - Assets/Prefabs/Equipment/PurityAltar/PurityAltar.blend

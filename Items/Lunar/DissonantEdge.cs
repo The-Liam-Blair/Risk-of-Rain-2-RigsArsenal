@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
 using static RigsArsenal.RigsArsenal;
+using HarmonyLib;
 
 namespace RigsArsenal.Items
 {
@@ -38,11 +39,20 @@ namespace RigsArsenal.Items
         public override float minViewport => 2f;
         public override float maxViewport => 3f;
 
-        ConfigEntry<float> damageIncrease;
-        ConfigEntry<float> damageDecrease;
+        private static ConfigEntry<float> damageIncrease;
+        private static ConfigEntry<float> damageDecrease;
+
+        private static ItemDef staticItemDef;
+
+        public override void CreateItem()
+        {
+            base.CreateItem();
+            staticItemDef = itemDef;
+        }
 
         public override void SetupHooks()
-        {         
+        {
+            /*
             On.RoR2.HealthComponent.TakeDamage += (orig, self, damageInfo) =>
             {
                 if (!damageInfo.attacker || 
@@ -86,7 +96,48 @@ namespace RigsArsenal.Items
 
                 orig(self, damageInfo);
             };
-            
+            */
+
+        }
+
+        public static bool DissonantEdgeScaleDamage(RoR2.HealthComponent __instance, DamageInfo damageInfo)
+        {
+            if (!damageInfo.attacker ||
+            damageInfo.damageType == DamageType.DoT || damageInfo.damageType == DamageType.NonLethal || damageInfo.damageType == DamageType.BypassBlock)
+            {
+                return true;
+            }
+
+            if ( !__instance  || !__instance.body || !__instance.body.inventory)
+            {
+                return true;
+            }
+
+            var attacker = damageInfo.attacker.GetComponent<CharacterBody>();
+            if (!attacker || !attacker.inventory || !attacker.healthComponent)
+            {
+                return true;
+            }
+
+            var count = attacker.inventory.GetItemCount(staticItemDef);
+            if (count <= 0)
+            {
+                return true;
+            }
+
+            var attackerHealth = attacker.healthComponent.combinedHealthFraction;
+            var victimHealth = __instance.combinedHealthFraction;
+
+            // Damage modifier of the attack increases by 10% per stack (With base values) if the attacker has more health than the victim.
+            // Damage modifier of the attack decreases by 25% (With base values) if the attacker has less health than the victim, regardless of stack count.
+            var damageScalar = 1f + (attackerHealth >= victimHealth ? damageIncrease.Value * count : -damageDecrease.Value);
+
+            damageInfo.damage *= damageScalar;
+
+            // Prevent negative and zero damage, the minimum damage is 1.
+            if (damageInfo.damage <= 1f) { damageInfo.damage = 1f; }
+
+            return true;
         }
 
         public override void AddConfigOptions()
