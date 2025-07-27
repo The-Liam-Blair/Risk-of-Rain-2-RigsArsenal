@@ -235,7 +235,7 @@ namespace RigsArsenal
                 case DotIndex.Burn:
                 //case DotIndex.StrongerBurn:
                     InflictDotInfo burnDot = new InflictDotInfo()
-                    {                        
+                    {
                         victimObject = victim.gameObject,
                         attackerObject = attacker.gameObject,
                         totalDamage = new float?(damage),
