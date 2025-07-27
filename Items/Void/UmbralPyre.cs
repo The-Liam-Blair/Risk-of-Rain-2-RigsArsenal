@@ -9,6 +9,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Diagnostics;
+using UnityEngine.Networking;
 using UnityEngine.UIElements;
 using static RigsArsenal.RigsArsenal;
 using static UnityEngine.UI.Image;
@@ -50,7 +51,34 @@ namespace RigsArsenal.Items.VoidItems
 
         public override ItemDef pureItemDef => RoR2Content.Items.IgniteOnKill; // Gasoline
 
-        
+        public static GameObject flameVFX;
+
+        public override void Init()
+        {
+            base.Init();
+
+            var explosionTex = MainAssets.LoadAsset<Texture2D>("ExplosionTexRamp2.png");
+
+            // Grab a copy of the gasoline explosion vfx for modification for umbral pyre.
+            var origFlameVFX = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/IgniteOnKill/IgniteExplosionVFX.prefab").WaitForCompletion();
+            flameVFX = origFlameVFX.InstantiateClone("UmbralPyreExplosionVFX", true);
+
+            var psRenderer = flameVFX.transform.GetChild(0).GetComponent<ParticleSystemRenderer>();
+            var explosionMat = Object.Instantiate(psRenderer.sharedMaterial);
+
+            explosionMat.SetFloat("_Boost", 15f); // Set brightness boost to 15.
+            explosionMat.SetFloat("_InvFade", 0f); // Set Soft Factor to 0.
+            explosionMat.SetFloat("_AlphaBoost", 2f); // Set Alpha Boost to 2.
+            explosionMat.SetFloat("_AlphaBias", 0.5f); // Set Alpha Bias to 0.5.
+            explosionMat.SetTexture("_RemapTex", explosionTex); // Override Color Remap Ramp to custom explosion vfx.
+
+            psRenderer.sharedMaterial = explosionMat; // Assign the new material to the particle system renderer.
+
+            flameVFX.AddComponent<NetworkIdentity>();
+
+            ContentAddition.AddEffect(flameVFX);
+        }
+
         /// Implementation uses an item body behaviour [<see cref="UmbralPyreItemBehaviour">] instead of a hook
         /*
         public override void SetupHooks()
@@ -277,7 +305,6 @@ namespace RigsArsenal.Items.VoidItems
             if (timer <= 0f)
             {
                 timer = timerStart;
-                var item = RigsArsenal.ItemList.Find(x => x.NameToken == "UMBRALPYRE") as UmbralPyre;
 
                 // Item stats (With base values):
                 // Radius: 7m + 1m per stack
@@ -285,7 +312,7 @@ namespace RigsArsenal.Items.VoidItems
                 // Burn DOT damage: 75% of the user's damage + 75% per stack
                 var radius = UmbralPyre.baseRange.Value + (UmbralPyre.rangePerStack.Value * stack);
                 var explosionDamage = body.damage * UmbralPyre.explosionDamage.Value;
-                var DOTDamage = body.damage * UmbralPyre.burnDamage.Value * stack;
+                float DOTDamage = body.damage * UmbralPyre.burnDamage.Value * stack;
 
 
                 // Borrowing the implementation of the igniteOnKill (gasoline) proc activation function:
@@ -330,10 +357,12 @@ namespace RigsArsenal.Items.VoidItems
 
                 // Create the visual effect of the explosion.
                 // Explosion vfx is not created if its disabled in the config or if no targets were hit.
-                // TODO: Custom visual effects.
                 if (RigsArsenal.EnableUmbralPyreVFX.Value && GlobalEventManager.igniteOnKillHurtBoxBuffer.Count > 0)
                 {
-                    EffectManager.SpawnEffect(GlobalEventManager.CommonAssets.igniteOnKillExplosionEffectPrefab, new EffectData
+                    var psRenderer = UmbralPyre.flameVFX.transform.GetChild(0).GetComponent<ParticleSystemRenderer>();
+                    Debug.Log($"[UmbralPyre] Spawning VFX: {UmbralPyre.flameVFX.name}, Mat: {psRenderer.sharedMaterial.name}, Boost: {psRenderer.sharedMaterial.GetFloat("_Boost")}");
+
+                    EffectManager.SpawnEffect(UmbralPyre.flameVFX, new EffectData
                     {
                         origin = body.corePosition,
                         scale = radius,

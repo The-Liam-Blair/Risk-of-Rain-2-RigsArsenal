@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 4189777403
+CRC: 781159971
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 6822d6d818d85115e72d0ac267687b8c
+    Hash: 448d275245567093c9a621199e10f085
   TypeTreeHash:
     serializedVersion: 2
     Hash: a7a21288fe2bd6ae3724c7054e7a1302
@@ -92,6 +92,7 @@ Assets:
 - Assets/Materials/Item/KineticBattery/its texturin time.png
 - Assets/Materials/Item/BountyHunterBadge/YellowTex2.png
 - Assets/Materials/Equipment/NidusVirus/M_Casing.mat
+- Assets/Materials/Item/UmbralPyre/ExplosionTexRamp2.png
 - Assets/Prefabs/Item/KineticBattery/KineticBattery.blend
 - Assets/Materials/Item/RazorLeeches/M_Teeth.mat
 - Assets/Materials/Item/ReactiveArmourPlate/ArmourTex.png
@@ -152,6 +153,7 @@ Assets:
 - Assets/Materials/Item/DissonantEdge/M_Guard.mat
 - Assets/Materials/Item/ReactiveArmourPlate/ReactiveArmourPlatingBuff.png
 - Assets/Materials/Equipment/SanguineShieldBattery/M_BatteryShine.mat
+- Assets/Materials/Item/UmbralPyre/ExplosionTexRamp.png
 - Assets/Materials/Item/DissonantEdge/energyGlow.png
 - Assets/Materials/Equipment/NidusVirus/M_TextBacking.mat
 - Assets/Prefabs/Item/UmbralPyre/UmbralPyre.prefab

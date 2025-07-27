@@ -41,8 +41,6 @@ namespace RigsArsenal.DOTs
 
         public virtual void CreateDOT()
         {
-            DebugLog.Log("Creating DOT: " + Name);
-
             // Create buff definition for the DOT.
             buffDef = ScriptableObject.CreateInstance<BuffDef>();
 

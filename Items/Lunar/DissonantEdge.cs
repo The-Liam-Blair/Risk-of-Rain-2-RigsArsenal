@@ -23,7 +23,7 @@ namespace RigsArsenal.Items
         public override string Name => "Dissonant Edge";
         public override string NameToken => "DISSONANTEDGE";
         public override string PickupToken => "Increased damage to foes with a lower health percentage. <style=cIsHealth> Reduced damage to foes with a higher health percentage.</style>";
-        public override string Description => $"<style=cIsDamage>All attacks</style> deal +{damageIncrease.Value*100f}% <style=cStack>(+{damageIncrease.Value*100f}% per stack)</style> more damage if the target's <style=cIsUtility>current health percentage is lower than yours</style>. <style=cIsHealth>All attacks deal {damageDecrease.Value*100f}% <style=cDeath>REDUCED</style> damage if the target's current health percentage is higher than yours.</style>";
+        public override string Description => $"<style=cIsDamage>All attacks</style> deal +{damageIncrease.Value*100f}% <style=cStack>(+{damageIncrease.Value*100f}% per stack)</style> increased damage if the target's <style=cIsUtility>current health percentage is lower than yours</style>. <style=cIsHealth>All attacks deal {damageDecrease.Value*100f}% <style=cDeath>REDUCED</style> damage if the target's current health percentage is higher than yours.</style>";
         public override string Lore => "<style=cLunarObjective>These creatures are imperfect. A flawed design. Unstable, temperamental, yet fragile.\n\nMy constructs are streamlined. Deadly, efficient, yet simple.\n\nWhy can't He see that? Is he so blinded by love? He is a fool. But one day He will see, and He will understand.</style>";
 
         public override ItemTier Tier => ItemTier.Lunar;
@@ -50,58 +50,12 @@ namespace RigsArsenal.Items
             staticItemDef = itemDef;
         }
 
-        public override void SetupHooks()
+        /// <summary>
+        /// Dissonent Edge implementation. Called via CharacterBody.TakeDamage as a Harmony prefix patch. (Called before the original method).
+        /// </summary>
+        public static bool TakeDamagePatch(RoR2.HealthComponent __instance, DamageInfo damageInfo)
         {
-            /*
-            On.RoR2.HealthComponent.TakeDamage += (orig, self, damageInfo) =>
-            {
-                if (!damageInfo.attacker || 
-                damageInfo.damageType == DamageType.DoT || damageInfo.damageType == DamageType.NonLethal || damageInfo.damageType == DamageType.BypassBlock) 
-                {
-                    orig(self, damageInfo); 
-                    return; 
-                }
-
-                if (!self || !self.body || !self.body.inventory) 
-                { 
-                    orig(self, damageInfo); 
-                    return; 
-                }
-
-                var attacker = damageInfo.attacker.GetComponent<CharacterBody>();
-                if (!attacker || !attacker.inventory || !attacker.healthComponent)
-                {
-                    orig(self, damageInfo); 
-                    return; 
-                }
-
-                var count = attacker.inventory.GetItemCount(itemDef);
-                if (count <= 0) 
-                {
-                    orig(self, damageInfo); 
-                    return; 
-                }
-
-                var attackerHealth = attacker.healthComponent.combinedHealthFraction;
-                var victimHealth = self.combinedHealthFraction;
-
-                // Damage modifier of the attack increases by 10% per stack (With base values) if the attacker has more health than the victim.
-                // Damage modifier of the attack decreases by 25% (With base values) if the attacker has less health than the victim, regardless of stack count.
-                var damageScalar = 1f + (attackerHealth >= victimHealth ? damageIncrease.Value * count : -damageDecrease.Value);
-
-                damageInfo.damage *= damageScalar;
-
-                // Prevent negative and zero damage, the minimum damage is 1.
-                if(damageInfo.damage <= 1f) { damageInfo.damage = 1f; }
-
-                orig(self, damageInfo);
-            };
-            */
-
-        }
-
-        public static bool DissonantEdgeScaleDamage(RoR2.HealthComponent __instance, DamageInfo damageInfo)
-        {
+            // Skip invalid damage types (DOTs and damage that are neutral and don't have an attacker such as fall damage and void fog).
             if (!damageInfo.attacker ||
             damageInfo.damageType == DamageType.DoT || damageInfo.damageType == DamageType.NonLethal || damageInfo.damageType == DamageType.BypassBlock)
             {

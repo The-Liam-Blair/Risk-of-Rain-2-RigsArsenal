@@ -164,9 +164,10 @@ namespace RigsArsenal
                 DOTList.Add(aDot);
             }
 
+            // Initialise Harmony and patch the dissonant edge damage modification implementation.
             var harmony = new Harmony(P_GUID);
             var targetMethod = AccessTools.Method(typeof(RoR2.HealthComponent), "TakeDamage");
-            var prefix = typeof(DissonantEdge).GetMethod("DissonantEdgeScaleDamage", BindingFlags.Public | BindingFlags.Static);
+            var prefix = typeof(DissonantEdge).GetMethod("TakeDamagePatch", BindingFlags.Public | BindingFlags.Static);
 
             harmony.Patch(targetMethod, prefix: new HarmonyMethod(prefix));
         }
@@ -234,12 +235,12 @@ namespace RigsArsenal
                 case DotIndex.Burn:
                 //case DotIndex.StrongerBurn:
                     InflictDotInfo burnDot = new InflictDotInfo()
-                    {
-                        attackerObject = attacker.gameObject,
+                    {                        
                         victimObject = victim.gameObject,
-                        totalDamage = damage,
-                        damageMultiplier = 1f,
-                        dotIndex = DotIndex.Burn
+                        attackerObject = attacker.gameObject,
+                        totalDamage = new float?(damage),
+                        dotIndex = DotController.DotIndex.Burn,
+                        damageMultiplier = 1f
                     };
 
                     // If user has an igntion tank, upgrade the dot into a stronger burn.
