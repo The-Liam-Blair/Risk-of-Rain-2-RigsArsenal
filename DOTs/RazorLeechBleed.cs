@@ -18,7 +18,7 @@ namespace RigsArsenal.DOTs
 
         public override Color BuffColor => Color.white;
 
-        public override Sprite Icon => null;
+        public override Sprite Icon => MainAssets.LoadAsset<Sprite>("WoundBleed.png");
 
         public override float dotDamageCoefficient => 1f;
 

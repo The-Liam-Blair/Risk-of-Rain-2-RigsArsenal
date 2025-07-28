@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 817888717
+CRC: 2919717972
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 1af64e2aac13f1bee8d52c288c405d8e
+    Hash: 6f69d8e58a0c4f7300119cc3046f54b0
   TypeTreeHash:
     serializedVersion: 2
     Hash: a7a21288fe2bd6ae3724c7054e7a1302
@@ -83,6 +83,7 @@ Assets:
 - Assets/Materials/Item/WristMountedShotgun/Strap.png
 - Assets/Prefabs/Item/WornOutStimpack/WornOutStimpack.blend
 - Assets/Materials/Item/DissonantEdge/M_Addons3.mat
+- Assets/Materials/Item/RazorLeeches/WoundBleed.png
 - Assets/Materials/modIcon.png
 - Assets/Materials/Item/KineticBattery/M_Screw.mat
 - Assets/Materials/Equipment/SanguineShieldBattery/flowmapnormals.png
@@ -106,18 +107,20 @@ Assets:
 - Assets/Prefabs/Item/DissonantEdge/DissonantEdge.prefab
 - Assets/Materials/Item/NeedleRounds/M_BulletBase.mat
 - Assets/Prefabs/Equipment/NidusVirus/Virus.prefab
+- Assets/Materials/Item/RazorLeeches/WoundStatus.png
 - Assets/Materials/Equipment/SanguineShieldBattery/M_Crystal3.mat
 - Assets/Prefabs/Item/WristMountedShotgun/WristMountedShotgun.blend
 - Assets/Materials/Item/WristMountedShotgun/M_RedDotSight.mat
 - Assets/Materials/Item/KineticBattery/KineticBattery.PNG
-- Assets/Materials/Item/UmbralPyre/M_Casing.mat
+- Assets/Materials/Item/RazorLeeches/RazorLeeches.png
 - Assets/Materials/Item/NeedleRounds/NeedleRounds.png
 - Assets/Materials/Item/Outlines/M_Invisible-Outline.mat
 - Assets/Prefabs/Item/ChaosRune/ChaosRune.blend
 - Assets/Materials/Equipment/SanguineShieldBattery/M_MetalFixtures.mat
 - Assets/Prefabs/Item/PrimordialChunk/PrimordialChunk.blend
-- Assets/Materials/Equipment/SanguineShieldBattery/M_Crystal.mat
+- Assets/Materials/Item/UmbralPyre/M_Casing.mat
 - Assets/Materials/Item/WornOutStimpack/M_DepletedStim.mat
+- Assets/Materials/Equipment/SanguineShieldBattery/M_Crystal.mat
 - Assets/Prefabs/Item/BountyHunterBadge/BountyHunterBadge.blend
 - Assets/Materials/Item/BountyHunterBadge/M_Black.mat
 - Assets/Prefabs/Equipment/NidusVirus/NidusVirus.blend

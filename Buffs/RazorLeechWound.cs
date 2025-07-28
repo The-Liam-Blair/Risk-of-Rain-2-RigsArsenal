@@ -13,7 +13,7 @@ namespace RigsArsenal.Buffs
         public override bool canStack => false;
         public override bool isDebuff => true;
         public override Color BuffColor => Color.white;
-        public override Sprite Icon => null;
+        public override Sprite Icon => MainAssets.LoadAsset<Sprite>("WoundStatus.png");
 
         private DOT leechBleed = null;
 
