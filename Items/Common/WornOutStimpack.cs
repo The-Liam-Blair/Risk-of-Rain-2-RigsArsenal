@@ -45,36 +45,6 @@ namespace RigsArsenal.Items
 
         public override void SetupHooks()
         {
-            // If entity takes damage that drops their health below the low health threshold, add the buff.
-            // Buff is refreshed if it's currently active.
-            /*
-            On.RoR2.HealthComponent.TakeDamage +=
-                (orig, self, damageInfo) =>
-                {
-                    orig(self, damageInfo);
-                    if(!self) { return; }
-
-                    var body = self.body;
-                    if (!body || !body.inventory) { return; }
-
-                    var count = body.inventory.GetItemCount(itemDef);
-                    if(count <= 0) { return; }
-
-                    if(body.healthComponent.health >= body.healthComponent.fullHealth * 0.5f) { return; }
-
-                    // Add buff for 5 second duration. If buff already exists, refresh the duration.
-                    if (body.GetBuffCount(ItemBuffDef) <= 0)
-                    {
-                        body.AddTimedBuff(ItemBuffDef, 5f);
-                    }
-                    else
-                    {
-                        body.ClearTimedBuffs(ItemBuffDef);
-                        body.AddTimedBuff(ItemBuffDef, 5f);
-                    }
-                };
-            */
-
             // todo: investigate when characterBody.recalculatestats fires, perform buff application logic in there instead of checking all instances of damage and healing?
             GlobalEventManager.onServerDamageDealt += (damageReport) =>
             {
@@ -124,6 +94,7 @@ namespace RigsArsenal.Items
 
                 return orig(self, amount, mask, regen);
             };
+
 
             // Item increases movement speed by 10% and health regen by 0.5 per stack. (Base values)
             R2API.RecalculateStatsAPI.GetStatCoefficients += (self, args) =>

@@ -161,7 +161,7 @@ namespace RigsArsenal.Equipments
         public override void AddConfigOptions()
         {
             equipCooldown = configFile.Bind("Altar_Of_Purity Config", "equipCooldown", 45, "Cooldown for this equipment.");
-            angryMithrix = configFile.Bind("Altar_Of_Purity Config", "angryMithrix", false, "When enabled, Mithrix will use more non-vulgar aggressive and sarcastic taunts when sacrificing items. Disable for more generic sacrifice dialogue.");
+            angryMithrix = configFile.Bind("Altar_Of_Purity Config", "angryMithrix", false, "When enabled, Mithrix will be snarkier when taunting you for sacrificing items. Disable for more generic sacrifice dialogue.");
         }
 
         private string SetPurityAltarConsumeFlavourText(ItemTier tier)
@@ -178,7 +178,6 @@ namespace RigsArsenal.Equipments
                     {
                         "<style=cIsUtility>You call that a sacrifice? I call it a tribute.</style>",
                         "<style=cIsUtility>An offering worthy of a king.</style>",
-                        "<style=cIsUtility>What a waste of a legendary item.</style>",
                         "<style=cIsUtility>One does not pawn divinity and escape mockery.</style>"
                     };
                 }
@@ -187,7 +186,7 @@ namespace RigsArsenal.Equipments
                     MithrixResponses = new string[]
                     {
                     "<style=cLunarObjective>Oops... was that one important?</style>",
-                    "<style=cLunarObjective>One step forward, ten steps back.</style>",
+                    "<style=cLunarObjective>One step forward, two steps back.</style>",
                     "<style=cLunarObjective>Two words my friend: No refunds!</style>",
                     "<style=cLunarObjective>I'll always take items you don't need.</style>",
                     "<style=cDeath>I see you..!</style>",
