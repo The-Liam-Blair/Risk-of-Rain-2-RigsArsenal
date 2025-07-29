@@ -164,11 +164,16 @@ namespace RigsArsenal
                 DOTList.Add(aDot);
             }
 
-            // Initialise Harmony and patch the dissonant edge damage modification implementation.
+            // Initialise Harmony
             var harmony = new Harmony(P_GUID);
             var targetMethod = AccessTools.Method(typeof(RoR2.HealthComponent), "TakeDamage");
-            var prefix = typeof(DissonantEdge).GetMethod("TakeDamagePatch", BindingFlags.Public | BindingFlags.Static);
 
+            // Dissonant Edge Patch
+            var prefix = typeof(DissonantEdge).GetMethod("TakeDamagePatch", BindingFlags.Public | BindingFlags.Static);
+            harmony.Patch(targetMethod, prefix: new HarmonyMethod(prefix));
+
+            // Coolant Pack Patch
+            prefix = typeof(CoolantPack).GetMethod("TakeDamagePatch", BindingFlags.Public | BindingFlags.Static);
             harmony.Patch(targetMethod, prefix: new HarmonyMethod(prefix));
         }
 

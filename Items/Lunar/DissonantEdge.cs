@@ -51,7 +51,7 @@ namespace RigsArsenal.Items
         }
 
         /// <summary>
-        /// Dissonent Edge implementation. Called via CharacterBody.TakeDamage as a Harmony prefix patch. (Called before the original method).
+        /// Dissonent Edge implementation. Called via CharacterBody.TakeDamage as a Harmony prefix patch.
         /// </summary>
         public static bool TakeDamagePatch(RoR2.HealthComponent __instance, DamageInfo damageInfo)
         {

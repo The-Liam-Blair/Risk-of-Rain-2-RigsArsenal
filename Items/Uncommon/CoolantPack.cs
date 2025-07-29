@@ -37,28 +37,37 @@ namespace RigsArsenal.Items
         public override float minViewport => 1f;
         public override float maxViewport => 2f;
 
-        private ConfigEntry<float> damageReduction;
+        private static ConfigEntry<float> damageReduction;
 
-        public override void SetupHooks()
+        private static ItemDef staticItemDef;
+
+        public override void CreateItem()
         {
-            On.RoR2.HealthComponent.TakeDamage += (orig, self, info) =>
+            base.CreateItem();
+            staticItemDef = itemDef;
+        }
+
+        /// <summary>
+        /// Coolant Pack implementation. Called via CharacterBody.TakeDamage as a Harmony prefix patch.
+        /// </summary>
+        public static bool TakeDamagePatch(RoR2.HealthComponent __instance, DamageInfo damageInfo)
+        {
+            if (!__instance) { return true; }
+
+            var body = __instance.body;
+            if (!body || !body.inventory) { return true; }
+
+            var count = body.inventory.GetItemCount(staticItemDef);
+
+            if (damageInfo.damageType == DamageType.DoT && count > 0)
             {
-                if (!self) { orig(self, info); return; }
+                var fractionalBit = 1 - (1 / (1 + count * damageReduction.Value)); // Hyperbolic Scaling, approaching 100% damage reduction.
+                damageInfo.damage *= 1 - fractionalBit;
 
-                var body = self.body;
-                if (!body || !body.inventory) { orig(self, info); return; }
+                if (damageInfo.damage < 0) { damageInfo.damage = 0; } // Catches negative damage.
+            }
 
-                var count = body.inventory.GetItemCount(itemDef);
-                if (info.damageType == DamageType.DoT && count > 0)
-                {
-                    var fractionalBit = 1 - (1 / (1 + count * damageReduction.Value)); // Hyperbolic Scaling, approaching 100% damage reduction.
-                    info.damage *= 1 - fractionalBit;
-
-                    if (info.damage < 0) { info.damage = 0; } // Catches negative damage.
-                }
-
-                orig(self, info);
-            };
+            return true;
         }
 
         public override void AddConfigOptions()
