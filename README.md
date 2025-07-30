@@ -1,6 +1,6 @@
 # Risk of Rain 2 Mod - Rigs Arsenal
 Adds 12 new items and 3 new equipment into the game.
-NOTE: When updating from a previous version to 1.4.0 or newer, please make sure to regenerate the config file for this mod; it has received major updates in the 1.4.0 update!
+<br>NOTE: When updating from a previous version to 1.4.0 or newer, please make sure to regenerate the config file for this mod; it has received major updates in the 1.4.0 update!
 
 ### Items
 
