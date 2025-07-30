@@ -38,7 +38,7 @@ namespace RigsArsenal
         public const string P_GUID = $"{P_Author}.{P_Name}";
         public const string P_Author = "RigsInRags";
         public const string P_Name = "RigsArsenal";
-        public const string P_Version = "1.3.3";
+        public const string P_Version = "1.4.0";
 
         public static AssetBundle MainAssets;
 
@@ -178,6 +178,7 @@ namespace RigsArsenal
         }
 
         //Spawn all items for debugging purposes
+        /*
         private void Update()
         {
             if(Input.GetKeyDown(KeyCode.F1))
@@ -193,7 +194,7 @@ namespace RigsArsenal
             }
         }
         
-
+        
         private void DEBUG_SpawnItem(string itemName)
         {
             var player = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
@@ -209,6 +210,7 @@ namespace RigsArsenal
 
             PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(equip.equipmentDef.equipmentIndex), player.position, player.forward * 20f * Random.Range(0.1f, 3f));
         }
+        */
 
         /// <summary>
         /// Swap from stubbed shaders to the actual in-game shaders per material (This enables emissions, specular reflections, normal maps, etc).
@@ -238,18 +240,21 @@ namespace RigsArsenal
                     break;
 
                 case DotIndex.Burn:
-                //case DotIndex.StrongerBurn:
+                case DotIndex.StrongerBurn:
                     InflictDotInfo burnDot = new InflictDotInfo()
                     {
                         victimObject = victim.gameObject,
                         attackerObject = attacker.gameObject,
                         totalDamage = new float?(damage),
-                        dotIndex = DotController.DotIndex.Burn,
+                        dotIndex = dotType,
                         damageMultiplier = 1f
                     };
 
                     // If user has an igntion tank, upgrade the dot into a stronger burn.
-                    StrengthenBurnUtils.CheckDotForUpgrade(attacker.inventory, ref burnDot);
+                    if (dotType == DotIndex.Burn)
+                    {
+                        StrengthenBurnUtils.CheckDotForUpgrade(attacker.inventory, ref burnDot);
+                    }
 
                     DotController.InflictDot(ref burnDot);
                     break;

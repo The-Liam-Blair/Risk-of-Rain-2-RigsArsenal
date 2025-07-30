@@ -1,18 +1,19 @@
-﻿using Rewired.ComponentControls.Data;
+﻿using BepInEx.Configuration;
+using EntityStates.VoidRaidCrab;
+using R2API;
+using Rewired.ComponentControls.Data;
 using Rewired.Utils;
+using RigsArsenal.DOTs;
 using RoR2;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
-using static RoR2.MasterSpawnSlotController;
 using static RigsArsenal.RigsArsenal;
-using R2API;
-using System.Collections;
-using BepInEx.Configuration;
-using EntityStates.VoidRaidCrab;
+using static RoR2.MasterSpawnSlotController;
 
 namespace RigsArsenal.Equipments
 {
@@ -119,9 +120,11 @@ namespace RigsArsenal.Equipments
 
             // Find the team the victim belongs to.
             var victimTeam = victim.healthComponent.body.teamComponent.teamIndex;
-                
+
+            var razorLeechBleedDOT = DOTList.Find(x => x.Name.Equals("RazorLeechBleed")); // Reference to the custom dot from Razor Leeches.
+
             // Get all entities in the victim's team.
-            foreach(var entity in TeamComponent.GetTeamMembers(victimTeam))
+            foreach (var entity in TeamComponent.GetTeamMembers(victimTeam))
             {
                 if(entity.teamIndex == victimTeam)
                 {
@@ -140,7 +143,16 @@ namespace RigsArsenal.Equipments
                         // Spread dots
                         foreach(var dot in UniqueDots)
                         {
-                            RigsArsenal.InflictDot(slot.characterBody, entity.body, dot.Item1.dotIndex, slot.characterBody.damage);
+                            if (dot.Item1.dotDef == razorLeechBleedDOT.dotDef)
+                            {
+                                RigsArsenal.InflictCustomDot(slot.characterBody, entity.body, razorLeechBleedDOT, slot.characterBody.damage);
+                            }
+                            else
+                            {
+                                // If the dot is not in the list of DOTs that can be spread, apply it as a normal buff.
+                                // This will not apply the stack count, but will apply the dot with its original duration.
+                                RigsArsenal.InflictDot(slot.characterBody, entity.body, dot.Item1.dotIndex, slot.characterBody.damage);
+                            }
                         }
                     }
                 }
