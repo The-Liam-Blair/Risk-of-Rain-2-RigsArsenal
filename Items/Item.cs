@@ -84,45 +84,43 @@ namespace RigsArsenal.Items
             switch (Tier)
             {
                 case ItemTier.Tier1:
-                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/Base/Common/Tier1Def.asset").WaitForCompletion();
+                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_Base_Common.Tier1Def_asset).WaitForCompletion();
                     break;
 
                 case ItemTier.Tier2:
-                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/Base/Common/Tier2Def.asset").WaitForCompletion();
+                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_Base_Common.Tier2Def_asset).WaitForCompletion();
                     break;
 
                 case ItemTier.Tier3:
-                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/Base/Common/Tier3Def.asset").WaitForCompletion();
+                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_Base_Common.Tier3Def_asset).WaitForCompletion();
                     break;
 
 
                 case ItemTier.VoidTier1:
-                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/DLC1/Common/VoidTier1Def.asset").WaitForCompletion();
+                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_DLC1_Common.VoidTier1Def_asset).WaitForCompletion();
                     break;
 
                 case ItemTier.VoidTier2:
-                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/DLC1/Common/VoidTier2Def.asset").WaitForCompletion();
+                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_DLC1_Common.VoidTier2Def_asset).WaitForCompletion();
                     break;
 
                 case ItemTier.VoidTier3:
-                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/DLC1/Common/VoidTier3Def.asset").WaitForCompletion();
+                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_DLC1_Common.VoidTier3Def_asset).WaitForCompletion();
                     break;
 
 
                 case ItemTier.NoTier:
-                    itemDef.tier = ItemTier.NoTier;
                     itemDef.hidden = true;
-                    itemDef.deprecatedTier = ItemTier.NoTier;
                     break;
 
 
                 case ItemTier.Lunar:
-                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/Base/Common/LunarTierDef.asset").WaitForCompletion();
+                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_Base_Common.LunarTierDef_asset).WaitForCompletion();
                     break;
 
                 default:
                     DebugLog.Log($"Warning: Item {itemDef.name} has an invalid item tier. Defaulting to Tier1.");
-                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>("RoR2/Base/Common/Tier1Def.asset").WaitForCompletion();
+                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_Base_Common.Tier1Def_asset).WaitForCompletion();
                     break;
             }
 
@@ -138,12 +136,12 @@ namespace RigsArsenal.Items
             // If it exists, load custom sprite and model, otherwise load default question mark sprite and model.
             itemDef.pickupIconSprite = (Icon != null)
                 ? Icon
-                : Addressables.LoadAssetAsync<Sprite>("RoR2/Base/Common/MiscIcons/texMysteryIcon.png").WaitForCompletion();
+                : Addressables.LoadAssetAsync<Sprite>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_Base_Common_MiscIcons.texMysteryIcon_png).WaitForCompletion();
 
 
             itemDef.pickupModelPrefab = (Model != null)
                 ? Model
-                : Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mystery/PickupMystery.prefab").WaitForCompletion();
+                : Addressables.LoadAssetAsync<GameObject>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_Base_Mystery.PickupMystery_prefab).WaitForCompletion();
 
 
             var modelView = itemDef.pickupModelPrefab.AddComponent<ModelPanelParameters>();

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using R2API;
 using RoR2;
+using RoR2.ContentManagement;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -84,12 +85,12 @@ namespace RigsArsenal.Equipments
             // If it exists, load custom sprite and model, otherwise load default question mark sprite and model.
             equipmentDef.pickupIconSprite = (Icon != null)
                 ? Icon
-                : Addressables.LoadAssetAsync<Sprite>("RoR2/Base/Common/MiscIcons/texMysteryIcon.png").WaitForCompletion();
+                : Addressables.LoadAssetAsync<Sprite>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_Base_Common_MiscIcons.texMysteryIcon_png).WaitForCompletion();
 
 
             equipmentDef.pickupModelPrefab = (Model != null)
                 ? Model
-                : Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mystery/PickupMystery.prefab").WaitForCompletion();
+                : Addressables.LoadAssetAsync<GameObject>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_Base_Mystery.PickupMystery_prefab).WaitForCompletion();
 
             equipmentDef.cooldown = cooldown;
 
