@@ -155,7 +155,7 @@ namespace RigsArsenal.Items.VoidItems
                     HurtBox hurtBox = GlobalEventManager.igniteOnKillHurtBoxBuffer[i];
                     if (hurtBox.healthComponent)
                     {
-                        RigsArsenal.InflictDot(body, hurtBox.healthComponent.body, DotController.DotIndex.Burn, DOTDamage);
+                        RigsArsenal.InflictDot(body, hurtBox.healthComponent.body, hurtBox, DotController.DotIndex.Burn, DOTDamage);
                     }
                 }
 

@@ -83,19 +83,19 @@ namespace RigsArsenal.Items
                         switch (DotIndex)
                         {
                             case 0: // Bleed
-                                InflictDot(attacker, victim, DotController.DotIndex.Bleed, attacker.damage, procCoefficient);
+                                InflictDot(attacker, victim, inflictDotInfo.hitHurtBox, DotController.DotIndex.Bleed, attacker.damage, procCoefficient);
                                 break;
 
                             case 1: // Burn
-                                InflictDot(attacker, victim, DotController.DotIndex.Burn, attacker.damage, procCoefficient);
+                                InflictDot(attacker, victim, inflictDotInfo.hitHurtBox, DotController.DotIndex.Burn, attacker.damage, procCoefficient);
                                 break;
 
                             case 2: // Blight
-                                InflictDot(attacker, victim, DotController.DotIndex.Blight, attacker.damage, procCoefficient);
+                                InflictDot(attacker, victim, inflictDotInfo.hitHurtBox, DotController.DotIndex.Blight, attacker.damage, procCoefficient);
                                 break;
 
                             case 3: // Collapse
-                                InflictDot(attacker, victim, DotController.DotIndex.Fracture, attacker.damage, procCoefficient);
+                                InflictDot(attacker, victim, inflictDotInfo.hitHurtBox, DotController.DotIndex.Fracture, attacker.damage, procCoefficient);
                                 break;
                         }
                     }

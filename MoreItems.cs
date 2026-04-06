@@ -178,7 +178,6 @@ namespace RigsArsenal
         }
 
         //Spawn all items for debugging purposes
-        /*
         private void Update()
         {
             if(Input.GetKeyDown(KeyCode.F1))
@@ -210,7 +209,6 @@ namespace RigsArsenal
 
             PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(equip.equipmentDef.equipmentIndex), player.position, player.forward * 20f * Random.Range(0.1f, 3f));
         }
-        */
 
         /// <summary>
         /// Swap from stubbed shaders to the actual in-game shaders per material (This enables emissions, specular reflections, normal maps, etc).
@@ -231,12 +229,12 @@ namespace RigsArsenal
         /// <summary>
         /// Inflict a standard dot on a target, as how the game applies them.
         /// </summary>
-        public static void InflictDot(CharacterBody attacker, CharacterBody victim, DotController.DotIndex dotType, float damage, float procCoefficent = 1f)
+        public static void InflictDot(CharacterBody attacker, CharacterBody victim, HurtBox hitHurtBox, DotController.DotIndex dotType, float damage, float procCoefficent = 1f)
         {
             switch (dotType)
             {
                 case DotIndex.Bleed:
-                    DotController.InflictDot(victim.gameObject, attacker.gameObject, DotIndex.Bleed, 3f * procCoefficent, 1f);
+                    DotController.InflictDot(victim.gameObject, attacker.gameObject, hitHurtBox, DotIndex.Bleed, 3f * procCoefficent, 1f);
                     break;
 
                 case DotIndex.Burn:
@@ -260,25 +258,25 @@ namespace RigsArsenal
                     break;
 
                 case DotIndex.Blight: // Acrid's blight
-                    DotController.InflictDot(victim.gameObject, attacker.gameObject, DotIndex.Blight, 5f * procCoefficent, 1f);
+                    DotController.InflictDot(victim.gameObject, attacker.gameObject, hitHurtBox, DotIndex.Blight, 5f * procCoefficent, 1f);
                     break;
 
                 case DotIndex.Fracture: // Collapse
                     DotDef collapseDef = GetDotDef(DotIndex.Fracture);
-                    DotController.InflictDot(victim.gameObject, attacker.gameObject, DotIndex.Fracture, collapseDef.interval);
+                    DotController.InflictDot(victim.gameObject, attacker.gameObject, hitHurtBox, DotIndex.Fracture, collapseDef.interval);
                     break;
 
                 case DotIndex.Poison: // Acrid's poison
-                    DotController.InflictDot(victim.gameObject, attacker.gameObject, DotIndex.Poison, 5f, 1f);
+                    DotController.InflictDot(victim.gameObject, attacker.gameObject, hitHurtBox, DotIndex.Poison, 5f, 1f);
                     break;
 
                 case DotIndex.SuperBleed: // Bandit's hemorrhage
-                    DotController.InflictDot(victim.gameObject, attacker.gameObject, DotIndex.SuperBleed, 15f, 1f);
+                    DotController.InflictDot(victim.gameObject, attacker.gameObject, hitHurtBox, DotIndex.SuperBleed, 15f, 1f);
                     break;
 
                 default: // All the other dots: default implementation
                     DebugLog.Log($"Default dot called for dot {dotType}. This should not happen!");
-                    DotController.InflictDot(victim.gameObject, attacker.gameObject, dotType, damage, procCoefficent);
+                    DotController.InflictDot(victim.gameObject, attacker.gameObject, hitHurtBox, dotType, damage, procCoefficent);
                     break;
             }
         }
@@ -287,7 +285,7 @@ namespace RigsArsenal
         /// <summary>
         /// Inflict a custom dot on a target. Similar to the standard dot infliction function but uses a custom dot class parameter instead.
         /// </summary>
-        public static void InflictCustomDot(CharacterBody attacker, CharacterBody victim, DOT dot, float damage)
+        public static void InflictCustomDot(CharacterBody attacker, CharacterBody victim, HurtBox hitHurtBox, DOT dot, float damage)
         {
             switch(dot.dotName)
             {
@@ -299,7 +297,8 @@ namespace RigsArsenal
                         dotIndex = dot.dotIndex,
                         preUpgradeDotIndex = dot.dotIndex,
                         duration = dot.dotDuration,
-                        damageMultiplier = damage / (dot.dotDuration / dot.dotInterval)
+                        damageMultiplier = damage / (dot.dotDuration / dot.dotInterval),
+                        hitHurtBox = hitHurtBox
                     };
                     DotController.InflictDot(ref leechBleed);
                     break;

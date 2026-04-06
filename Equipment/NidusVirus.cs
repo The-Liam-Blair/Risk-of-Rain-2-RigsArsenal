@@ -145,13 +145,13 @@ namespace RigsArsenal.Equipments
                         {
                             if (dot.Item1.dotDef == razorLeechBleedDOT.dotDef)
                             {
-                                RigsArsenal.InflictCustomDot(slot.characterBody, entity.body, razorLeechBleedDOT, slot.characterBody.damage);
+                                RigsArsenal.InflictCustomDot(slot.characterBody, entity.body, entity.body.mainHurtBox, razorLeechBleedDOT, slot.characterBody.damage);
                             }
                             else
                             {
                                 // If the dot is not in the list of DOTs that can be spread, apply it as a normal buff.
                                 // This will not apply the stack count, but will apply the dot with its original duration.
-                                RigsArsenal.InflictDot(slot.characterBody, entity.body, dot.Item1.dotIndex, slot.characterBody.damage);
+                                RigsArsenal.InflictDot(slot.characterBody, entity.body, entity.body.mainHurtBox, dot.Item1.dotIndex, slot.characterBody.damage);
                             }
                         }
                     }

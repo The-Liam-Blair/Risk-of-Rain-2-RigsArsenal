@@ -44,7 +44,7 @@ namespace RigsArsenal.Buffs
 
                 // Inflict the DOT equal to 20% of the damage dealt.
                 leechBleed ??= DOTList.Find(x => x.Name.Equals("RazorLeechBleed"));
-                RigsArsenal.InflictCustomDot(attacker, victim, leechBleed, damageInfo.damage * damageScalar);
+                RigsArsenal.InflictCustomDot(attacker, victim, damageReport.damageInfo.inflictedHurtbox, leechBleed, damageInfo.damage * damageScalar);
             };
         }
     }
