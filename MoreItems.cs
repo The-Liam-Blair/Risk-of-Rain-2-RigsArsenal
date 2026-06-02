@@ -316,6 +316,11 @@ namespace RigsArsenal
             {
                 foreach (var item in items)
                 {
+                    if (item.pureItemDef == null)
+                    {
+                        continue;
+                    }
+
                     item.itemDef.requiredExpansion = ExpansionCatalog.expansionDefs.FirstOrDefault(x => x.nameToken == "DLC1_NAME");
 
                     ItemDef.Pair voidTransform = new ItemDef.Pair

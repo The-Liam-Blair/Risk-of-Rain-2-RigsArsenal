@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using R2API;
 using R2API.Utils;
 using RoR2;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
@@ -43,7 +44,7 @@ namespace RigsArsenal.Items.VoidItems
 
         public override BuffDef ItemBuffDef => BuffList.Find(x => x.Name == "RazorLeechWound").buffDef;
 
-        public override ItemDef pureItemDef => ItemList.Find(x => x.NameToken == "NEEDLEROUNDS").itemDef; // Needle Rounds
+        public override ItemDef pureItemDef => ItemList.FirstOrDefault(x => x.NameToken == "NEEDLEROUNDS")?.itemDef; // Needle Rounds
 
         private ConfigEntry<int> baseDuration;
         private ConfigEntry<int> baseDurationPerStack;

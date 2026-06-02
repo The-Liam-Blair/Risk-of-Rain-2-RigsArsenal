@@ -77,8 +77,9 @@ namespace RigsArsenal.Items
             itemDef.pickupToken = $"ITEM_{NameToken}_PICKUP";
             itemDef.descriptionToken = $"ITEM_{NameToken}_DESCRIPTION";
             itemDef.loreToken = $"ITEM_{NameToken}_LORE";
-
+            itemDef.tier = Tier;
             itemDef.hidden = false;
+
             itemDef.canRemove = CanRemove;
 
             switch (Tier)
@@ -97,20 +98,24 @@ namespace RigsArsenal.Items
 
 
                 case ItemTier.VoidTier1:
-                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_DLC1_Common.VoidTier1Def_asset).WaitForCompletion();
+                      itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_DLC1_Common.VoidTier1Def_asset).WaitForCompletion();
                     break;
 
                 case ItemTier.VoidTier2:
-                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_DLC1_Common.VoidTier2Def_asset).WaitForCompletion();
+                      itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_DLC1_Common.VoidTier2Def_asset).WaitForCompletion();
                     break;
 
                 case ItemTier.VoidTier3:
-                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_DLC1_Common.VoidTier3Def_asset).WaitForCompletion();
+                      itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_DLC1_Common.VoidTier3Def_asset).WaitForCompletion();
                     break;
 
 
                 case ItemTier.NoTier:
+                    itemDef._itemTierDef = Addressables.LoadAssetAsync<ItemTierDef>(RoR2BepInExPack.GameAssetPathsBetter.RoR2_DLC1_Common.VoidTier3Def_asset).WaitForCompletion();
+
                     itemDef.hidden = true;
+                    itemDef._itemTierDef.isDroppable = false;
+                    itemDef._itemTierDef.tier = ItemTier.NoTier;
                     break;
 
 
