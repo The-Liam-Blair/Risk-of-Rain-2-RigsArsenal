@@ -39,7 +39,7 @@ namespace RigsArsenal
         public const string P_GUID = $"{P_Author}.{P_Name}";
         public const string P_Author = "RigsInRags";
         public const string P_Name = "RigsArsenal";
-        public const string P_Version = "1.4.0";
+        public const string P_Version = "1.4.1";
 
         public static AssetBundle MainAssets;
 
@@ -187,6 +187,7 @@ namespace RigsArsenal
         }
 
         //Spawn all items for debugging purposes
+        /*
         private void Update()
         {
             if(Input.GetKeyDown(KeyCode.F1))
@@ -218,6 +219,7 @@ namespace RigsArsenal
 
             PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(equip.equipmentDef.equipmentIndex), player.position, player.forward * 20f * Random.Range(0.1f, 3f));
         }
+        */
 
         /// <summary>
         /// Swap from stubbed shaders to the actual in-game shaders per material (This enables emissions, specular reflections, normal maps, etc).
