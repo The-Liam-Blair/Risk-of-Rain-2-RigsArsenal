@@ -17,7 +17,7 @@ namespace RigsArsenal.Buffs
         public override Color BuffColor => Color.white;
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("ReactiveArmourPlatingBuff.png");
 
-        private float armour = ReactiveArmourPlating.armourPerStack.Value;
+        private float armour = ReactiveArmourPlating.armourPerStack?.Value ?? 0f;
 
         public override void SetupHooks()
         {

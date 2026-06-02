@@ -37,7 +37,7 @@ namespace RigsArsenal.Items
         public override float minViewport => 1f;
         public override float maxViewport => 2f;
 
-        private static ConfigEntry<float> damageReduction;
+        public static ConfigEntry<float> damageReduction;
 
         private static ItemDef staticItemDef;
 

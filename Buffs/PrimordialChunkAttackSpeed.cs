@@ -17,7 +17,7 @@ namespace RigsArsenal.Buffs
         public override Color BuffColor => Color.white;
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("PrimordialChunkAttackSpeedBuff.png");
 
-        private float atkSpeedBonus = PrimordialChunk.atkSpeedBonus.Value;
+        private float atkSpeedBonus = PrimordialChunk.atkSpeedBonus?.Value ?? 0f;
 
         public override void SetupHooks()
         {

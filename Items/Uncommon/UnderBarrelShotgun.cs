@@ -50,10 +50,10 @@ namespace RigsArsenal.Items
         // Donut ring object that attaches to the player when the item is active to indicate range, much like the focus crystal.
         private GameObject rangeIndicator = null;
 
-        private ConfigEntry<float> itemProcChance;
+        public ConfigEntry<float> itemProcChance;
         private ConfigEntry<int> itemRange;
         private ConfigEntry<int> projectileCount;
-        private ConfigEntry<float> projectileDamage;
+        public ConfigEntry<float> projectileDamage;
         private ConfigEntry<float> projectileProcRate;
 
 

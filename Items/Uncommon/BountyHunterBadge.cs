@@ -37,9 +37,9 @@ namespace RigsArsenal.Items
         public override float minViewport => 1f;
         public override float maxViewport => 2.5f;
 
-        ConfigEntry<float> multiplier;
+        public ConfigEntry<float> multiplier;
 
-        private float goldIncrease = 0.25f; // 20% per stack.
+        public float goldIncrease = 0.25f; // 20% per stack.
 
         public override void SetupHooks()
         {

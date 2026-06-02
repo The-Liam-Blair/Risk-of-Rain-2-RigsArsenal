@@ -39,7 +39,7 @@ namespace RigsArsenal.Items
         public override float minViewport => 1f;
         public override float maxViewport => 3f;
 
-        private ConfigEntry<int> barrierAmount;
+        public ConfigEntry<int> barrierAmount;
         private ConfigEntry<float> cooldown;
 
         public override void SetupHooks()

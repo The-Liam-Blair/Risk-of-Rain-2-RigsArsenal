@@ -44,7 +44,7 @@ namespace RigsArsenal.Items
         public override BuffDef ItemBuffDef => BuffList.Find(x => x.Name == "PrimordialChunkAttackSpeed").buffDef;
 
         public static ConfigEntry<float> atkSpeedBonus;
-        private ConfigEntry<int> maxBuffStacks;
+        public ConfigEntry<int> maxBuffStacks;
         private ConfigEntry<float> buffDuration;
 
         public override void SetupHooks()

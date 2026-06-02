@@ -36,8 +36,8 @@ namespace RigsArsenal.Items
         public override float minViewport => 1f;
         public override float maxViewport => 2.75f;
 
-        private ConfigEntry<int> critChanceGain;
-        private ConfigEntry<float> critDamageGain;
+        public ConfigEntry<int> critChanceGain;
+        public ConfigEntry<float> critDamageGain;
 
         public override void SetupHooks()
         {

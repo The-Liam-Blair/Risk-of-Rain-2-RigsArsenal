@@ -23,7 +23,7 @@ namespace RigsArsenal.Items
         public override string Name => "Chaos Rune";
         public override string NameToken => "CHAOSRUNE";
         public override string PickupToken => "Chance to inflict additional damaging debuffs when applying any damaging debuff.";
-        public override string Description => $"When applying a damaging debuff to an enemy, there is a <style=cIsDamage>{procChance.Value}% chance</style><style=cStack> (+{rollsPerStack.Value} roll(s) per stack)</style> to apply <style=cIsHealth>additional damaging debuffs</style>.";
+        public override string Description => $"When applying a damaging debuff to an enemy, there is a <style=cIsDamage>{procChance.Value}% chance</style><style=cStack> (+{rollsPerStack.Value} " + (rollsPerStack.Value != 1 ? "rolls" : "roll") + $" per stack)</style> to apply <style=cIsHealth>additional damaging debuffs</style>.";
         public override string Lore => "<style=cMono>// ARTIFACT RECOVERY NOTES: EXCAVATION SITE 165-A34 //</style>\n\nName: Runic Stone Carving\n\nSize: 20cm by 20cm by 3cm\n\nSite Notes: ''Weighty and shimmers a bright red hue. The miner that recovered this artifact was found an hour after contact in tremendous pain, dehydrated and collapsed, still holding onto the artifact. Artifact was additionally glowing incredibly brightly, and is allegedly scalding to the touch for some while bone-chillingly cold to others.\n\nDo NOT handle directly. Do NOT stare into it's glow. Do NOT listen to what it offers. Be not tempted.''\n\n<style=cMono>// END OF NOTES //";
 
         public override ItemTier Tier => ItemTier.Tier3;
@@ -31,8 +31,7 @@ namespace RigsArsenal.Items
         public override bool CanRemove => true;
 
         public override ItemTag[] Tags => new ItemTag[] { ItemTag.Damage };
-        public override bool AIBlackList => true; // Even though the AI could get this item, its only going to be useful if the enemy can inflict damaging DOTs
-                                                   // naturally or is able to with another item, so its too niche.
+        public override bool AIBlackList => enemiesCanUseItem.Value ? false : true;
         
         public override Sprite Icon => MainAssets.LoadAsset<Sprite>("ChaosRune.png");
         public override GameObject Model => MainAssets.LoadAsset<GameObject>("ChaosRune.prefab");
@@ -40,8 +39,9 @@ namespace RigsArsenal.Items
         public override float minViewport => 1f;
         public override float maxViewport => 1.8f;
 
-        ConfigEntry<int> procChance;
-        ConfigEntry<int> rollsPerStack;
+        public ConfigEntry<int> procChance;
+        public ConfigEntry<int> rollsPerStack;
+        private ConfigEntry<bool> enemiesCanUseItem;
 
 
         private bool hasRun = false;
@@ -114,6 +114,7 @@ namespace RigsArsenal.Items
         {
             procChance = configFile.Bind("Chaos_Rune Config", "procChance", 33, "The chance of the item's effect triggering per item stack on applying a DOT.");
             rollsPerStack = configFile.Bind("Chaos_Rune Config", "rollsPerStack", 1, "Number of times the item will roll on activation per item stack.");
+            enemiesCanUseItem = configFile.Bind("Chaos_Rune Config", "enemiesCanUseItem", false, "Toggles if this item appears in enemy item loot pools. Toggle for scenarios where the enemy is capable of consistently inflicting DOTs.");
         }
     }
 }

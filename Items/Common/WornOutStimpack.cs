@@ -40,8 +40,8 @@ namespace RigsArsenal.Items
 
         public override BuffDef ItemBuffDef => BuffList.Find(x => x.Name == "StimpackHealStrong").buffDef;
 
-        private ConfigEntry<float> movementBonus;
-        private ConfigEntry<float> regenBonus;
+        public ConfigEntry<float> movementBonus;
+        public ConfigEntry<float> regenBonus;
 
         public override void SetupHooks()
         {

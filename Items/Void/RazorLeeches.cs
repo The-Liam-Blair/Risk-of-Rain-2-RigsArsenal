@@ -46,8 +46,8 @@ namespace RigsArsenal.Items.VoidItems
 
         public override ItemDef pureItemDef => ItemList.FirstOrDefault(x => x.NameToken == "NEEDLEROUNDS")?.itemDef; // Needle Rounds
 
-        private ConfigEntry<int> baseDuration;
-        private ConfigEntry<int> baseDurationPerStack;
+        public ConfigEntry<int> baseDuration;
+        public ConfigEntry<int> baseDurationPerStack;
         public static ConfigEntry<float> damageScalar;
 
         public override void SetupHooks()

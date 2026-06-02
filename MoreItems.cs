@@ -29,7 +29,8 @@ namespace RigsArsenal
     [BepInDependency(PrefabAPI.PluginGUID)]
     [BepInDependency(DotAPI.PluginGUID)]
 
-    [BepInDependency("com.rune500.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("droppod.lookingglass", BepInDependency.DependencyFlags.SoftDependency)]
 
     // Main Plugin Class
     public class RigsArsenal : BaseUnityPlugin
@@ -163,6 +164,14 @@ namespace RigsArsenal
                 aDot.Init();
                 DOTList.Add(aDot);
             }
+
+
+            // Check for Looking Glass, if present setup the Looking Glass stats displays for this mod.
+            if (LookingGlassItemStats.enabled)
+            {
+                ItemCatalog.availability.CallWhenAvailable(LookingGlassItemStats.SetupStatsDisplays);
+            }
+
 
             // Initialise Harmony
             var harmony = new Harmony(P_GUID);

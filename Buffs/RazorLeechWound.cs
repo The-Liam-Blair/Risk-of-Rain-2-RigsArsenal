@@ -18,7 +18,7 @@ namespace RigsArsenal.Buffs
         private DOT leechBleed = null;
 
         // Base value of 0.2 (20% of damage dealt).
-        private float damageScalar = RazorLeeches.damageScalar.Value;
+        private float damageScalar = RazorLeeches.damageScalar?.Value ?? 0f;
 
 
 
