@@ -67,10 +67,10 @@ namespace RigsArsenal.Items
             };
         }
 
-        public override void AddConfigOptions()
+        public override void AddConfigOptions(ConfigFile Config)
         {
-            barrierAmount = configFile.Bind("Kinetic_Battery Config", "barrierAmount", 35, "The barrier given by this item.");
-            cooldown = configFile.Bind("Kinetic_Battery Config", "cooldown", 3.0f, "The cooldown duration of the item.");
+            barrierAmount = Config.Bind("Kinetic_Battery Config", "barrierAmount", 35, "The barrier given by this item.");
+            cooldown = Config.Bind("Kinetic_Battery Config", "cooldown", 3.0f, "The cooldown duration of the item.");
         }
     }
 }

@@ -86,11 +86,11 @@ namespace RigsArsenal.Items.VoidItems
             };
         }
 
-        public override void AddConfigOptions()
+        public override void AddConfigOptions(ConfigFile Config)
         {
-            baseDuration = configFile.Bind("Razor_Leeches Config", "baseDuration", 2, "The base duration of the wound effect.");
-            baseDurationPerStack = configFile.Bind("Razor_Leeches Config", "baseDurationPerStack", 1, "The duration increase of the wound effect per stack.");
-            damageScalar = configFile.Bind("Razor_Leeches Config", "damageScalar", 0.2f, "The percentage of damage dealt that is applied as damage over time to the perforated enemy (0.2 = 20% of damage dealt).");
+            baseDuration = Config.Bind("Razor_Leeches Config", "baseDuration", 2, "The base duration of the wound effect.");
+            baseDurationPerStack = Config.Bind("Razor_Leeches Config", "baseDurationPerStack", 1, "The duration increase of the wound effect per stack.");
+            damageScalar = Config.Bind("Razor_Leeches Config", "damageScalar", 0.2f, "The percentage of damage dealt that is applied as damage over time to the perforated enemy (0.2 = 20% of damage dealt).");
         }
     }
 }

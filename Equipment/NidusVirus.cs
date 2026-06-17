@@ -243,11 +243,11 @@ namespace RigsArsenal.Equipments
             };
         }
 
-        public override void AddConfigOptions()
+        public override void AddConfigOptions(ConfigFile Config)
         {
-            equipCooldown = configFile.Bind("Nidus_Virus Config", "equipCooldown", 35, "Cooldown for this equipment.");
-            spreadRadius = configFile.Bind("Nidus_Virus Config", "spreadRadius", 50, "The spread radius in metres.");
-            debuffDuration = configFile.Bind("Nidus_Virus Config", "debuffDuration", 5, "Duration of all non-DOTs spread to enemies.");
+            equipCooldown = Config.Bind("Nidus_Virus Config", "equipCooldown", 35, "Cooldown for this equipment.");
+            spreadRadius = Config.Bind("Nidus_Virus Config", "spreadRadius", 50, "The spread radius in metres.");
+            debuffDuration = Config.Bind("Nidus_Virus Config", "debuffDuration", 5, "Duration of all non-DOTs spread to enemies.");
         }
 
 

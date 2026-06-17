@@ -158,10 +158,10 @@ namespace RigsArsenal.Equipments
             };
         }
 
-        public override void AddConfigOptions()
+        public override void AddConfigOptions(ConfigFile Config)
         {
-            equipCooldown = configFile.Bind("Altar_Of_Purity Config", "equipCooldown", 45, "Cooldown for this equipment.");
-            angryMithrix = configFile.Bind("Altar_Of_Purity Config", "angryMithrix", false, "When enabled, Mithrix will be snarkier when taunting you for sacrificing items. Disable for more generic sacrifice dialogue.");
+            equipCooldown = Config.Bind("Altar_Of_Purity Config", "equipCooldown", 45, "Cooldown for this equipment.");
+            angryMithrix = Config.Bind("Altar_Of_Purity Config", "angryMithrix", false, "When enabled, Mithrix will be snarkier when taunting you for sacrificing items. Disable for more generic sacrifice dialogue.");
         }
 
         private string SetPurityAltarConsumeFlavourText(ItemTier tier)

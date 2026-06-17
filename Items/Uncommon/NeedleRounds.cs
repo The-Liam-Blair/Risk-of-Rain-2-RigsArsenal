@@ -50,10 +50,10 @@ namespace RigsArsenal.Items
             };
         }
 
-        public override void AddConfigOptions()
+        public override void AddConfigOptions(ConfigFile Config)
         {
-            critChanceGain = configFile.Bind("Needle_Rounds Config", "critChanceGain", 15, "Critical hit chance per item stack.");
-            critDamageGain = configFile.Bind("Needle_Rounds Config", "critDamageGain", 0.15f, "Critical hit damage per item stack.");
+            critChanceGain = Config.Bind("Needle_Rounds Config", "critChanceGain", 15, "Critical hit chance per item stack.");
+            critDamageGain = Config.Bind("Needle_Rounds Config", "critDamageGain", 0.15f, "Critical hit damage per item stack.");
         }
     }
 }

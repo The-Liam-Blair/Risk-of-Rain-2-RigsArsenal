@@ -70,9 +70,9 @@ namespace RigsArsenal.Items
             return true;
         }
 
-        public override void AddConfigOptions()
+        public override void AddConfigOptions(ConfigFile Config)
         {
-            damageReduction = configFile.Bind("Coolant_Pack Config", "damageReduction", 0.15f, "Scales down the damage of incoming DOTs per stack. Does not change the hyperbolic approach value of 1.0 (100% damage reduction).");
+            damageReduction = Config.Bind("Coolant_Pack Config", "damageReduction", 0.15f, "Scales down the damage of incoming DOTs per stack. Does not change the hyperbolic approach value of 1.0 (100% damage reduction).");
         }
     }
 }

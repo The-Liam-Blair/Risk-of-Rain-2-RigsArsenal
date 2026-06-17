@@ -118,10 +118,10 @@ namespace RigsArsenal.Items
             };
         }
 
-        public override void AddConfigOptions()
+        public override void AddConfigOptions(ConfigFile Config)
         {
-            movementBonus = configFile.Bind("Worn-Out_Stimpack Config", "movementBonus", 0.1f, "The movement speed bonus granted by this item. (0.1 = +10%).");
-            regenBonus = configFile.Bind("Worn-Out_Stimpack Config", "regenBonus", 0.5f, "The health regeneration bonus granted by this item.");
+            movementBonus = Config.Bind("Worn-Out_Stimpack Config", "movementBonus", 0.1f, "The movement speed bonus granted by this item. (0.1 = +10%).");
+            regenBonus = Config.Bind("Worn-Out_Stimpack Config", "regenBonus", 0.5f, "The health regeneration bonus granted by this item.");
         }
     }
 }

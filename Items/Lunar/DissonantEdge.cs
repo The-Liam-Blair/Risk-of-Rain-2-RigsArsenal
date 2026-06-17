@@ -94,10 +94,10 @@ namespace RigsArsenal.Items
             return true;
         }
 
-        public override void AddConfigOptions()
+        public override void AddConfigOptions(ConfigFile Config)
         {
-            damageIncrease = configFile.Bind("Dissonant_Edge Config", "damageIncrease", 0.1f, "The damage increase granted by this item per stack (0.1 = +10%).");
-            damageDecrease = configFile.Bind("Dissonant_Edge Config", "damageDecrease", 0.25f, "The damage decrease inflicted by this item if under the health threshold. (0.25 = 25% reduced damage).");
+            damageIncrease = Config.Bind("Dissonant_Edge Config", "damageIncrease", 0.1f, "The damage increase granted by this item per stack (0.1 = +10%).");
+            damageDecrease = Config.Bind("Dissonant_Edge Config", "damageDecrease", 0.25f, "The damage decrease inflicted by this item if under the health threshold. (0.25 = 25% reduced damage).");
         }
     }
 }

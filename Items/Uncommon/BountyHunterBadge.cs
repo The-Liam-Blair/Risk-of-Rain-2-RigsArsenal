@@ -65,9 +65,9 @@ namespace RigsArsenal.Items
             };
         }
 
-        public override void AddConfigOptions()
+        public override void AddConfigOptions(ConfigFile Config)
         {
-            multiplier = configFile.Bind("Bounty_Hunters_Badge Config", "multiplier", 1f, "Scales the gold per stack and hyperbolic approach limit of the item (1.0 = +20% per stack, approaching +100%)");
+            multiplier = Config.Bind("Bounty_Hunters_Badge Config", "multiplier", 1f, "Scales the gold per stack and hyperbolic approach limit of the item (1.0 = +20% per stack, approaching +100%)");
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BepInEx.Configuration;
 using R2API;
 using RoR2;
 using RoR2.ContentManagement;
@@ -38,9 +39,9 @@ namespace RigsArsenal.Equipments
         /// <summary>
         /// Item assembly process: Setup LanguageAPI, create the item object, added to the item list, and reference & implement the methods/events the item hooks into.
         /// </summary>
-        public virtual void Init()
+        public virtual void Init(ConfigFile Config)
         {
-            AddConfigOptions();
+            AddConfigOptions(Config);
             InitLang();
             CreateItem();
             SetupHooks();
@@ -148,7 +149,7 @@ namespace RigsArsenal.Equipments
 
         public abstract bool UseEquipment(EquipmentSlot slot);
         public virtual void SetupHooks() {}
-        public virtual void AddConfigOptions() { }
+        public virtual void AddConfigOptions(ConfigFile Config) { }
 
     }
 }

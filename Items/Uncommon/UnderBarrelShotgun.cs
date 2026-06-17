@@ -57,9 +57,9 @@ namespace RigsArsenal.Items
         private ConfigEntry<float> projectileProcRate;
 
 
-        public override void Init()
+        public override void Init(ConfigFile Config)
         {
-            base.Init();
+            base.Init(Config);
 
             
             GameObject proj = Resources.Load<GameObject>("prefabs/projectiles/RailgunnerPistolProjectile");
@@ -180,13 +180,13 @@ namespace RigsArsenal.Items
             };
         }
 
-        public override void AddConfigOptions()
+        public override void AddConfigOptions(ConfigFile Config)
         {
-            itemProcChance = configFile.Bind("Wrist-Mounted_Shotgun Config", "itemProcChance", 10f, "The base proc chance of the item as a percentage.");
-            itemRange = configFile.Bind("Wrist-Mounted_Shotgun Config", "itemRange", 35, "The maximum range which this item can trigger. Also scales the visual indicator range if enabled.");
-            projectileCount = configFile.Bind("Wrist-Mounted_Shotgun Config", "projectileCount", 13, "The number of projectiles fired by the item.");
-            projectileDamage = configFile.Bind("Wrist-Mounted_Shotgun Config", "projectileDamage", 0.25f, "The damage of each projectile (Scaled from the damage of the proc that triggered the item).");
-            projectileProcRate = configFile.Bind("Wrist-Mounted_Shotgun Config", "projectileProcRate", 0.25f, "The proc coefficient of each projectile (Scaled from the proc coefficient of the attack that triggered the item)");
+            itemProcChance = Config.Bind("Wrist-Mounted_Shotgun Config", "itemProcChance", 10f, "The base proc chance of the item as a percentage.");
+            itemRange = Config.Bind("Wrist-Mounted_Shotgun Config", "itemRange", 35, "The maximum range which this item can trigger. Also scales the visual indicator range if enabled.");
+            projectileCount = Config.Bind("Wrist-Mounted_Shotgun Config", "projectileCount", 13, "The number of projectiles fired by the item.");
+            projectileDamage = Config.Bind("Wrist-Mounted_Shotgun Config", "projectileDamage", 0.25f, "The damage of each projectile (Scaled from the damage of the proc that triggered the item).");
+            projectileProcRate = Config.Bind("Wrist-Mounted_Shotgun Config", "projectileProcRate", 0.25f, "The proc coefficient of each projectile (Scaled from the proc coefficient of the attack that triggered the item)");
 
         }
 

@@ -110,11 +110,11 @@ namespace RigsArsenal.Items
             };
         }
 
-        public override void AddConfigOptions()
+        public override void AddConfigOptions(ConfigFile Config)
         {
-            procChance = configFile.Bind("Chaos_Rune Config", "procChance", 33, "The chance of the item's effect triggering per item stack on applying a DOT.");
-            rollsPerStack = configFile.Bind("Chaos_Rune Config", "rollsPerStack", 1, "Number of times the item will roll on activation per item stack.");
-            enemiesCanUseItem = configFile.Bind("Chaos_Rune Config", "enemiesCanUseItem", false, "Toggles if this item appears in enemy item loot pools. Toggle for scenarios where the enemy is capable of consistently inflicting DOTs.");
+            procChance = Config.Bind("Chaos_Rune Config", "procChance", 33, "The chance of the item's effect triggering per item stack on applying a DOT.");
+            rollsPerStack = Config.Bind("Chaos_Rune Config", "rollsPerStack", 1, "Number of times the item will roll on activation per item stack.");
+            enemiesCanUseItem = Config.Bind("Chaos_Rune Config", "enemiesCanUseItem", false, "Toggles if this item appears in enemy item loot pools. Toggle for scenarios where the enemy is capable of consistently inflicting DOTs.");
         }
     }
 }

@@ -46,9 +46,9 @@ namespace RigsArsenal.Items
         /// <summary>
         /// Item assembly process: Setup LanguageAPI, create the item object, added to the item list, and reference & implement the methods/events the item hooks into.
         /// </summary>
-        public virtual void Init()
+        public virtual void Init(ConfigFile Config)
         {
-            AddConfigOptions();
+            AddConfigOptions(Config);
             InitLang();
             CreateItem();
             SetupHooks();
@@ -166,7 +166,7 @@ namespace RigsArsenal.Items
             ItemAPI.Add(new CustomItem(itemDef, rules)); // CreateItemDisplatRules() not being called currently, will maybe later on when item displays are added for other items.
         }
 
-        public virtual void AddConfigOptions() {}
+        public virtual void AddConfigOptions(ConfigFile Config) {}
 
         public virtual ItemDisplayRuleDict CreateItemDisplayRules() => null;
 

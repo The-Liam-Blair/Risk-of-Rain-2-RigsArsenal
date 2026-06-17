@@ -53,9 +53,9 @@ namespace RigsArsenal.Items.VoidItems
 
         public static GameObject flameVFX;
 
-        public override void Init()
+        public override void Init(ConfigFile Config)
         {
-            base.Init();
+            base.Init(Config);
 
             var explosionTex = MainAssets.LoadAsset<Texture2D>("ExplosionTexRamp2.png");
 
@@ -85,13 +85,13 @@ namespace RigsArsenal.Items.VoidItems
         {}
         */
 
-        public override void AddConfigOptions()
+        public override void AddConfigOptions(ConfigFile Config)
         {
-            explosionDamage = configFile.Bind("Umbral_Pyre Config", "explosionDamage", 1f, "Explosion damage scalar (1.0 = 100% of the user's damage).");
-            burnDamage = configFile.Bind("Umbral_Pyre Config", "burnDamage", 0.75f, "Burn DOT scalar applied by this item per stack.");
-            baseRange = configFile.Bind("Umbral_Pyre Config", "baseRange", 7, "The base radius of the explosion (in meters).");
-            rangePerStack = configFile.Bind("Umbral_Pyre Config", "rangePerStack", 1, "The radius increase of the explosion per stack.");
-            explosionsPerSecond = configFile.Bind("Umbral_Pyre Config", "explosionsPerSecond", 1, "The number of explosions this item will trigger per second.");
+            explosionDamage = Config.Bind("Umbral_Pyre Config", "explosionDamage", 1f, "Explosion damage scalar (1.0 = 100% of the user's damage).");
+            burnDamage = Config.Bind("Umbral_Pyre Config", "burnDamage", 0.75f, "Burn DOT scalar applied by this item per stack.");
+            baseRange = Config.Bind("Umbral_Pyre Config", "baseRange", 7, "The base radius of the explosion (in meters).");
+            rangePerStack = Config.Bind("Umbral_Pyre Config", "rangePerStack", 1, "The radius increase of the explosion per stack.");
+            explosionsPerSecond = Config.Bind("Umbral_Pyre Config", "explosionsPerSecond", 1, "The number of explosions this item will trigger per second.");
         }
     }
 
@@ -106,7 +106,7 @@ namespace RigsArsenal.Items.VoidItems
         [BaseItemBodyBehavior.ItemDefAssociationAttribute(useOnServer = true, useOnClient = false)]
         public static ItemDef GetItemDef()
         {
-            return RigsArsenal.ItemList.Find(x => x.NameToken == "UMBRALPYRE").itemDef;
+            return RigsArsenal.ItemList.Find(x => x.NameToken == "UMBRALPYRE")?.itemDef ?? null;
         }
 
         // Timer reset value scaled from the user-defined explosions per second value.

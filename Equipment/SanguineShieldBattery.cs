@@ -131,14 +131,14 @@ namespace RigsArsenal.Equipments
             };
         }
 
-        public override void AddConfigOptions()
+        public override void AddConfigOptions(ConfigFile Config)
         {
-            equipCooldown = configFile.Bind("Sanguine_Shield_Battery Config", "equipCooldown", 20, "Cooldown for this equipment.");
-            percentHealthDrain = configFile.Bind("Sanguine_Shield_Battery Config", "percentHealthDrain", 2, "Percent health drained per proc.");
-            percentBarrierGain = configFile.Bind("Sanguine_Shield_Battery Config", "percentBarrierGain", 3, "Percent barrier gained per proc.");
-            procCount = configFile.Bind("Sanguine_Shield_Battery Config", "procCount", 20, "Total number of instances where this item will convert health into barrier.");
-            procsPerSecond = configFile.Bind("Sanguine_Shield_Battery Config", "procsPerSecond", 4, "Number of times per second a proc will occur. Total equipment duration is equal to procCount / procsPerSecond.");
-            barrierDecayRateMultiplier = configFile.Bind("Sanguine_Shield_Battery Config", "barrierDecayRateMultiplier", 0.5f, "Alters barrier decay while the equipment is active. 0.5 = 50% reduced drain rate. Negative values increase drain rate further.");
+            equipCooldown = Config.Bind("Sanguine_Shield_Battery Config", "equipCooldown", 20, "Cooldown for this equipment.");
+            percentHealthDrain = Config.Bind("Sanguine_Shield_Battery Config", "percentHealthDrain", 2, "Percent health drained per proc.");
+            percentBarrierGain = Config.Bind("Sanguine_Shield_Battery Config", "percentBarrierGain", 3, "Percent barrier gained per proc.");
+            procCount = Config.Bind("Sanguine_Shield_Battery Config", "procCount", 20, "Total number of instances where this item will convert health into barrier.");
+            procsPerSecond = Config.Bind("Sanguine_Shield_Battery Config", "procsPerSecond", 4, "Number of times per second a proc will occur. Total equipment duration is equal to procCount / procsPerSecond.");
+            barrierDecayRateMultiplier = Config.Bind("Sanguine_Shield_Battery Config", "barrierDecayRateMultiplier", 0.5f, "Alters barrier decay while the equipment is active. 0.5 = 50% reduced drain rate. Negative values increase drain rate further.");
         }
     }
 }

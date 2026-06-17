@@ -39,7 +39,7 @@ namespace RigsArsenal
         public const string P_GUID = $"{P_Author}.{P_Name}";
         public const string P_Author = "RigsInRags";
         public const string P_Name = "RigsArsenal";
-        public const string P_Version = "1.4.1";
+        public const string P_Version = "1.4.2";
 
         public static AssetBundle MainAssets;
 
@@ -53,8 +53,6 @@ namespace RigsArsenal
         public static ConfigEntry<bool> EnableUmbralPyreVFX { get; set; }
         public static List<ConfigEntry<bool>> EnableItems { get; set; }
 
-        public static ConfigFile configFile;
-
 
         public void Awake()
         {
@@ -65,8 +63,6 @@ namespace RigsArsenal
             {
                 MainAssets = AssetBundle.LoadFromStream(stream);
             }
-
-            configFile = Config;
 
             ApplyShaders();
 
@@ -109,7 +105,7 @@ namespace RigsArsenal
                 //       Bless OR operators skipping the second check if the first is true.
                 if (anItem.Tier == ItemTier.NoTier || EnableItems[EnableItems.Count - 1].Value)
                 {
-                    anItem.Init();
+                    anItem.Init(Config);
                     ItemList.Add(anItem);
 
                     if (anItem.Tier == ItemTier.VoidTier1 || anItem.Tier == ItemTier.VoidTier2 || anItem.Tier == ItemTier.VoidTier3)
@@ -149,7 +145,7 @@ namespace RigsArsenal
 
                 if(EnableItems[EnableItems.Count - 1].Value)
                 {
-                    equip.Init();
+                    equip.Init(Config);
                     EquipmentList.Add(equip);
                 }
             }
